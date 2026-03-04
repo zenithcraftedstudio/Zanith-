@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Policies — Zanith Crafted Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f7fa; --white: #fff; --brown: #3a6ea8; --brown-dark: #2d5a8e;
+  --warm: #eef2f8; --text: #1a2a3a; --muted: #6b7c93; --border: #d8e2ec;
+  --green: #2e7d32; --green-bg: #e8f5e9; --red: #c0392b; --red-bg: #fde8e6;
+  --shadow: 0 2px 16px rgba(58,110,168,0.10);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); }
+
+.topbar { background: var(--brown); color: white; text-align: center; padding: 8px; font-size: 12px; }
+
+header { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 24px; box-shadow: var(--shadow); }
+.header-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+.logo-icon { width: 36px; height: 36px; background: var(--brown); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; }
+.logo-text h1 { font-family: 'Playfair Display', serif; font-size: 18px; }
+.logo-text p { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+.back-btn { background: var(--warm); border: 1px solid var(--border); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text); text-decoration: none; }
+
+.hero { background: linear-gradient(135deg, #1a2a3a, #3a6ea8); color: white; padding: 40px 24px; text-align: center; }
+.hero h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 8px; }
+.hero p { font-size: 14px; opacity: 0.8; }
+
+.container { max-width: 1000px; margin: 0 auto; padding: 40px 24px; display: grid; grid-template-columns: 220px 1fr; gap: 32px; }
+@media(max-width: 700px) { .container { grid-template-columns: 1fr; } }
+
+/* SIDEBAR NAV */
+.sidebar { position: sticky; top: 20px; align-self: start; }
+.sidebar-nav { background: var(--white); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; box-shadow: var(--shadow); }
+.sidebar-nav a { display: flex; align-items: center; gap: 10px; padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); transition: all 0.2s; cursor: pointer; }
+.sidebar-nav a:last-child { border: none; }
+.sidebar-nav a:hover, .sidebar-nav a.active { background: var(--warm); color: var(--brown); font-weight: 600; }
+.sidebar-nav a .icon { font-size: 16px; width: 20px; text-align: center; }
+
+/* CONTENT */
+.content { display: flex; flex-direction: column; gap: 24px; }
+.policy-section { background: var(--white); border-radius: 12px; border: 1px solid var(--border); padding: 28px; box-shadow: var(--shadow); }
+.policy-section h2 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--text); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--warm); display: flex; align-items: center; gap: 10px; }
+.policy-section h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--brown); margin: 18px 0 8px; }
+.policy-section p { font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 8px; }
+.policy-section ul { padding-left: 20px; margin-bottom: 8px; }
+.policy-section li { font-size: 14px; color: var(--muted); line-height: 1.8; }
+.policy-section li strong { color: var(--text); }
+.highlight-box { background: var(--warm); border-left: 4px solid var(--brown); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 12px 0; font-size: 14px; color: var(--text); line-height: 1.7; }
+.highlight-box.green { background: var(--green-bg); border-color: var(--green); }
+.highlight-box.red { background: var(--red-bg); border-color: var(--red); }
+.can-cannot { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px; }
+@media(max-width: 600px) { .can-cannot { grid-template-columns: 1fr; } }
+.can-box { background: var(--green-bg); border-radius: 10px; padding: 16px; }
+.cannot-box { background: var(--red-bg); border-radius: 10px; padding: 16px; }
+.can-box h4 { color: var(--green); font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+.cannot-box h4 { color: var(--red); font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+.can-box li, .cannot-box li { font-size: 13px; color: var(--text); line-height: 1.8; }
+.faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
+.faq-item:last-child { border: none; }
+.faq-q { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.faq-a { font-size: 14px; color: var(--muted); line-height: 1.7; }
+.rate-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+.rate-table th { text-align: left; padding: 8px 12px; background: var(--warm); border-bottom: 2px solid var(--border); font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--muted); }
+.rate-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text); }
+.rate-table tr:last-child td { border: none; }
+
+footer { background: var(--text); color: white; padding: 28px 24px; text-align: center; margin-top: 40px; }
+footer p { font-size: 13px; opacity: 0.6; }
+footer a { color: white; opacity: 0.8; margin: 0 12px; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">🌿 Free digital delivery · Worldwide POD shipping · Commercial license included</div>
+
+<header>
+  <div class="header-inner">
+    <a href="shop.html" class="logo">
+      <div class="logo-icon">🌿</div>
+      <div class="logo-text">
+        <h1>Zanith Crafted Studio</h1>
+        <p>Policies & Info</p>
+      </div>
+    </a>
+    <a href="shop.html" class="back-btn">← Back to Shop</a>
+  </div>
+</header>
+
+<div class="hero">
+  <h2>📋 Store Policies</h2>
+  <p>Everything you need to know about shipping, returns, licenses, and payments.</p>
+</div>
+
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-nav">
+      <a href="#shipping"><span class="icon">🚚</span> Shipping</a>
+      <a href="#returns"><span class="icon">↩️</span> Returns & Refunds</a>
+      <a href="#digital"><span class="icon">⚡</span> Digital Downloads</a>
+      <a href="#license"><span class="icon">📄</span> License & Usage</a>
+      <a href="#payment"><span class="icon">💳</span> Payment</a>
+      <a href="#faq"><span class="icon">❓</span> FAQ</a>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- SHIPPING -->
+    <div class="policy-section" id="shipping">
+      <h2>🚚 Shipping Policy</h2>
+      <div class="highlight-box">All digital pattern files are delivered via email — no waiting for shipping!</div>
+
+      <h3>Digital Products</h3>
+      <ul>
+        <li>Files sent to your email within <strong>24 hours</strong> after payment is confirmed</li>
+        <li>No physical shipping — instant access from anywhere in the world</li>
+        <li>If you don't receive files, check your spam folder or contact us</li>
+        <li>Re-download available anytime — just email us your Order ID</li>
+      </ul>
+
+      <h3>POD (Print-on-Demand) Physical Products</h3>
+      <ul>
+        <li><strong>Production time:</strong> 3–5 business days</li>
+        <li><strong>Standard shipping:</strong> 7–14 business days worldwide</li>
+        <li><strong>Express shipping:</strong> 3–7 business days (contact us for pricing)</li>
+        <li>Tracking number emailed once your order ships</li>
+        <li>Fulfilled via Printify from USA/EU production centers</li>
+      </ul>
+
+      <h3>Shipping Rates</h3>
+      <table class="rate-table">
+        <thead><tr><th>Region</th><th>First Item</th><th>Each Additional</th><th>Free Shipping</th></tr></thead>
+        <tbody>
+          <tr><td>🇺🇸 USA</td><td>$4.99</td><td>$2.00</td><td>Orders over $50</td></tr>
+          <tr><td>🇪🇺 Europe</td><td>$7.99</td><td>$2.50</td><td>Orders over $75</td></tr>
+          <tr><td>🌏 Asia / AU</td><td>$9.99</td><td>$3.00</td><td>Orders over $80</td></tr>
+          <tr><td>🌍 Rest of World</td><td>$11.99</td><td>$3.50</td><td>Orders over $100</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Customs & Duties</h3>
+      <p>International orders may be subject to import taxes and customs fees. These charges are the buyer's responsibility and are not included in our prices.</p>
+    </div>
+
+    <!-- RETURNS -->
+    <div class="policy-section" id="returns">
+      <h2>↩️ Returns & Refunds</h2>
+      <div class="highlight-box green">We want you 100% happy! If something is wrong, we will make it right. 💚</div>
+
+      <h3>Digital Products</h3>
+      <ul>
+        <li>Due to the instant-delivery nature of digital files, <strong>we do not offer refunds</strong> once files are delivered</li>
+        <li><strong>Exception:</strong> If files are corrupted, missing, or significantly different from the description — we will resend or refund immediately</li>
+        <li>Please review preview images carefully before purchasing</li>
+        <li>Contact us within 7 days if there is any issue with your files</li>
+      </ul>
+
+      <h3>POD Physical Products</h3>
+      <ul>
+        <li>Returns accepted within <strong>30 days</strong> of delivery date</li>
+        <li>Item must be unworn, unwashed, and in original condition</li>
+        <li><strong>We cover return shipping</strong> for defective or incorrect items</li>
+        <li>Buyer pays return shipping for size exchanges or change of mind</li>
+        <li>Refund processed within 5–7 business days after we receive the item</li>
+        <li>Exchanges available — contact us within 14 days of delivery</li>
+      </ul>
+
+      <h3>Non-Returnable Items</h3>
+      <ul>
+        <li>Customized or personalized POD products</li>
+        <li>Digital downloads once delivered</li>
+        <li>Items damaged due to misuse or improper care</li>
+      </ul>
+
+      <h3>How to Request a Return</h3>
+      <div class="highlight-box">
+        Email <strong>hello@zanithcraftedstudio.com</strong> with:<br>
+        1. Your Order ID<br>
+        2. Photo of the item / issue<br>
+        3. Brief description of the problem<br><br>
+        We respond within <strong>24 hours</strong> on business days.
+      </div>
+    </div>
+
+    <!-- DIGITAL DOWNLOADS -->
+    <div class="policy-section" id="digital">
+      <h2>⚡ Digital Downloads</h2>
+      <div class="highlight-box">High-resolution, seamless, commercial-ready files — delivered straight to your inbox.</div>
+
+      <h3>What's Included in Every Pattern Purchase</h3>
+      <ul>
+        <li>✅ High-res seamless PNG tile: <strong>3600×3600px, 300dpi</strong></li>
+        <li>✅ Full preview JPG: 4000×4000px</li>
+        <li>✅ Commercial License PDF</li>
+        <li>✅ Usage guide & tips PDF</li>
+      </ul>
+
+      <h3>How Delivery Works</h3>
+      <ul>
+        <li>Place your order and complete bank transfer with your Order ID</li>
+        <li>Send payment screenshot to our email or Zalo for faster processing</li>
+        <li>We verify payment and send files within 24 hours</li>
+        <li>Files delivered as a download link to your email</li>
+      </ul>
+
+      <h3>Compatible With</h3>
+      <ul>
+        <li>Adobe Photoshop, Illustrator, InDesign</li>
+        <li>Procreate, Affinity Designer, Canva Pro</li>
+        <li>POD platforms: Printify, Printful, Spoonflower, Redbubble</li>
+        <li>Any software that accepts PNG files</li>
+      </ul>
+
+      <h3>File Specs</h3>
+      <ul>
+        <li>Format: PNG (transparent or solid background)</li>
+        <li>Resolution: 300dpi (print-ready)</li>
+        <li>Color mode: RGB (convertible to CMYK)</li>
+        <li>Seamless: tiles perfectly in all directions</li>
+      </ul>
+    </div>
+
+    <!-- LICENSE -->
+    <div class="policy-section" id="license">
+      <h2>📄 License & Usage</h2>
+      <div class="highlight-box green">🎉 Every purchase includes a <strong>Commercial License</strong> — use our patterns to sell products!</div>
+
+      <div class="can-cannot">
+        <div class="can-box">
+          <h4>✅ YOU CAN:</h4>
+          <ul>
+            <li>Sell POD products (t-shirts, mugs, phone cases, etc.)</li>
+            <li>Use for fabric printing and physical products</li>
+            <li>Use for commercial projects & client work</li>
+            <li>Create unlimited end products per license</li>
+            <li>Sell on Etsy, Amazon, Redbubble, Society6</li>
+            <li>Use for digital products & templates</li>
+            <li>Use for social media & marketing</li>
+          </ul>
+        </div>
+        <div class="cannot-box">
+          <h4>❌ YOU CANNOT:</h4>
+          <ul>
+            <li>Resell or redistribute the raw pattern files</li>
+            <li>Claim the design as your own original art</li>
+            <li>Share or transfer files to others</li>
+            <li>Use in NFTs or AI training datasets</li>
+            <li>Sub-license to other designers</li>
+            <li>Use in harmful, offensive, or illegal content</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>One License = One Buyer</h3>
+      <p>Each license is valid for one person or one business entity. If multiple team members need access, please purchase additional licenses or contact us for a team license.</p>
+
+      <h3>Attribution</h3>
+      <p>Attribution is not required but always appreciated! Tag us <strong>@zanithcraftedstudio</strong> when you share products made with our patterns.</p>
+    </div>
+
+    <!-- PAYMENT -->
+    <div class="policy-section" id="payment">
+      <h2>💳 Payment Information</h2>
+      <div class="highlight-box">We currently accept bank transfer (Vietnam) for all orders.</div>
+
+      <h3>How to Pay — Step by Step</h3>
+      <ul>
+        <li><strong>Step 1:</strong> Add items to cart and click Checkout</li>
+        <li><strong>Step 2:</strong> Fill in your name, email, phone, and shipping address</li>
+        <li><strong>Step 3:</strong> Click "Place Order" — you'll receive a unique <strong>Order ID</strong></li>
+        <li><strong>Step 4:</strong> Transfer the exact amount to our bank account shown on screen</li>
+        <li><strong>Step 5:</strong> Include your <strong>Order ID in the transfer note</strong> (e.g. ZANITH AB1234)</li>
+        <li><strong>Step 6:</strong> Send payment screenshot to us via email or Zalo</li>
+      </ul>
+
+      <h3>Payment Confirmation Times</h3>
+      <ul>
+        <li>Payments verified within <strong>2–4 hours</strong> during business hours (9am–6pm GMT+7)</li>
+        <li>Weekend payments confirmed on the next business day</li>
+        <li>Digital files delivered within 24 hours after confirmation</li>
+        <li>POD orders sent to production within 24 hours after confirmation</li>
+      </ul>
+
+      <h3>Currency & Exchange Rate</h3>
+      <ul>
+        <li>Prices displayed in USD or VND (toggle in shop header)</li>
+        <li>VND rate updated regularly to match current exchange</li>
+        <li>Please transfer the VND amount shown at time of checkout</li>
+      </ul>
+
+      <h3>Payment Issues</h3>
+      <p>If you transferred an incorrect amount or have any payment issues, please contact us at <strong>hello@zanithcraftedstudio.com</strong> with your Order ID and we'll resolve it quickly.</p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="policy-section" id="faq">
+      <h2>❓ Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I use these patterns on Etsy or POD platforms?</div>
+        <div class="faq-a">Yes! Commercial license is included with every purchase. You can sell unlimited products on Etsy, Redbubble, Society6, Amazon, or any other platform.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do I get my digital files after payment?</div>
+        <div class="faq-a">After payment is confirmed (within 24h), we email the download link directly to the email address you provided at checkout. Check your spam folder if you don't see it!</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I request a custom color variation?</div>
+        <div class="faq-a">Yes! Email us with the pattern name and your desired color palette. Custom color variations start at $15 and are delivered within 2–3 business days.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if I need the file in SVG or AI format?</div>
+        <div class="faq-a">Contact us after purchase — we can provide SVG, AI, or EPS format for most geometric patterns at no extra charge.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you offer bulk discounts?</div>
+        <div class="faq-a">Yes! Buy 5+ patterns and get 20% off. Buy 10+ and get 30% off. Contact us before placing your order to arrange the discount code.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">My pattern looks pixelated when I print — help!</div>
+        <div class="faq-a">Make sure you're using the full-size PNG file (3600×3600px, 300dpi) and not the preview JPG. Also ensure your software is set to the correct resolution before exporting.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I use the patterns for fabric printing at a local print shop?</div>
+        <div class="faq-a">Absolutely! Commercial license covers physical fabric printing. You can bring our files to any print shop or use online fabric printing services like Spoonflower.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How do I contact you for support?</div>
+        <div class="faq-a">Email us at <strong>hello@zanithcraftedstudio.com</strong> or message us on Instagram/Zalo. We respond within 24 hours on business days.</div>
+      </div>
+    </div>
+
+  </div><!-- content -->
+</div><!-- container -->
+
+<footer>
+  <p>© 2025 Zanith Crafted Studio · <a href="shop.html">Shop</a> · <a href="mailto:hello@zanithcraftedstudio.com">Contact</a></p>
+</footer>
+
+</body>
+</html>
