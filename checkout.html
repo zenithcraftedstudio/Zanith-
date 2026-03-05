@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Zanith Crafted Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1e2d4a;--navy-light:#2a3f63;--gold:#c8974a;--cream:#faf7f2;--warm:#f3ede3;--white:#fff;--border:#e2ddd6;--text:#1a2332;--text-soft:#5a6a7e;--muted:#8a9bb5;--green:#2e7d52;--red:#c0392b;--shadow:0 2px 16px rgba(30,45,74,0.1);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Instrument Sans',sans-serif;background:var(--cream);color:var(--text);}
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:var(--shadow);}
+.nav-logo{font-family:'Fraunces',serif;font-size:1.1rem;color:var(--navy);text-decoration:none;}
+.nav-back{font-size:0.85rem;color:var(--text-soft);text-decoration:none;}
+.nav-back:hover{color:var(--navy);}
+.wrap{max-width:960px;margin:2rem auto;padding:0 1.5rem;display:grid;grid-template-columns:1fr 380px;gap:2rem;align-items:start;}
+@media(max-width:700px){.wrap{grid-template-columns:1fr;}}
+.card{background:var(--white);border-radius:14px;border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:1.25rem;overflow:hidden;}
+.ch{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.6rem;}
+.ch h3{font-family:'Fraunces',serif;font-size:1rem;font-weight:500;}
+.sn{width:24px;height:24px;background:var(--navy);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;flex-shrink:0;}
+.cb{padding:1.25rem 1.5rem;}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.fr.full{grid-template-columns:1fr;}
+.fg{display:flex;flex-direction:column;gap:0.35rem;}
+.fg label{font-size:0.75rem;font-weight:600;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.05em;}
+.fg input,.fg textarea{border:1px solid var(--border);background:var(--warm);border-radius:8px;padding:0.6rem 0.85rem;font-family:'Instrument Sans',sans-serif;font-size:0.875rem;color:var(--text);outline:none;transition:border 0.2s;width:100%;}
+.fg input:focus,.fg textarea:focus{border-color:var(--navy);background:white;}
+.fg textarea{resize:vertical;min-height:80px;}
+.req{color:var(--red);}
+.ci{display:flex;gap:1rem;padding:0.85rem 0;border-bottom:1px solid var(--border);}
+.ci:last-child{border-bottom:none;}
+.ci-img{width:64px;height:64px;border-radius:8px;object-fit:cover;background:var(--warm);flex-shrink:0;border:1px solid var(--border);}
+.ci-info{flex:1;min-width:0;}
+.ci-title{font-size:0.85rem;font-weight:500;line-height:1.3;margin-bottom:0.2rem;}
+.ci-var{font-size:0.75rem;color:var(--text-soft);}
+.ci-qr{display:flex;align-items:center;gap:0.5rem;margin-top:0.4rem;}
+.qb{width:24px;height:24px;border:1px solid var(--border);background:var(--warm);border-radius:6px;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;justify-content:center;}
+.qb:hover{background:var(--border);}
+.qn{font-size:0.85rem;font-weight:600;min-width:20px;text-align:center;}
+.rm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.78rem;margin-left:auto;}
+.rm:hover{color:var(--red);}
+.ci-price{font-weight:700;color:var(--navy);font-size:0.9rem;white-space:nowrap;}
+.tots{padding:1rem 1.5rem;}
+.tr{display:flex;justify-content:space-between;font-size:0.875rem;padding:0.3rem 0;}
+.tr.main{font-size:1rem;font-weight:700;color:var(--navy);padding-top:0.75rem;border-top:2px solid var(--border);margin-top:0.5rem;}
+.tr .lb{color:var(--text-soft);}
+.bank-box{background:linear-gradient(135deg,#e8f4e8,#f0f9f0);border:1px solid #a8d5a8;border-radius:12px;padding:1.25rem;}
+.bl{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;}
+.blogo{background:#e31837;color:white;font-weight:800;font-size:0.75rem;padding:0.3rem 0.6rem;border-radius:6px;}
+.bname{font-weight:600;}
+.bf{display:flex;justify-content:space-between;align-items:center;padding:0.55rem 0;border-bottom:1px solid rgba(0,0,0,0.07);}
+.bf:last-child{border-bottom:none;}
+.bf .ll{font-size:0.78rem;color:var(--text-soft);}
+.bf .vv{font-size:0.9rem;font-weight:700;display:flex;align-items:center;gap:0.4rem;}
+.cpb{background:var(--navy);color:white;border:none;padding:0.18rem 0.55rem;border-radius:5px;font-size:0.7rem;cursor:pointer;}
+.cpb:hover{background:var(--navy-light);}
+.bnote{margin-top:0.85rem;background:rgba(255,255,255,0.75);border-radius:8px;padding:0.75rem;font-size:0.8rem;color:var(--text-soft);line-height:1.65;}
+.bnote strong{color:var(--navy);}
+.btn-c{width:100%;background:var(--navy);color:white;border:none;padding:0.9rem;border-radius:10px;font-family:'Instrument Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.2s;margin-top:1rem;}
+.btn-c:hover{background:var(--navy-light);}
+.btn-c:disabled{background:var(--muted);cursor:not-allowed;}
+.sec-note{text-align:center;font-size:0.75rem;color:var(--muted);margin-top:0.6rem;}
+.empty-c{text-align:center;padding:2.5rem;color:var(--text-soft);}
+.suc{display:none;text-align:center;padding:3rem 1.5rem;max-width:560px;margin:3rem auto;}
+.suc.show{display:block;}
+.suc-icon{font-size:4rem;margin-bottom:1rem;}
+.suc h2{font-family:'Fraunces',serif;font-size:1.8rem;margin-bottom:0.75rem;color:var(--navy);}
+.suc p{color:var(--text-soft);line-height:1.7;margin-bottom:1.25rem;}
+.oref{background:var(--warm);border:2px solid var(--border);border-radius:10px;padding:1rem;font-family:monospace;font-size:1.1rem;color:var(--navy);font-weight:700;margin:1rem 0;}
+.btn-bk{display:inline-block;background:var(--navy);color:white;text-decoration:none;padding:0.75rem 2rem;border-radius:10px;font-size:0.9rem;font-weight:600;margin-top:1rem;}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;background:var(--navy);color:white;padding:0.7rem 1.2rem;border-radius:10px;font-size:0.84rem;box-shadow:0 4px 20px rgba(0,0,0,0.2);transform:translateY(80px);transition:transform 0.3s;}
+.toast.show{transform:translateY(0);}
+.toast.ok{background:var(--green);}
+.what-box{font-size:0.82rem;color:var(--text-soft);line-height:2.1;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">🌿 Zanith Crafted Studio</a>
+  <a href="index.html" class="nav-back">← Continue Shopping</a>
+</nav>
+
+<div id="mainWrap">
+<div class="wrap">
+  <!-- LEFT -->
+  <div>
+    <div class="card">
+      <div class="ch"><div class="sn">1</div><h3>Contact Information</h3></div>
+      <div class="cb">
+        <div class="fr">
+          <div class="fg"><label>Full Name <span class="req">*</span></label><input id="cName" placeholder="Your name..."></div>
+          <div class="fg"><label>Email <span class="req">*</span></label><input id="cEmail" type="email" placeholder="your@email.com"></div>
+        </div>
+        <div class="fr full">
+          <div class="fg"><label>Phone (optional)</label><input id="cPhone" placeholder="+84..."></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ch"><div class="sn">2</div><h3>Thông tin chuyển khoản / Bank Transfer</h3></div>
+      <div class="cb">
+        <div class="bank-box">
+          <div class="bl">
+            <div class="blogo">TCB</div>
+            <div class="bname">Techcombank</div>
+            <span style="font-size:0.75rem;color:var(--green);margin-left:auto">✅ Verified</span>
+          </div>
+          <div class="bf">
+            <span class="ll">Số tài khoản / Account No.</span>
+            <span class="vv">1903 8843 1140 14 <button class="cpb" onclick="cp('1903884311401 4','Account number')">Copy</button></span>
+          </div>
+          <div class="bf">
+            <span class="ll">Tên tài khoản / Account Name</span>
+            <span class="vv">CHU THI LIEN</span>
+          </div>
+          <div class="bf">
+            <span class="ll">Số tiền / Amount</span>
+            <span class="vv" id="txAmt" style="color:var(--green)">—</span>
+          </div>
+          <div class="bf">
+            <span class="ll">Nội dung CK / Transfer Note</span>
+            <span class="vv" style="font-size:0.82rem">
+              <span id="txNote">ZANITH ORDER</span>
+              <button class="cpb" onclick="cpNote()">Copy</button>
+            </span>
+          </div>
+          <div class="bnote">
+            👇 Vui lòng chuyển khoản theo thông tin trên, sau đó nhấn nút <strong>"Tôi đã chuyển khoản"</strong> bên dưới.<br>
+            Please transfer first, then click <strong>"I've Completed Payment"</strong> below.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ch"><div class="sn">3</div><h3>Order Notes (optional)</h3></div>
+      <div class="cb">
+        <div class="fg"><textarea id="oNote" placeholder="Special requests, questions..."></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div>
+    <div class="card">
+      <div class="ch"><h3>🛒 Order Summary</h3></div>
+      <div id="itemsList" style="padding:0 1.5rem"></div>
+      <div class="tots" id="totsWrap" style="display:none">
+        <div class="tr" style="color:var(--green)"><span class="lb">🏷️ Sale Discount (50%)</span><span id="discAmt"></span></div>
+        <div class="tr"><span class="lb">Subtotal</span><span id="subAmt"></span></div>
+        <div class="tr"><span class="lb">Delivery</span><span style="color:var(--green)">Free (Digital)</span></div>
+        <div class="tr main"><span>Total</span><span id="totAmt"></span></div>
+      </div>
+      <div style="padding:0 1.5rem 1.5rem" id="btnWrap" style="display:none">
+        <!-- Step A: Review & Place -->
+        <div id="stepA">
+          <button class="btn-c" id="placeBtn" onclick="placeOrder()">📋 Review & Get Payment Info</button>
+          <p class="sec-note">Bước tiếp theo: xem thông tin chuyển khoản</p>
+        </div>
+        <!-- Step B: Confirm payment — shown after place -->
+        <div id="stepB" style="display:none">
+          <div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:10px;padding:0.85rem 1rem;margin-bottom:1rem;font-size:0.84rem;color:#1b5e20;line-height:1.65;">
+            ✅ Đơn hàng đã được ghi nhận! Vui lòng chuyển khoản theo thông tin bên trên.<br>
+            <strong>Sau khi chuyển khoản xong</strong>, nhấn nút bên dưới để hoàn tất.
+          </div>
+          <button class="btn-c" id="paidBtn" onclick="confirmPaid()" style="background:var(--green)">
+            ✅ Tôi đã chuyển khoản xong!
+          </button>
+          <p class="sec-note">🔒 Files sẽ được gửi về email trong 24h sau khi xác nhận</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cb what-box">
+        <div>📦 Seamless PNG · 300 DPI · 3600×3600px</div>
+        <div>📧 Delivered to email within 24h</div>
+        <div>♾️ Commercial license included</div>
+        <div>💬 zenithcraftedstudio@gmail.com</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<div class="toast" id="toast"></div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('zanith_cart')||'[]');
+
+function renderCart() {
+  const list = document.getElementById('itemsList');
+  if (!cart.length) {
+    list.innerHTML = '<div class="empty-c"><div style="font-size:2.5rem">🛒</div><p>Cart is empty</p><a href="index.html" style="color:var(--navy)">Shop now →</a></div>';
+    document.getElementById('totsWrap').style.display='none';
+    document.getElementById('btnWrap').style.display='none';
+    return;
+  }
+  list.innerHTML = cart.map((it,i)=>`
+    <div class="ci">
+      <img class="ci-img" src="${it.image||''}" onerror="this.src='https://placehold.co/64x64/f3ede3/8a9bb5?text=IMG'">
+      <div class="ci-info">
+        <div class="ci-title">${it.title}</div>
+        <div class="ci-var">${it.variant||'Standard'}</div>
+        <div class="ci-qr">
+          <button class="qb" onclick="chQty(${i},-1)">−</button>
+          <span class="qn">${it.qty}</span>
+          <button class="qb" onclick="chQty(${i},1)">+</button>
+          <button class="rm" onclick="rmItem(${i})">🗑 Remove</button>
+        </div>
+      </div>
+      <div class="ci-price">$${(it.price*it.qty).toFixed(2)}</div>
+    </div>`).join('');
+
+  const sub = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const orig = cart.reduce((s,i)=>s+(i.originalPrice||i.price*2)*i.qty,0);
+  document.getElementById('discAmt').textContent=`-$${(orig-sub).toFixed(2)}`;
+  document.getElementById('subAmt').textContent=`$${sub.toFixed(2)}`;
+  document.getElementById('totAmt').textContent=`$${sub.toFixed(2)} USD`;
+  document.getElementById('txAmt').textContent=`$${sub.toFixed(2)} USD`;
+  document.getElementById('totsWrap').style.display='block';
+  document.getElementById('btnWrap').style.display='block';
+  updNote();
+}
+
+function chQty(i,d){cart[i].qty=Math.max(1,cart[i].qty+d);save();renderCart();}
+function rmItem(i){cart.splice(i,1);save();renderCart();}
+function save(){localStorage.setItem('zanith_cart',JSON.stringify(cart));}
+
+function updNote(){
+  const em=document.getElementById('cEmail')?.value||'ORDER';
+  const ref='ZCS'+Date.now().toString().slice(-6);
+  document.getElementById('txNote').textContent=`ZANITH ${em.split('@')[0].toUpperCase()} ${ref}`;
+  document.getElementById('txNote').dataset.ref=ref;
+}
+document.getElementById('cEmail')?.addEventListener('input',updNote);
+
+function cp(txt,lbl){navigator.clipboard.writeText(txt).then(()=>toast(`✅ ${lbl} copied!`,'ok'));}
+function cpNote(){cp(document.getElementById('txNote').textContent,'Transfer note');}
+
+// Step A — validate info, save pending order, show bank info
+var pendingOrderRef = null;
+
+function placeOrder() {
+  const name = document.getElementById('cName').value.trim();
+  const email = document.getElementById('cEmail').value.trim();
+  if (!name) { toast('Vui lòng nhập tên / Please enter your name', ''); return; }
+  if (!email || !email.includes('@')) { toast('Email không hợp lệ / Invalid email', ''); return; }
+  if (!cart.length) { toast('Giỏ hàng trống / Cart is empty', ''); return; }
+
+  const ref = 'ZCS-' + Date.now().toString().slice(-8);
+  pendingOrderRef = ref;
+  const sub = cart.reduce((s,i) => s + i.price * i.qty, 0);
+
+  // Update transfer note with real order ref
+  document.getElementById('txNote').textContent = 'ZANITH ' + email.split('@')[0].toUpperCase() + ' ' + ref.replace('ZCS-','');
+
+  // Save pending order
+  const order = {
+    ref, name, email,
+    phone: document.getElementById('cPhone').value || '',
+    items: [...cart],
+    total: sub.toFixed(2),
+    note: document.getElementById('oNote').value || '',
+    status: 'pending',
+    time: new Date().toISOString(),
+    timeDisplay: new Date().toLocaleString('vi-VN')
+  };
+  localStorage.setItem('zanith_last_order', JSON.stringify(order));
+  const orders = JSON.parse(localStorage.getItem('zanith_orders') || '[]');
+  orders.unshift(order);
+  localStorage.setItem('zanith_orders', JSON.stringify(orders));
+
+  // Show step B, scroll to bank info
+  document.getElementById('stepA').style.display = 'none';
+  document.getElementById('stepB').style.display = 'block';
+  document.querySelector('.bank-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  toast('📋 Đơn hàng đã tạo! Vui lòng chuyển khoản theo thông tin bên trên.', 'ok');
+}
+
+// ═══════════════════════════════════════════════
+// ⚙️ CẤU HÌNH — Paste URL Apps Script vào đây
+// ═══════════════════════════════════════════════
+const SHEET_WEBHOOK = localStorage.getItem('zanith_webhook') || 'YOUR_APPS_SCRIPT_URL_HERE';
+
+// Step B — customer confirms they've paid → redirect to thank-you
+async function confirmPaid() {
+  const btn = document.getElementById('paidBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Đang xử lý...';
+
+  const order = JSON.parse(localStorage.getItem('zanith_last_order') || 'null');
+
+  if (order) {
+    const itemsTxt = (order.items||[]).map(function(i){ return i.title + ' x' + i.qty + ' — $' + (i.price*i.qty).toFixed(2); }).join(' | ');
+    const payload = {
+      order_ref:   order.ref,
+      name:        order.name,
+      email:       order.email,
+      phone:       order.phone || '',
+      items:       itemsTxt,
+      total:       '$' + order.total + ' USD',
+      note:        order.note || '',
+      status:      'Pending',
+      time:        order.timeDisplay
+    };
+
+    // 1. Ghi vào Google Sheet (webhook)
+    if (SHEET_WEBHOOK && SHEET_WEBHOOK !== 'YOUR_APPS_SCRIPT_URL_HERE') {
+      try {
+        // Dùng no-cors để tránh lỗi CORS từ GitHub Pages
+        await fetch(SHEET_WEBHOOK, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(payload)
+        });
+      } catch(e) { console.log('Sheet webhook failed:', e); }
+    }
+
+    // 2. Gửi email thông báo (Formspree backup)
+    try {
+      await fetch('https://formspree.io/f/mwkgnjvb', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          _subject: '[Zanith] Payment Confirmed - ' + order.ref + ' — ' + order.name,
+          _replyto: order.email,
+          order_ref: order.ref,
+          name: order.name,
+          email: order.email,
+          phone: order.phone || 'N/A',
+          items: itemsTxt,
+          total: '$' + order.total + ' USD',
+          payment: 'Techcombank - CUSTOMER CONFIRMED PAID',
+          note: order.note || 'None',
+          time: order.timeDisplay
+        })
+      });
+    } catch(e) { console.log('Email failed, continuing...'); }
+  }
+
+  // Clear cart, redirect
+  localStorage.removeItem('zanith_cart');
+  window.location.href = 'thank-you.html';
+}
+
+function toast(msg,type=''){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast show '+type;
+  setTimeout(()=>t.className='toast',3000);
+}
+
+renderCart();
+</script>
+</body>
+</html>
