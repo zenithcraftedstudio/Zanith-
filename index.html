@@ -1,0 +1,2472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zanith Crafted Studio — Handcrafted Digital & Print Goods</title>
+<meta name="description" content="Unique seamless patterns & POD products designed for makers, sellers & dreamers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1e2d4a;
+  --navy-light: #2a3f63;
+  --navy-dark: #131d30;
+  --gold: #c8974a;
+  --gold-light: #e8b86d;
+  --cream: #faf7f2;
+  --warm: #f3ede3;
+  --muted: #8a9bb5;
+  --text: #1a2332;
+  --text-soft: #5a6a7e;
+  --white: #ffffff;
+  --border: #e2ddd6;
+  --green: #2e7d52;
+  --red: #c0392b;
+  --shadow-sm: 0 1px 4px rgba(30,45,74,0.08);
+  --shadow-md: 0 4px 16px rgba(30,45,74,0.12);
+  --shadow-lg: 0 12px 40px rgba(30,45,74,0.16);
+  --radius: 12px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Instrument Sans', sans-serif;
+  background:var(--cream); color:var(--text);
+  min-height:100vh;
+}
+
+/* ── ANNOUNCEMENT BAR ── */
+.announce-bar {
+  background:var(--navy);
+  color:rgba(255,255,255,0.85);
+  text-align:center; padding:0.5rem 1rem;
+  font-size:0.78rem; letter-spacing:0.03em;
+}
+.announce-bar span { margin:0 1rem; }
+
+/* ── HEADER ── */
+header {
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  position:sticky; top:0; z-index:100;
+  box-shadow:var(--shadow-sm);
+}
+.header-inner {
+  max-width:1200px; margin:0 auto;
+  padding:0.9rem 1.5rem;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+}
+.logo {
+  display:flex; align-items:center; gap:0.75rem;
+  text-decoration:none; flex-shrink:0;
+}
+.logo-icon {
+  width:42px; height:42px; background:var(--navy);
+  border-radius:10px; display:flex; align-items:center;
+  justify-content:center; font-size:1.3rem;
+}
+.logo-text { line-height:1.2; }
+.logo-name {
+  font-family:'Fraunces',serif; font-size:1.1rem;
+  font-weight:500; color:var(--navy);
+}
+.logo-sub {
+  font-size:0.65rem; color:var(--muted); letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+.header-search {
+  flex:1; max-width:420px;
+  display:flex; align-items:center;
+  background:var(--warm); border:1px solid var(--border);
+  border-radius:25px; padding:0.45rem 1rem; gap:0.5rem;
+}
+.header-search input {
+  flex:1; border:none; background:transparent; outline:none;
+  font-family:'Instrument Sans',sans-serif; font-size:0.875rem; color:var(--text);
+}
+.header-search input::placeholder { color:var(--muted); }
+.header-search button {
+  background:none; border:none; cursor:pointer; color:var(--muted); font-size:1rem;
+  transition:color 0.2s;
+}
+.header-search button:hover { color:var(--navy); }
+.header-right { display:flex; align-items:center; gap:0.75rem; }
+.lang-toggle {
+  display:flex; align-items:center; gap:0.3rem;
+  background:var(--warm); border:1px solid var(--border);
+  border-radius:20px; padding:0.35rem 0.75rem;
+  font-size:0.75rem; cursor:pointer; color:var(--text-soft);
+  transition:all 0.2s;
+}
+.lang-toggle:hover { border-color:var(--navy); color:var(--navy); }
+.lang-toggle .active-lang { font-weight:600; color:var(--navy); }
+.cart-btn {
+  display:flex; align-items:center; gap:0.5rem;
+  background:var(--navy); color:var(--white);
+  border:none; border-radius:25px; padding:0.5rem 1.1rem;
+  font-family:'Instrument Sans',sans-serif; font-size:0.85rem;
+  font-weight:500; cursor:pointer; transition:all 0.2s;
+  text-decoration:none;
+}
+.cart-btn:hover { background:var(--navy-light); }
+.cart-count {
+  background:var(--gold); color:var(--white);
+  border-radius:50%; width:20px; height:20px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.7rem; font-weight:700;
+}
+
+/* ── NAV TABS ── */
+.nav-tabs {
+  background:var(--white); border-bottom:1px solid var(--border);
+  overflow-x:auto; white-space:nowrap;
+}
+.nav-tabs-inner {
+  max-width:1200px; margin:0 auto;
+  padding:0 1.5rem;
+  display:flex; gap:0;
+}
+.tab {
+  display:inline-flex; align-items:center; gap:0.4rem;
+  padding:0.85rem 1.1rem; font-size:0.875rem; font-weight:500;
+  color:var(--text-soft); cursor:pointer; text-decoration:none;
+  border-bottom:2px solid transparent; transition:all 0.2s;
+  white-space:nowrap;
+}
+.tab:hover { color:var(--navy); }
+.tab.active { color:var(--navy); border-bottom-color:var(--navy); font-weight:600; }
+
+/* ── HERO ── */
+.hero {
+  background:linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #3a5180 100%);
+  padding:4rem 1.5rem;
+  text-align:center; position:relative; overflow:hidden;
+}
+.hero::before {
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 50%, rgba(200,151,74,0.15) 0%, transparent 60%),
+             radial-gradient(ellipse at 70% 50%, rgba(255,255,255,0.05) 0%, transparent 60%);
+}
+.hero-content { position:relative; max-width:640px; margin:0 auto; }
+.hero h1 {
+  font-family:'Fraunces',serif; font-weight:500;
+  font-size:clamp(2rem,5vw,3.2rem); color:var(--white);
+  line-height:1.15; margin-bottom:1rem;
+}
+.hero h1 em { font-style:italic; color:var(--gold-light); }
+.hero p {
+  color:rgba(255,255,255,0.75); font-size:1rem;
+  line-height:1.7; margin-bottom:2rem;
+}
+.hero-badges {
+  display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;
+}
+.hero-badge {
+  background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2);
+  color:rgba(255,255,255,0.85); padding:0.4rem 1rem;
+  border-radius:20px; font-size:0.8rem;
+}
+
+/* ── FILTERS ── */
+.filters-section {
+  background:var(--white); border-bottom:1px solid var(--border);
+  position:sticky; top:61px; z-index:40;
+}
+/* Main filter bar */
+.filters-bar {
+  max-width:1200px; margin:0 auto;
+  display:flex; gap:0.6rem; align-items:center;
+  padding:0.75rem 1.5rem;
+  justify-content:space-between; flex-wrap:wrap;
+}
+.filter-group { display:flex; gap:0.4rem; flex-wrap:wrap; align-items:center; }
+.filter-chip {
+  background:transparent; border:1.5px solid var(--border);
+  padding:0.3rem 0.85rem; border-radius:20px;
+  font-size:0.78rem; cursor:pointer; color:var(--text-soft);
+  transition:all 0.18s; white-space:nowrap; font-weight:500;
+  letter-spacing:0.01em;
+}
+.filter-chip:hover { border-color:var(--navy); color:var(--navy); background:var(--warm); }
+.filter-chip.active {
+  background:var(--navy); border-color:var(--navy);
+  color:var(--white); font-weight:600;
+}
+/* POD sub-filter bar — hidden by default */
+.pod-filter-bar {
+  display:none;
+  border-top:1px solid var(--border);
+  background:var(--cream);
+  padding:0.55rem 1.5rem;
+}
+.pod-filter-bar.visible { display:block; }
+.pod-filter-inner {
+  max-width:1200px; margin:0 auto;
+  display:flex; gap:0.35rem; flex-wrap:wrap; align-items:center;
+}
+.pod-label {
+  font-size:0.68rem; font-weight:700; text-transform:uppercase;
+  letter-spacing:0.1em; color:var(--muted); margin-right:0.4rem;
+}
+.pod-chip {
+  background:var(--white); border:1px solid var(--border);
+  padding:0.22rem 0.7rem; border-radius:20px;
+  font-size:0.74rem; cursor:pointer; color:var(--text-soft);
+  transition:all 0.15s; white-space:nowrap;
+}
+.pod-chip:hover { border-color:var(--gold); color:var(--text); }
+.pod-chip.active {
+  background:var(--gold); border-color:var(--gold);
+  color:var(--white); font-weight:600;
+}
+.sort-row { display:flex; align-items:center; gap:0.6rem; flex-shrink:0; }
+.sort-label { font-size:0.75rem; color:var(--muted); }
+.sort-select {
+  border:1px solid var(--border); background:var(--warm);
+  padding:0.3rem 0.75rem; border-radius:8px;
+  font-size:0.75rem; color:var(--text); cursor:pointer; outline:none;
+  font-family:'Instrument Sans',sans-serif;
+}
+
+/* ── MAIN ── */
+.main { max-width:1200px; margin:0 auto; padding:2rem 1.5rem; }
+.section-header {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:1.5rem;
+}
+.section-title {
+  font-family:'Fraunces',serif; font-size:1.4rem; font-weight:500;
+}
+.results-info { font-size:0.82rem; color:var(--text-soft); }
+
+/* ── PRODUCT GRID — masonry auto height ── */
+.products-grid {
+  columns:5; column-gap:12px;
+}
+.products-grid .product-card {
+  break-inside:avoid; margin-bottom:12px; display:inline-block; width:100%;
+}
+@media(max-width:1100px){ .products-grid{ columns:4; } }
+@media(max-width:768px){ .products-grid{ columns:3; column-gap:10px; } .products-grid .product-card{ margin-bottom:10px; } }
+@media(max-width:480px){ .products-grid{ columns:2; column-gap:8px; } .products-grid .product-card{ margin-bottom:8px; } }
+
+/* ── PRODUCT CARD ── */
+.product-card {
+  background:transparent; border-radius:4px;
+  cursor:pointer; transition:none;
+  position:relative;
+}
+
+/* ── GALLERY ── */
+.card-gallery {
+  position:relative;
+  background:var(--warm); overflow:hidden;
+  border-radius:4px; width:100%;
+}
+/* Default aspect ratio trước khi ảnh load */
+.card-gallery::before {
+  content:''; display:block; padding-top:100%;
+}
+.card-gallery.img-loaded::before { display:none; }
+.gallery-track {
+  display:flex; width:100%;
+  transition:transform 0.3s ease;
+  position:absolute; top:0; left:0; right:0; bottom:0;
+}
+.card-gallery.img-loaded .gallery-track {
+  position:relative; top:auto; left:auto; right:auto; bottom:auto;
+}
+.gallery-track img {
+  flex-shrink:0; width:100%;
+  object-fit:contain; display:block;
+  background:var(--warm);
+}
+/* Arrows */
+.g-arr {
+  position:absolute; top:50%; transform:translateY(-50%);
+  background:rgba(255,255,255,0.9); border:none;
+  width:30px; height:30px; border-radius:50%;
+  font-size:1rem; cursor:pointer; z-index:5;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transition:opacity 0.15s;
+  box-shadow:0 1px 6px rgba(0,0,0,0.18);
+  line-height:1;
+}
+.g-arr.prev { left:8px; }
+.g-arr.next { right:8px; }
+.product-card:hover .g-arr { opacity:1; }
+/* Dots */
+.card-dots {
+  position:absolute; bottom:8px; left:50%; transform:translateX(-50%);
+  display:flex; gap:4px; opacity:0; transition:opacity 0.15s; z-index:4;
+}
+.product-card:hover .card-dots { opacity:1; }
+.card-dot {
+  width:5px; height:5px; border-radius:50%;
+  background:rgba(255,255,255,0.55); border:none; padding:0; cursor:pointer;
+  transition:background 0.2s;
+}
+.card-dot.active { background:white; }
+/* Sale badge */
+.card-badge-sale {
+  position:absolute; top:10px; left:10px; z-index:4;
+  background:var(--red); color:white;
+  font-size:0.6rem; font-weight:700; padding:0.18rem 0.55rem;
+  border-radius:3px; letter-spacing:0.04em;
+}
+/* Wishlist */
+.card-wish {
+  position:absolute; bottom:8px; right:8px; z-index:4;
+  background:rgba(255,255,255,0.92); border:none;
+  width:30px; height:30px; border-radius:50%;
+  font-size:0.9rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transition:opacity 0.15s;
+  box-shadow:0 1px 4px rgba(0,0,0,0.12);
+}
+.product-card:hover .card-wish { opacity:1; }
+
+/* ── CARD INFO (below image, no border box) ── */
+.card-info { padding:8px 2px 4px; }
+.card-title {
+  font-size:0.82rem; font-weight:400; line-height:1.4; color:var(--text);
+  margin-bottom:2px;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.card-shop-name { font-size:0.72rem; color:var(--text-soft); margin-bottom:4px; }
+.card-price-row { display:flex; align-items:center; gap:6px; margin-bottom:5px; flex-wrap:wrap; }
+.card-price { font-size:0.9rem; font-weight:700; color:var(--text); }
+.card-price-orig { font-size:0.75rem; color:var(--muted); text-decoration:line-through; }
+.card-sale-tag { font-size:0.7rem; color:var(--red); font-weight:600; }
+.card-swatches { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:7px; }
+.cswatch {
+  width:20px; height:20px; border-radius:50%;
+  border:1.5px solid rgba(0,0,0,0.15); cursor:pointer;
+  transition:transform 0.15s; flex-shrink:0;
+}
+.cswatch:hover { transform:scale(1.15); }
+.cswatch.sel { outline:2px solid var(--navy); outline-offset:2px; }
+.card-add {
+  width:100%; background:var(--navy); color:white;
+  border:none; padding:0.6rem; border-radius:20px;
+  font-family:'Instrument Sans',sans-serif; font-size:0.78rem;
+  font-weight:600; cursor:pointer; transition:background 0.2s;
+  display:block; margin-top:0.5rem;
+}
+.card-add:hover { background:var(--gold); }
+/* Desktop only: ẩn nút, hiện khi hover */
+@media(hover:hover) and (pointer:fine) {
+  .card-add {
+    opacity:0; transform:translateY(4px);
+    transition:opacity 0.2s, transform 0.2s, background 0.2s;
+  }
+  .product-card:hover .card-add {
+    opacity:1; transform:translateY(0);
+  }
+}
+/* Touch devices (iPad, mobile): luôn hiện */
+@media(hover:none), (pointer:coarse) {
+  .card-add { display:block !important; opacity:1 !important; transform:none !important; }
+}
+
+/* Cart float */
+.cart-float{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;background:var(--navy);color:white;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 20px rgba(30,45,74,0.35);transition:all 0.2s;text-decoration:none;}
+.cart-float:hover{background:var(--navy-light);transform:scale(1.05);}
+.cf-count{position:absolute;top:-2px;right:-2px;background:var(--red);color:white;width:20px;height:20px;border-radius:50%;font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+
+/* ── MODAL ── */
+.modal-overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(13,20,35,0.65); z-index:500;
+  align-items:center; justify-content:center;
+  padding:1rem; backdrop-filter:blur(4px);
+}
+.modal-overlay.open { display:flex; }
+.modal {
+  background:var(--white); border-radius:16px;
+  max-width:800px; width:100%; max-height:90vh;
+  overflow-y:auto; box-shadow:var(--shadow-lg);
+  animation:slideUp 0.3s ease;
+}
+@keyframes slideUp { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
+.modal-layout {
+  display:grid;
+  grid-template-columns:64px minmax(0,1fr) 380px;
+  max-height:88vh; border-radius:20px; overflow:hidden;
+}
+.modal-thumbs {
+  display:flex; flex-direction:column; gap:0.5rem;
+  overflow-y:auto; padding:0.5rem;
+  background:var(--warm);
+}
+.modal-img-col {
+  background:var(--warm); overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  min-height:300px;
+}
+.modal-img-col img {
+  width:100%; height:auto;
+  max-height:88vh;
+  object-fit:contain; display:block;
+}
+.modal-thumb {
+  width:52px; height:52px; border-radius:6px; object-fit:cover;
+  cursor:pointer; border:2px solid transparent; transition:all 0.15s; flex-shrink:0;
+}
+.modal-thumb:hover { border-color:var(--muted); }
+.modal-thumb.active { border-color:var(--navy); box-shadow:0 0 0 1px var(--navy); }
+.modal-info-col { padding:2rem; display:flex; flex-direction:column; gap:1rem; overflow-y:auto; }
+.modal-close {
+  position:absolute; top:1rem; right:1rem;
+  background:var(--white); border:1px solid var(--border);
+  width:32px; height:32px; border-radius:50%;
+  cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center;
+  transition:all 0.2s;
+}
+.modal-close:hover { background:var(--warm); }
+.modal { position:relative; }
+.modal-sku { font-size:0.7rem; color:var(--muted); letter-spacing:0.1em; font-weight:600; }
+.modal-cat { font-size:0.75rem; color:var(--gold); font-weight:700; text-transform:uppercase; letter-spacing:0.08em; }
+.modal-title {
+  font-family:'Fraunces',serif; font-size:1.35rem; font-weight:500; color:var(--text); line-height:1.3;
+}
+.modal-desc { font-size:0.875rem; color:var(--text-soft); line-height:1.75; }
+.price-box {
+  background:var(--warm); border-radius:10px; padding:1rem;
+  border:1px solid var(--border);
+}
+.price-box-row { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.85rem; }
+.price-box-row .lbl { color:var(--text-soft); }
+.price-box-row .val { font-weight:600; color:var(--text); }
+.price-box-row.main-price .val { font-size:1.3rem; color:var(--navy); }
+.price-box-row.margin .val { color:var(--green); }
+.divider { border:none; border-top:1px solid var(--border); margin:0; }
+.modal-hashtags {
+  font-size:0.75rem; color:var(--text-soft);
+  line-height:2.2; background:var(--warm); border-radius:8px; padding:0.75rem;
+}
+.modal-actions { display:flex; gap:0.75rem; }
+.btn-primary {
+  flex:1; background:var(--navy); color:var(--white);
+  border:none; padding:0.75rem; border-radius:10px;
+  font-family:'Instrument Sans',sans-serif; font-size:0.875rem;
+  font-weight:600; cursor:pointer; transition:all 0.2s;
+}
+.btn-primary:hover { background:var(--navy-light); }
+.btn-secondary {
+  background:var(--warm); border:1px solid var(--border); color:var(--text);
+  padding:0.75rem 1rem; border-radius:10px;
+  font-size:0.875rem; cursor:pointer; transition:all 0.2s;
+}
+.btn-secondary:hover { background:var(--border); }
+@media(max-width:860px) {
+  .modal-layout { grid-template-columns:56px minmax(0,1fr) 300px !important; }
+}
+@media(max-width:680px) {
+  .modal-layout { grid-template-columns:1fr !important; max-height:none !important; }
+  .modal-thumbs { flex-direction:row !important; overflow-x:auto; overflow-y:hidden !important; max-height:64px; }
+  .modal-img-col { min-height:200px; }
+  .modal-img-col img { max-height:60vw; }
+  .modal-info-col { max-height:50vh; overflow-y:auto; }
+}
+
+/* ── SUGGESTED PRODUCTS ── */
+.suggested-section {
+  padding:1.5rem 0 0;
+  border-top:1px solid var(--border);
+  margin-top:0.5rem;
+}
+.suggested-label {
+  font-size:0.7rem; font-weight:700; text-transform:uppercase;
+  letter-spacing:0.1em; color:var(--muted); margin-bottom:0.75rem;
+}
+.suggested-row {
+  display:flex; gap:0.6rem; overflow-x:auto; padding-bottom:0.5rem;
+  scrollbar-width:none;
+}
+.suggested-row::-webkit-scrollbar { display:none; }
+.suggested-card {
+  flex-shrink:0; width:80px; cursor:pointer; border-radius:6px;
+  overflow:hidden; transition:transform 0.15s;
+}
+.suggested-card:hover { transform:scale(1.04); }
+.suggested-card img {
+  width:80px; height:80px; object-fit:cover; display:block;
+  border-radius:6px; background:var(--warm);
+}
+.suggested-card-title {
+  font-size:0.6rem; color:var(--text-soft); margin-top:3px;
+  line-height:1.3; text-align:center;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+/* Recently viewed section cuối trang */
+.recently-section {
+  max-width:1200px; margin:0 auto; padding:2rem 1.5rem 0;
+  border-top:1px solid var(--border);
+}
+.recently-header {
+  display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;
+}
+.recently-title {
+  font-family:'Fraunces',serif; font-size:1.1rem; font-weight:500; color:var(--text);
+}
+.recently-clear {
+  font-size:0.75rem; color:var(--muted); cursor:pointer; background:none;
+  border:none; text-decoration:underline;
+}
+.recently-grid {
+  display:flex; gap:12px; overflow-x:auto; padding-bottom:1rem;
+  scrollbar-width:thin; scrollbar-color:var(--border) transparent;
+}
+.recently-item {
+  flex-shrink:0; width:130px; cursor:pointer;
+}
+.recently-item img {
+  width:130px; height:130px; object-fit:cover; border-radius:8px;
+  background:var(--warm); display:block; transition:transform 0.15s;
+}
+.recently-item:hover img { transform:scale(1.03); }
+.recently-item-title {
+  font-size:0.72rem; color:var(--text); margin-top:6px; line-height:1.4;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.recently-item-price { font-size:0.72rem; color:var(--navy); font-weight:600; margin-top:2px; }
+
+
+
+/* ── FAQ SECTION ── */
+.faq-section {
+  max-width:860px; margin:0 auto; padding:3rem 1.5rem;
+}
+.faq-section-title {
+  font-family:'Fraunces',serif; font-size:1.6rem; font-weight:500;
+  text-align:center; margin-bottom:0.5rem; color:var(--navy);
+}
+.faq-section-sub {
+  text-align:center; font-size:0.875rem; color:var(--text-soft);
+  margin-bottom:2rem;
+}
+.faq-item {
+  border-bottom:1px solid var(--border); overflow:hidden;
+}
+.faq-q {
+  width:100%; text-align:left; background:none; border:none;
+  padding:1rem 0; cursor:pointer; display:flex;
+  justify-content:space-between; align-items:center; gap:1rem;
+  font-family:'Instrument Sans',sans-serif; font-size:0.92rem;
+  font-weight:600; color:var(--text); line-height:1.4;
+}
+.faq-q:hover { color:var(--navy); }
+.faq-arrow {
+  flex-shrink:0; width:22px; height:22px; border-radius:50%;
+  background:var(--warm); display:flex; align-items:center;
+  justify-content:center; font-size:0.75rem; transition:transform 0.25s;
+  color:var(--muted);
+}
+.faq-item.open .faq-arrow { transform:rotate(180deg); background:var(--navy); color:white; }
+.faq-a {
+  max-height:0; overflow:hidden; transition:max-height 0.3s ease, padding 0.2s;
+  font-size:0.85rem; color:var(--text-soft); line-height:1.75;
+  padding:0 0 0;
+}
+.faq-item.open .faq-a { max-height:400px; padding:0 0 1rem; }
+.faq-a a { color:var(--navy); }
+.faq-contact-cta {
+  text-align:center; margin-top:2rem; padding:1.5rem;
+  background:var(--warm); border-radius:12px;
+  border:1px solid var(--border);
+}
+.faq-contact-cta p { font-size:0.875rem; color:var(--text-soft); margin-bottom:0.75rem; }
+
+/* ── REVIEWS SECTION ── */
+.reviews-section {
+  max-width:1200px; margin:0 auto; padding:2.5rem 1.5rem;
+  border-top:1px solid var(--border);
+}
+.reviews-header {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;
+}
+.reviews-title {
+  font-family:'Fraunces',serif; font-size:1.4rem; font-weight:500; color:var(--navy);
+}
+.reviews-summary {
+  display:flex; align-items:center; gap:8px;
+}
+.stars-big { font-size:1.2rem; }
+.rating-num { font-size:1.5rem; font-weight:700; color:var(--navy); }
+.rating-count { font-size:0.8rem; color:var(--text-soft); }
+.reviews-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1rem; margin-bottom:1.5rem;
+}
+.review-card {
+  background:white; border-radius:12px; padding:1.1rem;
+  box-shadow:0 1px 6px rgba(30,45,74,0.07);
+  border:1px solid var(--border);
+}
+.review-stars { font-size:0.85rem; margin-bottom:6px; }
+.review-text {
+  font-size:0.83rem; color:var(--text); line-height:1.6;
+  margin-bottom:8px;
+}
+.review-meta {
+  font-size:0.72rem; color:var(--muted);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.review-product-tag {
+  font-size:0.65rem; background:var(--warm); border-radius:10px;
+  padding:1px 7px; color:var(--text-soft);
+}
+/* Write review form */
+.review-form-wrap {
+  background:var(--warm); border-radius:12px; padding:1.25rem;
+  border:1px solid var(--border);
+}
+.review-form-title {
+  font-size:0.9rem; font-weight:600; color:var(--navy); margin-bottom:1rem;
+}
+.review-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; }
+.rf-field { display:flex; flex-direction:column; gap:4px; }
+.rf-field label { font-size:0.7rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; }
+.rf-field input, .rf-field select, .rf-field textarea {
+  padding:0.5rem 0.75rem; border:1.5px solid var(--border);
+  border-radius:8px; font-size:0.82rem; font-family:inherit;
+  background:white; outline:none; color:var(--text);
+}
+.rf-field input:focus, .rf-field select:focus, .rf-field textarea:focus { border-color:var(--navy); }
+.rf-field textarea { resize:vertical; min-height:70px; }
+.star-picker { display:flex; gap:4px; }
+.star-pick-btn {
+  background:none; border:none; font-size:1.3rem; cursor:pointer;
+  transition:transform 0.1s; color:#ddd; padding:0;
+}
+.star-pick-btn.on { color:#f4c430; }
+.star-pick-btn:hover { transform:scale(1.2); }
+@media(max-width:600px){
+  .review-form-grid{grid-template-columns:1fr;}
+  .reviews-grid{grid-template-columns:1fr;}
+}
+
+/* ── FLASH SALE BAR ── */
+.flash-bar {
+  background: linear-gradient(90deg, #c0392b 0%, #e74c3c 50%, #c0392b 100%);
+  color: white; text-align:center; padding:0.6rem 1rem;
+  font-size:0.8rem; font-weight:600; letter-spacing:0.02em;
+  display:flex; align-items:center; justify-content:center; gap:1rem;
+  position:relative;
+}
+.flash-bar.hidden { display:none; }
+.flash-countdown {
+  display:inline-flex; gap:4px; align-items:center;
+}
+.flash-unit {
+  background:rgba(0,0,0,0.3); border-radius:4px;
+  padding:1px 6px; font-variant-numeric:tabular-nums;
+  font-size:0.85rem; font-weight:700; min-width:28px; text-align:center;
+}
+.flash-sep { opacity:0.7; font-weight:700; }
+.flash-close-btn {
+  position:absolute; right:12px; top:50%; transform:translateY(-50%);
+  background:none; border:none; color:rgba(255,255,255,0.7);
+  cursor:pointer; font-size:1rem; line-height:1;
+}
+
+/* ── TIER BADGE ── */
+.tier-badge {
+  display:inline-block; font-size:0.58rem; font-weight:700;
+  padding:1px 6px; border-radius:10px; text-transform:uppercase;
+  letter-spacing:0.06em; vertical-align:middle; margin-left:4px;
+}
+.tier-entry { background:#e8f5e9; color:#2e7d52; }
+.tier-mid    { background:#e3f2fd; color:#1565c0; }
+.tier-premium{ background:#fce4ec; color:#c62828; }
+
+/* ── DISCOUNT BADGE on card ── */
+.card-badge-discount {
+  position:absolute; top:10px; right:10px; z-index:4;
+  background:var(--red); color:white;
+  font-size:0.58rem; font-weight:700; padding:2px 6px;
+  border-radius:3px; letter-spacing:0.04em;
+}
+
+/* ── PROMO BANNER below header ── */
+.promo-banner {
+  background:var(--navy); color:rgba(255,255,255,0.9);
+  padding:0.45rem 1rem; font-size:0.75rem;
+  display:flex; align-items:center; justify-content:center;
+  gap:1.5rem; flex-wrap:wrap;
+}
+.promo-tag {
+  display:inline-flex; align-items:center; gap:5px;
+}
+.promo-code {
+  background:var(--gold); color:var(--navy); font-weight:700;
+  padding:1px 8px; border-radius:12px; font-size:0.72rem;
+  letter-spacing:0.04em; cursor:pointer;
+}
+.promo-code:hover { background:var(--gold-light); }
+.promo-copied {
+  font-size:0.65rem; color:var(--gold-light);
+  display:none; margin-left:2px;
+}
+
+/* ── MODAL PRICE BOX NEW ── */
+.price-main-row {
+  display:flex; align-items:baseline; gap:8px; margin-bottom:4px;
+}
+.price-sale-val {
+  font-size:1.6rem; font-weight:700; color:var(--navy);
+  font-family:'Fraunces',serif;
+}
+.price-orig-val {
+  font-size:0.95rem; text-decoration:line-through; color:var(--muted);
+}
+.price-save-tag {
+  font-size:0.7rem; font-weight:700; background:#fde8e6;
+  color:var(--red); padding:2px 8px; border-radius:10px;
+}
+.price-note {
+  font-size:0.75rem; color:var(--text-soft); margin-top:4px;
+}
+.flash-badge-inline {
+  display:inline-flex; align-items:center; gap:5px;
+  background:#fde8e6; color:var(--red); border-radius:6px;
+  padding:4px 10px; font-size:0.75rem; font-weight:600;
+  margin-bottom:8px;
+}
+
+/* ── DISCOUNT CODE BOX ── */
+.code-box {
+  display:flex; align-items:center; gap:8px;
+  background:var(--warm); border:1px dashed var(--gold);
+  border-radius:8px; padding:8px 12px; margin:6px 0;
+}
+.code-lbl { font-size:0.72rem; color:var(--text-soft); }
+.code-val {
+  font-weight:700; color:var(--navy); letter-spacing:0.1em;
+  font-size:0.85rem; flex:1;
+}
+.code-copy-btn {
+  background:var(--gold); color:white; border:none;
+  padding:3px 10px; border-radius:6px; font-size:0.7rem;
+  font-weight:600; cursor:pointer; white-space:nowrap;
+}
+.code-copy-btn:hover { background:var(--gold-light); }
+
+/* ── VARIANTS ── */
+.variants-section { margin:8px 0; }
+.variant-label {
+  font-size:0.72rem; font-weight:600; color:var(--text-soft);
+  text-transform:uppercase; letter-spacing:0.07em; margin-bottom:6px;
+}
+.variant-row { display:flex; gap:6px; flex-wrap:wrap; }
+.variant-btn {
+  padding:5px 12px; border:1.5px solid var(--border);
+  border-radius:20px; font-size:0.78rem; cursor:pointer;
+  background:white; color:var(--text); transition:all 0.15s;
+  font-family:'Instrument Sans',sans-serif;
+}
+.variant-btn:hover { border-color:var(--navy); color:var(--navy); }
+.variant-btn.selected {
+  background:var(--navy); border-color:var(--navy); color:white; font-weight:600;
+}
+.variant-btn.color-swatch {
+  width:28px; height:28px; padding:0; border-radius:50%;
+  position:relative;
+}
+.variant-btn.color-swatch.selected::after {
+  content:'✓'; position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.7rem; color:white; text-shadow:0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* ── QTY SELECTOR ── */
+.qty-row {
+  display:flex; align-items:center; gap:10px; margin:8px 0;
+}
+.qty-lbl { font-size:0.72rem; font-weight:600; color:var(--text-soft); text-transform:uppercase; letter-spacing:0.07em; }
+.qty-ctrl { display:flex; align-items:center; gap:6px; }
+.qty-btn {
+  width:28px; height:28px; border:1.5px solid var(--border);
+  border-radius:50%; background:white; cursor:pointer;
+  font-size:1rem; line-height:1; display:flex; align-items:center;
+  justify-content:center; transition:all 0.15s; color:var(--text);
+}
+.qty-btn:hover { border-color:var(--navy); color:var(--navy); }
+.qty-val {
+  width:32px; text-align:center; font-size:0.9rem;
+  font-weight:600; color:var(--text);
+}
+
+/* ── ADD TO CART BUTTON ── */
+.btn-add-cart {
+  flex:1; background:var(--navy); color:white; border:none;
+  padding:0.8rem 1.2rem; border-radius:10px;
+  font-family:'Instrument Sans',sans-serif; font-size:0.9rem;
+  font-weight:600; cursor:pointer; transition:all 0.2s;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+}
+.btn-add-cart:hover { background:var(--navy-light); transform:translateY(-1px); box-shadow:0 4px 12px rgba(30,45,74,0.25); }
+.btn-add-cart:active { transform:translateY(0); }
+.btn-add-cart.added { background:var(--green); }
+
+/* ── BUNDLE DEAL BOX ── */
+.bundle-box {
+  background:linear-gradient(135deg,#f0f9f4,#e8f5e9);
+  border:1px solid #a5d6a7; border-radius:10px;
+  padding:10px 14px; margin:6px 0;
+}
+.bundle-title { font-size:0.72rem; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:4px; }
+.bundle-desc { font-size:0.8rem; color:var(--text); line-height:1.4; }
+.bundle-qty-select {
+  display:flex; gap:5px; margin-top:8px; flex-wrap:wrap;
+}
+.bundle-qty-btn {
+  padding:4px 10px; border:1.5px solid #a5d6a7;
+  border-radius:16px; font-size:0.75rem; cursor:pointer;
+  background:white; color:var(--green); transition:all 0.15s;
+  font-family:'Instrument Sans',sans-serif;
+}
+.bundle-qty-btn:hover, .bundle-qty-btn.selected {
+  background:var(--green); color:white; border-color:var(--green);
+}
+
+/* ── LOADING ── */
+.loading-state { text-align:center; padding:5rem; grid-column:1/-1; }
+.spinner { width:40px; height:40px; border:3px solid var(--border); border-top-color:var(--navy); border-radius:50%; animation:spin 0.7s linear infinite; margin:0 auto 1rem; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* ── EMPTY ── */
+.empty-state { text-align:center; padding:4rem; grid-column:1/-1; color:var(--text-soft); }
+.empty-icon { font-size:3rem; margin-bottom:1rem; }
+
+/* ── TOAST ── */
+.toast {
+  position:fixed; bottom:1.5rem; right:1.5rem; z-index:999;
+  background:var(--navy); color:var(--white);
+  padding:0.75rem 1.25rem; border-radius:10px;
+  font-size:0.85rem; box-shadow:var(--shadow-lg);
+  transform:translateY(80px); transition:transform 0.3s;
+  max-width:320px;
+}
+.toast.show { transform:translateY(0); }
+.toast.success { background:var(--green); }
+.toast.error { background:var(--red); }
+
+/* ── FOOTER ── */
+footer {
+  background:var(--navy-dark); color:rgba(255,255,255,0.7);
+  padding:3rem 1.5rem 2rem; margin-top:4rem;
+}
+.footer-inner {
+  max-width:1200px; margin:0 auto;
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:2rem;
+}
+.footer-brand .footer-logo-name {
+  font-family:'Fraunces',serif; font-size:1.2rem; color:var(--white); margin-bottom:0.5rem;
+}
+.footer-brand p { font-size:0.82rem; line-height:1.7; margin-bottom:1rem; }
+.footer-email { font-size:0.8rem; color:var(--gold-light); }
+.footer-col h4 { font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.5); margin-bottom:1rem; }
+.footer-col a { display:block; font-size:0.82rem; color:rgba(255,255,255,0.65); text-decoration:none; margin-bottom:0.5rem; transition:color 0.2s; }
+.footer-col a:hover { color:var(--white); }
+.footer-bottom { max-width:1200px; margin:2rem auto 0; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:rgba(255,255,255,0.4); flex-wrap:wrap; gap:0.5rem; }
+@media(max-width:768px) {
+  .footer-inner { grid-template-columns:1fr 1fr; }
+  .header-search { display:none; }
+  .hero h1 { font-size:1.8rem; }
+}
+@media(max-width:480px) {
+  .footer-inner { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- FLASH SALE BAR -->
+<div class="flash-bar hidden" id="flashBar">
+  <span>🔥 <span class="en">FLASH SALE — Ends in</span><span class="vi" style="display:none">FLASH SALE — Kết thúc sau</span></span>
+  <div class="flash-countdown">
+    <span class="flash-unit" id="fcH">00</span><span class="flash-sep">:</span>
+    <span class="flash-unit" id="fcM">00</span><span class="flash-sep">:</span>
+    <span class="flash-unit" id="fcS">00</span>
+  </div>
+  <button class="flash-close-btn" onclick="document.getElementById('flashBar').classList.add('hidden')">✕</button>
+</div>
+<!-- PROMO BAR -->
+<div class="promo-banner" id="promoBanner">
+  <span class="promo-tag">🎁 <span class="en">First order:</span><span class="vi" style="display:none">Đơn đầu tiên:</span>&nbsp;
+    <span class="promo-code" onclick="copyCode('ZANITH20',this)">ZANITH20</span>
+    <span class="promo-copied" id="copied-ZANITH20">✓ Copied!</span>
+    &nbsp;<span style="font-size:0.72rem;opacity:0.8" class="en">20% off</span><span style="font-size:0.72rem;opacity:0.8" class="vi" style="display:none">giảm 20%</span>
+  </span>
+  <span class="promo-tag">🛍️ <span class="en">Buy 3 patterns → get 1 free</span><span class="vi" style="display:none">Mua 3 họa tiết → tặng 1</span></span>
+  <span class="promo-tag">📦 <span class="en">Instant digital download</span><span class="vi" style="display:none">Tải ngay sau thanh toán</span></span>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🌿</div>
+      <div class="logo-text">
+        <div class="logo-name">Zanith Crafted Studio</div>
+        <div class="logo-sub">Handcrafted Digital & Print Goods</div>
+      </div>
+    </a>
+    <div class="header-search">
+      <button onclick="doSearch()">🔍</button>
+      <input type="text" id="searchInput" placeholder="Search patterns, styles, colors..." oninput="filterProducts()">
+    </div>
+    <div class="header-right">
+      <button class="lang-toggle" onclick="toggleLang()">
+        🌐 <span class="active-lang" id="langLabel">EN</span>
+      </button>
+      <a href="checkout.html" class="cart-btn">
+        🛒 <span class="en">Cart</span><span class="vi" style="display:none">Giỏ</span>
+        <span class="cart-count" id="cartCountHeader">0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <div class="nav-tabs-inner" id="navTabs">
+    <a class="tab active" onclick="setTab('all',this)" href="#">
+      <span class="en">🎨 All</span>
+      <span class="vi" style="display:none">🎨 Tất cả</span>
+    </a>
+    <a class="tab" onclick="setTab('Digital Pattern',this)" href="#">
+      <span class="en">🖼️ Digital Pattern</span>
+      <span class="vi" style="display:none">🖼️ Họa tiết số</span>
+    </a>
+    <a class="tab" onclick="setTab('Template',this)" href="#">
+      <span class="en">📐 Template</span>
+      <span class="vi" style="display:none">📐 Mẫu thiết kế</span>
+    </a>
+    <a class="tab" onclick="setTab('POD',this)" href="#">
+      <span class="en">👕 POD</span>
+      <span class="vi" style="display:none">👕 In theo yêu cầu</span>
+    </a>
+    <a class="tab" onclick="setTab('Ebook',this)" href="#">
+      <span class="en">📖 Ebook</span>
+      <span class="vi" style="display:none">📖 Sách điện tử</span>
+    </a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="heroSection">
+  <div class="hero-content">
+    <h1 class="en">Handcrafted Patterns <em>&amp; Print Goods</em></h1>
+    <h1 class="vi" style="display:none">Họa tiết Thủ công <em>&amp; Sản phẩm In ấn</em></h1>
+    <p class="en">Unique seamless patterns &amp; POD products designed for makers, sellers &amp; dreamers.</p>
+    <p class="vi" style="display:none">Họa tiết liền mạch độc đáo &amp; sản phẩm POD cho người sáng tạo, người bán &amp; những giấc mơ.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">✨ 34 Exclusive Designs</span>
+      <span class="hero-badge">🖨️ 300 DPI Ready</span>
+      <span class="hero-badge">💸 Up to 50% OFF</span>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-section" id="filtersSection">
+  <!-- Main filter bar -->
+  <div class="filters-bar">
+    <div class="filter-group" id="filterChips">
+      <div class="filter-chip active" onclick="setFilter('all',this)">All</div>
+      <div class="filter-chip" onclick="setFilter('Digital Pattern',this)">🖼 Digital Pattern</div>
+      <div class="filter-chip" onclick="setFilter('Template',this)">📐 Template</div>
+      <div class="filter-chip" id="podMainChip" onclick="setFilter('POD',this)">👕 POD</div>
+      <div class="filter-chip" onclick="setFilter('Ebook',this)">📖 Ebook</div>
+    </div>
+    <div class="sort-row">
+      <span class="sort-label">Sort</span>
+      <select class="sort-select" onchange="sortProducts(this.value)">
+        <option value="default">Featured</option>
+        <option value="price-low">Price ↑</option>
+        <option value="price-high">Price ↓</option>
+        <option value="sku">A → Z</option>
+      </select>
+    </div>
+  </div>
+  <!-- POD sub-filter — chỉ hiện khi tab POD active -->
+  <div class="pod-filter-bar" id="podFilterBar">
+    <div class="pod-filter-inner">
+      <span class="pod-label">Type</span>
+      <div class="pod-chip active" onclick="setPodFilter('all',this)">All POD</div>
+      <div class="pod-chip" onclick="setPodFilter('T-Shirt',this)">T-Shirt</div>
+      <div class="pod-chip" onclick="setPodFilter('Hoodie',this)">Hoodie</div>
+      <div class="pod-chip" onclick="setPodFilter('Sweatshirt',this)">Sweatshirt</div>
+      <div class="pod-chip" onclick="setPodFilter('Tank Top',this)">Tank Top</div>
+      <div class="pod-chip" onclick="setPodFilter('Long Sleeve',this)">Long Sleeve</div>
+      <div class="pod-chip" onclick="setPodFilter('Mug',this)">Mug</div>
+      <div class="pod-chip" onclick="setPodFilter('Tote Bag',this)">Tote Bag</div>
+      <div class="pod-chip" onclick="setPodFilter('Poster',this)">Poster</div>
+      <div class="pod-chip" onclick="setPodFilter('Canvas',this)">Canvas</div>
+      <div class="pod-chip" onclick="setPodFilter('Phone Case',this)">Phone Case</div>
+      <div class="pod-chip" onclick="setPodFilter('Pillow',this)">Pillow</div>
+      <div class="pod-chip" onclick="setPodFilter('Sticker',this)">Sticker</div>
+      <div class="pod-chip" onclick="setPodFilter('Blanket',this)">Blanket</div>
+      <div class="pod-chip" onclick="setPodFilter('Hat',this)">Hat</div>
+      <div class="pod-chip" onclick="setPodFilter('Sneakers',this)">Sneakers</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="section-header">
+    <h2 class="section-title" id="sectionTitle">
+      <span class="en">All Products</span>
+      <span class="vi" style="display:none">Tất cả sản phẩm</span>
+    </h2>
+    <span class="results-info" id="resultsInfo"></span>
+  </div>
+  <div class="products-grid" id="productsGrid">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p style="color:var(--text-soft);font-size:0.875rem">
+        <span class="en">Loading products from Google Sheets...</span>
+        <span class="vi" style="display:none">Đang tải sản phẩm từ Google Sheets...</span>
+      </p>
+    </div>
+  </div>
+</main>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleModalClick(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-layout">
+      <!-- Thumbnails trái -->
+      <div class="modal-thumbs" id="mThumbs"></div>
+      <!-- Ảnh chính -->
+      <div class="modal-img-col">
+        <img id="mImg" src="" alt="" style="border-radius:0">
+        <button class="g-arr prev" onclick="modalSlide(-1)" style="opacity:0.8;left:8px">&#8249;</button>
+        <button class="g-arr next" onclick="modalSlide(1)" style="opacity:0.8;right:8px">&#8250;</button>
+      </div>
+      <div class="modal-info-col">
+        <div>
+          <div class="modal-sku" id="mSku"></div>
+          <div class="modal-cat" id="mCat"></div>
+        </div>
+        <h3 class="modal-title" id="mTitle"></h3>
+        <p class="modal-desc" id="mDesc"></p>
+        <hr class="divider">
+        <!-- PRICE BOX -->
+        <div class="price-box" id="mPriceBox">
+          <div id="mFlashBadge" class="flash-badge-inline" style="display:none">
+            ⏰ <span class="en">Flash Sale price</span><span class="vi" style="display:none">Giá Flash Sale</span>
+          </div>
+          <div class="price-main-row">
+            <span class="price-sale-val" id="mSalePrice">$0</span>
+            <span class="price-orig-val" id="mPrice">$0</span>
+            <span class="price-save-tag" id="mSaveTag"></span>
+          </div>
+          <div class="price-note" id="mPriceTier"></div>
+          <!-- CODE BOX -->
+          <div class="code-box" id="mCodeBox" style="display:none">
+            <div>
+              <div class="code-lbl en">First order discount:</div>
+              <div class="code-lbl vi" style="display:none">Giảm giá đơn đầu:</div>
+              <div class="code-val">ZANITH20</div>
+            </div>
+            <button class="code-copy-btn" onclick="copyCode('ZANITH20',this)">
+              <span class="en">Copy</span><span class="vi" style="display:none">Sao chép</span>
+            </button>
+          </div>
+          <div style="font-size:0.75rem;color:var(--green);margin-top:6px">
+            ✅ <span class="en">Seamless PNG · 300 DPI · 3600×3600px · Instant download</span>
+            <span class="vi" style="display:none">PNG liền mạch · 300 DPI · 3600×3600px · Tải ngay</span>
+          </div>
+        </div>
+
+        <!-- VARIANTS (POD: size, color) -->
+        <div id="mVariants" style="display:none">
+          <div class="variants-section" id="mSizeSection" style="display:none">
+            <div class="variant-label en">Size</div>
+            <div class="variant-label vi" style="display:none">Kích thước</div>
+            <div class="variant-row" id="mSizeRow"></div>
+          </div>
+          <div class="variants-section" id="mColorSection" style="display:none">
+            <div class="variant-label en">Color</div>
+            <div class="variant-label vi" style="display:none">Màu sắc</div>
+            <div class="variant-row" id="mColorRow"></div>
+          </div>
+        </div>
+
+        <!-- BUNDLE DEAL -->
+        <div class="bundle-box" id="mBundleBox" style="display:none">
+          <div class="bundle-title">🛍️ Bundle Deal</div>
+          <div class="bundle-desc en">Buy 3 patterns → get 1 free (auto added at checkout)</div>
+          <div class="bundle-desc vi" style="display:none">Mua 3 họa tiết → tặng 1 miễn phí</div>
+          <div class="bundle-qty-select" id="mBundleQty">
+            <button class="bundle-qty-btn selected" data-qty="1" onclick="selectBundleQty(this)">× 1</button>
+            <button class="bundle-qty-btn" data-qty="2" onclick="selectBundleQty(this)">× 2</button>
+            <button class="bundle-qty-btn" data-qty="3" onclick="selectBundleQty(this)">× 3 <span style="font-size:0.65rem">🎁+1 free</span></button>
+          </div>
+        </div>
+
+        <!-- QTY -->
+        <div class="qty-row">
+          <span class="qty-lbl en">Qty</span>
+          <span class="qty-lbl vi" style="display:none">Số lượng</span>
+          <div class="qty-ctrl">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <span class="qty-val" id="mQty">1</span>
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+          <span id="mQtyNote" style="font-size:0.72rem;color:var(--text-soft)"></span>
+        </div>
+
+        <div class="modal-hashtags" id="mHashtags"></div>
+
+        <!-- ACTIONS -->
+        <div class="modal-actions">
+          <button class="btn-add-cart" id="mAddCartBtn" onclick="addToCartFromModal()">
+            🛒 <span class="en">Add to Cart</span><span class="vi" style="display:none">Thêm vào giỏ</span>
+          </button>
+          <button class="btn-secondary" onclick="closeModal()">
+            <span class="en">Close</span>
+            <span class="vi" style="display:none">Đóng</span>
+          </button>
+        </div>
+        <!-- REVIEWS IN MODAL -->
+        <div style="padding-top:8px;border-top:1px solid var(--border);margin-top:4px">
+          <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:6px">
+            ⭐ <span class="en">Customer Reviews</span><span class="vi" style="display:none">Đánh giá</span>
+          </div>
+          <div id="mReviewsWrap"></div>
+          <!-- Write review — chỉ hiện sau khi mua sản phẩm này -->
+          <div id="mWriteReviewWrap" style="display:none;margin-top:10px;padding:10px;background:var(--warm);border-radius:8px;border:1px solid var(--border)">
+            <div style="font-size:0.72rem;font-weight:600;color:var(--navy);margin-bottom:8px">✍️ <span class="en">Leave a Review</span><span class="vi" style="display:none">Viết đánh giá</span></div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <input id="mRvName" type="text" placeholder="Your name" style="padding:6px 10px;border:1.5px solid var(--border);border-radius:6px;font-size:0.8rem;font-family:inherit;outline:none">
+              <div id="mStarPicker" style="display:flex;gap:3px">
+                <button class="star-pick-btn on" data-v="1" onclick="setMStars(1)" style="font-size:1.2rem;background:none;border:none;cursor:pointer;color:#f4c430;padding:0">★</button>
+                <button class="star-pick-btn on" data-v="2" onclick="setMStars(2)" style="font-size:1.2rem;background:none;border:none;cursor:pointer;color:#f4c430;padding:0">★</button>
+                <button class="star-pick-btn on" data-v="3" onclick="setMStars(3)" style="font-size:1.2rem;background:none;border:none;cursor:pointer;color:#f4c430;padding:0">★</button>
+                <button class="star-pick-btn on" data-v="4" onclick="setMStars(4)" style="font-size:1.2rem;background:none;border:none;cursor:pointer;color:#f4c430;padding:0">★</button>
+                <button class="star-pick-btn on" data-v="5" onclick="setMStars(5)" style="font-size:1.2rem;background:none;border:none;cursor:pointer;color:#f4c430;padding:0">★</button>
+              </div>
+              <textarea id="mRvText" placeholder="How did you use this pattern?" style="padding:6px 10px;border:1.5px solid var(--border);border-radius:6px;font-size:0.8rem;font-family:inherit;outline:none;resize:vertical;min-height:55px"></textarea>
+              <button onclick="submitModalReview()" style="background:var(--navy);color:white;border:none;padding:7px 14px;border-radius:7px;font-size:0.8rem;font-family:inherit;cursor:pointer;font-weight:600;align-self:flex-start">
+                <span class="en">Submit</span><span class="vi" style="display:none">Gửi</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- SUGGESTED IN MODAL -->
+        <div class="suggested-section" id="mSuggested" style="display:none">
+          <div class="suggested-label">✨ You may also like</div>
+          <div class="suggested-row" id="mSuggestedRow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RECENTLY VIEWED -->
+<div class="recently-section" id="recentlySection" style="display:none">
+  <div class="recently-header">
+    <h3 class="recently-title">
+      <span class="en">👁 Recently Viewed</span>
+      <span class="vi" style="display:none">👁 Đã xem gần đây</span>
+    </h3>
+    <button class="recently-clear" onclick="clearRecent()">
+      <span class="en">Clear</span>
+      <span class="vi" style="display:none">Xoá</span>
+    </button>
+  </div>
+  <div class="recently-grid" id="recentlyGrid"></div>
+</div>
+
+
+<!-- FAQ SECTION — link to faq.html -->
+<div style="background:var(--white);border-top:1px solid var(--border)">
+<section style="max-width:860px;margin:0 auto;padding:3rem 1.5rem;text-align:center">
+  <div style="font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin-bottom:0.6rem">Help Center</div>
+  <h2 style="font-family:'Fraunces',serif;font-size:1.6rem;font-weight:500;color:var(--navy);margin-bottom:0.5rem">
+    <span class="en">Have a question?</span><span class="vi" style="display:none">Bạn có thắc mắc?</span>
+  </h2>
+  <p style="font-size:0.875rem;color:var(--text-soft);margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto">
+    <span class="en">From downloads to licensing — find answers in our FAQ or chat with us directly.</span>
+    <span class="vi" style="display:none">Từ tải file đến bản quyền — tìm câu trả lời trong FAQ hoặc nhắn tin trực tiếp với chúng tôi.</span>
+  </p>
+  <!-- FAQ preview pills -->
+  <div style="display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-bottom:2rem">
+    <a href="faq.html#download" style="padding:0.45rem 1rem;border:1.5px solid var(--border);border-radius:20px;font-size:0.78rem;color:var(--text-soft);text-decoration:none;background:var(--cream);transition:all 0.15s" onmouseover="this.style.borderColor='var(--navy)';this.style.color='var(--navy)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-soft)'">📥 <span class="en">Downloads & Files</span><span class="vi" style="display:none">Tải file</span></a>
+    <a href="faq.html#license" style="padding:0.45rem 1rem;border:1.5px solid var(--border);border-radius:20px;font-size:0.78rem;color:var(--text-soft);text-decoration:none;background:var(--cream);transition:all 0.15s" onmouseover="this.style.borderColor='var(--navy)';this.style.color='var(--navy)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-soft)'">📄 <span class="en">Licensing</span><span class="vi" style="display:none">Bản quyền</span></a>
+    <a href="faq.html#payment" style="padding:0.45rem 1rem;border:1.5px solid var(--border);border-radius:20px;font-size:0.78rem;color:var(--text-soft);text-decoration:none;background:var(--cream);transition:all 0.15s" onmouseover="this.style.borderColor='var(--navy)';this.style.color='var(--navy)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-soft)'">💳 <span class="en">Payment & Refunds</span><span class="vi" style="display:none">Thanh toán</span></a>
+    <a href="faq.html#custom" style="padding:0.45rem 1rem;border:1.5px solid var(--border);border-radius:20px;font-size:0.78rem;color:var(--text-soft);text-decoration:none;background:var(--cream);transition:all 0.15s" onmouseover="this.style.borderColor='var(--navy)';this.style.color='var(--navy)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-soft)'">✏️ <span class="en">Custom Orders</span><span class="vi" style="display:none">Đặt riêng</span></a>
+  </div>
+  <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap">
+    <a href="faq.html" style="display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:white;padding:0.7rem 1.5rem;border-radius:10px;font-size:0.875rem;font-weight:600;text-decoration:none">
+      📖 <span class="en">View Full FAQ</span><span class="vi" style="display:none">Xem toàn bộ FAQ</span>
+    </a>
+    <button onclick="if(window.Tawk_API)Tawk_API.toggle();else window.location.href='mailto:zenithcraftedstudio@gmail.com'" style="display:inline-flex;align-items:center;gap:6px;background:none;border:1.5px solid var(--border);color:var(--text);padding:0.7rem 1.5rem;border-radius:10px;font-size:0.875rem;cursor:pointer;font-family:inherit">
+      💬 <span class="en">Chat with us</span><span class="vi" style="display:none">Nhắn tin</span>
+    </button>
+  </div>
+</section>
+</div>
+
+<!-- REVIEWS SECTION -->
+<section class="reviews-section" id="reviewsSection">
+  <div class="reviews-header">
+    <div>
+      <h2 class="reviews-title">
+        <span class="en">⭐ Customer Reviews</span>
+        <span class="vi" style="display:none">⭐ Đánh giá khách hàng</span>
+      </h2>
+      <div class="reviews-summary" id="reviewsSummary"></div>
+    </div>
+  </div>
+
+  <div class="reviews-grid" id="reviewsGrid"></div>
+
+  <!-- Reviews note -->
+  <div style="background:var(--warm);border-radius:12px;padding:1.25rem;border:1px solid var(--border);text-align:center">
+    <p style="font-size:0.82rem;color:var(--text-soft)">
+      <span class="en">🛒 To leave a review, purchase a product and open it from your order history.</span>
+      <span class="vi" style="display:none">🛒 Để viết đánh giá, hãy mua sản phẩm và mở từ lịch sử đơn hàng.</span>
+    </p>
+  </div>
+  <div style="display:none">
+    <div class="review-form-grid">
+      <div class="rf-field">
+        <label class="en">Your Name</label>
+        <label class="vi" style="display:none">Tên của bạn</label>
+        <input type="text" id="rvName" placeholder="e.g. Sarah M.">
+      </div>
+
+      <div class="rf-field" style="grid-column:1/-1">
+        <label class="en">Rating</label>
+        <label class="vi" style="display:none">Đánh giá</label>
+        <div class="star-picker" id="starPicker">
+          <button class="star-pick-btn" data-v="1" onclick="setStars(1)">★</button>
+          <button class="star-pick-btn" data-v="2" onclick="setStars(2)">★</button>
+          <button class="star-pick-btn" data-v="3" onclick="setStars(3)">★</button>
+          <button class="star-pick-btn" data-v="4" onclick="setStars(4)">★</button>
+          <button class="star-pick-btn" data-v="5" onclick="setStars(5)">★</button>
+        </div>
+      </div>
+      <div class="rf-field" style="grid-column:1/-1">
+        <label class="en">Your Review</label>
+        <label class="vi" style="display:none">Nội dung đánh giá</label>
+        <textarea id="rvText" placeholder="What did you use this pattern for? How was the quality?"></textarea>
+      </div>
+    </div>
+    <button class="btn-primary" style="margin-top:0.75rem;max-width:160px;padding:0.6rem 1.2rem;font-size:0.85rem;border-radius:8px" onclick="submitReview()">
+      <span class="en">Submit Review</span><span class="vi" style="display:none">Gửi đánh giá</span>
+    </button>
+    </div><!-- end rvFormInner -->
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo-name">🌿 Zanith Crafted Studio</div>
+      <p class="en">Handcrafted seamless patterns and print-on-demand goods for makers, sellers, and dreamers worldwide.</p>
+      <p class="vi" style="display:none">Họa tiết liền mạch thủ công và sản phẩm in theo yêu cầu cho người sáng tạo trên toàn thế giới.</p>
+      <div class="footer-email"><a href="mailto:zenithcraftedstudio@gmail.com" style="color:var(--gold-light);text-decoration:none">✉ zenithcraftedstudio@gmail.com</a></div>
+    </div>
+    <div class="footer-col">
+      <h4><span class="en">Shop</span><span class="vi" style="display:none">Cửa hàng</span></h4>
+      <a href="#"><span class="en">Pattern Designs</span><span class="vi" style="display:none">Họa tiết</span></a>
+      <a href="#"><span class="en">T-Shirts</span><span class="vi" style="display:none">Áo thun</span></a>
+      <a href="#"><span class="en">Hoodies</span><span class="vi" style="display:none">Áo hoodie</span></a>
+      <a href="#"><span class="en">Tote Bags</span><span class="vi" style="display:none">Túi tote</span></a>
+      <a href="#"><span class="en">Mugs</span><span class="vi" style="display:none">Cốc</span></a>
+    </div>
+    <div class="footer-col">
+      <h4><span class="en">Info</span><span class="vi" style="display:none">Thông tin</span></h4>
+      <a href="#"><span class="en">Shipping Policy</span><span class="vi" style="display:none">Chính sách vận chuyển</span></a>
+      <a href="#"><span class="en">Returns & Refunds</span><span class="vi" style="display:none">Đổi trả</span></a>
+      <a href="#"><span class="en">Digital Downloads</span><span class="vi" style="display:none">Tải kỹ thuật số</span></a>
+      <a href="#"><span class="en">License & Usage</span><span class="vi" style="display:none">Bản quyền</span></a>
+      <a href="#">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4><span class="en">Contact</span><span class="vi" style="display:none">Liên hệ</span></h4>
+      <a href="mailto:zenithcraftedstudio@gmail.com"><span class="en">Email Us</span><span class="vi" style="display:none">Email</span></a>
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="about.html"><span class="en">About Us</span><span class="vi" style="display:none">Về chúng tôi</span></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Zanith Crafted Studio. All rights reserved.</span>
+    <span><a href="admin.html" style="color:rgba(255,255,255,0.15);text-decoration:none;font-size:0.7rem">Admin</a></span>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- CART FLOAT -->
+<a href="checkout.html" class="cart-float" id="cartFloat">
+  🛒<span class="cf-count" id="cfCount" style="display:none">0</span>
+</a>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// ⚙️  CONFIG — Thay YOUR_SHEET_ID bằng ID Google Sheet
+// ═══════════════════════════════════════════════════════
+const SHEET_ID = localStorage.getItem('zanith_sheet_id') || '106YCK4r_y80NHkjfc2EcFEsuVEXep27A9IhTGWrh9U8';
+const SHEET_TAB = 'Products';
+const CSV_URL = id => `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_TAB)}`;
+
+// ═══════════════════════════════════════════════════════
+let allProducts = [], filtered = [], modalProduct = null;
+let currentFilter = 'all', currentPodFilter = 'all', currentTab = 'all', currentSort = 'default';
+let lang = localStorage.getItem('zanith_lang') || 'en';
+
+// Parse CSV
+function parseCSV(txt) {
+  const lines = txt.trim().split('\n');
+  const hdrs = lines[0].split(',').map(h => h.replace(/"/g,'').trim());
+  return lines.slice(1).map(line => {
+    const vals=[]; let cur='', inQ=false;
+    for(const c of line){
+      if(c==='"') inQ=!inQ;
+      else if(c===','&&!inQ){vals.push(cur.trim());cur='';}
+      else cur+=c;
+    }
+    vals.push(cur.trim());
+    const o={};
+    hdrs.forEach((h,i)=>o[h]=(vals[i]||'').replace(/^"|"$/g,''));
+    return o;
+  }).filter(p=>p.SKU&&p.SKU.length>0);
+}
+
+// Load from Google Sheets
+async function loadProducts() {
+  const id = localStorage.getItem('zanith_sheet_id') || SHEET_ID;
+  if(!id || id==='YOUR_SHEET_ID_HERE'){
+    loadFallback(); return;
+  }
+  try {
+    const r = await fetch(CSV_URL(id));
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const txt = await r.text();
+    allProducts = parseCSV(txt);
+    if(!allProducts.length) throw new Error('No data');
+    filtered = [...allProducts];
+    renderGrid();
+  renderReviews(); // refresh product dropdown
+    showToast(`✅ ${allProducts.length} products loaded`, 'success');
+  } catch(e){
+    console.warn('Sheets load failed:', e);
+    loadFallback();
+  }
+}
+
+function loadFallback(){
+  allProducts = FALLBACK_DATA;
+  filtered = [...allProducts];
+  renderGrid();
+  renderReviews(); // refresh product dropdown
+  updateCartUI();
+}
+
+function colorToHex(name) {
+  const map = {
+    'pink':'#ffb6c1','beige':'#f5f0e8','brown':'#8b6355','black':'#2d2d2d',
+    'white':'#f8f8f8','navy':'#1e2d4a','blue':'#4a7abf','cobalt blue':'#0047ab',
+    'royal blue':'#4169e1','periwinkle':'#ccccff','periwinkle blue':'#ccccff',
+    'teal':'#008080','dark teal':'#004d4d','sage green':'#8fa882',
+    'forest green':'#228b22','bright green':'#4caf50','olive':'#808000',
+    'red':'#e31837','crimson':'#dc143c','deep crimson':'#8b0000',
+    'gold':'#ffd700','golden yellow':'#ffc200','mustard yellow':'#ffdb58',
+    'lavender':'#e6e0f0','mauve':'#b08080','blush pink':'#f4b8b0',
+    'cream':'#fffdd0','ivory':'#fffff0','cornflower blue':'#6495ed',
+    'yellow':'#ffd700','sunshine yellow':'#ffd700','orange':'#ff8c00',
+    'grey':'#888888','gray':'#888888','multicolor':'linear-gradient(135deg,#ff6b6b,#4ecdc4,#45b7d1)',
+    'navy black':'#1a1a2e','olive black':'#2d2d1a','olive gold':'#c8a830',
+  };
+  const k = name.toLowerCase();
+  return map[k] || '#d4d4d4';
+}
+
+// Render
+function renderGrid(){
+  var grid = document.getElementById('productsGrid');
+  var count = filtered.length;
+  document.getElementById('resultsInfo').textContent =
+    lang==='en' ? (count + ' of ' + allProducts.length + ' products')
+                : (count + ' / ' + allProducts.length + ' sản phẩm');
+
+  if(!filtered.length){
+    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><p>'+(lang==='en'?'No products found':'Không tìm thấy sản phẩm')+'</p></div>';
+    return;
+  }
+
+  // Build using DOM to avoid quote escaping issues
+  var fragment = document.createDocumentFragment();
+  filtered.forEach(function(p){
+    var card = buildCard(p);
+    fragment.appendChild(card);
+  });
+  grid.innerHTML = '';
+  grid.appendChild(fragment);
+}
+
+function buildCard(p) {
+  var img1 = p.Image  || ('images/' + p.SKU + '.png');
+  var img2 = p.Image2 || ('images/' + p.SKU + '_2.png');
+  var img3 = p.Image3 || ('images/' + p.SKU + '_3.png');
+  var imgList = [img1, img2, img3];
+
+  // CARD wrapper
+  var card = document.createElement('div');
+  card.className = 'product-card';
+  card.addEventListener('click', function(){ openModal(p.SKU); });
+
+  // ── GALLERY ──
+  var gal = document.createElement('div');
+  gal.className = 'card-gallery';
+  gal.id = 'gal-' + p.SKU;
+
+  var track = document.createElement('div');
+  track.className = 'gallery-track';
+  track.id = 'trk-' + p.SKU;
+
+  imgList.forEach(function(src, si){
+    var img = document.createElement('img');
+    img.src = src;
+    img.alt = p.Title;
+    img.loading = si === 0 ? 'eager' : 'lazy';
+    img.onerror = function(){
+      this.style.display = 'none';
+      // shrink track if first image failed, show placeholder
+      if(si === 0){
+        var ph = document.createElement('div');
+        ph.style.cssText = 'min-width:100%;height:100%;background:var(--warm);display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:var(--muted)';
+        ph.textContent = '🖼️';
+        track.insertBefore(ph, track.firstChild);
+      }
+    };
+    track.appendChild(img);
+  });
+  gal.appendChild(track);
+
+  // Prev / Next arrows
+  var prev = document.createElement('button');
+  prev.className = 'g-arr prev';
+  prev.innerHTML = '&#8249;';
+  prev.addEventListener('click', function(e){ e.stopPropagation(); slideGallery(p.SKU, -1, true); });
+  gal.appendChild(prev);
+
+  var next = document.createElement('button');
+  next.className = 'g-arr next';
+  next.innerHTML = '&#8250;';
+  next.addEventListener('click', function(e){ e.stopPropagation(); slideGallery(p.SKU, 1, true); });
+  gal.appendChild(next);
+
+  // Dots
+  var dotsWrap = document.createElement('div');
+  dotsWrap.className = 'card-dots';
+  imgList.forEach(function(_, di){
+    var dot = document.createElement('span');
+    dot.className = 'card-dot' + (di === 0 ? ' active' : '');
+    dot.addEventListener('click', function(e){ e.stopPropagation(); slideGallery(p.SKU, di, false); });
+    dotsWrap.appendChild(dot);
+  });
+  gal.appendChild(dotsWrap);
+
+  // Sale badge
+  var badge = document.createElement('span');
+  badge.className = 'card-badge-sale';
+  badge.textContent = '50% OFF';
+  gal.appendChild(badge);
+
+  // Wishlist
+  var wish = document.createElement('button');
+  wish.className = 'card-wish';
+  wish.innerHTML = '&#9825;';
+  wish.addEventListener('click', function(e){ e.stopPropagation(); });
+  gal.appendChild(wish);
+
+  card.appendChild(gal);
+
+  // ── INFO ──
+  var info = document.createElement('div');
+  info.className = 'card-info';
+
+  var title = document.createElement('div');
+  title.className = 'card-title';
+  title.textContent = p.Title;
+  info.appendChild(title);
+
+  var shop = document.createElement('div');
+  shop.className = 'card-shop-name';
+  shop.textContent = 'Zanith Crafted Studio';
+  info.appendChild(shop);
+
+  var dp = getDisplayPrice(p);
+  var priceRow = document.createElement('div');
+  priceRow.className = 'card-price-row';
+  var priceHTML = '<span class="card-price">$'+dp.sale.toFixed(2)+'</span>';
+  if (dp.isFlash) priceHTML += '<span class="card-price-orig">$'+dp.orig.toFixed(2)+'</span>'
+    + '<span class="card-badge-discount">-'+dp.pct+'%</span>';
+  priceRow.innerHTML = priceHTML;
+    + '<span class="card-sale-tag">50% off</span>';
+  info.appendChild(priceRow);
+
+  // Color swatches
+  var swatchRow = document.createElement('div');
+  swatchRow.className = 'card-swatches';
+  var colors = (p.Colors||'').split(',').slice(0,5);
+  colors.forEach(function(col, ci){
+    col = col.trim();
+    var sw = document.createElement('span');
+    sw.className = 'cswatch' + (ci===0?' sel':'');
+    sw.style.background = colorToHex(col);
+    sw.title = col;
+    sw.addEventListener('click', function(e){ e.stopPropagation(); selVar(p.SKU,'color',this,col); });
+    swatchRow.appendChild(sw);
+  });
+  info.appendChild(swatchRow);
+
+  // Add to cart btn
+  var addBtn = document.createElement('button');
+  addBtn.className = 'card-add';
+  addBtn.textContent = lang==='en' ? '+ Add to cart' : '+ Thêm vào giỏ';
+  addBtn.addEventListener('click', function(e){ e.stopPropagation(); addToCart(p.SKU); });
+  info.appendChild(addBtn);
+
+  card.appendChild(info);
+  return card;
+}
+
+// Gallery navigation
+var galState = {};
+function slideGallery(sku, val, isRelative) {
+  var trk = document.getElementById('trk-' + sku);
+  if (!trk) return;
+  var imgs = Array.from(trk.querySelectorAll('img')).filter(function(img){
+    return img.style.display !== 'none';
+  });
+  var total = imgs.length;
+  if (total <= 1) return;
+  var cur = galState[sku] || 0;
+  if (isRelative) cur = (cur + val + total) % total;
+  else cur = Math.max(0, Math.min(val, total - 1));
+  galState[sku] = cur;
+  var allImgs = trk.querySelectorAll('img');
+  var realIdx = Array.from(allImgs).indexOf(imgs[cur]);
+  trk.style.transform = 'translateX(-' + (realIdx * 100) + '%)';
+  var gal = document.getElementById('gal-' + sku);
+  if (gal) gal.querySelectorAll('.card-dot').forEach(function(d,di){ d.classList.toggle('active', di===cur); });
+}
+function goDot(sku, idx) { slideGallery(sku, idx, false); }
+
+
+
+
+
+// Filter & sort
+function filterProducts(){
+  const q = (document.getElementById('searchInput').value||'').toLowerCase();
+  filtered = allProducts.filter(function(p){
+    const cat = (p.Category||p.Type||'').toLowerCase();
+    const subcat = (p.SubCategory||p.Type||'').toLowerCase();
+
+    // Dùng tab hoặc filter chip — ưu tiên filter chip nếu không phải 'all'
+    var activeFilter = currentFilter !== 'all' ? currentFilter : currentTab;
+    var catMatch = activeFilter === 'all' || cat.includes(activeFilter.toLowerCase());
+
+    // POD sub-filter
+    var podMatch = true;
+    if (currentPodFilter && currentPodFilter !== 'all') {
+      podMatch = subcat.includes(currentPodFilter.toLowerCase())
+        || cat.includes(currentPodFilter.toLowerCase());
+    }
+    // Search
+    var searchMatch = !q || p.Title.toLowerCase().includes(q)
+      || (p.Description||'').toLowerCase().includes(q)
+      || (p.Colors||'').toLowerCase().includes(q)
+      || (p.Style||'').toLowerCase().includes(q)
+      || (p.SKU||'').toLowerCase().includes(q);
+
+    return catMatch && podMatch && searchMatch;
+  });
+  renderGrid();
+  renderReviews(); // refresh product dropdown
+}
+
+function setTab(t, el) {
+  currentTab = t;
+  currentFilter = 'all';
+  currentPodFilter = 'all';
+  document.querySelectorAll('.tab').forEach(function(x){ x.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  // Reset filter chips
+  document.querySelectorAll('.filter-chip').forEach(function(c,i){ c.classList.toggle('active', i===0); });
+  // Show/hide POD sub-bar
+  var podBar = document.getElementById('podFilterBar');
+  if (t === 'POD') { podBar.classList.add('visible'); }
+  else { podBar.classList.remove('visible'); }
+  // Reset pod chips
+  document.querySelectorAll('.pod-chip').forEach(function(c,i){ c.classList.toggle('active', i===0); });
+  filterProducts();
+}
+
+function setFilter(val, el) {
+  currentFilter = val;
+  currentPodFilter = 'all'; // reset pod sub-filter
+  document.querySelectorAll('.filter-chip').forEach(function(c){ c.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  // Show/hide POD sub-bar
+  var podBar = document.getElementById('podFilterBar');
+  if (val === 'POD' || currentTab === 'POD') {
+    podBar.classList.add('visible');
+  } else {
+    podBar.classList.remove('visible');
+  }
+  // Reset pod chips
+  document.querySelectorAll('.pod-chip').forEach(function(c,i){ c.classList.toggle('active', i===0); });
+  filterProducts();
+}
+
+function setPodFilter(val, el) {
+  currentPodFilter = val;
+  document.querySelectorAll('.pod-chip').forEach(function(c){ c.classList.remove('active'); });
+  if (el) el.classList.add('active');
+  filterProducts();
+}
+
+function sortProducts(v){
+  currentSort=v; applySort(); renderGrid();
+  renderReviews(); // refresh product dropdown
+}
+
+function applySort(){
+  if(currentSort==='price-low') filtered.sort((a,b)=>getDisplayPrice(a).sale - getDisplayPrice(b).sale);
+  else if(currentSort==='price-high') filtered.sort((a,b)=>getDisplayPrice(b).sale - getDisplayPrice(a).sale);
+  else if(currentSort==='sku') filtered.sort((a,b)=>a.SKU.localeCompare(b.SKU));
+}
+
+// Modal
+function openModal(sku) {
+  const p = allProducts.find(x => x.SKU === sku);
+  if (!p) return;
+  modalProduct = p;
+
+  // Build image list
+  const imgs = [
+    p.Image  || ('images/' + p.SKU + '.png'),
+    p.Image2 || ('images/' + p.SKU + '_2.png'),
+    p.Image3 || ('images/' + p.SKU + '_3.png'),
+  ];
+  const ph = 'https://placehold.co/600x600/f3ede3/8a9bb5?text=' + encodeURIComponent(p.SKU);
+  let curIdx = 0;
+
+  // Main image
+  const mImg = document.getElementById('mImg');
+  mImg.src = imgs[0];
+  mImg.alt = p.Title;
+  mImg.onerror = function(){ this.src = ph; };
+
+  // Thumbnails
+  const thumbsWrap = document.getElementById('mThumbs');
+  thumbsWrap.innerHTML = '';
+  imgs.forEach(function(src, i) {
+    const th = document.createElement('img');
+    th.className = 'modal-thumb' + (i === 0 ? ' active' : '');
+    th.src = src; th.alt = p.Title + ' ' + (i+1);
+    th.onerror = function(){ this.style.display='none'; };
+    th.addEventListener('click', function() {
+      mImg.src = src;
+      thumbsWrap.querySelectorAll('.modal-thumb').forEach(function(t){ t.classList.remove('active'); });
+      th.classList.add('active');
+      curIdx = i;
+    });
+    thumbsWrap.appendChild(th);
+  });
+
+  // Store imgs on window for slide nav
+  window._modalImgs = imgs; window._modalIdx = 0;
+
+  document.getElementById('mSku').textContent = p.SKU;
+  document.getElementById('mCat').textContent = p.Category || p.Type || '';
+  document.getElementById('mTitle').textContent = p.Title;
+  document.getElementById('mDesc').textContent = p.Description || '';
+  // price rendered by renderModalPricing(p)
+  document.getElementById('mHashtags').textContent = p.Hashtags || '';
+  renderModalPricing(p);
+  document.getElementById('mImg').onerror = function(){ this.src = ph; };
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Track & suggest
+  addRecent(sku);
+  renderSuggested(sku, p.Style || '', p.Type || p.Category || '');
+  renderModalReviews(sku);
+  renderRecentlyViewed();
+}
+
+
+// ═══════════════ RECENTLY VIEWED & SUGGESTED ═══════════════
+var MAX_RECENT = 8;
+
+function getRecent() {
+  try { return JSON.parse(localStorage.getItem('zanith_recent') || '[]'); }
+  catch(e) { return []; }
+}
+
+function addRecent(sku) {
+  var recent = getRecent().filter(function(s){ return s !== sku; });
+  recent.unshift(sku);
+  if (recent.length > MAX_RECENT) recent = recent.slice(0, MAX_RECENT);
+  localStorage.setItem('zanith_recent', JSON.stringify(recent));
+}
+
+function renderSuggested(currentSku, currentStyle, currentType) {
+  // Gợi ý: cùng style > cùng type > ngẫu nhiên, loại trừ sp hiện tại
+  var pool = allProducts.filter(function(p){ return p.SKU !== currentSku; });
+  var byStyle = pool.filter(function(p){
+    return currentStyle && (p.Style||'').toLowerCase() === currentStyle.toLowerCase();
+  });
+  var byType = pool.filter(function(p){
+    return currentType && (p.Type||p.Category||'').toLowerCase().includes(currentType.toLowerCase());
+  });
+  // Ưu tiên cùng style, rồi cùng type, rồi còn lại
+  var merged = [];
+  byStyle.forEach(function(p){ if (merged.indexOf(p) < 0) merged.push(p); });
+  byType.forEach(function(p){ if (merged.indexOf(p) < 0) merged.push(p); });
+  pool.forEach(function(p){ if (merged.indexOf(p) < 0) merged.push(p); });
+  var picks = merged.slice(0, 8);
+
+  var row = document.getElementById('mSuggestedRow');
+  var sec = document.getElementById('mSuggested');
+  if (!picks.length) { sec.style.display = 'none'; return; }
+  sec.style.display = 'block';
+  row.innerHTML = '';
+  picks.forEach(function(p) {
+    var ph = 'https://placehold.co/80x80/f3ede3/8a9bb5?text=' + encodeURIComponent(p.SKU);
+    var imgSrc = p.Image || ('images/' + p.SKU + '.png');
+    var card = document.createElement('div');
+    card.className = 'suggested-card';
+    var sImg = document.createElement('img');
+    sImg.src = imgSrc; sImg.alt = p.Title;
+    (function(placeholder){ sImg.onerror = function(){ this.src = placeholder; }; })(ph);
+    var sTitle = document.createElement('div');
+    sTitle.className = 'suggested-card-title';
+    sTitle.textContent = p.Title;
+    card.appendChild(sImg); card.appendChild(sTitle);
+    (function(sku){ card.addEventListener('click', function(){ closeModal(); setTimeout(function(){ openModal(sku); }, 180); }); })(p.SKU);
+    row.appendChild(card);
+  });
+}
+
+function renderRecentlyViewed() {
+  var recent = getRecent();
+  var sec = document.getElementById('recentlySection');
+  var grid = document.getElementById('recentlyGrid');
+  if (!sec || !grid) return;
+  var products = recent.map(function(sku){ return allProducts.find(function(p){ return p.SKU === sku; }); })
+    .filter(Boolean);
+  if (products.length < 2) { sec.style.display = 'none'; return; }
+  sec.style.display = 'block';
+  grid.innerHTML = '';
+  products.forEach(function(p) {
+    var ph = 'https://placehold.co/130x130/f3ede3/8a9bb5?text=' + encodeURIComponent(p.SKU);
+    var imgSrc = p.Image || ('images/' + p.SKU + '.png');
+    var item = document.createElement('div');
+    item.className = 'recently-item';
+    var rImg = document.createElement('img');
+    rImg.src = imgSrc; rImg.alt = p.Title;
+    (function(placeholder){ rImg.onerror = function(){ this.src = placeholder; }; })(ph);
+    var rTitle = document.createElement('div');
+    rTitle.className = 'recently-item-title'; rTitle.textContent = p.Title;
+    var rPrice = document.createElement('div');
+    rPrice.className = 'recently-item-price'; rPrice.textContent = '$' + getDisplayPrice(p).sale.toFixed(2);
+    item.appendChild(rImg); item.appendChild(rTitle); item.appendChild(rPrice);
+    (function(sku){ item.addEventListener('click', function(){ openModal(sku); }); })(p.SKU);
+    grid.appendChild(item);
+  });
+}
+
+function clearRecent() {
+  localStorage.removeItem('zanith_recent');
+  var sec = document.getElementById('recentlySection');
+  if (sec) sec.style.display = 'none';
+}
+// ═══════════════════════════════════════════════════════════
+
+
+// ══════════════ CAMPAIGN / PRICING ENGINE ══════════════
+var CAMPAIGN = (function(){
+  try {
+    var stored = JSON.parse(localStorage.getItem('zanith_campaign') || 'null');
+    if (stored) return stored;
+  } catch(e){}
+  // Default: NO sale, just discount code + bundle
+  return {
+    flashActive: false,
+    flashEnd: null,
+    flashPct: 0,
+    discountCodes: [{ code:'ZANITH20', pct:20, label:'20% off first order' }],
+    bundleActive: true,
+    bundleQty: 3,
+    bundleFreePct: 1
+  };
+})();
+
+// Tính giá hiển thị dựa trên campaign hiện tại
+// Price_USD = giá gốc thực từ Sheet (không bao giờ bị sale cố định)
+// Flash sale nếu active → giảm flashPct% khỏi Price_USD
+function getDisplayPrice(p) {
+  var orig = parseFloat(p.Price_USD) || 0;
+  var isFlash = CAMPAIGN.flashActive && CAMPAIGN.flashEnd && new Date(CAMPAIGN.flashEnd) > new Date();
+  var pct = isFlash ? (parseFloat(CAMPAIGN.flashPct) || 0) : 0;
+  var sale = pct > 0 ? Math.round(orig * (1 - pct/100) * 100) / 100 : orig;
+  return { orig: orig, sale: sale, pct: pct, isFlash: isFlash && pct > 0 };
+}
+
+// Tier pricing logic based on complexity
+function getTier(p) {
+  var orig = parseFloat(p.Price_USD) || 0;
+  // Dựa trên giá gốc: Entry <$9, Mid $9-$14, Premium $15+
+  if (orig >= 15) return { name:'premium', label:'Premium', cls:'tier-premium' };
+  if (orig >= 9)  return { name:'mid', label:'Mid-range', cls:'tier-mid' };
+  return { name:'entry', label:'Entry', cls:'tier-entry' };
+}
+
+function calcSavePct(orig, sale) {
+  orig = parseFloat(orig); sale = parseFloat(sale);
+  if (!orig || !sale) return 0;
+  return Math.round((orig - sale) / orig * 100);
+}
+
+// ── FLASH COUNTDOWN ──
+function startFlashCountdown() {
+  var bar = document.getElementById('flashBar');
+  if (!CAMPAIGN.flashActive || !CAMPAIGN.flashEnd) { if(bar) bar.classList.add('hidden'); return; }
+  function tick() {
+    var diff = new Date(CAMPAIGN.flashEnd) - new Date();
+    if (diff <= 0) { if(bar) bar.classList.add('hidden'); return; }
+    var h = Math.floor(diff/3600000);
+    var m = Math.floor((diff%3600000)/60000);
+    var s = Math.floor((diff%60000)/1000);
+    var pad = function(n){ return String(n).padStart(2,'0'); };
+    var fh = document.getElementById('fcH');
+    var fm = document.getElementById('fcM');
+    var fs = document.getElementById('fcS');
+    if(fh) fh.textContent = pad(h);
+    if(fm) fm.textContent = pad(m);
+    if(fs) fs.textContent = pad(s);
+    setTimeout(tick, 1000);
+  }
+  tick();
+}
+
+// ── COPY PROMO CODE ──
+function copyCode(code, btn) {
+  navigator.clipboard && navigator.clipboard.writeText(code).catch(function(){});
+  var el = document.getElementById('copied-'+code);
+  if (el) { el.style.display='inline'; setTimeout(function(){ el.style.display='none'; }, 2000); }
+  if (btn && btn.classList) {
+    var orig = btn.innerHTML;
+    btn.textContent = '✓ Copied!';
+    setTimeout(function(){ btn.innerHTML = orig; }, 2000);
+  }
+}
+
+// ── MODAL STATE ──
+var modalQty = 1;
+var modalBundleQty = 1;
+var modalSelectedSize = '';
+var modalSelectedColor = '';
+
+function changeQty(delta) {
+  modalQty = Math.max(1, Math.min(99, modalQty + delta));
+  document.getElementById('mQty').textContent = modalQty;
+  updateBundleNote();
+}
+
+function updateBundleNote() {
+  var note = document.getElementById('mQtyNote');
+  if (!note) return;
+  if (CAMPAIGN.bundleActive && modalQty >= CAMPAIGN.bundleQty) {
+    note.textContent = '🎁 +1 free pattern!';
+    note.style.color = 'var(--green)';
+  } else if (CAMPAIGN.bundleActive) {
+    var need = CAMPAIGN.bundleQty - modalQty;
+    note.textContent = need + ' more for free pattern';
+    note.style.color = 'var(--text-soft)';
+  } else {
+    note.textContent = '';
+  }
+}
+
+function selectBundleQty(btn) {
+  document.querySelectorAll('.bundle-qty-btn').forEach(function(b){ b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  modalBundleQty = parseInt(btn.getAttribute('data-qty'));
+  document.getElementById('mQty').textContent = modalBundleQty;
+  modalQty = modalBundleQty;
+  updateBundleNote();
+}
+
+function selectVariant(btn, type) {
+  var row = btn.parentElement;
+  row.querySelectorAll('.variant-btn').forEach(function(b){ b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  if (type === 'size') modalSelectedSize = btn.dataset.val;
+  if (type === 'color') modalSelectedColor = btn.dataset.val;
+}
+
+function addToCartFromModal() {
+  if (!modalProduct) return;
+  var btn = document.getElementById('mAddCartBtn');
+  
+  // Validate variants
+  var sizeSection = document.getElementById('mSizeSection');
+  if (sizeSection && sizeSection.style.display !== 'none' && !modalSelectedSize) {
+    alert('Please select a size'); return;
+  }
+
+  var item = {
+    sku: modalProduct.SKU,
+    title: modalProduct.Title,
+    price: getDisplayPrice(modalProduct).sale,
+    qty: modalQty,
+    size: modalSelectedSize,
+    color: modalSelectedColor,
+    image: modalProduct.Image || ('images/' + modalProduct.SKU + '.png')
+  };
+  // Apply code discount note
+  item.codeNote = CAMPAIGN.discountCodes && CAMPAIGN.discountCodes.length
+    ? 'Code ' + CAMPAIGN.discountCodes[0].code + ' applies at checkout' : '';
+
+  // Add to cart
+  var cart = [];
+  try { cart = JSON.parse(localStorage.getItem('zanith_cart') || '[]'); } catch(e){}
+  var existing = cart.find(function(x){ return x.sku===item.sku && x.size===item.size && x.color===item.color; });
+  if (existing) { existing.qty += item.qty; }
+  else { cart.push(item); }
+  localStorage.setItem('zanith_cart', JSON.stringify(cart));
+
+  // Feedback
+  btn.classList.add('added');
+  var origHTML = btn.innerHTML;
+  btn.innerHTML = '✓ <span class="en">Added!</span><span class="vi" style="display:none">Đã thêm!</span>';
+  setTimeout(function(){
+    btn.innerHTML = origHTML;
+    btn.classList.remove('added');
+  }, 1800);
+
+  // Update cart count
+  updateCartCount();
+}
+
+// ── RENDER MODAL PRICE + VARIANTS (called inside openModal) ──
+function renderModalPricing(p) {
+  // Reset qty
+  modalQty = 1; modalBundleQty = 1;
+  modalSelectedSize = ''; modalSelectedColor = '';
+  document.getElementById('mQty').textContent = '1';
+
+  var dp = getDisplayPrice(p);
+  var tier = getTier(p);
+
+  document.getElementById('mSalePrice').textContent = '$' + dp.sale.toFixed(2);
+  // Chỉ hiện giá gốc gạch khi đang flash sale
+  var mPriceEl = document.getElementById('mPrice');
+  if (dp.isFlash) {
+    mPriceEl.textContent = '$' + dp.orig.toFixed(2);
+    mPriceEl.style.display = '';
+  } else {
+    mPriceEl.textContent = '';
+    mPriceEl.style.display = 'none';
+  }
+  document.getElementById('mSaveTag').textContent = dp.isFlash ? 'Save ' + dp.pct + '%' : '';
+  
+  var flashBadge = document.getElementById('mFlashBadge');
+  if (flashBadge) flashBadge.style.display = dp.isFlash ? 'inline-flex' : 'none';
+
+  var tierEl = document.getElementById('mPriceTier');
+  if (tierEl) tierEl.innerHTML = '<span class="tier-badge '+tier.cls+'">'+tier.label+'</span> &nbsp;✅ Commercial license included';
+
+  // Code box
+  var codeBox = document.getElementById('mCodeBox');
+  if (codeBox) codeBox.style.display = (CAMPAIGN.discountCodes && CAMPAIGN.discountCodes.length) ? 'flex' : 'none';
+
+  // Bundle box
+  var bundleBox = document.getElementById('mBundleBox');
+  if (bundleBox) bundleBox.style.display = CAMPAIGN.bundleActive ? 'block' : 'none';
+
+  // Variants - only show for POD products
+  var isPOD = (p.Type||p.Category||'').toLowerCase().includes('pod') || (p.SubCategory||'');
+  var varSection = document.getElementById('mVariants');
+  var sizeSection = document.getElementById('mSizeSection');
+  var colorSection = document.getElementById('mColorSection');
+  var sizeRow = document.getElementById('mSizeRow');
+  var colorRow = document.getElementById('mColorRow');
+
+  if (varSection) varSection.style.display = isPOD ? 'block' : 'none';
+  if (sizeSection) sizeSection.style.display = 'none';
+  if (colorSection) colorSection.style.display = 'none';
+
+  if (isPOD) {
+    // Size variants
+    var sizes = ['S','M','L','XL','2XL'];
+    if (p.SubCategory && (p.SubCategory.toLowerCase().includes('mug') || p.SubCategory.toLowerCase().includes('poster'))) {
+      sizes = ['11oz','15oz'];
+    }
+    if (sizeSection && sizeRow) {
+      sizeSection.style.display = 'block';
+      sizeRow.innerHTML = '';
+      sizes.forEach(function(sz) {
+        var btn = document.createElement('button');
+        btn.className = 'variant-btn'; btn.textContent = sz;
+        btn.dataset.val = sz;
+        btn.onclick = function(){ selectVariant(this, 'size'); };
+        sizeRow.appendChild(btn);
+      });
+    }
+  }
+
+  updateBundleNote();
+}
+// ══════════════════════════════════════════════════════════════
+
+function modalSlide(dir) {
+  const imgs = window._modalImgs || [];
+  const total = imgs.filter(function(s){ return s; }).length;
+  if (total <= 1) return;
+  window._modalIdx = ((window._modalIdx || 0) + dir + total) % total;
+  const mImg = document.getElementById('mImg');
+  mImg.src = imgs[window._modalIdx];
+  const thumbs = document.getElementById('mThumbs').querySelectorAll('.modal-thumb');
+  thumbs.forEach(function(t,i){ t.classList.toggle('active', i === window._modalIdx); });
+}
+
+function handleModalClick(e){ if(e.target===document.getElementById('modalOverlay')) closeModal(); }
+function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow=''; }
+
+function copyHashtags(){
+  if(!modalProduct) return;
+  navigator.clipboard.writeText(modalProduct.Hashtags||'').then(()=>showToast(lang==='en'?'Hashtags copied! ✅':'Đã sao chép hashtag! ✅','success'));
+}
+
+function quickCopy(sku){
+  const p=allProducts.find(x=>x.SKU===sku); if(!p) return;
+  navigator.clipboard.writeText(p.Hashtags||'').then(()=>showToast('📋 Copied!','success'));
+}
+
+// Language
+function toggleLang(){
+  lang = lang==='en'?'vi':'en';
+  localStorage.setItem('zanith_lang', lang);
+  applyLang();
+}
+
+function applyLang(){
+  document.querySelectorAll('.en').forEach(el=>el.style.display=lang==='en'?'':'none');
+  document.querySelectorAll('.vi').forEach(el=>el.style.display=lang==='vi'?'':'none');
+  document.getElementById('langLabel').textContent = lang.toUpperCase();
+  document.getElementById('searchInput').placeholder = lang==='en'?'Search patterns, styles, colors...':'Tìm họa tiết, phong cách, màu sắc...';
+  renderGrid();
+  renderReviews(); // refresh product dropdown
+}
+
+// Toast
+function showToast(msg,type=''){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast show '+type;
+  setTimeout(()=>t.className='toast',3000);
+}
+
+function doSearch(){ filterProducts(); }
+
+// ═══════════════════════════════════════════
+// FALLBACK DATA (34 products)
+// ═══════════════════════════════════════════
+const FALLBACK_DATA = [
+  {SKU:"PTN-ACC-001",Category:"Digital Pattern",Title:"Boho Fashion Accessories Toss Pattern",Type:"Illustrated Toss",Style:"Boho / Y2K Retro",Colors:"Pink, Beige, Brown, Yellow-Green",Description:"A playful illustrated toss pattern featuring retro fashion accessories on a warm beige background.",Price_USD:"11.99",Sale_Price_USD:"5.99",Margin_Sale_Pct:"50",Hashtags:"#surfacepattern #fabricdesign #bohofashion #accessoriespattern #retropink #Y2Kaesthetic",Image:"images/PTN-ACC-001.png"},
+  {SKU:"PTN-GEO-002",Category:"Digital Pattern",Title:"Abstract Geometric Bear Silhouette Pattern",Type:"Geometric Abstract",Style:"Modern / Bauhaus",Colors:"Black, Baby Blue, White",Description:"Bold modernist pattern using overlapping bear-like silhouettes in black and baby blue on white.",Price_USD:"7.99",Sale_Price_USD:"3.99",Margin_Sale_Pct:"50",Hashtags:"#geometricpattern #blackandblue #modernpattern #abstractprint #bauhausstyle",Image:"images/PTN-GEO-002.png"},
+  {SKU:"PTN-MED-003",Category:"Digital Pattern",Title:"Cross-Stitch Blue Medallion Tile Pattern",Type:"Medallion / Folk",Style:"Folk Art / Cross-Stitch",Colors:"Cornflower Blue, Navy, Golden Yellow",Description:"Intricate cross-stitch inspired medallion pattern with folk art motifs in cornflower blue.",Price_USD:"9.99",Sale_Price_USD:"4.99",Margin_Sale_Pct:"50",Hashtags:"#crossstitchpattern #folkartdesign #medallionprint #embroiderypattern #blueyellow",Image:"images/PTN-MED-003.png"},
+  {SKU:"PTN-LAT-004",Category:"Digital Pattern",Title:"Dark Teal Geometric Star Lattice Pattern",Type:"Lattice / Geometric",Style:"Elegant / Celestial",Colors:"Dark Teal, Gold, Royal Blue",Description:"Sophisticated repeating lattice of dotted star motifs on deep teal with gold accents.",Price_USD:"7.99",Sale_Price_USD:"3.99",Margin_Sale_Pct:"50",Hashtags:"#celestialpattern #darkteal #goldprint #latticepattern #stardesign",Image:"images/PTN-LAT-004.png"},
+  {SKU:"PTN-DIA-005",Category:"Digital Pattern",Title:"Periwinkle Blue Diamond Tile Pattern",Type:"Diamond Tile",Style:"Classic / Woven",Colors:"Periwinkle, Lavender, Navy Blue",Description:"Refined all-over diamond tile with subtle woven texture in harmonious periwinkle and lavender.",Price_USD:"7.99",Sale_Price_USD:"3.99",Margin_Sale_Pct:"50",Hashtags:"#diamondpattern #periwinkleblue #woventextile #classicprint #alloverpattern",Image:"images/PTN-DIA-005.png"},
+  {SKU:"PTN-FLW-006",Category:"Digital Pattern",Title:"Sage Green Blush Pink Floral Lattice Pattern",Type:"Floral Lattice",Style:"Cottagecore / Romantic",Colors:"Sage Green, Blush Pink",Description:"Delicate floral rosette medallions on muted sage green — perfect for cottagecore apparel.",Price_USD:"7.99",Sale_Price_USD:"3.99",Margin_Sale_Pct:"50",Hashtags:"#cottagecore #floralpattern #sagegreen #blushpink #gardenpattern",Image:"images/PTN-FLW-006.png"},
+  {SKU:"PTN-ILL-007",Category:"Digital Pattern",Title:"Illustrated Goose Whimsy Argyle Pattern",Type:"Illustrated Novelty",Style:"Whimsical / Novelty",Colors:"Pink, Olive Green, White",Description:"Charming illustrated pattern with a white goose in argyle diamond background.",Price_USD:"11.99",Sale_Price_USD:"5.99",Margin_Sale_Pct:"50",Hashtags:"#goosepattern #whimsicalprint #noveltyprint #illustratedpattern #farmanimals",Image:"images/PTN-ILL-007.png"},
+  {SKU:"PTN-FIG-008",Category:"Digital Pattern",Title:"Golden Women Empowerment Pattern",Type:"Illustrated Figure",Style:"Empowerment / Bohemian",Colors:"Golden Ochre, Ivory, Brown, White",Description:"Warm empowering pattern featuring diverse women with daisies and the word Queen.",Price_USD:"11.99",Sale_Price_USD:"5.99",Margin_Sale_Pct:"50",Hashtags:"#womenempowerment #diversitypattern #feministfabric #goldenochre #queenprint",Image:"images/PTN-FIG-008.png"},
+  {SKU:"PTN-BOW-009",Category:"Digital Pattern",Title:"Dark Academia Bow Sticker Pattern",Type:"Toss / Sticker",Style:"Dark Academia / Coquette",Colors:"Black, Crimson, Peach, Gold",Description:"Coquette-aesthetic bows in warm autumn tones on deep black background.",Price_USD:"7.99",Sale_Price_USD:"3.99",Margin_Sale_Pct:"50",Hashtags:"#bowpattern #darkacademia #coquetteaesthetic #blackbackground #ribbonprint",Image:"images/PTN-BOW-009.png"},
+  {SKU:"PTN-BOW-010",Category:"Digital Pattern",Title:"Vintage Teal Bow Ribbon Pattern",Type:"Toss / Sticker",Style:"Vintage / Festive",Colors:"Teal, Crimson, Peach, Gold",Description:"Same charming bow pattern reimagined on a rich teal background.",Price_USD:"7.99",Sale_Price_USD:"3.99",Margin_Sale_Pct:"50",Hashtags:"#tealbowpattern #vintageribbon #autumnbows #festiveprint #tealbackground",Image:"images/PTN-BOW-010.png"},
+  {SKU:"PTN-GEO-011",Category:"Digital Pattern",Title:"Mauve Cobalt Geometric Diamond Pattern",Type:"Geometric Woven",Style:"Contemporary / Artisan",Colors:"Mauve, Cobalt Blue, Mustard Yellow",Description:"Contemporary woven geometric with diamond shapes in cobalt blue and mustard on mauve.",Price_USD:"7.99",Sale_Price_USD:"3.99",Margin_Sale_Pct:"50",Hashtags:"#mauvepattern #cobaltblue #geometricweave #diamondprint #texturepattern",Image:"images/PTN-GEO-011.png"},
+  {SKU:"PTN-LAC-012",Category:"Digital Pattern",Title:"Blush Pink White Lace Floral Pattern",Type:"Lace / Floral",Style:"Romantic / Bridal",Colors:"Blush Pink, White",Description:"Ultra-delicate lace-inspired floral rosette pattern in soft blush pink on white.",Price_USD:"9.99",Sale_Price_USD:"4.99",Margin_Sale_Pct:"50",Hashtags:"#lacepattern #blushpink #weddingprint #bridalfabric #delicatepattern",Image:"images/PTN-LAC-012.png"},
+  {SKU:"PTN-MED-013",Category:"Digital Pattern",Title:"Dark Forest Green Ornamental Medallion Pattern",Type:"Medallion / Ornamental",Style:"Gothic / Victorian",Colors:"Forest Green, Olive Black",Description:"Rich ornamental medallion with layered circular motifs on muted forest green.",Price_USD:"9.99",Sale_Price_USD:"4.99",Margin_Sale_Pct:"50",Hashtags:"#gothicpattern #darkgreen #ornamentalprint #victoriandesign #medallionprint",Image:"images/PTN-MED-013.png"},
+  {SKU:"PTN-GEO-014",Category:"Digital Pattern",Title:"Royal Blue Pinwheel Checkerboard Pattern",Type:"Geometric / Op-Art",Style:"Bold / Graphic",Colors:"Royal Blue, Periwinkle Blue",Description:"Striking op-art pinwheel squares and checkerboard triangles in bold royal and periwinkle blue.",Price_USD:"7.99",Sale_Price_USD:"3.99",Margin_Sale_Pct:"50",Hashtags:"#royalblue #pinwheelpattern #checkerboard #oparthprint #graphicpattern",Image:"images/PTN-GEO-014.png"},
+  {SKU:"PTN-ILL-015",Category:"Digital Pattern",Title:"Blue Garden Gloves Floral Repeat Pattern",Type:"Illustrated Toss",Style:"Cottagecore / Botanical",Colors:"Cobalt Blue, Cream, Sage Green",Description:"Charming blue garden gloves with white daisies and green leaves on cream.",Price_USD:"11.99",Sale_Price_USD:"5.99",Margin_Sale_Pct:"50",Hashtags:"#gardengloves #cottagecore #botanicalpattern #blueandcream #floraltoss",Image:"images/PTN-ILL-015.png"},
+  {SKU:"PTN-GEO-016",Category:"Digital Pattern",Title:"Sunshine Yellow Cross-Stitch Geometric Pattern",Type:"Geometric / Folk",Style:"Folk Art / Retro",Colors:"Sunshine Yellow, White",Description:"Vibrant two-tone cross-stitch geometric in bold sunshine yellow and white.",Price_USD:"9.99",Sale_Price_USD:"4.99",Margin_Sale_Pct:"50",Hashtags:"#yellowpattern #crossstitchprint #folkartfabric #sunshinecolor #geometricprint",Image:"images/PTN-GEO-016.png"},
+  {SKU:"PTN-ILL-017",Category:"Digital Pattern",Title:"Cottagecore Mushroom Goose Illustrated Pattern",Type:"Illustrated Novelty",Style:"Whimsical / Cottagecore",Colors:"Sage Green, Crimson, White",Description:"Whimsical pattern with giant red mushrooms, white geese and Quack! on sage green.",Price_USD:"11.99",Sale_Price_USD:"5.99",Margin_Sale_Pct:"50",Hashtags:"#mushroompattern #cottagecore #whimsicalprint #goosedesign #fantasypattern",Image:"images/PTN-ILL-017.png"},
+  {SKU:"PTN-GEO-018",Category:"Digital Pattern",Title:"Black White Tribal Geometric Maze Pattern",Type:"Geometric / Tribal",Style:"Bold / Ethnic",Colors:"Black, White",Description:"High-contrast black and white tribal geometric maze with interlocking cross motifs.",Price_USD:"7.99",Sale_Price_USD:"3.99",Margin_Sale_Pct:"50",Hashtags:"#blackwhitepattern #tribalgeometric #mazepattern #monochromeprint #ethnicdesign",Image:"images/PTN-GEO-018.png"},
+  {SKU:"PTN-MED-019",Category:"Digital Pattern",Title:"Crimson Cream Dense Medallion Pattern",Type:"Medallion / Dense",Style:"Traditional / Folk",Colors:"Deep Crimson, Cream",Description:"Rich densely-packed crimson medallion on cream inspired by traditional folk embroidery.",Price_USD:"9.99",Sale_Price_USD:"4.99",Margin_Sale_Pct:"50",Hashtags:"#crimsonpattern #medallionprint #folkembroidery #traditionaltextile #densegeo",Image:"images/PTN-MED-019.png"},
+  {SKU:"PTN-MED-020",Category:"Digital Pattern",Title:"Crimson Cream Medium Floral Medallion Pattern",Type:"Medallion / Floral",Style:"Vintage / Folk",Colors:"Deep Crimson, Cream",Description:"Elegant medium-scale crimson floral medallion with delicate cross-stitch connecting motifs.",Price_USD:"9.99",Sale_Price_USD:"4.99",Margin_Sale_Pct:"50",Hashtags:"#crimsonfloral #vintagefabric #medallionpattern #folkmedallion #creambackground",Image:"images/PTN-MED-020.png"},
+  {SKU:"PTN-MED-021",Category:"Digital Pattern",Title:"Crimson Cream Large-Scale Medallion Pattern",Type:"Medallion / Large Scale",Style:"Heritage / Bold",Colors:"Deep Crimson, Cream",Description:"Bold large-scale crimson medallion with prominent gear-flower motifs on cream.",Price_USD:"9.99",Sale_Price_USD:"4.99",Margin_Sale_Pct:"50",Hashtags:"#largescalepattern #crimsonmedallion #boldheritage #upholsteryprint #quilting",Image:"images/PTN-MED-021.png"},
+  {SKU:"PTN-LAC-022",Category:"Digital Pattern",Title:"Lavender Purple Floral Loop Lace Pattern",Type:"Lace / Floral",Style:"Delicate / Handmade",Colors:"Lavender, White",Description:"Ultra-delicate lavender floral loop lace on white mimicking hand-drawn botanical embroidery.",Price_USD:"9.99",Sale_Price_USD:"4.99",Margin_Sale_Pct:"50",Hashtags:"#lavenderpattern #floralloop #lacedesign #delicateprint #handdrawnaesthetic",Image:"images/PTN-LAC-022.png"},
+  {SKU:"PTN-MED-023",Category:"Digital Pattern",Title:"Sage Green Blue Yellow Cross-Stitch Lattice",Type:"Cross-Stitch / Lattice",Style:"Folk Art / Spring",Colors:"Sage Green, Periwinkle Blue, Mustard Yellow",Description:"Fresh multicolor cross-stitch lattice combining sage green, periwinkle and mustard on white.",Price_USD:"7.99",Sale_Price_USD:"3.99",Margin_Sale_Pct:"50",Hashtags:"#crossstitchpattern #sagegreen #periwinkleblue #mustardyellow #folkartprint",Image:"images/PTN-MED-023.png"},
+  {SKU:"PTN-BOT-024",Category:"Digital Pattern",Title:"Black White Botanical Bug Floral Pattern",Type:"Botanical / Illustrated",Style:"Gothic / Dark Botanical",Colors:"Black, White, Grey",Description:"Intricate botanical scroll with hidden ladybugs and insects among flowing floral vines.",Price_USD:"11.99",Sale_Price_USD:"5.99",Margin_Sale_Pct:"50",Hashtags:"#botanicalpattern #gothicgarden #blackwhitefloral #bugprint #insectdesign",Image:"images/PTN-BOT-024.png"},
+  {SKU:"PTN-ILL-025",Category:"Digital Pattern",Title:"Blue Garden Gloves Large-Scale Pattern",Type:"Illustrated / Large Scale",Style:"Botanical / Cheerful",Colors:"Cobalt Blue, Cream, Sage Green",Description:"Large-scale hero garden gloves with oversized daisies and botanical leaves on cream.",Price_USD:"11.99",Sale_Price_USD:"5.99",Margin_Sale_Pct:"50",Hashtags:"#gardengloveslarge #bluerubbergloves #botanicalprint #largescaleillustration #kitchenfabric",Image:"images/PTN-ILL-025.png"},
+  {SKU:"PTN-ILL-026",Category:"Digital Pattern",Title:"Vintage Beauty Vanity Toss Pattern",Type:"Illustrated Toss",Style:"Vintage / Dark Feminine",Colors:"Navy Black, Blue, White, Lavender",Description:"Sophisticated vintage beauty items — mirrors, perfumes, lipsticks — on deep navy.",Price_USD:"11.99",Sale_Price_USD:"5.99",Margin_Sale_Pct:"50",Hashtags:"#beautypattern #vanityprint #vintagecosmetics #darkbackground #navyfabric",Image:"images/PTN-ILL-026.png"},
+  {SKU:"PTN-ILL-027",Category:"Digital Pattern",Title:"Cartoon Dog Faces Emoji Pattern",Type:"Illustrated Novelty",Style:"Cute / Kawaii",Colors:"Black, Yellow, Navy Blue, Crimson",Description:"Adorable kawaii cartoon dog faces wearing blue berets on black background.",Price_USD:"11.99",Sale_Price_USD:"5.99",Margin_Sale_Pct:"50",Hashtags:"#dogpattern #kawaiidogs #cuteanimals #petprint #cartoondog",Image:"images/PTN-ILL-027.png"},
+  {SKU:"PTN-ILL-028",Category:"Digital Pattern",Title:"Cool Giraffe Summer Illustrated Pattern",Type:"Illustrated Character",Style:"Summer / Whimsical",Colors:"White, Orange, Green, Navy Blue",Description:"Stylish giraffe in pink robe with sunglasses holding iced coffee among tropical leaves.",Price_USD:"11.99",Sale_Price_USD:"5.99",Margin_Sale_Pct:"50",Hashtags:"#giraffepattern #summerprint #coolanimals #illustratedcharacter #tropicalprint",Image:"images/PTN-ILL-028.png"},
+  {SKU:"PTN-MED-029",Category:"Digital Pattern",Title:"Crimson Blue Two-Tone Gear Medallion Pattern",Type:"Medallion / Two-Tone",Style:"Heritage / Folk",Colors:"Deep Crimson, Cornflower Blue, Cream",Description:"Striking alternating crimson and cornflower blue gear-flower medallions on cream.",Price_USD:"9.99",Sale_Price_USD:"4.99",Margin_Sale_Pct:"50",Hashtags:"#twotonpattern #crimsonblue #gearmedallion #folkheritage #colorblockpattern",Image:"images/PTN-MED-029.png"},
+  {SKU:"PTN-LAC-030",Category:"Digital Pattern",Title:"Periwinkle Cream Geometric Lace Pattern",Type:"Lace / Geometric",Style:"Elegant / Cross-Stitch",Colors:"Periwinkle Blue, Cream",Description:"Refined geometric lace with cross-stitch butterfly motifs in soft periwinkle on cream.",Price_USD:"9.99",Sale_Price_USD:"4.99",Margin_Sale_Pct:"50",Hashtags:"#lacepattern #periwinklecream #geometriclace #crossstitchinspired #butterflyprint",Image:"images/PTN-LAC-030.png"},
+  {SKU:"PTN-LAC-031",Category:"Digital Pattern",Title:"Periwinkle White Delicate Lace Pattern",Type:"Lace / Delicate",Style:"Airy / Romantic",Colors:"Periwinkle Blue, White",Description:"Lighter airier periwinkle lace on bright white — crisp and perfect for bridal wear.",Price_USD:"9.99",Sale_Price_USD:"4.99",Margin_Sale_Pct:"50",Hashtags:"#periwinkelwhite #airypattern #delicatelace #crossstitchlace #cleandesign",Image:"images/PTN-LAC-031.png"},
+  {SKU:"PTN-LAC-032",Category:"Digital Pattern",Title:"Dark Forest Green Geometric Lace Pattern",Type:"Lace / Geometric",Style:"Luxury / Dark Botanical",Colors:"Forest Green, Olive Gold",Description:"Rich monochromatic geometric lace in deep forest green — luxurious understated elegance.",Price_USD:"9.99",Sale_Price_USD:"4.99",Margin_Sale_Pct:"50",Hashtags:"#forestgreenpattern #geometriclace #darkbotanical #luxuryprint #monochromicdesign",Image:"images/PTN-LAC-032.png"},
+  {SKU:"PTN-GEO-033",Category:"Digital Pattern",Title:"Bright Green Blue Yellow Star Lattice Pattern",Type:"Geometric / Lattice",Style:"Vibrant / Folk",Colors:"Bright Green, Royal Blue, Mustard Yellow",Description:"Energetic star lattice combining bright emerald green, royal blue and mustard yellow.",Price_USD:"7.99",Sale_Price_USD:"3.99",Margin_Sale_Pct:"50",Hashtags:"#brightgreenpattern #starlattice #vibrantfolk #royalblue #mustardyellow",Image:"images/PTN-GEO-033.png"},
+  {SKU:"PTN-GEO-034",Category:"Digital Pattern",Title:"White Blue Yellow Cross-Stitch Star Pattern",Type:"Geometric / Nordic",Style:"Nordic / Clean",Colors:"White, Royal Blue, Mustard Yellow",Description:"Clean Nordic cross-stitch star in royal blue and mustard on white — Scandinavian style.",Price_USD:"7.99",Sale_Price_USD:"3.99",Margin_Sale_Pct:"50",Hashtags:"#nordicpattern #scandidesign #whiteblueyellow #crossstitchstar #cleanprint",Image:"images/PTN-GEO-034.png"},
+];
+
+
+// ═══════════════ CART ═══════════════
+function getCart() {
+  try { return JSON.parse(localStorage.getItem('zanith_cart') || '[]'); }
+  catch(e) { return []; }
+}
+function saveCart(cart) {
+  localStorage.setItem('zanith_cart', JSON.stringify(cart));
+  updateCartUI();
+}
+function addToCart(sku, qty, variant) {
+  qty = qty || 1;
+  var p = allProducts.find(function(x){ return x.SKU === sku; });
+  if (!p) return;
+  var cart = getCart();
+  var key = sku + (variant ? '::' + variant : '');
+  var existing = cart.find(function(i){ return i.key === key; });
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({
+      key: key, sku: sku, title: p.Title,
+      price: parseFloat(p.Sale_Price_USD) || 0,
+      image: p.Image || ('images/' + sku + '.png'),
+      variant: variant || null, qty: qty
+    });
+  }
+  saveCart(cart);
+  // Flash feedback
+  var btn = document.getElementById('modalAddBtn');
+  if (btn) { btn.textContent = '✓ Added!'; btn.style.background='var(--green)'; setTimeout(function(){ btn.textContent = lang==='en'?'🛒 Add to Cart':'🛒 Thêm vào giỏ'; btn.style.background=''; }, 1200); }
+  showCartToast(p.Title, qty);
+}
+function removeFromCart(key) {
+  var cart = getCart().filter(function(i){ return i.key !== key; });
+  saveCart(cart);
+}
+function updateCartUI() {
+  var n = getCart().reduce(function(s,i){ return s + (i.qty||1); }, 0);
+  var els = document.querySelectorAll('.cart-count');
+  els.forEach(function(el){ el.textContent = n; el.style.display = n > 0 ? 'inline-flex' : 'none'; });
+  var fl = document.getElementById('cartFloat');
+  if (fl) fl.style.display = n > 0 ? 'flex' : 'flex';
+}
+function showCartToast(title, qty) {
+  var t = document.getElementById('cartToast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'cartToast';
+    t.style.cssText = 'position:fixed;bottom:90px;right:1.5rem;background:var(--navy);color:white;padding:0.75rem 1.2rem;border-radius:12px;font-size:0.82rem;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.25);transition:all 0.3s;max-width:260px;';
+    document.body.appendChild(t);
+  }
+  t.textContent = '✓ ' + title.substring(0,30) + (qty>1?' (×'+qty+')':'') + ' added to cart';
+  t.style.opacity = '1'; t.style.transform = 'translateY(0)';
+  clearTimeout(t._hide);
+  t._hide = setTimeout(function(){ t.style.opacity='0'; }, 2200);
+}
+// ════════════════════════════════════
+
+// Init
+applyLang();
+loadProducts();
+updateCartUI();
+
+// ═══════════════════════ FAQ ═══════════════════════
+var FAQ_DATA = [
+  { q_en:"What file formats do I receive?", q_vi:"Tôi sẽ nhận được file định dạng gì?",
+    a_en:"All patterns are delivered as seamless PNG files at 300 DPI, 3600×3600px — ready for Printify, Printful, Spoonflower, Adobe, Procreate or any professional print service.",
+    a_vi:"Tất cả họa tiết được giao dưới dạng file PNG liền mạch 300 DPI, 3600×3600px — dùng ngay trên Printify, Printful, Spoonflower, Adobe, Procreate hoặc dịch vụ in chuyên nghiệp." },
+  { q_en:"How do I download after purchase?", q_vi:"Làm sao tải file sau khi mua?",
+    a_en:"After payment you'll receive a confirmation email with your download link within a few minutes. Files are available instantly — no waiting.",
+    a_vi:"Sau khi thanh toán, bạn nhận email xác nhận kèm link tải trong vài phút. File có ngay lập tức." },
+  { q_en:"Can I use these patterns for commercial products?", q_vi:"Có thể dùng họa tiết này cho sản phẩm bán thương mại không?",
+    a_en:"Yes! Commercial license is included. Use on physical products, POD items (t-shirts, mugs, totes), digital products and more. You may NOT resell the pattern file itself.",
+    a_vi:"Có! Giấy phép thương mại đã bao gồm. Dùng trên sản phẩm vật lý, POD (áo thun, cốc, túi), sản phẩm kỹ thuật số. Không được bán lại file họa tiết gốc." },
+  { q_en:"Do you offer refunds?", q_vi:"Có hoàn tiền không?",
+    a_en:"Because these are instant digital downloads, we cannot offer refunds after download. If you have any issues (corrupted file, wrong file) contact us and we'll fix it immediately.",
+    a_vi:"Vì đây là tải xuống kỹ thuật số ngay lập tức, chúng tôi không hoàn tiền sau khi tải. Nếu có vấn đề với file, hãy liên hệ để được giải quyết ngay." },
+  { q_en:"Can I use the pattern on products I sell on Etsy or Shopee?", q_vi:"Có thể dùng họa tiết cho sản phẩm bán trên Etsy/Shopee không?",
+    a_en:"Absolutely! That's exactly what these patterns are designed for. Use on any products you sell — as long as you don't resell the pattern file itself.",
+    a_vi:"Hoàn toàn được! Đó chính là mục đích của những họa tiết này. Dùng trên bất kỳ sản phẩm nào bạn bán — miễn là không bán lại file gốc." },
+  { q_en:"What's the difference between price tiers?", q_vi:"Sự khác biệt giữa các mức giá là gì?",
+    a_en:"Entry ($3–4): Simple geometric or 1–2 color patterns. Mid ($5–6): Illustrated or detailed multi-color. Premium ($9–11): Complex scenes, bundles of 3–5 patterns, or POD mockups.",
+    a_vi:"Entry ($3–4): Hình học đơn giản hoặc 1–2 màu. Mid ($5–6): Minh họa hoặc nhiều màu chi tiết. Premium ($9–11): Cảnh phức tạp, gói 3–5 họa tiết, hoặc mockup POD." },
+  { q_en:"Can I request a custom color variation?", q_vi:"Có thể đặt biến thể màu tùy chỉnh không?",
+    a_en:"Yes! We offer custom color variations for existing patterns and fully custom designs. Chat with us or email zenithcraftedstudio@gmail.com.",
+    a_vi:"Có! Chúng tôi làm biến thể màu tùy chỉnh và thiết kế hoàn toàn theo yêu cầu. Chat hoặc email zenithcraftedstudio@gmail.com." },
+  { q_en:"How do I use a discount code?", q_vi:"Cách dùng mã giảm giá?",
+    a_en:"Add items to cart → at checkout enter the code in the Discount Code field → click Apply. Code ZANITH20 gives 20% off your first order.",
+    a_vi:"Thêm vào giỏ hàng → ở trang thanh toán nhập mã vào ô Mã giảm giá → nhấn Áp dụng. Mã ZANITH20 giảm 20% đơn đầu tiên." }
+];
+
+function buildFAQ() {
+  var list = document.getElementById('faqList');
+  if (!list) return;
+  var isVI = (localStorage.getItem('zanith_lang')||'en') === 'vi';
+  list.innerHTML = '';
+  FAQ_DATA.forEach(function(item) {
+    var div = document.createElement('div');
+    div.className = 'faq-item';
+    var q = isVI ? item.q_vi : item.q_en;
+    var a = isVI ? item.a_vi : item.a_en;
+    var btn = document.createElement('button');
+    btn.className = 'faq-q';
+    btn.innerHTML = '<span>' + q + '</span><span class="faq-arrow">▾</span>';
+    btn.onclick = function(){ toggleFAQ(this); };
+    var ans = document.createElement('div');
+    ans.className = 'faq-a';
+    ans.textContent = a;
+    div.appendChild(btn);
+    div.appendChild(ans);
+    list.appendChild(div);
+  });
+}
+
+function toggleFAQ(btn) {
+  var item = btn.closest('.faq-item');
+  var wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); });
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ═══════════════════════ REVIEWS (modal) ═══════════════════════
+var selectedStars = 5;
+
+function starsHTML(n) {
+  var s = '';
+  for (var i=1;i<=5;i++) s += '<span style="color:'+(i<=n?'#f4c430':'#ddd')+'">★</span>';
+  return s;
+}
+
+function setStars(n) {
+  selectedStars = n;
+  document.querySelectorAll('.star-pick-btn').forEach(function(b){
+    b.classList.toggle('on', parseInt(b.dataset.v) <= n);
+  });
+}
+
+function loadReviews() {
+  try { return JSON.parse(localStorage.getItem('zanith_reviews') || '[]'); } catch(e){ return []; }
+}
+
+function getReviewsForSku(sku) {
+  return loadReviews().filter(function(r){ return r.sku === sku; });
+}
+
+function renderReviews() {
+  // Populate product dropdown in the review form
+  var sel = document.getElementById('rvProduct');
+  if (sel && allProducts.length && sel.options.length <= 1) {
+    allProducts.forEach(function(p){
+      var opt = document.createElement('option');
+      opt.value = p.SKU; opt.textContent = p.Title;
+      sel.appendChild(opt);
+    });
+  }
+  // Render global reviews section cuối trang
+  renderGlobalReviews();
+}
+
+function renderGlobalReviews() {
+  var reviews = loadReviews();
+  // Seed nếu chưa có
+  if (!reviews.length) {
+    reviews = [
+      { sku:'PTN-ACC-001', name:'Sarah M.', stars:5, text:'Absolutely gorgeous! Used for Etsy tote bags and got so many compliments. Files are crystal clear.', date:'2025-02-14' },
+      { sku:'PTN-BOW-009', name:'Linh T.', stars:5, text:'Mua về in áo thun cho shop, khách hàng rất thích. File PNG rõ nét, dùng Printify rất mượt!', date:'2025-02-28' },
+      { sku:'PTN-FLW-006', name:'Emma K.', stars:5, text:'Perfect for my fabric printing business. Commercial license made it easy. Fast download too!', date:'2025-03-01' },
+      { sku:'PTN-ILL-017', name:'Minh H.', stars:4, text:'Họa tiết đẹp, màu sắc tươi. Rất đáng tiền, sẽ mua thêm nhiều mẫu nữa.', date:'2025-03-05' }
+    ];
+    localStorage.setItem('zanith_reviews', JSON.stringify(reviews));
+  }
+  var grid = document.getElementById('reviewsGrid');
+  var summary = document.getElementById('reviewsSummary');
+  if (!grid) return;
+  var avg = reviews.reduce(function(s,r){ return s+r.stars; },0) / (reviews.length||1);
+  if (summary) {
+    summary.innerHTML = '<span style="font-size:1rem">' + starsHTML(Math.round(avg)) + '</span>'
+      + ' <strong style="color:var(--navy);font-size:1.3rem">' + avg.toFixed(1) + '</strong>'
+      + ' <span style="color:var(--muted);font-size:0.8rem">(' + reviews.length + ' reviews)</span>';
+  }
+  grid.innerHTML = '';
+  reviews.slice().reverse().slice(0,6).forEach(function(r) {
+    var p = allProducts.find(function(x){ return x.SKU === r.sku; });
+    var card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = '<div class="review-stars">' + starsHTML(r.stars) + '</div>'
+      + '<div class="review-text">"' + r.text + '"</div>'
+      + '<div class="review-meta"><strong>' + r.name + '</strong><span>' + (r.date||'') + '</span></div>'
+      + (p ? '<div style="margin-top:5px"><span class="review-product-tag">📦 ' + p.Title + '</span></div>' : '');
+    grid.appendChild(card);
+  });
+}
+
+// Render reviews inside modal for a specific product
+function renderModalReviews(sku) {
+  var wrap = document.getElementById('mReviewsWrap');
+  if (!wrap) return;
+  // Show/hide write review form based on purchase
+  var writeWrap = document.getElementById('mWriteReviewWrap');
+  if (writeWrap) writeWrap.style.display = hasPurchased(sku) ? 'block' : 'none';
+
+  var reviews = getReviewsForSku(sku);
+  if (!reviews.length) {
+    wrap.innerHTML = '<div style="font-size:0.78rem;color:var(--muted);padding:4px 0">'
+      + (hasPurchased(sku) ? 'Be the first to review this product!' : 'No reviews yet.')
+      + '</div>';
+    return;
+  }
+  var avg = reviews.reduce(function(s,r){ return s+r.stars; },0) / reviews.length;
+  wrap.innerHTML = '<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">'
+    + starsHTML(Math.round(avg))
+    + '<span style="font-size:0.8rem;color:var(--text-soft)">' + avg.toFixed(1) + ' (' + reviews.length + ')</span>'
+    + '</div>';
+  reviews.slice(-3).reverse().forEach(function(r) {
+    var d = document.createElement('div');
+    d.style.cssText = 'border-top:1px solid var(--border);padding:6px 0;';
+    d.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center">'
+      + '<span style="font-size:0.72rem;font-weight:600">' + r.name + '</span>'
+      + '<span style="font-size:0.7rem">' + starsHTML(r.stars) + '</span>'
+      + '</div>'
+      + '<div style="font-size:0.78rem;color:var(--text-soft);margin-top:2px">' + r.text + '</div>';
+    wrap.appendChild(d);
+  });
+}
+
+function hasPurchased(sku) {
+  // Check orders hoặc cart history
+  try {
+    var orders = JSON.parse(localStorage.getItem('zanith_orders') || '[]');
+    if (orders.some(function(o){
+      return o.items && o.items.some && o.items.some(function(i){ return i.sku===sku; });
+    })) return true;
+    // Cũng check last_order
+    var last = JSON.parse(localStorage.getItem('zanith_last_order') || 'null');
+    if (last && last.items && last.items.some(function(i){ return i.sku===sku; })) return true;
+  } catch(e){}
+  return false;
+}
+
+function checkReviewAccess() {
+  var sku = document.getElementById('rvProduct') && document.getElementById('rvProduct').value;
+  var gate = document.getElementById('rvGate');
+  var form = document.getElementById('rvFormInner');
+  if (!gate || !form) return;
+  if (!sku) { gate.style.display='none'; form.style.display='none'; return; }
+  if (hasPurchased(sku)) {
+    gate.style.display='none'; form.style.display='block';
+  } else {
+    gate.style.display='block'; form.style.display='none';
+  }
+}
+
+function submitReview() {
+  var name = (document.getElementById('rvName').value||'').trim();
+  var text = (document.getElementById('rvText').value||'').trim();
+  var sku  = document.getElementById('rvProduct').value;
+  if (!name || !text) { showToast('Please enter your name and review.'); return; }
+  var reviews = loadReviews();
+  reviews.push({ sku:sku, name:name, stars:selectedStars, text:text, date:new Date().toISOString().slice(0,10) });
+  localStorage.setItem('zanith_reviews', JSON.stringify(reviews));
+  renderGlobalReviews();
+  if (modalProduct && modalProduct.SKU === sku) renderModalReviews(sku);
+  document.getElementById('rvName').value='';
+  document.getElementById('rvText').value='';
+  setStars(5);
+  showToast('✅ Thank you for your review!');
+}
+
+// ═══════════════ PROMO BAR: ẩn nếu không có active campaign ═══════════════
+function syncPromoBanner() {
+  // Flash bar: chỉ hiện khi flashActive=true VÀ thời gian chưa hết
+  var flashBar = document.getElementById('flashBar');
+  var isFlashLive = CAMPAIGN.flashActive && CAMPAIGN.flashEnd && new Date(CAMPAIGN.flashEnd) > new Date();
+  if (flashBar) flashBar.classList.toggle('hidden', !isFlashLive);
+
+  // Promo bar: chỉ hiện khi có code HOẶC bundle active
+  var banner = document.getElementById('promoBanner');
+  if (!banner) return;
+  var hasCodes = CAMPAIGN.discountCodes && CAMPAIGN.discountCodes.length > 0;
+  var hasBundle = CAMPAIGN.bundleActive;
+  banner.style.display = (hasCodes || hasBundle) ? 'flex' : 'none';
+  if (hasCodes) {
+    var codeEl = banner.querySelector('.promo-code');
+    if (codeEl) codeEl.textContent = CAMPAIGN.discountCodes[0].code;
+  }
+}
+
+var mSelectedStars = 5;
+
+function setMStars(n) {
+  mSelectedStars = n;
+  document.querySelectorAll('#mStarPicker .star-pick-btn').forEach(function(b){
+    b.style.color = parseInt(b.dataset.v) <= n ? '#f4c430' : '#ddd';
+  });
+}
+
+function submitModalReview() {
+  if (!modalProduct) return;
+  var name = (document.getElementById('mRvName').value||'').trim();
+  var text = (document.getElementById('mRvText').value||'').trim();
+  if (!name || !text) { showToast('Please enter name and review.'); return; }
+  var reviews = loadReviews();
+  reviews.push({ sku: modalProduct.SKU, name:name, stars:mSelectedStars, text:text, date:new Date().toISOString().slice(0,10) });
+  localStorage.setItem('zanith_reviews', JSON.stringify(reviews));
+  document.getElementById('mRvName').value = '';
+  document.getElementById('mRvText').value = '';
+  setMStars(5);
+  renderModalReviews(modalProduct.SKU);
+  renderGlobalReviews();
+  showToast('✅ Thank you for your review!');
+}
+</script>
+
+<!-- TAWK.TO LIVE CHAT -->
+<!-- 
+  ⚙️  SETUP: 
+  1. Đăng ký miễn phí tại https://www.tawk.to
+  2. Tạo property → copy "Property ID" và "Widget ID"
+  3. Thay YOUR_PROPERTY_ID và YOUR_WIDGET_ID bên dưới
+-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+// Uncommment và thay ID sau khi đăng ký tawk.to:
+// (function(){
+//   var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+//   s1.async=true;
+//   s1.src='https://embed.tawk.to/YOUR_PROPERTY_ID/YOUR_WIDGET_ID';
+//   s1.charset='UTF-8';
+//   s1.setAttribute('crossorigin','*');
+//   s0.parentNode.insertBefore(s1,s0);
+// })();
+
+// Auto-reply messages khi offline (set trong Tawk.to dashboard):
+// "Xin chào! Cảm ơn bạn đã nhắn tin. Chúng tôi sẽ trả lời trong vòng 24 giờ. 
+//  Trong lúc đó bạn có thể xem FAQ tại shop hoặc email: zenithcraftedstudio@gmail.com"
+</script>
+
+</body>
+</html>
