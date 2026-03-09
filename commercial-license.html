@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Commercial License — Zanith Crafted Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1e2d4a;--gold:#c8974a;--gold-light:#e8b86d;--cream:#faf7f2;--warm:#f3ede3;--text:#1a2332;--text-soft:#5a6a7e;--border:#e2ddd6;--green:#2e7d52;--red:#c62828;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Instrument Sans',sans-serif;background:var(--cream);color:var(--text);padding:2rem 1rem;}
+.doc{max-width:720px;margin:0 auto;background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 32px rgba(30,45,74,0.10);}
+.doc-header{background:var(--navy);padding:2.5rem 2.5rem 2rem;color:white;}
+.doc-logo{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;}
+.doc-logo-icon{width:40px;height:40px;background:var(--gold);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+.doc-logo-name{font-family:'Fraunces',serif;font-size:1rem;font-weight:500;}
+.doc-logo-sub{font-size:0.62rem;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em;}
+.doc-title{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:500;line-height:1.2;margin-bottom:0.5rem;}
+.doc-title em{font-style:italic;color:var(--gold-light);}
+.doc-meta{font-size:0.78rem;color:rgba(255,255,255,0.55);}
+
+.tier-header{display:flex;align-items:center;gap:1rem;padding:1.75rem 2.5rem 1.25rem;border-bottom:2px solid var(--warm);}
+.tier-badge-large{padding:0.4rem 1.1rem;border-radius:24px;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;}
+.tier-badge-large.basic{background:#e8f5e9;color:var(--green);}
+.tier-badge-large.premium{background:linear-gradient(135deg,#fdf6e9,#fce8c0);color:#8a5c00;border:1.5px solid var(--gold);}
+.tier-badge-large.extended{background:#e3f2fd;color:#1565c0;}
+.tier-title{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--navy);}
+.tier-price-tag{margin-left:auto;font-size:0.85rem;font-weight:700;color:var(--gold);}
+
+.doc-body{padding:2rem 2.5rem;}
+.info-row{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2rem;}
+.info-box{background:var(--warm);border-radius:10px;padding:0.9rem 1.1rem;}
+.info-label{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-soft);margin-bottom:0.3rem;}
+.info-value{font-size:0.88rem;font-weight:600;color:var(--navy);}
+.info-value.placeholder{color:var(--text-soft);font-style:italic;font-weight:400;}
+
+.section{margin-bottom:1.75rem;}
+.section-title{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1.5px solid var(--warm);}
+.grant-list{list-style:none;}
+.grant-list li{font-size:0.86rem;color:var(--text-soft);line-height:1.7;padding:0.25rem 0;}
+.grant-list li::before{content:'✓ ';color:var(--green);font-weight:700;}
+.grant-list li.no::before{content:'✗ ';color:var(--red);}
+.grant-list li strong{color:var(--text);}
+
+.limit-box{background:#fff8f0;border:1.5px solid #f0c070;border-radius:10px;padding:1rem 1.2rem;display:flex;gap:0.75rem;align-items:flex-start;margin-bottom:1.25rem;}
+.limit-box-icon{font-size:1.1rem;flex-shrink:0;margin-top:0.1rem;}
+.limit-box-text{font-size:0.83rem;color:var(--text-soft);line-height:1.6;}
+.limit-box-text strong{color:var(--text);}
+
+.upsell-box{background:linear-gradient(135deg,var(--navy),#2a3f63);border-radius:12px;padding:1.25rem 1.5rem;color:white;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;}
+.upsell-box-text h4{font-family:'Fraunces',serif;font-size:0.95rem;color:var(--gold-light);margin-bottom:0.2rem;}
+.upsell-box-text p{font-size:0.78rem;color:rgba(255,255,255,0.7);line-height:1.5;}
+.upsell-box a{flex-shrink:0;background:var(--gold);color:white;text-decoration:none;padding:0.45rem 1rem;border-radius:20px;font-size:0.76rem;font-weight:700;}
+
+.doc-footer{padding:1.5rem 2.5rem;background:var(--warm);border-top:1px solid var(--border);font-size:0.78rem;color:var(--text-soft);line-height:1.6;}
+.doc-footer a{color:var(--gold);}
+
+@media(max-width:500px){.info-row{grid-template-columns:1fr;}.doc-body,.doc-header,.tier-header{padding-left:1.25rem;padding-right:1.25rem;}.doc-footer{padding-left:1.25rem;padding-right:1.25rem;}}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     BASIC LICENSE  (shown by default)
+     Comment out / hide sections as needed
+══════════════════════════════════════════════ -->
+
+<div class="doc" id="doc-basic">
+  <div class="doc-header">
+    <div class="doc-logo">
+      <div class="doc-logo-icon">🌿</div>
+      <div>
+        <div class="doc-logo-name">Zanith Crafted Studio</div>
+        <div class="doc-logo-sub">Commercial License Certificate</div>
+      </div>
+    </div>
+    <div class="doc-title">Commercial Use License — <em>Basic</em></div>
+    <div class="doc-meta">Issued upon purchase · Valid indefinitely · Non-transferable</div>
+  </div>
+
+  <div class="tier-header">
+    <span class="tier-badge-large basic">🌱 Basic</span>
+    <div class="tier-title">Standard Commercial License</div>
+    <div class="tier-price-tag">Included Free</div>
+  </div>
+
+  <div class="doc-body">
+    <div class="info-row">
+      <div class="info-box">
+        <div class="info-label">Licensee (Buyer)</div>
+        <div class="info-value placeholder">[Your Name / Shop Name]</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">Pattern SKU</div>
+        <div class="info-value placeholder">[PTN-XXX-000]</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">Order Reference</div>
+        <div class="info-value placeholder">[Order #]</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">Issue Date</div>
+        <div class="info-value placeholder">[Date of Purchase]</div>
+      </div>
+    </div>
+
+    <div class="limit-box">
+      <div class="limit-box-icon">📦</div>
+      <div class="limit-box-text"><strong>Production limit: up to 500 finished items per year</strong> across all products using this pattern. Applies to 1 seller account only. Need more? See upgrade options below.</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Permitted Uses</div>
+      <ul class="grant-list">
+        <li>Sell finished physical products (fabric, apparel, packaging, homeware)</li>
+        <li>Sell POD items (t-shirts, mugs, tote bags, phone cases, posters)</li>
+        <li>Sell digital products (templates, Canva kits, digital prints)</li>
+        <li>Use in freelance / client projects</li>
+        <li>List on Etsy, Shopee, Redbubble, and similar marketplaces</li>
+        <li>Use in social media content and marketing materials</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Not Permitted</div>
+      <ul class="grant-list">
+        <li class="no">Reselling or distributing the original PNG file itself</li>
+        <li class="no">Claiming the pattern as your own original design</li>
+        <li class="no">Sub-licensing to other designers or sellers</li>
+        <li class="no">Producing more than 500 items/year without upgrading</li>
+        <li class="no">Wholesale or mass production runs</li>
+        <li class="no">Use by more than 1 seller/business entity</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Copyright Notice</div>
+      <p style="font-size:0.84rem;color:var(--text-soft);line-height:1.7">This pattern is an original artwork created by and copyright © Zanith Crafted Studio. All rights reserved. This license grants usage rights only — ownership of the design remains with Zanith Crafted Studio. Violation of license terms may result in revocation and legal action.</p>
+    </div>
+
+    <div class="upsell-box">
+      <div class="upsell-box-text">
+        <h4>Selling more than 500 items?</h4>
+        <p>Upgrade to Premium ($8) for 5,000 items/year + wholesale, or Extended ($25) for unlimited production. Email us your order number to upgrade any time.</p>
+      </div>
+      <a href="/cdn-cgi/l/email-protection#dfa5bab1b6abb7bcadbeb9abbabbacabaabbb6b09fb8b2beb6b3f1bcb0b2e0acaabdb5babcabe293b6bcbab1acbaff8aafb8adbebbbaff8dbaaeaabaacab">Upgrade →</a>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    Questions about your license? Contact us at <a href="/cdn-cgi/l/email-protection#c5bfa0abacb1ada6b7a4a3b1a0a1b6b1b0a1acaa85a2a8a4aca9eba6aaa8"><span class="__cf_email__" data-cfemail="611b040f0815090213000715040512151405080e21060c00080d4f020e0c">[email&#160;protected]</span></a> · Zanith Crafted Studio · All pattern files contain embedded authorship metadata.
+  </div>
+</div>
+
+<br><br>
+
+<!-- ═══════════════════════════════════════════
+     PREMIUM LICENSE
+══════════════════════════════════════════════ -->
+
+<div class="doc" id="doc-premium">
+  <div class="doc-header">
+    <div class="doc-logo">
+      <div class="doc-logo-icon">🌿</div>
+      <div>
+        <div class="doc-logo-name">Zanith Crafted Studio</div>
+        <div class="doc-logo-sub">Commercial License Certificate</div>
+      </div>
+    </div>
+    <div class="doc-title">Commercial Use License — <em>Premium</em></div>
+    <div class="doc-meta">Issued upon upgrade · Valid indefinitely · Non-transferable</div>
+  </div>
+
+  <div class="tier-header">
+    <span class="tier-badge-large premium">✨ Premium</span>
+    <div class="tier-title">Premium Commercial License</div>
+    <div class="tier-price-tag">+$8 / pattern</div>
+  </div>
+
+  <div class="doc-body">
+    <div class="info-row">
+      <div class="info-box">
+        <div class="info-label">Licensee (Buyer)</div>
+        <div class="info-value placeholder">[Your Name / Shop Name]</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">Pattern SKU</div>
+        <div class="info-value placeholder">[PTN-XXX-000]</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">Order Reference</div>
+        <div class="info-value placeholder">[Order #]</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">Upgrade Date</div>
+        <div class="info-value placeholder">[Date of Upgrade]</div>
+      </div>
+    </div>
+
+    <div class="limit-box">
+      <div class="limit-box-icon">📦</div>
+      <div class="limit-box-text"><strong>Production limit: up to 5,000 finished items per year</strong> across all products using this pattern. Wholesale runs up to 500 units per run. Multi-platform and multi-store permitted.</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Permitted Uses</div>
+      <ul class="grant-list">
+        <li>Everything in Basic License, plus:</li>
+        <li><strong>Up to 2,000 finished items per year</strong></li>
+        <li>Multiple Etsy stores / platforms simultaneously</li>
+        <li>Wholesale orders up to 500 units per production run</li>
+        <li>Print shop and studio use</li>
+        <li>Client branding and identity projects</li>
+        <li>Product packaging and labels</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Not Permitted</div>
+      <ul class="grant-list">
+        <li class="no">Reselling or distributing the original PNG file itself</li>
+        <li class="no">Claiming the pattern as your own original design</li>
+        <li class="no">Sub-licensing to other designers or sellers</li>
+        <li class="no">Producing more than 5,000 items/year without upgrading</li>
+        <li class="no">Factory-scale mass production (use Extended for that)</li>
+        <li class="no">Unlimited / factory-scale mass production</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Copyright Notice</div>
+      <p style="font-size:0.84rem;color:var(--text-soft);line-height:1.7">This pattern is an original artwork created by and copyright © Zanith Crafted Studio. All rights reserved. This license grants usage rights only — ownership of the design remains with Zanith Crafted Studio.</p>
+    </div>
+
+    <div class="upsell-box">
+      <div class="upsell-box-text">
+        <h4>Need unlimited production or factory-scale runs?</h4>
+        <p>Upgrade to Extended ($25) for unlimited items, mass production, brand identity packages, and multi-entity use.</p>
+      </div>
+      <a href="/cdn-cgi/l/email-protection#0f756a61667b676c7d6e697b6a6b7c7b7a6b66604f68626e6663216c6062307c7a6d656a6c7b324a777b6a616b6a6b2f43666c6a617c6a2f46617e7a667d76">Upgrade to Extended →</a>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    Questions about your license? Contact us at <a href="/cdn-cgi/l/email-protection#2258474c4b564a41504344564746515657464b4d62454f434b4e0c414d4f"><span class="__cf_email__" data-cfemail="d1abb4bfb8a5b9b2a3b0b7a5b4b5a2a5a4b5b8be91b6bcb0b8bdffb2bebc">[email&#160;protected]</span></a> · Zanith Crafted Studio · All pattern files contain embedded authorship metadata.
+  </div>
+</div>
+
+<br><br>
+
+<!-- ═══════════════════════════════════════════
+     EXTENDED LICENSE
+══════════════════════════════════════════════ -->
+
+<div class="doc" id="doc-extended">
+  <div class="doc-header">
+    <div class="doc-logo">
+      <div class="doc-logo-icon">🌿</div>
+      <div>
+        <div class="doc-logo-name">Zanith Crafted Studio</div>
+        <div class="doc-logo-sub">Commercial License Certificate</div>
+      </div>
+    </div>
+    <div class="doc-title">Commercial Use License — <em>Extended</em></div>
+    <div class="doc-meta">Issued upon purchase · Valid indefinitely · Non-transferable</div>
+  </div>
+
+  <div class="tier-header">
+    <span class="tier-badge-large extended">🏢 Extended</span>
+    <div class="tier-title">Extended Commercial License</div>
+    <div class="tier-price-tag">+$25 / pattern</div>
+  </div>
+
+  <div class="doc-body">
+    <div class="info-row">
+      <div class="info-box">
+        <div class="info-label">Licensee (Business)</div>
+        <div class="info-value placeholder">[Business Name / Entity]</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">Pattern SKU</div>
+        <div class="info-value placeholder">[PTN-XXX-000]</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">Order Reference</div>
+        <div class="info-value placeholder">[Order #]</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">License Date</div>
+        <div class="info-value placeholder">[Date]</div>
+      </div>
+    </div>
+
+    <div class="limit-box" style="background:#e8f5e9;border-color:#a5d6a7;">
+      <div class="limit-box-icon">♾️</div>
+      <div class="limit-box-text"><strong>No production limit.</strong> Unlimited items, unlimited production runs. Includes factory-scale and mass production. Covers multiple business entities under the same ownership.</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Permitted Uses</div>
+      <ul class="grant-list">
+        <li>Everything in Basic and Premium, plus:</li>
+        <li><strong>Unlimited finished items — no annual cap</strong></li>
+        <li>Factory-scale and mass production</li>
+        <li>Brand identity, product packaging, and corporate design</li>
+        <li>Multiple business entities under same ownership</li>
+        <li>Resale as part of design kits or curated bundles</li>
+        <li>Use in print-on-demand white-label services</li>
+        <li>Priority email support &amp; official invoice provided</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Not Permitted (even with Extended)</div>
+      <ul class="grant-list">
+        <li class="no">Reselling or distributing the original PNG file as a standalone product</li>
+        <li class="no">Claiming the pattern as your own original artwork</li>
+        <li class="no">Sub-licensing to unaffiliated third parties</li>
+        <li class="no">Registering the pattern as a trademark</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Copyright Notice</div>
+      <p style="font-size:0.84rem;color:var(--text-soft);line-height:1.7">This pattern is an original artwork created by and copyright © 
