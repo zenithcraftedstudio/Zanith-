@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Zanith Crafted Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1e2d4a;--gold:#c8974a;--cream:#faf7f2;--warm:#f3ede3;--white:#fff;--border:#e2ddd6;--text:#1a2332;--text-soft:#5a6a7e;--muted:#8a9bb5;--green:#2e7d52;--shadow:0 2px 16px rgba(30,45,74,0.1);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Instrument Sans',sans-serif;background:var(--cream);color:var(--text);}
+
+/* NAV */
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:var(--shadow);}
+.nav-left{display:flex;align-items:center;gap:0.75rem;}
+.nav-logo{font-family:'Fraunces',serif;font-size:1.05rem;color:var(--navy);text-decoration:none;display:flex;align-items:center;gap:0.4rem;}
+.nav-right{display:flex;align-items:center;gap:0.5rem;}
+.lang-btn{padding:0.3rem 0.75rem;border:1.5px solid var(--border);border-radius:20px;background:none;font-size:0.78rem;font-weight:600;cursor:pointer;font-family:inherit;color:var(--text-soft);transition:all 0.15s;}
+.lang-btn.active{background:var(--navy);border-color:var(--navy);color:white;}
+.back-btn{font-size:0.82rem;color:var(--text-soft);text-decoration:none;border:1px solid var(--border);padding:0.35rem 0.85rem;border-radius:20px;}
+.back-btn:hover{color:var(--navy);border-color:var(--navy);}
+
+/* HERO */
+.hero{background:var(--navy);padding:3rem 1.5rem 2.5rem;text-align:center;}
+.hero-label{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--gold);margin-bottom:0.75rem;}
+.hero-title{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:400;color:white;margin-bottom:1.25rem;}
+.hero-title em{color:var(--gold);font-style:italic;}
+.search-wrap{max-width:480px;margin:0 auto;position:relative;}
+.search-wrap input{width:100%;padding:0.8rem 1rem 0.8rem 2.5rem;border-radius:30px;border:none;font-family:inherit;font-size:0.9rem;background:rgba(255,255,255,0.12);color:white;outline:none;}
+.search-wrap input::placeholder{color:rgba(255,255,255,0.5);}
+.search-wrap input:focus{background:rgba(255,255,255,0.18);}
+.search-icon{position:absolute;left:0.85rem;top:50%;transform:translateY(-50%);font-size:0.85rem;opacity:0.6;}
+
+/* FILTER PILLS */
+.filter-bar{max-width:780px;margin:2rem auto 0;padding:0 1.5rem;display:flex;flex-wrap:wrap;gap:0.5rem;}
+.fpill{padding:0.4rem 1rem;border:1.5px solid var(--border);border-radius:20px;font-size:0.78rem;background:var(--white);color:var(--text-soft);cursor:pointer;font-family:inherit;transition:all 0.15s;}
+.fpill:hover,.fpill.active{background:var(--navy);border-color:var(--navy);color:white;}
+
+/* MAIN */
+.main{max-width:780px;margin:0 auto;padding:1.5rem 1.5rem 4rem;}
+
+/* FAQ ACCORDION — luôn hiện, không ẩn theo group */
+.faq-section{margin-bottom:2.5rem;}
+.faq-section-title{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:2px solid var(--warm);}
+.faq-item{border:1px solid var(--border);border-radius:10px;margin-bottom:0.5rem;background:var(--white);overflow:hidden;}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:1rem 1.1rem;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;font-family:inherit;font-size:0.88rem;font-weight:600;color:var(--text);line-height:1.45;}
+.faq-q:hover{background:var(--warm);}
+.faq-arrow{flex-shrink:0;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:0.68rem;color:var(--muted);transition:all 0.25s;margin-top:1px;}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease,padding 0.3s;font-size:0.84rem;color:var(--text-soft);line-height:1.75;padding:0 1.1rem;}
+.faq-item.open .faq-arrow{transform:rotate(180deg);background:var(--navy);border-color:var(--navy);color:white;}
+.faq-item.open .faq-a{max-height:600px;padding:0 1.1rem 1rem;}
+.no-results{text-align:center;padding:3rem;color:var(--muted);font-size:0.875rem;display:none;}
+
+/* CONTACT */
+.contact-section{background:var(--navy);border-radius:16px;padding:2rem;text-align:center;margin-top:1rem;}
+.contact-section h3{font-family:'Fraunces',serif;font-size:1.2rem;color:white;margin-bottom:0.5rem;}
+.contact-section p{font-size:0.84rem;color:rgba(255,255,255,0.65);margin-bottom:1.25rem;}
+.contact-btns{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;}
+.btn-gold{background:var(--gold);color:white;padding:0.65rem 1.4rem;border-radius:10px;text-decoration:none;font-size:0.85rem;font-weight:600;}
+.btn-outline-white{border:1.5px solid rgba(255,255,255,0.3);color:white;padding:0.65rem 1.4rem;border-radius:10px;text-decoration:none;font-size:0.85rem;}
+
+@media(max-width:600px){.hero-title{font-size:1.6rem;}.filter-bar{gap:0.4rem;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="nav-logo">🌿 Zanith Crafted Studio</a>
+  </div>
+  <div class="nav-right">
+    <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" id="btnVI" onclick="setLang('vi')">VI</button>
+    <a href="index.html" class="back-btn">← <span class="en">Back to Shop</span><span class="vi" style="display:none">Về Shop</span></a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Help Center</div>
+  <h1 class="hero-title">
+    <span class="en">Frequently Asked <em>Questions</em></span>
+    <span class="vi" style="display:none">Câu hỏi <em>thường gặp</em></span>
+  </h1>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput"
+      placeholder="Search questions... / Tìm câu hỏi..."
+      oninput="filterFAQ()">
+  </div>
+</div>
+
+<!-- Filter pills -->
+<div class="filter-bar">
+  <button class="fpill active" data-cat="all" onclick="filterCat('all')">
+    <span class="en">All</span><span class="vi" style="display:none">Tất cả</span>
+  </button>
+  <button class="fpill" data-cat="download" onclick="filterCat('download')">
+    📥 <span class="en">Downloads</span><span class="vi" style="display:none">Tải file</span>
+  </button>
+  <button class="fpill" data-cat="license" onclick="filterCat('license')">
+    📄 <span class="en">Licensing</span><span class="vi" style="display:none">Bản quyền</span>
+  </button>
+  <button class="fpill" data-cat="payment" onclick="filterCat('payment')">
+    💳 <span class="en">Payment</span><span class="vi" style="display:none">Thanh toán</span>
+  </button>
+  <button class="fpill" data-cat="product" onclick="filterCat('product')">
+    🎨 <span class="en">Products</span><span class="vi" style="display:none">Sản phẩm</span>
+  </button>
+  <button class="fpill" data-cat="custom" onclick="filterCat('custom')">
+    ✏️ <span class="en">Custom</span><span class="vi" style="display:none">Đặt riêng</span>
+  </button>
+</div>
+
+<main class="main">
+  <div id="faqList"></div>
+  <div class="no-results" id="noResults">
+    <span class="en">No results found. Try a different keyword.</span>
+    <span class="vi" style="display:none">Không tìm thấy. Thử từ khóa khác.</span>
+  </div>
+
+  <div class="contact-section">
+    <h3><span class="en">Still need help?</span><span class="vi" style="display:none">Vẫn cần hỗ trợ?</span></h3>
+    <p><span class="en">We reply within a few hours — usually much faster.</span><span class="vi" style="display:none">Chúng tôi trả lời trong vài giờ — thường nhanh hơn nhiều.</span></p>
+    <div class="contact-btns">
+      <a href="#" class="btn-gold" onclick="if(window.Tawk_API)Tawk_API.toggle();return false;">
+        💬 <span class="en">Live Chat</span><span class="vi" style="display:none">Chat trực tiếp</span>
+      </a>
+      <a href="mailto:zenithcraftedstudio@gmail.com" class="btn-outline-white">
+        ✉ zenithcraftedstudio@gmail.com
+      </a>
+    </div>
+  </div>
+</main>
+
+<script>
+var FAQ = [
+  { cat:'download',
+    en_q:'What file formats will I receive?',
+    vi_q:'Tôi sẽ nhận được file định dạng gì?',
+    en_a:'All patterns are delivered as <strong>seamless PNG at 300 DPI, 3600×3600px</strong> — ready for Printify, Printful, Spoonflower, Adobe, and Procreate.',
+    vi_a:'Tất cả họa tiết giao dưới dạng <strong>PNG liền mạch 300 DPI, 3600×3600px</strong> — dùng ngay trên Printify, Printful, Spoonflower, Adobe, Procreate.' },
+
+  { cat:'download',
+    en_q:'How do I download my files after purchase?',
+    vi_q:'Làm sao tải file sau khi mua?',
+    en_a:'After payment you will receive a confirmation email with your download link within <strong>15–30 minutes</strong>. Files are delivered straight to your inbox — no account needed.',
+    vi_a:'Sau khi thanh toán, bạn nhận email kèm link tải trong vòng <strong>15–30 phút</strong>. File giao thẳng vào hộp thư — không cần tạo tài khoản.' },
+
+  { cat:'download',
+    en_q:'My download link is not working. What should I do?',
+    vi_q:'Link tải không hoạt động, phải làm gì?',
+    en_a:'Check your spam/junk folder first. If the link has expired or is broken, email <a href="mailto:zenithcraftedstudio@gmail.com">zenithcraftedstudio@gmail.com</a> with your order number and we will resend immediately.',
+    vi_a:'Kiểm tra thư mục spam trước. Nếu link hết hạn hoặc bị lỗi, email <a href="mailto:zenithcraftedstudio@gmail.com">zenithcraftedstudio@gmail.com</a> kèm mã đơn hàng — chúng tôi gửi lại ngay.' },
+
+  { cat:'license',
+    en_q:'What commercial license is included with my purchase?',
+    vi_q:'Giấy phép thương mại nào được bao gồm khi mua?',
+    en_a:'Every purchase includes a <strong>Basic Commercial License</strong> — up to 500 end products sold or printed. Upgrade to Standard (2,000 units) or Extended (unlimited) directly in the product listing.',
+    vi_a:'Mỗi lần mua bao gồm <strong>Giấy phép Cơ bản</strong> — tối đa 500 sản phẩm bán/in. Nâng cấp lên Standard (2.000 sản phẩm) hoặc Extended (không giới hạn) ngay trong trang sản phẩm.' },
+
+  { cat:'license',
+    en_q:'Can I sell products made with these patterns on Etsy or Shopee?',
+    vi_q:'Có thể dùng họa tiết bán hàng trên Etsy, Shopee không?',
+    en_a:'Absolutely — that is exactly what these patterns are made for! Sell finished products (t-shirts, mugs, fabric, prints) featuring the pattern on any marketplace. You just cannot resell the pattern PNG file itself.',
+    vi_a:'Hoàn toàn được — đó chính là mục đích! Bán sản phẩm hoàn chỉnh (áo, cốc, vải, tranh in) trên bất kỳ sàn nào. Chỉ cần không bán lại file PNG gốc.' },
+
+  { cat:'license',
+    en_q:'How many products can I make with one pattern?',
+    vi_q:'Mua 1 họa tiết được làm bao nhiêu sản phẩm?',
+    en_a:'<strong>Basic (included free):</strong> up to 500 end products. <strong>Standard (+$8):</strong> up to 2,000. <strong>Extended (+$25):</strong> unlimited. You can add a license upgrade directly from the product modal.',
+    vi_a:'<strong>Basic (miễn phí):</strong> tối đa 500 sản phẩm. <strong>Standard (+$8):</strong> tối đa 2.000. <strong>Extended (+$25):</strong> không giới hạn. Thêm nâng cấp ngay trong modal sản phẩm.' },
+
+  { cat:'payment',
+    en_q:'How do I pay? What payment methods are accepted?',
+    vi_q:'Thanh toán bằng gì? Chấp nhận hình thức nào?',
+    en_a:'We accept <strong>bank transfer via Techcombank</strong>. After adding to cart, go to Checkout — the bank details are shown automatically. International card payments are coming soon.',
+    vi_a:'Chúng tôi nhận <strong>chuyển khoản qua Techcombank</strong>. Sau khi thêm vào giỏ, vào Checkout — thông tin tài khoản hiện tự động. Thanh toán thẻ quốc tế sẽ sớm ra mắt.' },
+
+  { cat:'payment',
+    en_q:'Do you offer refunds?',
+    vi_q:'Có hoàn tiền không?',
+    en_a:'Because these are instant digital downloads, we cannot refund after the file has been sent. However if you experience any technical issue (corrupted file, wrong item), contact us immediately and we will resend, replace, or fully refund.',
+    vi_a:'Vì đây là file kỹ thuật số giao ngay, chúng tôi không hoàn tiền sau khi gửi file. Tuy nhiên nếu có vấn đề kỹ thuật (file lỗi, sai sản phẩm), liên hệ ngay để được gửi lại, đổi hoặc hoàn tiền đầy đủ.' },
+
+  { cat:'payment',
+    en_q:'How do I use a discount code?',
+    vi_q:'Cách dùng mã giảm giá?',
+    en_a:'At checkout, enter your code in the <strong>Discount Code</strong> field and click Apply. The discount is calculated automatically on your total. First order code: <strong>ZANITH20</strong> — 20% off.',
+    vi_a:'Ở trang thanh toán, nhập mã vào ô <strong>Mã giảm giá</strong> và nhấn Áp dụng. Chiết khấu tự tính. Mã đơn đầu tiên: <strong>ZANITH20</strong> — giảm 20%.' },
+
+  { cat:'product',
+    en_q:'Are the patterns truly seamless?',
+    vi_q:'Họa tiết có thực sự liền mạch không?',
+    en_a:'Yes — every pattern is tested as a true seamless tile. You can repeat them infinitely in any direction with no visible seams, gaps, or breaks.',
+    vi_a:'Có — mọi họa tiết đều được kiểm tra là tile liền mạch thực sự. Lặp vô hạn theo mọi hướng, không có đường nối hay khoảng trống.' },
+
+  { cat:'product',
+    en_q:'What resolution are the files? Are they print-ready?',
+    vi_q:'File có độ phân giải bao nhiêu? Dùng in được không?',
+    en_a:'All files are <strong>300 DPI, 3600×3600px PNG</strong> — professional print quality. Compatible with Printify, Printful, Spoonflower, Zazzle, Redbubble, and all major POD platforms.',
+    vi_a:'Tất cả file <strong>300 DPI, 3600×3600px PNG</strong> — chất lượng in chuyên nghiệp. Tương thích với Printify, Printful, Spoonflower, Zazzle, Redbubble và mọi nền tảng POD lớn.' },
+
+  { cat:'custom',
+    en_q:'Can I request a custom color variation of an existing pattern?',
+    vi_q:'Có thể đặt biến thể màu tùy chỉnh không?',
+    en_a:'Yes! Color recoloring starts from <strong>$5</strong>. Email or chat with your color requirements and we will provide a quote.',
+    vi_a:'Có! Đổi màu từ <strong>$5</strong>. Email hoặc chat với yêu cầu màu sắc để được báo giá.' },
+
+  { cat:'custom',
+    en_q:'Do you create fully custom patterns from scratch?',
+    vi_q:'Có thiết kế họa tiết hoàn toàn tùy chỉnh không?',
+    en_a:'Yes! Custom pattern design starts from <strong>$25</strong> depending on complexity. Includes 2 revision rounds, delivered as seamless PNG with full commercial license.',
+    vi_a:'Có! Thiết kế tùy chỉnh từ <strong>$25</strong> tùy độ phức tạp. Bao gồm 2 lần chỉnh sửa, giao file PNG liền mạch kèm giấy phép thương mại đầy đủ.' }
+];
+
+var SECTIONS = [
+  { id:'download', icon:'📥', en:'Downloads & Files',  vi:'Tải file & Giao hàng' },
+  { id:'license',  icon:'📄', en:'Licensing & Usage',  vi:'Bản quyền & Sử dụng' },
+  { id:'payment',  icon:'💳', en:'Payment & Refunds',  vi:'Thanh toán & Hoàn tiền' },
+  { id:'product',  icon:'🎨', en:'About the Products', vi:'Về sản phẩm' },
+  { id:'custom',   icon:'✏️', en:'Custom Orders',      vi:'Đặt hàng riêng' }
+];
+
+var currentLang = localStorage.getItem('zanith_lang') || 'en';
+var currentCat  = 'all';
+
+function setLang(l) {
+  currentLang = l;
+  localStorage.setItem('zanith_lang', l);
+  document.getElementById('btnEN').classList.toggle('active', l === 'en');
+  document.getElementById('btnVI').classList.toggle('active', l === 'vi');
+  document.querySelectorAll('.en').forEach(function(el){ el.style.display = l==='en' ? '' : 'none'; });
+  document.querySelectorAll('.vi').forEach(function(el){ el.style.display = l==='vi' ? '' : 'none'; });
+  render();
+}
+
+function filterCat(cat) {
+  currentCat = cat;
+  document.querySelectorAll('.fpill').forEach(function(p){
+    p.classList.toggle('active', p.dataset.cat === cat);
+  });
+  document.getElementById('searchInput').value = '';
+  render();
+}
+
+function filterFAQ() {
+  render();
+}
+
+function render() {
+  var list    = document.getElementById('faqList');
+  var noRes   = document.getElementById('noResults');
+  var isVI    = currentLang === 'vi';
+  var q       = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+
+  // Filter FAQ items
+  var filtered = FAQ.filter(function(f) {
+    if (currentCat !== 'all' && f.cat !== currentCat) return false;
+    if (q) {
+      var text = (f.en_q + ' ' + f.vi_q + ' ' + f.en_a + ' ' + f.vi_a).toLowerCase();
+      return text.includes(q);
+    }
+    return true;
+  });
+
+  if (!filtered.length) {
+    list.innerHTML = '';
+    noRes.style.display = 'block';
+    return;
+  }
+  noRes.style.display = 'none';
+
+  // Group by section (only if showing all cats and no search)
+  var html = '';
+  if (currentCat === 'all' && !q) {
+    SECTIONS.forEach(function(sec) {
+      var items = filtered.filter(function(f){ return f.cat === sec.id; });
+      if (!items.length) return;
+      html += '<div class="faq-section">';
+      html += '<div class="faq-section-title">' + sec.icon + ' ' + (isVI ? sec.vi : sec.en) + '</div>';
+      items.forEach(function(f, i) {
+        html += buildItem(f, sec.id + '-' + i, isVI);
+      });
+      html += '</div>';
+    });
+  } else {
+    filtered.forEach(function(f, i) {
+      html += buildItem(f, 'fi-' + i, isVI);
+    });
+  }
+
+  list.innerHTML = html;
+}
+
+function buildItem(f, id, isVI) {
+  var q = isVI ? f.vi_q : f.en_q;
+  var a = isVI ? f.vi_a : f.en_a;
+  return '<div class="faq-item" id="fitem-' + id + '">'
+    + '<button class="faq-q" onclick="toggleItem(\'fitem-' + id + '\')">'
+    + '<span>' + q + '</span>'
+    + '<span class="faq-arrow">▾</span>'
+    + '</button>'
+    + '<div class="faq-a">' + a + '</div>'
+    + '</div>';
+}
+
+function toggleItem(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var wasOpen = el.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-item.open').forEach(function(e){ e.classList.remove('open'); });
+  if (!wasOpen) el.classList.add('open');
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', function() {
+  setLang(currentLang);
+  // Hash jump to category
+  var hash = location.hash.replace('#','');
+  if (hash && ['download','license','payment','product','custom'].includes(hash)) {
+    filterCat(hash);
+  }
+});
+</script>
+</body>
+</html>
