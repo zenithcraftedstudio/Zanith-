@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Zanith Crafted Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1e2d4a;--navy-light:#2a3f63;--gold:#c8974a;--cream:#faf7f2;--warm:#f3ede3;--white:#fff;--border:#e2ddd6;--text:#1a2332;--text-soft:#5a6a7e;--muted:#8a9bb5;--green:#2e7d52;--red:#c0392b;--shadow:0 2px 16px rgba(30,45,74,0.1);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Instrument Sans',sans-serif;background:var(--cream);color:var(--text);}
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:var(--shadow);}
+.nav-logo{font-family:'Fraunces',serif;font-size:1.1rem;color:var(--navy);text-decoration:none;}
+.nav-back{font-size:0.85rem;color:var(--text-soft);text-decoration:none;}
+.nav-back:hover{color:var(--navy);}
+.wrap{max-width:960px;margin:2rem auto;padding:0 1.5rem;display:grid;grid-template-columns:1fr 380px;gap:2rem;align-items:start;}
+/* Tablet */
+@media(max-width:700px){
+  .wrap{grid-template-columns:1fr; padding:0 1rem;}
+  .fr{grid-template-columns:1fr;}
+}
+/* Phone */
+@media(max-width:480px){
+  nav{padding:0.7rem 0.85rem;}
+  .wrap{margin:1rem auto; padding:0 0.75rem; gap:1.25rem;}
+  .fr{grid-template-columns:1fr;}
+  .card{border-radius:10px;}
+  .ch{padding:0.9rem 1rem;}
+  .cb{padding:1rem;}
+  .bf .ll{font-size:0.72rem;}
+  .bf .vv{font-size:0.82rem;}
+  .btn-c{padding:0.8rem; font-size:0.92rem;}
+  .tots{padding:0.75rem 1rem;}
+  .suc{padding:2rem 1rem; margin:1.5rem auto;}
+  .suc h2{font-size:1.4rem;}
+}
+.card{background:var(--white);border-radius:14px;border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:1.25rem;overflow:hidden;}
+.ch{padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.6rem;}
+.ch h3{font-family:'Fraunces',serif;font-size:1rem;font-weight:500;}
+.sn{width:24px;height:24px;background:var(--navy);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;flex-shrink:0;}
+.cb{padding:1.25rem 1.5rem;}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.fr.full{grid-template-columns:1fr;}
+.fg{display:flex;flex-direction:column;gap:0.35rem;}
+.fg label{font-size:0.75rem;font-weight:600;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.05em;}
+.fg input,.fg textarea,.fg select{border:1px solid var(--border);background:var(--warm);border-radius:8px;padding:0.6rem 0.85rem;font-family:'Instrument Sans',sans-serif;font-size:0.875rem;color:var(--text);outline:none;transition:border 0.2s;width:100%;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--navy);background:white;}
+.fg textarea{resize:vertical;min-height:80px;}
+.req{color:var(--red);}
+/* Cart items */
+.ci{display:flex;gap:1rem;padding:0.85rem 0;border-bottom:1px solid var(--border);}
+.ci:last-child{border-bottom:none;}
+.ci-img{width:64px;height:64px;border-radius:8px;object-fit:cover;background:var(--warm);flex-shrink:0;border:1px solid var(--border);}
+.ci-info{flex:1;min-width:0;}
+.ci-title{font-size:0.85rem;font-weight:500;line-height:1.3;margin-bottom:0.2rem;}
+.ci-var{font-size:0.75rem;color:var(--text-soft);}
+.ci-lic{font-size:0.68rem;background:#e8f4e8;color:var(--green);padding:1px 7px;border-radius:8px;display:inline-block;margin-top:3px;}
+.ci-qr{display:flex;align-items:center;gap:0.5rem;margin-top:0.4rem;}
+.qb{width:24px;height:24px;border:1px solid var(--border);background:var(--warm);border-radius:6px;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;justify-content:center;}
+.qb:hover{background:var(--border);}
+.qn{font-size:0.85rem;font-weight:600;min-width:20px;text-align:center;}
+.rm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.78rem;margin-left:auto;}
+.rm:hover{color:var(--red);}
+.ci-price{font-weight:700;color:var(--navy);font-size:0.9rem;white-space:nowrap;}
+/* Totals */
+.tots{padding:1rem 1.5rem;}
+.tr{display:flex;justify-content:space-between;font-size:0.875rem;padding:0.3rem 0;}
+.tr.main{font-size:1rem;font-weight:700;color:var(--navy);padding-top:0.75rem;border-top:2px solid var(--border);margin-top:0.5rem;}
+.tr .lb{color:var(--text-soft);}
+/* Discount code */
+.code-row{display:flex;gap:0.5rem;margin-bottom:0.75rem;}
+.code-row input{flex:1;border:1px solid var(--border);background:var(--warm);border-radius:8px;padding:0.55rem 0.85rem;font-family:inherit;font-size:0.85rem;outline:none;}
+.code-row input:focus{border-color:var(--navy);background:white;}
+.code-apply-btn{background:var(--navy);color:white;border:none;padding:0.55rem 1rem;border-radius:8px;font-family:inherit;font-size:0.82rem;font-weight:600;cursor:pointer;white-space:nowrap;}
+.code-apply-btn:hover{background:var(--navy-light);}
+.code-status{font-size:0.78rem;margin-bottom:0.5rem;}
+.code-ok{color:var(--green);}
+.code-err{color:var(--red);}
+/* Bank box */
+.bank-box{background:linear-gradient(135deg,#e8f4e8,#f0f9f0);border:1px solid #a8d5a8;border-radius:12px;padding:1.25rem;}
+.bl{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;}
+.blogo{background:#e31837;color:white;font-weight:800;font-size:0.75rem;padding:0.3rem 0.6rem;border-radius:6px;}
+.bname{font-weight:600;}
+.bf{display:flex;justify-content:space-between;align-items:center;padding:0.55rem 0;border-bottom:1px solid rgba(0,0,0,0.07);}
+.bf:last-child{border-bottom:none;}
+.bf .ll{font-size:0.78rem;color:var(--text-soft);}
+.bf .vv{font-size:0.9rem;font-weight:700;display:flex;align-items:center;gap:0.4rem;}
+.cpb{background:var(--navy);color:white;border:none;padding:0.18rem 0.55rem;border-radius:5px;font-size:0.7rem;cursor:pointer;}
+.cpb:hover{background:var(--navy-light);}
+.bnote{margin-top:0.85rem;background:rgba(255,255,255,0.75);border-radius:8px;padding:0.75rem;font-size:0.8rem;color:var(--text-soft);line-height:1.65;}
+.bnote strong{color:var(--navy);}
+/* QR code hint */
+.qr-hint{text-align:center;margin-top:0.75rem;padding:0.75rem;background:rgba(255,255,255,0.6);border-radius:8px;font-size:0.78rem;color:var(--text-soft);}
+/* Buttons */
+.btn-c{width:100%;background:var(--navy);color:white;border:none;padding:0.9rem;border-radius:10px;font-family:'Instrument Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.2s;margin-top:1rem;}
+.btn-c:hover{background:var(--navy-light);}
+.btn-c:disabled{background:var(--muted);cursor:not-allowed;}
+.btn-c.green{background:var(--green);}
+.btn-c.green:hover{background:#1b5e20;}
+.sec-note{text-align:center;font-size:0.75rem;color:var(--muted);margin-top:0.6rem;}
+.empty-c{text-align:center;padding:2.5rem;color:var(--text-soft);}
+/* Step B — confirm paid */
+.step-b-wrap{display:none;}
+.step-b-header{background:var(--navy);color:white;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1rem;text-align:center;}
+.step-b-header h3{font-family:'Fraunces',serif;font-size:1.1rem;margin-bottom:0.3rem;}
+.step-b-header p{font-size:0.8rem;opacity:0.75;}
+/* Success */
+.suc{display:none;text-align:center;padding:3rem 1.5rem;max-width:560px;margin:3rem auto;}
+.suc.show{display:block;}
+.suc-icon{font-size:4rem;margin-bottom:1rem;}
+.suc h2{font-family:'Fraunces',serif;font-size:1.8rem;margin-bottom:0.75rem;color:var(--navy);}
+.suc p{color:var(--text-soft);line-height:1.7;margin-bottom:1.25rem;}
+.oref{background:var(--warm);border:2px solid var(--border);border-radius:10px;padding:1rem;font-family:monospace;font-size:1.1rem;color:var(--navy);font-weight:700;margin:1rem 0;}
+.btn-bk{display:inline-block;background:var(--navy);color:white;text-decoration:none;padding:0.75rem 2rem;border-radius:10px;font-size:0.9rem;font-weight:600;margin-top:1rem;}
+/* Toast */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;background:var(--navy);color:white;padding:0.7rem 1.2rem;border-radius:10px;font-size:0.84rem;box-shadow:0 4px 20px rgba(0,0,0,0.2);transform:translateY(80px);transition:transform 0.3s;max-width:300px;}
+.toast.show{transform:translateY(0);}
+.toast.ok{background:var(--green);}
+/* VND display */
+.vnd-note{font-size:0.72rem;color:var(--text-soft);margin-top:2px;}
+/* Trust badges */
+.trust-row{display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;margin-top:0.75rem;}
+.trust-badge{font-size:0.72rem;color:var(--muted);display:flex;align-items:center;gap:4px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">🌿 Zanith Crafted Studio</a>
+  <a href="index.html" class="nav-back">← Tiếp tục mua / Continue Shopping</a>
+</nav>
+
+<!-- SUCCESS PAGE -->
+<div class="suc" id="sucPage">
+  <div class="suc-icon">✅</div>
+  <h2>Cảm ơn bạn! / Thank You!</h2>
+  <p>Đơn hàng của bạn đã được ghi nhận. Chúng tôi sẽ xác nhận thanh toán và gửi file trong vòng <strong>15–30 phút</strong> qua email.<br><br>
+  Your order has been received. We'll verify your payment and send the files within <strong>15–30 minutes</strong> via email.</p>
+  <div class="oref" id="sucRef">ZCS-XXXXXXXX</div>
+  <p style="font-size:0.82rem">Lưu mã đơn hàng để tra cứu / Save this order reference.</p>
+  <a href="index.html" class="btn-bk">← Về cửa hàng / Back to Shop</a>
+</div>
+
+<!-- MAIN CHECKOUT -->
+<div id="mainWrap">
+<div class="wrap">
+
+  <!-- LEFT COLUMN -->
+  <div>
+
+    <!-- STEP A: Contact + Discount + Notes -->
+    <div id="stepA">
+
+      <div class="card">
+        <div class="ch"><div class="sn">1</div><h3>Thông tin liên hệ / Contact</h3></div>
+        <div class="cb">
+          <div class="fr">
+            <div class="fg">
+              <label>Họ tên / Full Name <span class="req">*</span></label>
+              <input id="cName" placeholder="Nguyễn Văn A...">
+            </div>
+            <div class="fg">
+              <label>Email <span class="req">*</span></label>
+              <input id="cEmail" type="email" placeholder="your@email.com">
+            </div>
+          </div>
+          <div class="fr full">
+            <div class="fg">
+              <label>Số điện thoại / Phone (optional)</label>
+              <input id="cPhone" placeholder="0901 234 567">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><div class="sn">2</div><h3>Mã giảm giá / Discount Code</h3></div>
+        <div class="cb">
+          <div class="code-row">
+            <input id="codeInput" placeholder="Nhập mã giảm giá / Enter promo code" oninput="this.value=this.value.toUpperCase()">
+            <button class="code-apply-btn" onclick="applyCode()">Áp dụng / Apply</button>
+          </div>
+          <div class="code-status" id="codeStatus"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><div class="sn">3</div><h3>Ghi chú đơn hàng / Order Notes</h3></div>
+        <div class="cb">
+          <div class="fg">
+            <textarea id="oNote" placeholder="Yêu cầu đặc biệt, câu hỏi... / Special requests, questions..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-c" onclick="placeOrder()">
+        Tiến hành thanh toán / Proceed to Payment →
+      </button>
+    </div>
+
+    <!-- STEP B: Bank transfer confirmation -->
+    <div class="step-b-wrap" id="stepB">
+      <div class="step-b-header">
+        <h3>📋 Thông tin chuyển khoản / Bank Transfer Details</h3>
+        <p>Vui lòng chuyển khoản rồi nhấn xác nhận bên dưới</p>
+      </div>
+
+      <div class="card">
+        <div class="cb">
+          <div class="bank-box">
+            <div class="bl">
+              <div class="blogo">TCB</div>
+              <div class="bname">Techcombank</div>
+              <span style="font-size:0.75rem;color:var(--green);margin-left:auto">✅ Verified</span>
+            </div>
+            <div class="bf">
+              <span class="ll">Số tài khoản / Account No.</span>
+              <span class="vv">1903 8843 1140 14 <button class="cpb" onclick="cp('19038843114014','Số tài khoản')">Copy</button></span>
+            </div>
+            <div class="bf">
+              <span class="ll">Tên tài khoản / Account Name</span>
+              <span class="vv">CHU THI LIEN</span>
+            </div>
+            <div class="bf">
+              <span class="ll">Số tiền / Amount</span>
+              <span class="vv" id="txAmt" style="color:var(--green)">—</span>
+            </div>
+            <div class="bf">
+              <span class="ll">Nội dung CK / Transfer Note</span>
+              <span class="vv" style="font-size:0.82rem">
+                <span id="txNote">ZANITH ORDER</span>
+                <button class="cpb" onclick="cpNote()">Copy</button>
+              </span>
+            </div>
+            <div class="bnote">
+              👇 Chuyển khoản theo thông tin trên → nhấn <strong>"Tôi đã chuyển khoản"</strong><br>
+              Transfer → then click <strong>"I've Completed Payment"</strong>
+            </div>
+            <div class="qr-hint">💡 Mở app ngân hàng → Chuyển tiền → Nhập số TK → Nhập đúng nội dung để tự động xác nhận</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-c green" id="paidBtn" onclick="confirmPaid()">
+        ✅ Tôi đã chuyển khoản / I've Completed Payment
+      </button>
+      <button class="btn-c" style="background:none;color:var(--text-soft);border:1px solid var(--border);margin-top:0.5rem" onclick="document.getElementById('stepA').style.display='block';document.getElementById('stepB').style.display='none'">
+        ← Quay lại / Back
+      </button>
+      <p class="sec-note" style="margin-top:0.75rem">🔒 File sẽ được gửi qua email sau khi xác nhận thanh toán<br>Files sent via email after payment verification</p>
+    </div>
+
+  </div>
+
+  <!-- RIGHT COLUMN: Order Summary -->
+  <div>
+    <div class="card">
+      <div class="ch"><h3>🛒 Đơn hàng / Order Summary</h3></div>
+      <div id="itemsList" style="padding:0 1.5rem"></div>
+      <div class="tots" id="totsWrap" style="display:none">
+        <div class="tr" id="flashDiscRow" style="display:none;color:var(--red)">
+          <span class="lb" id="flashDiscLabel">🔥 Flash Sale</span>
+          <span id="flashDiscAmt"></span>
+        </div>
+        <div class="tr" id="codeDiscRow" style="display:none;color:var(--green)">
+          <span class="lb" id="codeDiscLabel">🏷️ Promo Code</span>
+          <span id="codeDiscAmt"></span>
+        </div>
+        <div class="tr"><span class="lb">Subtotal</span><span id="subAmt"></span></div>
+        <div class="tr"><span class="lb">Giao hàng / Delivery</span><span style="color:var(--green)">Free (Digital)</span></div>
+        <div class="tr main"><span>Tổng cộng / Total</span><span id="totAmt"></span></div>
+        <div class="vnd-note" id="vndNote"></div>
+      </div>
+      <div style="padding:0 1.5rem 1.5rem" id="btnWrap" style="display:none">
+        <div class="trust-row">
+          <span class="trust-badge">🔒 Secure</span>
+          <span class="trust-badge">📥 Instant Download</span>
+          <span class="trust-badge">✉ Email Delivery</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- What happens next -->
+    <div class="card">
+      <div class="ch"><h3>📦 Sau khi thanh toán / What Happens Next</h3></div>
+      <div class="cb" style="font-size:0.82rem;color:var(--text-soft);line-height:2.1">
+        <div>✅ <strong>Bước 1:</strong> Chuyển khoản theo thông tin trên</div>
+        <div>✅ <strong>Bước 2:</strong> Nhấn "Tôi đã chuyển khoản"</div>
+        <div>✅ <strong>Bước 3:</strong> Nhận xác nhận + link tải qua email trong 15–30 phút</div>
+        <div style="margin-top:0.5rem;font-size:0.75rem">❓ Hỗ trợ: <a href="mailto:zenithcraftedstudio@gmail.com" style="color:var(--navy)">zenithcraftedstudio@gmail.com</a></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Load campaign for discount codes + flash label ──
+var CAMPAIGN = (function(){
+  try { var s = JSON.parse(localStorage.getItem('zanith_campaign')||'null'); if(s) return s; } catch(e){}
+  return { flashActive:false, flashEnd:null, flashPct:0, discountCodes:[{code:'ZANITH20',pct:20,label:'20% off first order'}], bundleActive:true, bundleQty:3 };
+})();
+
+var USD_TO_VND = 25400; // tỷ giá tham khảo
+
+var cart = [];
+try { cart = JSON.parse(localStorage.getItem('zanith_cart')||'[]'); } catch(e){}
+
+var appliedCode = null;   // { code, pct, label }
+var flashPct    = 0;      // % flash đang active
+
+function getFlashPct() {
+  if (!CAMPAIGN.flashActive || !CAMPAIGN.flashEnd) return 0;
+  if (new Date(CAMPAIGN.flashEnd) <= new Date()) return 0;
+  return parseFloat(CAMPAIGN.flashPct) || 0;
+}
+
+function renderCart() {
+  var list = document.getElementById('itemsList');
+  if (!cart.length) {
+    list.innerHTML = '<div class="empty-c">🛒 Giỏ hàng trống / Cart is empty.<br><a href="index.html" style="color:var(--navy)">← Về cửa hàng</a></div>';
+    document.getElementById('totsWrap').style.display = 'none';
+    document.getElementById('btnWrap').style.display = 'none';
+    return;
+  }
+
+  list.innerHTML = cart.map(function(it, i) {
+    var licBadge = it.sku && it.sku.includes('-LIC-') ? '' :
+      '<span class="ci-lic">Basic License incl.</span>';
+    return '<div class="ci">'
+      + '<img class="ci-img" src="' + (it.image||'') + '" onerror="this.style.background=\'#f3ede3\';this.removeAttribute(\'src\')">'
+      + '<div class="ci-info">'
+      + '<div class="ci-title">' + it.title + '</div>'
+      + (it.variant ? '<div class="ci-var">' + it.variant + '</div>' : '')
+      + licBadge
+      + '<div class="ci-qr">'
+      + '<button class="qb" onclick="chQty('+i+',-1)">−</button>'
+      + '<span class="qn">' + it.qty + '</span>'
+      + '<button class="qb" onclick="chQty('+i+',1)">+</button>'
+      + '<button class="rm" onclick="rmItem('+i+')">🗑 Xoá</button>'
+      + '</div></div>'
+      + '<div class="ci-price">$' + (it.price * it.qty).toFixed(2) + '</div>'
+      + '</div>';
+  }).join('');
+
+  renderTotals();
+  document.getElementById('totsWrap').style.display = 'block';
+  document.getElementById('btnWrap').style.display = 'block';
+  updNote();
+}
+
+function renderTotals() {
+  var base = cart.reduce(function(s, i){ return s + i.price * i.qty; }, 0);
+  flashPct = getFlashPct();
+
+  // Flash discount (đã tính trong giá từ shop nếu flash active khi add to cart)
+  // Ở checkout chỉ show informational — giá đã là sale price
+  var flashRow = document.getElementById('flashDiscRow');
+  if (flashPct > 0) {
+    flashRow.style.display = 'flex';
+    document.getElementById('flashDiscLabel').textContent = '🔥 Flash Sale (-' + flashPct + '%)';
+    document.getElementById('flashDiscAmt').textContent = 'Applied';
+  } else {
+    flashRow.style.display = 'none';
+  }
+
+  // Promo code discount
+  var codeDiscount = 0;
+  var codeRow = document.getElementById('codeDiscRow');
+  if (appliedCode) {
+    codeDiscount = Math.round(base * appliedCode.pct / 100 * 100) / 100;
+    codeRow.style.display = 'flex';
+    document.getElementById('codeDiscLabel').textContent = '🏷️ ' + appliedCode.code + ' (-' + appliedCode.pct + '%)';
+    document.getElementById('codeDiscAmt').textContent = '-$' + codeDiscount.toFixed(2);
+  } else {
+    codeRow.style.display = 'none';
+  }
+
+  var total = Math.max(0, base - codeDiscount);
+  document.getElementById('subAmt').textContent = '$' + base.toFixed(2);
+  document.getElementById('totAmt').textContent = '$' + total.toFixed(2) + ' USD';
+  document.getElementById('txAmt').textContent  = '$' + total.toFixed(2) + ' USD';
+
+  // VND equiv
+  var vnd = Math.round(total * USD_TO_VND / 1000) * 1000;
+  document.getElementById('vndNote').textContent = '≈ ' + vnd.toLocaleString('vi-VN') + ' VNĐ (tỷ giá tham khảo)';
+}
+
+function chQty(i, d) { cart[i].qty = Math.max(1, cart[i].qty + d); save(); renderCart(); }
+function rmItem(i)    { cart.splice(i, 1); save(); renderCart(); }
+function save()       { localStorage.setItem('zanith_cart', JSON.stringify(cart)); }
+
+function updNote() {
+  var em = document.getElementById('cEmail').value || 'ORDER';
+  var ref = 'ZCS' + Date.now().toString().slice(-6);
+  document.getElementById('txNote').textContent = 'ZANITH ' + em.split('@')[0].toUpperCase().slice(0,8) + ' ' + ref;
+  document.getElementById('txNote').dataset.ref = ref;
+}
+document.getElementById('cEmail').addEventListener('input', updNote);
+
+function cp(txt, lbl) { navigator.clipboard.writeText(txt).then(function(){ toast('✅ ' + lbl + ' đã copy!', 'ok'); }); }
+function cpNote()     { cp(document.getElementById('txNote').textContent, 'Nội dung CK'); }
+
+// ── Discount code ──
+function applyCode() {
+  var input = document.getElementById('codeInput').value.trim().toUpperCase();
+  var status = document.getElementById('codeStatus');
+  if (!input) { status.innerHTML = '<span class="code-err">Vui lòng nhập mã giảm giá.</span>'; return; }
+
+  var codes = (CAMPAIGN.discountCodes || [{code:'ZANITH20', pct:20, label:'20% off first order'}]);
+  var found = codes.find(function(c){ return c.code === input; });
+
+  if (found) {
+    appliedCode = found;
+    status.innerHTML = '<span class="code-ok">✅ Mã hợp lệ! Giảm ' + found.pct + '% — ' + (found.label||'') + '</span>';
+    renderTotals();
+  } else {
+    appliedCode = null;
+    status.innerHTML = '<span class="code-err">❌ Mã không hợp lệ hoặc đã hết hạn.</span>';
+    renderTotals();
+  }
+}
+
+// ── Place order → show bank info ──
+var pendingOrderRef = null;
+
+function placeOrder() {
+  var name  = document.getElementById('cName').value.trim();
+  var email = document.getElementById('cEmail').value.trim();
+  if (!name)  { toast('Vui lòng nhập họ tên / Enter your name', ''); return; }
+  if (!email || !email.includes('@')) { toast('Email không hợp lệ / Invalid email', ''); return; }
+  if (!cart.length) { toast('Giỏ hàng trống / Cart is empty', ''); return; }
+
+  var ref   = 'ZCS-' + new Date().getFullYear() + '-' + Date.now().toString().slice(-6);
+  pendingOrderRef = ref;
+
+  var base         = cart.reduce(function(s,i){ return s + i.price * i.qty; }, 0);
+  var codeDiscount = appliedCode ? Math.round(base * appliedCode.pct / 100 * 100) / 100 : 0;
+  var total        = Math.max(0, base - codeDiscount).toFixed(2);
+
+  // Update bank transfer note with real ref
+  document.getElementById('txNote').textContent = 'ZANITH ' + email.split('@')[0].toUpperCase().slice(0,8) + ' ' + ref.replace('ZCS-','');
+  document.getElementById('txAmt').textContent  = '$' + total + ' USD';
+
+  // Save order to localStorage
+  var order = {
+    orderRef: ref, ref: ref,
+    name: name, email: email,
+    phone: document.getElementById('cPhone').value || '',
+    items: cart.slice(),
+    subtotal: base.toFixed(2),
+    discount: codeDiscount.toFixed(2),
+    promoCode: appliedCode ? appliedCode.code : '',
+    total: total,
+    note: document.getElementById('oNote').value || '',
+    status: 'pending_payment',
+    time: new Date().toISOString(),
+    timeDisplay: new Date().toLocaleString('vi-VN')
+  };
+  localStorage.setItem('zanith_last_order', JSON.stringify(order));
+  var orders = JSON.parse(localStorage.getItem('zanith_orders') || '[]');
+  orders.unshift(order);
+  localStorage.setItem('zanith_orders', JSON.stringify(orders));
+
+  // Show step B
+  document.getElementById('stepA').style.display = 'none';
+  document.getElementById('stepB').style.display  = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  toast('📋 Vui lòng chuyển khoản theo thông tin bên dưới!', 'ok');
+}
+
+// ── Confirm paid → webhook + email + redirect ──
+const SHEET_WEBHOOK = localStorage.getItem('zanith_webhook') || 'YOUR_APPS_SCRIPT_URL_HERE';
+
+async function confirmPaid() {
+  var btn = document.getElementById('paidBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Đang xử lý...';
+
+  var order = JSON.parse(localStorage.getItem('zanith_last_order') || 'null');
+
+  if (order) {
+    var itemsTxt = (order.items||[]).map(function(i){
+      return i.title + ' x' + i.qty + ' — $' + (i.price * i.qty).toFixed(2);
+    }).join(' | ');
+
+    var payload = {
+      order_ref:  order.orderRef || order.ref,
+      name:       order.name,
+      email:      order.email,
+      phone:      order.phone || '',
+      items:      itemsTxt,
+      subtotal:   '$' + order.subtotal,
+      discount:   order.promoCode ? order.promoCode + ' -$' + order.discount : 'None',
+      total:      '$' + order.total + ' USD',
+      note:       order.note || '',
+      status:     'Payment Confirmed by Customer',
+      time:       order.timeDisplay
+    };
+
+    // 1. Google Sheet webhook
+    if (SHEET_WEBHOOK && SHEET_WEBHOOK !== 'YOUR_APPS_SCRIPT_URL_HERE') {
+      try {
+        await fetch(SHEET_WEBHOOK, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body: JSON.stringify(payload) });
+      } catch(e) { console.log('Webhook failed:', e); }
+    }
+
+    // 2. Formspree email backup
+    try {
+      await fetch('https://formspree.io/f/mwkgnjvb', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          _subject: '[Zanith Order] ' + order.orderRef + ' — ' + order.name + ' — $' + order.total,
+          _replyto: order.email,
+          ...payload
+        })
+      });
+    } catch(e) { console.log('Email backup failed:', e); }
+  }
+
+  // Update order status
+  try {
+    var orders2 = JSON.parse(localStorage.getItem('zanith_orders') || '[]');
+    if (orders2.length) { orders2[0].status = 'payment_confirmed'; localStorage.setItem('zanith_orders', JSON.stringify(orders2)); }
+  } catch(e){}
+
+  // Show success
+  localStorage.removeItem('zanith_cart');
+  document.getElementById('mainWrap').style.display = 'none';
+  var suc = document.getElementById('sucPage');
+  suc.classList.add('show');
+  document.getElementById('sucRef').textContent = pendingOrderRef || (order && order.orderRef) || 'ZCS-CONFIRMED';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast show ' + (type||'');
+  setTimeout(function(){ t.className = 'toast'; }, 3500);
+}
+
+renderCart();
+</script>
+</body>
+</html>
