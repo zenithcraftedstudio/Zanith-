@@ -1,0 +1,14 @@
+{
+  "_note": "Zanith Crafted Studio — Config file. Chỉnh trực tiếp hoặc qua Admin.",
+  "sheet_id": "",
+  "webhook_url": "",
+  "emailjs": {
+    "public_key": "",
+    "service_id": "",
+    "tpl_customer": "",
+    "tpl_admin": "",
+    "tpl_newsletter": "",
+    "admin_email": ""
+  },
+  "anthropic_api_key": ""
+}
