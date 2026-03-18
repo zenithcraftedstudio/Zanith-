@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Zanith Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1e2d4a;--navy-light:#2a3f63;--gold:#c8974a;
+  --cream:#faf7f2;--warm:#f3ede3;--white:#fff;
+  --border:#e2ddd6;--text:#1a2332;--text-soft:#5a6a7e;--muted:#8a9bb5;
+  --green:#2e7d52;--red:#c0392b;--shadow:0 2px 16px rgba(30,45,74,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Instrument Sans',sans-serif;background:#f0f2f5;color:var(--text);display:flex;min-height:100vh;}
+
+/* SIDEBAR */
+.sidebar{width:220px;background:var(--navy);min-height:100vh;padding:1.25rem 0;display:flex;flex-direction:column;flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto;}
+.sb-brand{padding:0 1rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:0.75rem;}
+.sb-brand-name{font-family:'Fraunces',serif;font-size:1rem;color:#fff;display:flex;align-items:center;gap:0.5rem;}
+.sb-brand-sub{font-size:0.62rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px;}
+.sb-section{padding:0 0.75rem;margin-bottom:0.25rem;}
+.sb-label{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);padding:0.5rem 0.25rem 0.25rem;}
+.sb-item{display:flex;align-items:center;gap:0.6rem;padding:0.55rem 0.75rem;border-radius:8px;cursor:pointer;font-size:0.82rem;color:rgba(255,255,255,0.65);margin-bottom:0.15rem;transition:all 0.2s;text-decoration:none;border:none;background:none;width:100%;text-align:left;font-family:inherit;}
+.sb-item:hover{background:rgba(255,255,255,0.08);color:white;}
+.sb-item.active{background:rgba(255,255,255,0.15);color:white;font-weight:600;}
+.sb-divider{border:none;border-top:1px solid rgba(255,255,255,0.08);margin:0.5rem 0.75rem;}
+
+/* MAIN */
+.main{flex:1;padding:1.5rem;min-width:0;overflow-x:hidden;}
+.tab-section{display:none;}
+.tab-section.active{display:block;}
+
+/* PAGE HEADER */
+.pg-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap;}
+.pg-title{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:500;color:var(--navy);}
+.pg-sub{font-size:0.82rem;color:var(--muted);margin-top:2px;}
+.btn-group{display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;}
+.stat-card{background:var(--white);border-radius:12px;padding:1.1rem 1.25rem;border:1px solid var(--border);border-top:3px solid var(--border);}
+.stat-card.gold{border-top-color:var(--gold);}
+.stat-card.green{border-top-color:var(--green);}
+.stat-card.purple{border-top-color:#7b52ab;}
+.stat-label{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:0.35rem;}
+.stat-val{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:500;color:var(--navy);line-height:1;}
+.stat-note{font-size:0.7rem;color:var(--muted);margin-top:0.25rem;}
+
+/* CARDS */
+.table-card,.config-card{background:var(--white);border-radius:14px;border:1px solid var(--border);margin-bottom:1.25rem;}
+.config-card{padding:1.25rem 1.5rem;border-left:3px solid var(--navy);overflow:hidden;}
+.config-card h3{font-size:0.95rem;font-weight:600;color:var(--navy);margin-bottom:0.85rem;}
+.config-row{display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;margin-bottom:0.5rem;}
+.config-input{flex:1;min-width:180px;padding:0.55rem 0.85rem;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:0.85rem;color:var(--text);background:var(--warm);outline:none;transition:border 0.2s;}
+.config-input:focus{border-color:var(--navy);background:var(--white);}
+.config-hint{font-size:0.75rem;color:var(--muted);line-height:1.65;margin-top:0.35rem;}
+.config-hint code{background:var(--warm);padding:1px 5px;border-radius:4px;font-size:0.72rem;font-family:monospace;}
+.config-hint a{color:var(--navy);}
+.status-msg{font-size:0.8rem;min-height:1.2rem;margin-top:0.35rem;}
+
+/* BUTTONS */
+.btn{padding:0.5rem 1rem;border-radius:8px;font-size:0.82rem;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--white);color:var(--text);font-family:inherit;transition:all 0.15s;text-decoration:none;display:inline-flex;align-items:center;gap:0.35rem;}
+.btn:hover{background:var(--warm);}
+.btn-primary{background:var(--navy);color:#fff;border-color:var(--navy);}
+.btn-primary:hover{background:var(--navy-light);}
+.btn-success{background:var(--green);color:#fff;border-color:var(--green);}
+.btn-success:hover{opacity:0.9;}
+.btn-danger{background:var(--red);color:#fff;border-color:var(--red);}
+.btn-danger:hover{opacity:0.9;}
+.btn-outline{background:transparent;}
+.btn-sm{font-size:0.76rem;padding:0.35rem 0.75rem;}
+
+/* TABLE */
+.table-top{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--border);gap:0.75rem;flex-wrap:wrap;}
+.table-top h3{font-size:0.9rem;font-weight:600;color:var(--navy);}
+.table-tools{display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;}
+.tbl-search{padding:0.45rem 0.85rem;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:0.8rem;outline:none;background:var(--warm);min-width:200px;}
+.tbl-search:focus{border-color:var(--navy);}
+.tbl-row{display:grid;grid-template-columns:90px 1fr 80px 80px 70px 52px;gap:0.5rem;align-items:center;padding:0.65rem 1.25rem;border-bottom:1px solid var(--border);font-size:0.8rem;cursor:pointer;transition:background 0.15s;}
+.tbl-row:hover{background:var(--warm);}
+.tbl-head{background:var(--warm);font-weight:600;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);cursor:default;}
+.tbl-head:hover{background:var(--warm);}
+.tbl-sku{font-family:monospace;font-size:0.72rem;color:var(--muted);}
+.tbl-msg{text-align:center;padding:3rem;color:var(--muted);}
+.spinner{width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--navy);border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 0.75rem;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ORDER ROW */
+.order-row{display:grid;grid-template-columns:130px 1fr 80px 110px 90px;gap:0.5rem;align-items:center;padding:0.65rem 1.25rem;border-bottom:1px solid var(--border);font-size:0.8rem;cursor:pointer;transition:background 0.15s;}
+.order-row:hover{background:var(--warm);}
+.order-ref{font-family:monospace;font-size:0.72rem;color:var(--navy);font-weight:600;}
+.order-status{font-size:0.7rem;padding:2px 8px;border-radius:20px;font-weight:600;text-align:center;}
+.s-pending{background:#fff3cd;color:#856404;}
+.s-confirmed{background:#d1e7dd;color:#0a3622;}
+.s-cancelled{background:#f8d7da;color:#842029;}
+
+/* CAMPAIGN */
+.fg{display:flex;flex-direction:column;gap:0.3rem;}
+.fg label{font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-soft);}
+.fg input,.fg select{padding:0.55rem 0.85rem;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:0.85rem;background:var(--warm);outline:none;transition:border 0.2s;}
+.fg input:focus{border-color:var(--navy);background:var(--white);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:0.75rem;}
+.toggle-row{display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0 0.75rem;}
+.toggle-label{font-size:0.88rem;color:var(--text);}
+.toggle{width:44px;height:24px;background:var(--border);border-radius:12px;position:relative;cursor:pointer;transition:background 0.2s;flex-shrink:0;border:none;}
+.toggle.on{background:var(--navy);}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:white;border-radius:50%;transition:transform 0.2s;}
+.toggle.on::after{transform:translateX(20px);}
+.preset-row{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;}
+.preset-btn{padding:0.35rem 0.85rem;border-radius:20px;font-size:0.78rem;border:1px solid var(--border);background:var(--warm);cursor:pointer;transition:all 0.15s;font-family:inherit;}
+.preset-btn:hover{border-color:var(--navy);background:var(--white);}
+.code-item{display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0.75rem;background:var(--warm);border-radius:8px;font-size:0.82rem;margin-bottom:0.4rem;}
+.code-tag{font-family:monospace;font-weight:700;color:var(--navy);}
+.code-pct{color:var(--green);font-weight:600;}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.about-slot label{font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-soft);display:block;margin-bottom:5px;}
+.about-preview{width:64px;height:64px;object-fit:cover;border-radius:6px;border:1px solid var(--border);display:none;margin-top:5px;}
+
+/* GUIDE */
+.guide-box{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:1rem;}
+.guide-toggle{width:100%;padding:0.85rem 1rem;background:var(--warm);border:none;font-family:inherit;font-size:0.85rem;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;text-align:left;}
+.guide-content{padding:1rem;display:none;flex-direction:column;gap:0.75rem;}
+.guide-step{font-size:0.82rem;color:var(--text-soft);line-height:1.65;}
+.guide-step strong{color:var(--navy);}
+.code-block{background:#1e2d4a;color:#a8d8a8;padding:1rem;border-radius:8px;font-family:monospace;font-size:0.73rem;white-space:pre;overflow-x:auto;line-height:1.6;}
+
+/* OVERLAYS */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:500;align-items:center;justify-content:center;padding:1rem;}
+.overlay.open{display:flex;}
+.detail-panel,.edit-panel,.od-panel{background:var(--white);border-radius:16px;max-width:760px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
+.dp-head{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);}
+.dp-head h3{font-size:1rem;font-weight:600;color:var(--navy);}
+.dp-close{background:var(--warm);border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;}
+.dp-body{display:grid;grid-template-columns:220px 1fr;max-height:65vh;}
+.dp-img-col{padding:1.25rem;border-right:1px solid var(--border);}
+.dp-img-col img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:var(--warm);}
+.dp-info-col{padding:1.25rem;overflow-y:auto;}
+.dp-foot{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;gap:0.5rem;flex-wrap:wrap;}
+.dp-sku{font-family:monospace;font-size:0.72rem;background:var(--warm);padding:3px 8px;border-radius:4px;color:var(--muted);display:inline-block;margin-bottom:0.5rem;}
+.dp-title{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:500;color:var(--navy);margin-bottom:0.5rem;}
+.dp-tags{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:0.75rem;}
+.dp-tag{font-size:0.7rem;background:var(--warm);border:1px solid var(--border);padding:2px 8px;border-radius:20px;color:var(--text-soft);}
+.dp-desc{font-size:0.82rem;color:var(--text-soft);line-height:1.7;margin-bottom:1rem;}
+.dp-hashtags{font-size:0.75rem;color:var(--muted);background:var(--warm);padding:0.6rem;border-radius:8px;line-height:1.8;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;padding:1.25rem 1.5rem;}
+.form-grid .full{grid-column:1/-1;}
+.form-grid textarea{border:1px solid var(--border);border-radius:8px;padding:0.55rem;font-family:inherit;font-size:0.85rem;background:var(--warm);outline:none;resize:vertical;width:100%;}
+.form-grid textarea:focus{border-color:var(--navy);background:var(--white);}
+.edit-note{font-size:0.75rem;color:#856404;padding:0.65rem 1.5rem;background:#fff8e1;border-top:1px solid #ffe082;}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--navy);color:#fff;padding:0.75rem 1.25rem;border-radius:10px;font-size:0.85rem;z-index:9999;display:none;max-width:320px;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+.toast.show{display:block;}
+.toast.ok{background:var(--green);}
+.toast.err{background:var(--red);}
+
+@media(max-width:768px){
+  .sidebar{display:none;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .form-row,.about-grid,.dp-body{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sb-brand">
+    <div class="sb-brand-name">🌿 Zanith Admin</div>
+    <div class="sb-brand-sub">Crafted Studio</div>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">Menu</div>
+    <button class="sb-item active" id="sb-products"  onclick="showTab('products')">📦 Products</button>
+    <button class="sb-item"        id="sb-orders"    onclick="showTab('orders')">🛒 Orders</button>
+    <button class="sb-item"        id="sb-campaigns" onclick="showTab('campaigns')">🎯 Campaigns</button>
+    <button class="sb-item"        id="sb-about"     onclick="showTab('about')">🖼️ About Us</button>
+    <button class="sb-item"        id="sb-settings"  onclick="showTab('settings')">⚙️ Settings</button>
+  </div>
+  <hr class="sb-divider">
+  <div class="sb-section">
+    <div class="sb-label">Filter</div>
+    <button class="sb-item" onclick="showTab('products');quickFilter('')">🎨 All</button>
+    <button class="sb-item" onclick="showTab('products');quickFilter('Digital Pattern')">🖼️ Digital Pattern</button>
+    <button class="sb-item" onclick="showTab('products');quickFilter('Template')">📐 Template</button>
+    <button class="sb-item" onclick="showTab('products');quickFilter('POD')">👕 POD</button>
+    <button class="sb-item" onclick="showTab('products');quickFilter('Ebook')">📖 Ebook</button>
+  </div>
+  <hr class="sb-divider">
+  <div class="sb-section">
+    <div class="sb-label">Tools</div>
+    <button class="sb-item" onclick="exportAllHashtags()">📋 Export Hashtags</button>
+    <a class="sb-item" href="index.html" target="_blank">🛍️ View Shop</a>
+  </div>
+</nav>
+
+<div class="main">
+
+<!-- ══════ TAB: PRODUCTS ══════ -->
+<div class="tab-section active" id="tab-products">
+  <div class="pg-header">
+    <div>
+      <div class="pg-title">Product Manager</div>
+      <div class="pg-sub" id="productsSubtitle">Đang tải...</div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="loadProducts()">🔄 Refresh</button>
+      <a id="sheetLink" href="#" target="_blank" class="btn btn-success">📊 Open Sheet</a>
+      <a href="index.html" target="_blank" class="btn btn-primary">🛍️ View Shop</a>
+    </div>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">Total Products</div><div class="stat-val" id="sTotal">—</div><div class="stat-note">in database</div></div>
+    <div class="stat-card gold"><div class="stat-label">Total Orders</div><div class="stat-val" id="sTotalOrders">—</div><div class="stat-note">all time</div></div>
+    <div class="stat-card green"><div class="stat-label">Pending</div><div class="stat-val" id="sPending">—</div><div class="stat-note">awaiting payment</div></div>
+    <div class="stat-card"><div class="stat-label">Avg Price</div><div class="stat-val" id="sAvg">—</div><div class="stat-note">after sale</div></div>
+    <div class="stat-card gold"><div class="stat-label">Avg Margin</div><div class="stat-val" id="sMargin">—</div><div class="stat-note">at sale price</div></div>
+    <div class="stat-card purple"><div class="stat-label">Types</div><div class="stat-val" id="sTypes">—</div><div class="stat-note">categories</div></div>
+  </div>
+  <div class="table-card">
+    <div class="table-top">
+      <h3>🎨 Products (<span id="tblCount">0</span>)</h3>
+      <div class="table-tools">
+        <input class="tbl-search" id="tblSearch" type="text" placeholder="Search SKU, title, style..." oninput="filterTable(this.value)">
+        <button class="btn btn-outline btn-sm" onclick="exportAllHashtags()">📋 Hashtags</button>
+      </div>
+    </div>
+    <div class="tbl-row tbl-head"><span>SKU</span><span>Title</span><span>Price</span><span>Type</span><span>Style</span><span></span></div>
+    <div id="tblBody"><div class="tbl-msg"><div class="spinner"></div><p>Loading...</p></div></div>
+  </div>
+</div>
+
+<!-- ══════ TAB: ORDERS ══════ -->
+<div class="tab-section" id="tab-orders">
+  <div class="pg-header">
+    <div>
+      <div class="pg-title">Order Management</div>
+      <div class="pg-sub" id="ordersSubtitle">Đơn hàng từ checkout</div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="loadOrders();renderOrders()">🔄 Refresh</button>
+      <button class="btn btn-outline" onclick="exportOrders()">⬇ Export CSV</button>
+      <button class="btn btn-danger btn-sm" onclick="if(confirm('Xóa tất cả đơn hàng?'))clearOrders()">🗑 Clear</button>
+    </div>
+  </div>
+  <div class="table-card">
+    <div class="table-top">
+      <h3>All Orders <span id="orderCount" style="font-weight:400;color:var(--muted);font-size:0.8rem"></span></h3>
+      <div class="table-tools">
+        <select class="tbl-search" style="min-width:140px" onchange="filterOrders(this.value)">
+          <option value="">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+    </div>
+    <div class="order-row tbl-head"><span>Order Ref</span><span>Customer</span><span>Total</span><span>Time</span><span>Status</span></div>
+    <div id="ordersWrap"></div>
+  </div>
+</div>
+
+<!-- ══════ TAB: CAMPAIGNS ══════ -->
+<div class="tab-section" id="tab-campaigns">
+  <div class="pg-header">
+    <div>
+      <div class="pg-title">Campaign Manager</div>
+      <div class="pg-sub">Flash sale · Discount codes · Bundle deals</div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="saveCampaign()">💾 Save &amp; Sync to Sheet</button>
+      <button class="btn btn-outline" onclick="window.open('index.html','_blank')">👁 Preview</button>
+    </div>
+  </div>
+
+  <div class="config-card" style="border-left-color:var(--red)">
+    <h3>🔥 Flash Sale</h3>
+    <div class="toggle-row">
+      <button class="toggle" id="campFlashToggle" onclick="this.classList.toggle('on')"></button>
+      <span class="toggle-label">Bật Flash Sale</span>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Giảm giá (%)</label><input type="number" id="campFlashPct" value="20" min="1" max="80"></div>
+      <div class="fg"><label>Kết thúc lúc</label><input type="datetime-local" id="campFlashEnd"></div>
+    </div>
+  </div>
+
+  <div class="config-card" style="border-left-color:var(--gold)">
+    <h3>🗓️ Seasonal Presets</h3>
+    <div class="preset-row">
+      <button class="preset-btn" onclick="applyPreset('tet')">🧧 Tết</button>
+      <button class="preset-btn" onclick="applyPreset('summer')">☀️ Summer</button>
+      <button class="preset-btn" onclick="applyPreset('halloween')">🎃 Halloween</button>
+      <button class="preset-btn" onclick="applyPreset('christmas')">🎄 Christmas</button>
+      <button class="preset-btn" onclick="applyPreset('valentine')">💝 Valentine</button>
+      <button class="preset-btn" onclick="applyPreset('sale11')">1️⃣1️⃣ 11/11</button>
+      <button class="preset-btn" onclick="applyPreset('blackfriday')">🖤 Black Friday</button>
+    </div>
+  </div>
+
+  <div class="config-card" style="border-left-color:var(--green)">
+    <h3>🏷️ Discount Codes</h3>
+    <div id="codeListWrap"></div>
+    <div class="form-row" style="margin-top:0.5rem">
+      <div class="fg"><label>Code mới</label><input type="text" id="newCodeVal" placeholder="ZANITH20" style="text-transform:uppercase"></div>
+      <div class="fg"><label>Giảm (%)</label><input type="number" id="newCodePct" value="20" min="1" max="80"></div>
+    </div>
+    <button class="btn btn-outline btn-sm" onclick="addCode()">+ Thêm code</button>
+  </div>
+
+  <div class="config-card" style="border-left-color:var(--navy)">
+    <h3>📦 Bundle Deal</h3>
+    <div class="toggle-row">
+      <button class="toggle on" id="campBundleToggle" onclick="this.classList.toggle('on')"></button>
+      <span class="toggle-label">Bật Bundle Deal</span>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Mua bao nhiêu (qty)</label><input type="number" id="campBundleQty" value="3" min="2"></div>
+      <div class="fg"><label>Tặng thêm</label><input type="number" id="campBundleFree" value="1" min="1"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ TAB: ABOUT US ══════ -->
+<div class="tab-section" id="tab-about">
+  <div class="pg-header">
+    <div>
+      <div class="pg-title">About Us — Ảnh</div>
+      <div class="pg-sub">Quản lý ảnh trang giới thiệu</div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="saveAboutImages()">💾 Lưu tất cả</button>
+      <button class="btn btn-outline" onclick="saveAboutImages();window.open('about.html','_blank')">👁 Xem trang</button>
+    </div>
+  </div>
+  <div class="config-card">
+    <h3>🖼️ URL ảnh từng khung</h3>
+    <p class="config-hint" style="margin-bottom:1rem">
+      Dán URL ảnh GitHub raw hoặc Google Drive → Save → hiện ngay trên trang About Us.<br>
+      GitHub raw URL: <code>raw.githubusercontent.com/user/repo/main/images/file.jpg</code>
+    </p>
+    <div class="about-grid">
+      <div class="about-slot">
+        <label>🧑‍🎨 Ảnh chân dung (4:5)</label>
+        <input class="config-input" id="ab-about_portrait" placeholder="URL ảnh chân dung..." oninput="prevAbout('about_portrait',this.value)">
+        <img class="about-preview" id="prev-about_portrait">
+      </div>
+      <div class="about-slot">
+        <label>🏠 Banner rộng (16:6)</label>
+        <input class="config-input" id="ab-studio_wide" placeholder="URL banner studio..." oninput="prevAbout('studio_wide',this.value)">
+        <img class="about-preview" id="prev-studio_wide">
+      </div>
+      <div class="about-slot" style="grid-column:1/-1">
+        <label>📸 Ảnh lớn lưới (2 cột)</label>
+        <input class="config-input" id="ab-studio_1" placeholder="URL ảnh lớn..." oninput="prevAbout('studio_1',this.value)">
+        <img class="about-preview" id="prev-studio_1">
+      </div>
+      <div class="about-slot">
+        <label>📸 Ảnh studio 2</label>
+        <input class="config-input" id="ab-studio_2" placeholder="URL ảnh 2..." oninput="prevAbout('studio_2',this.value)">
+        <img class="about-preview" id="prev-studio_2">
+      </div>
+      <div class="about-slot">
+        <label>📸 Ảnh studio 3</label>
+        <input class="config-input" id="ab-studio_3" placeholder="URL ảnh 3..." oninput="prevAbout('studio_3',this.value)">
+        <img class="about-preview" id="prev-studio_3">
+      </div>
+      <div class="about-slot">
+        <label>📸 Ảnh studio 4</label>
+        <input class="config-input" id="ab-studio_4" placeholder="URL ảnh 4..." oninput="prevAbout('studio_4',this.value)">
+        <img class="about-preview" id="prev-studio_4">
+      </div>
+      <div class="about-slot">
+        <label>📸 Ảnh studio 5</label>
+        <input class="config-input" id="ab-studio_5" placeholder="URL ảnh 5..." oninput="prevAbout('studio_5',this.value)">
+        <img class="about-preview" id="prev-studio_5">
+      </div>
+    </div>
+    <div class="status-msg" id="aboutStatus"></div>
+  </div>
+</div>
+
+<!-- ══════ TAB: SETTINGS ══════ -->
+<div class="tab-section" id="tab-settings">
+  <div class="pg-header">
+    <div>
+      <div class="pg-title">Settings</div>
+      <div class="pg-sub">Kết nối Google Sheet, EmailJS, API keys</div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="exportConfig()">📋 Export config.json</button>
+    </div>
+  </div>
+
+  <!-- Google Sheet -->
+  <div class="config-card" style="border-left-color:#34a853">
+    <h3>📊 Google Sheets Connection</h3>
+    <div class="config-row">
+      <input class="config-input" id="sheetInput" placeholder="Paste Google Sheet ID hoặc full URL...">
+      <button class="btn btn-primary" onclick="saveSheet()">💾 Save &amp; Connect</button>
+    </div>
+    <div class="config-row">
+      <button class="btn btn-outline btn-sm" onclick="testSheet()">🔗 Test</button>
+      <span class="status-msg" id="sheetStatus" style="margin:0"></span>
+    </div>
+    <div class="config-hint">
+      📋 Lấy ID từ URL: <code>docs.google.com/spreadsheets/d/<strong>ID_Ở_ĐÂY</strong>/edit</code><br>
+      ⚠️ Sheet phải <strong>Publish to web</strong> · Tab tên là <strong>Products</strong>
+    </div>
+  </div>
+
+  <!-- Anthropic API Key -->
+  <div class="config-card" style="border-left-color:var(--gold)">
+    <h3>🤖 Anthropic API Key <span style="font-size:0.7rem;font-weight:400;color:var(--muted)">— tự dịch sang tiếng Việt</span></h3>
+    <div class="config-row">
+      <input class="config-input" id="apiKeyInput" type="password" placeholder="sk-ant-api03-..." autocomplete="off">
+      <button class="btn btn-primary" onclick="saveApiKey()">💾 Lưu</button>
+      <button class="btn btn-outline" onclick="clearApiKey()">🗑 Xóa</button>
+    </div>
+    <div class="status-msg" id="apiKeyStatus"></div>
+    <div class="config-hint">
+      🔑 Lấy key tại <a href="https://console.anthropic.com/keys" target="_blank">console.anthropic.com/keys</a><br>
+      💡 Sau khi lưu → vào shop → bấm VI → tự dịch hết
+    </div>
+  </div>
+
+  <!-- Free Pattern Funnel -->
+  <div class="config-card" style="border-left-color:#e91e8c">
+    <h3>🎁 Free Pattern Funnel <span style="font-size:0.7rem;font-weight:400;color:var(--muted)">— hiện khi khách Subscribe</span></h3>
+    <div class="config-row">
+      <input class="config-input" id="freePatternInput" placeholder="https://... hoặc images/PTN-GEO-diamond-001.png">
+      <button class="btn btn-primary" onclick="saveFreePattern()">💾 Lưu</button>
+    </div>
+    <div class="status-msg" id="freePatternStatus"></div>
+    <div class="config-hint">
+      · GitHub: <code>images/tên-file.png</code><br>
+      · Google Drive: <code>https://drive.google.com/uc?export=download&amp;id=FILE_ID</code>
+    </div>
+  </div>
+
+  <!-- EmailJS -->
+  <div class="config-card" style="border-left-color:var(--green)">
+    <h3>📧 EmailJS — Gửi email tự động <span style="font-size:0.7rem;font-weight:400;color:var(--muted)">Free 200/tháng</span></h3>
+    <div class="config-hint" style="margin-bottom:1rem">
+      Đăng ký miễn phí tại <a href="https://www.emailjs.com" target="_blank">emailjs.com</a>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.75rem">
+      <div><p class="config-hint" style="margin-bottom:4px"><strong>Public Key</strong></p>
+        <input class="config-input" id="ejPublicKey" placeholder="user_xxxxxxxxxx"></div>
+      <div><p class="config-hint" style="margin-bottom:4px"><strong>Service ID</strong></p>
+        <input class="config-input" id="ejServiceId" placeholder="service_xxxxxxx"></div>
+      <div><p class="config-hint" style="margin-bottom:4px"><strong>Template — Email khách</strong></p>
+        <input class="config-input" id="ejTplCustomer" placeholder="template_xxxxxxx"></div>
+      <div><p class="config-hint" style="margin-bottom:4px"><strong>Template — Thông báo bạn</strong></p>
+        <input class="config-input" id="ejTplAdmin" placeholder="template_xxxxxxx"></div>
+      <div><p class="config-hint" style="margin-bottom:4px"><strong>Template — Newsletter</strong></p>
+        <input class="config-input" id="ejTplNewsletter" placeholder="template_xxxxxxx"></div>
+      <div><p class="config-hint" style="margin-bottom:4px"><strong>Email Admin của bạn</strong></p>
+        <input class="config-input" id="ejAdminEmail" placeholder="your@gmail.com"></div>
+    </div>
+    <div class="config-row">
+      <button class="btn btn-primary" onclick="saveEmailJS()">💾 Lưu EmailJS</button>
+      <button class="btn btn-outline" onclick="testEmailJS()">🧪 Test</button>
+      <button class="btn btn-outline" onclick="clearEmailJS()">🗑 Xóa</button>
+    </div>
+    <div class="status-msg" id="ejStatus"></div>
+  </div>
+
+  <!-- Apps Script Webhook -->
+  <div class="config-card" style="border-left-color:#4285f4">
+    <h3>🔗 Apps Script Webhook <span style="font-size:0.7rem;font-weight:400;color:var(--muted)">— ghi đơn + sync campaign lên Sheet</span></h3>
+    <div class="config-row">
+      <input class="config-input" id="webhookInput" placeholder="Paste Apps Script Web App URL...">
+      <button class="btn btn-primary" onclick="saveWebhook()">💾 Save</button>
+      <button class="btn btn-outline" onclick="testWebhook()">🔗 Test</button>
+    </div>
+    <div class="status-msg" id="webhookStatus"></div>
+    <div class="guide-box">
+      <button class="guide-toggle" onclick="toggleGuide()">📖 Hướng dẫn setup Apps Script <span id="guideArrow">▼</span></button>
+      <div class="guide-content" id="guideContent">
+        <div class="guide-step"><strong>Bước 1</strong> — Google Sheet → Extensions → Apps Script</div>
+        <div class="guide-step"><strong>Bước 2</strong> — Xóa code cũ → dán code này:</div>
+        <div class="code-block">function doPost(e) {
+  try {
+    const ss   = SpreadsheetApp.getActiveSpreadsheet();
+    const data = JSON.parse(e.postData.contents);
+
+    if (data.action === 'updateConfig') {
+      let cfg = ss.getSheetByName('Config');
+      if (!cfg) { cfg = ss.insertSheet('Config'); cfg.appendRow(['key','value']); }
+      const rows = cfg.getDataRange().getValues();
+      const keyRow = {};
+      for (let i = 1; i &lt; rows.length; i++) keyRow[rows[i][0]] = i + 1;
+      Object.keys(data.config || {}).forEach(function(key) {
+        if (keyRow[key]) cfg.getRange(keyRow[key], 2).setValue(data.config[key]);
+        else cfg.appendRow([key, data.config[key]]);
+      });
+      return ContentService
+        .createTextOutput(JSON.stringify({result:'ok'}))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    let orders = ss.getSheetByName('Orders');
+    if (!orders) {
+      orders = ss.insertSheet('Orders');
+      orders.appendRow(['Thời gian','Mã đơn','Tên KH','Email',
+                        'SĐT','Sản phẩm','Tổng tiền','Ghi chú','Trạng thái']);
+    }
+    orders.appendRow([
+      new Date().toLocaleString('vi-VN'),
+      data.order_ref||'', data.name||'', data.email||'',
+      data.phone||'', data.items||'', data.total||'',
+      data.note||'', data.status||'Pending'
+    ]);
+    return ContentService
+      .createTextOutput(JSON.stringify({result:'ok'}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch(err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({error:err.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function testSetup() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let cfg = ss.getSheetByName('Config');
+  if (!cfg) { cfg = ss.insertSheet('Config'); cfg.appendRow(['key','value']); }
+  [['flashActive','FALSE'],['flashPct','20'],['flashEnd',''],
+   ['discountCodes','ZANITH20:20'],['bundleActive','TRUE'],
+   ['bundleQty','3'],['bundleFreePct','1']
+  ].forEach(r => cfg.appendRow(r));
+  Logger.log('Setup xong!');
+}</div>
+        <div class="guide-step"><strong>Bước 3</strong> — Chọn <code>testSetup</code> → bấm <strong>Chạy</strong> → cho phép quyền → tab Config tự tạo</div>
+        <div class="guide-step"><strong>Bước 4</strong> — <strong>Deploy → New deployment</strong> → Type: Web app → Execute as: Me → Who has access: Anyone → Deploy → Copy URL</div>
+        <div class="guide-step"><strong>Bước 5</strong> — Paste URL vào ô bên trên → Save → Test</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .main -->
+
+<!-- PRODUCT DETAIL OVERLAY -->
+<div class="overlay" id="detailOverlay" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-panel">
+    <div class="dp-head">
+      <h3>Product — <span id="dpSku" style="font-family:monospace;color:var(--navy)"></span></h3>
+      <button class="dp-close" onclick="closeDetail()">✕</button>
+    </div>
+    <div class="dp-body">
+      <div class="dp-img-col"><img id="dpImg" src="" alt=""></div>
+      <div class="dp-info-col">
+        <span class="dp-sku" id="dpSkuBadge"></span>
+        <div class="dp-title" id="dpTitle"></div>
+        <div class="dp-tags" id="dpTags"></div>
+        <p class="dp-desc" id="dpDesc"></p>
+        <div style="margin-bottom:0.75rem"><span style="font-size:0.68rem;color:var(--muted)">PRICE</span><div style="font-size:1.1rem;font-weight:600;color:var(--navy)" id="dpPrice"></div></div>
+        <div class="dp-hashtags" id="dpHashtags"></div>
+      </div>
+    </div>
+    <div class="dp-foot">
+      <button class="btn btn-outline" onclick="copyHashtags()">📋 Copy Hashtags</button>
+      <button class="btn btn-outline" onclick="openEditFromDetail()">✏️ Edit</button>
+      <button class="btn btn-primary" onclick="closeDetail()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT OVERLAY -->
+<div class="overlay" id="editOverlay" onclick="if(event.target===this)closeEdit()">
+  <div class="edit-panel">
+    <div class="dp-head">
+      <h3>✏️ Edit — <span id="editSkuLabel" style="font-family:monospace;font-size:0.85rem;color:var(--navy)"></span></h3>
+      <button class="dp-close" onclick="closeEdit()">✕</button>
+    </div>
+    <div class="form-grid">
+      <div class="fg"><label>SKU</label><input id="fSku" readonly></div>
+      <div class="fg"><label>Type</label><input id="fType"></div>
+      <div class="fg full"><label>Title</label><input id="fTitle"></div>
+      <div class="fg"><label>Style</label><input id="fStyle"></div>
+      <div class="fg"><label>Colors</label><input id="fColors"></div>
+      <div class="fg"><label>Price (USD)</label><input id="fPrice" type="number" step="0.01"></div>
+      <div class="fg"><label>Image URL</label><input id="fImage" placeholder="images/PTN-XXX.png"></div>
+      <div class="fg full"><label>Description</label><textarea id="fDesc" rows="3"></textarea></div>
+      <div class="fg full"><label>Hashtags</label><textarea id="fHashtags" rows="2"></textarea></div>
+    </div>
+    <div class="edit-note">⚠️ Chỉnh ở đây chỉ là preview tạm thời — lưu vĩnh viễn trong Google Sheets</div>
+    <div class="dp-foot">
+      <button class="btn btn-outline" onclick="closeEdit()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveEdit()">💾 Save Preview</button>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER DETAIL OVERLAY -->
+<div class="overlay" id="orderOverlay" onclick="if(event.target===this)closeOrderDetail()">
+  <div class="od-panel">
+    <div class="dp-head">
+      <h3 id="odTitle">Order Detail</h3>
+      <button class="dp-close" onclick="closeOrderDetail()">✕</button>
+    </div>
+    <div id="odBody" style="padding:1.25rem 1.5rem;font-size:0.88rem;line-height:1.9"></div>
+    <div class="dp-foot" id="odActions"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════
+// STATE
+// ══════════════════════════════════════
+let SHEET_ID  = localStorage.getItem('zanith_sheet_id') || '';
+const SHEET_TAB = 'Products';
+const csvUrl  = id => `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_TAB)}`;
+let allProducts = [], filtered = [], activeProduct = null;
+let allOrders = [], filteredOrders = [];
+let editCodes = [];
+
+// ══════════════════════════════════════
+// TABS
+// ══════════════════════════════════════
+function showTab(tab) {
+  document.querySelectorAll('.tab-section').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.sb-item[id^="sb-"]').forEach(el => el.classList.remove('active'));
+  const tabEl = document.getElementById('tab-' + tab);
+  const sbEl  = document.getElementById('sb-' + tab);
+  if (tabEl) tabEl.classList.add('active');
+  if (sbEl)  sbEl.classList.add('active');
+  if (tab === 'campaigns') loadCampaignUI();
+  if (tab === 'about')     loadAboutForm();
+  if (tab === 'orders')  { loadOrders(); renderOrders(); }
+  if (tab === 'settings')  loadSettingsForm();
+}
+
+// ══════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast show ' + type;
+  setTimeout(() => t.className = 'toast', 3500);
+}
+
+// ══════════════════════════════════════
+// PRODUCTS
+// ══════════════════════════════════════
+function parseCSV(txt) {
+  const lines = txt.trim().split('\n');
+  const hdrs  = lines[0].split(',').map(h => h.replace(/"/g,'').trim());
+  return lines.slice(1).map(line => {
+    const vals = []; let cur = '', inQ = false;
+    for (const c of line) {
+      if (c === '"') inQ = !inQ;
+      else if (c === ',' && !inQ) { vals.push(cur.trim()); cur = ''; }
+      else cur += c;
+    }
+    vals.push(cur.trim());
+    const o = {};
+    hdrs.forEach((h, i) => o[h] = (vals[i]||'').replace(/^"|"$/g,''));
+    return o;
+  }).filter(p => {
+    const s = (p.SKU||'').trim();
+    return s.length > 2 && !/^[#—–\-]/.test(s);
+  });
+}
+
+function setSheetLinks() {
+  const base = `https://docs.google.com/spreadsheets/d/${SHEET_ID}`;
+  ['sheetLink'].forEach(id => { const el = document.getElementById(id); if(el) el.href = base+'/edit'; });
+}
+
+async function loadProducts() {
+  document.getElementById('productsSubtitle').textContent = '⏳ Đang tải...';
+  if (!SHEET_ID) { useFallback(); return; }
+  try {
+    const r = await fetch(csvUrl(SHEET_ID) + '&t=' + Date.now());
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    allProducts = parseCSV(await r.text());
+    if (!allProducts.length) throw new Error('0 sản phẩm — kiểm tra Sheet');
+    filtered = [...allProducts];
+    renderTable(); updateStats(); setSheetLinks();
+    document.getElementById('productsSubtitle').textContent = allProducts.length + ' sản phẩm — kết nối Google Sheets ✅';
+  } catch(e) {
+    document.getElementById('productsSubtitle').textContent = '⚠️ ' + e.message + ' — dùng data mẫu';
+    useFallback();
+  }
+}
+
+function useFallback() {
+  allProducts = FALLBACK_DATA; filtered = [...allProducts];
+  renderTable(); updateStats();
+  document.getElementById('productsSubtitle').textContent = allProducts.length + ' sản phẩm (data mẫu — chưa kết nối Sheet)';
+}
+
+function updateStats() {
+  const orders = JSON.parse(localStorage.getItem('zanith_orders')||'[]');
+  document.getElementById('sTotal').textContent       = allProducts.length;
+  document.getElementById('sTotalOrders').textContent  = orders.length;
+  document.getElementById('sPending').textContent      = orders.filter(o=>(o.status||'').includes('pending')).length;
+  const avg = allProducts.length ? allProducts.reduce((s,p)=>s+(parseFloat(p.Price_USD)||0),0)/allProducts.length : 0;
+  document.getElementById('sAvg').textContent    = '$' + avg.toFixed(2);
+  document.getElementById('sMargin').textContent = '—';
+  document.getElementById('sTypes').textContent  = new Set(allProducts.map(p=>(p.Type||'').split('/')[0].trim())).size;
+}
+
+function renderTable() {
+  const tbody = document.getElementById('tblBody');
+  document.getElementById('tblCount').textContent = filtered.length;
+  if (!filtered.length) { tbody.innerHTML = '<div class="tbl-msg">Không có sản phẩm</div>'; return; }
+  tbody.innerHTML = filtered.map(p => `
+    <div class="tbl-row" onclick="openDetail('${p.SKU}')">
+      <span class="tbl-sku">${p.SKU}</span>
+      <span style="font-weight:500">${p.Title||''}</span>
+      <span style="color:var(--navy);font-weight:600">$${parseFloat(p.Price_USD||0).toFixed(2)}</span>
+      <span style="font-size:0.75rem;color:var(--text-soft)">${(p.Type||'').split('/')[0].trim()}</span>
+      <span style="font-size:0.75rem;color:var(--text-soft)">${(p.Style||'').split('/')[0].trim()}</span>
+      <span><button class="btn btn-sm btn-outline" onclick="event.stopPropagation();openEdit('${p.SKU}')">✏️</button></span>
+    </div>`).join('');
+}
+
+function filterTable(q) {
+  q = q.toLowerCase();
+  filtered = q ? allProducts.filter(p =>
+    (p.SKU+p.Title+p.Style+p.Type+p.Colors).toLowerCase().includes(q)
+  ) : [...allProducts];
+  renderTable();
+}
+
+function quickFilter(type) {
+  filtered = type ? allProducts.filter(p => (p.Category||p.Type||'').includes(type)) : [...allProducts];
+  if (document.getElementById('tblSearch')) document.getElementById('tblSearch').value = type;
+  renderTable();
+}
+
+function exportAllHashtags() {
+  const rows = ['SKU,Title,Hashtags', ...allProducts.map(p => `"${p.SKU}","${p.Title}","${p.Hashtags||''}"`)];
+  const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'})), download:'zanith_hashtags.csv' });
+  a.click();
+}
+
+// Detail
+function openDetail(sku) {
+  const p = allProducts.find(x => x.SKU === sku); if (!p) return;
+  activeProduct = p;
+  document.getElementById('dpSku').textContent        = p.SKU;
+  document.getElementById('dpSkuBadge').textContent    = p.SKU;
+  document.getElementById('dpTitle').textContent       = p.Title||'';
+  document.getElementById('dpDesc').textContent        = p.Description||'';
+  document.getElementById('dpPrice').textContent       = '$' + parseFloat(p.Price_USD||0).toFixed(2);
+  document.getElementById('dpHashtags').textContent    = p.Hashtags||'';
+  document.getElementById('dpImg').src = p.Image || 'images/'+p.SKU+'.png';
+  document.getElementById('dpTags').innerHTML = [p.Type,p.Style,p.Colors].filter(Boolean)
+    .map(t=>`<span class="dp-tag">${t}</span>`).join('');
+  document.getElementById('detailOverlay').classList.add('open');
+}
+function closeDetail() { document.getElementById('detailOverlay').classList.remove('open'); }
+function copyHashtags() {
+  if (!activeProduct) return;
+  navigator.clipboard && navigator.clipboard.writeText(activeProduct.Hashtags||'');
+  showToast('📋 Copied!', 'ok');
+}
+function openEditFromDetail() { closeDetail(); if (activeProduct) openEdit(activeProduct.SKU); }
+
+// Edit
+function openEdit(sku) {
+  const p = allProducts.find(x => x.SKU === sku); if (!p) return;
+  activeProduct = p;
+  document.getElementById('editSkuLabel').textContent = sku;
+  ['fSku','fType','fTitle','fStyle','fColors','fDesc','fHashtags','fImage'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = p[{fSku:'SKU',fType:'Type',fTitle:'Title',fStyle:'Style',fColors:'Colors',fDesc:'Description',fHashtags:'Hashtags',fImage:'Image'}[id]]||'';
+  });
+  document.getElementById('fPrice').value = p.Price_USD||'';
+  document.getElementById('editOverlay').classList.add('open');
+}
+function closeEdit() { document.getElementById('editOverlay').classList.remove('open'); }
+function saveEdit() {
+  if (!activeProduct) return;
+  const map = {fType:'Type',fTitle:'Title',fStyle:'Style',fColors:'Colors',fPrice:'Price_USD',fDesc:'Description',fHashtags:'Hashtags',fImage:'Image'};
+  Object.keys(map).forEach(id => { const el=document.getElementById(id); if(el) activeProduct[map[id]]=el.value; });
+  renderTable(); closeEdit(); showToast('✅ Preview updated!','ok');
+}
+
+// ══════════════════════════════════════
+// ORDERS
+// ══════════════════════════════════════
+function loadOrders() {
+  try { allOrders = JSON.parse(localStorage.getItem('zanith_orders')||'[]'); } catch(e){ allOrders=[]; }
+  filteredOrders = [...allOrders];
+  const sub = document.getElementById('ordersSubtitle');
+  if (sub) sub.textContent = allOrders.length + ' đơn hàng từ checkout';
+  return Promise.resolve();
+}
+
+function renderOrders() {
+  const wrap = document.getElementById('ordersWrap');
+  const cnt  = document.getElementById('orderCount');
+  if (cnt) cnt.textContent = '(' + filteredOrders.length + ')';
+  if (!filteredOrders.length) { wrap.innerHTML='<div class="tbl-msg">Chưa có đơn hàng nào</div>'; return; }
+  wrap.innerHTML = filteredOrders.map(o => {
+    const st = o.status||'pending_payment';
+    const cls = st.includes('confirm') ? 's-confirmed' : st.includes('cancel') ? 's-cancelled' : 's-pending';
+    const lbl = st.includes('confirm') ? 'Confirmed'  : st.includes('cancel')  ? 'Cancelled'   : 'Pending';
+    return `<div class="order-row" onclick="openOrderDetail('${o.orderRef||o.ref||''}')">
+      <span class="order-ref">${o.orderRef||o.ref||'—'}</span>
+      <span>${o.name||''} <span style="color:var(--muted);font-size:0.72rem">${o.email||''}</span></span>
+      <span style="font-weight:600;color:var(--navy)">$${o.total||'0'}</span>
+      <span style="color:var(--muted);font-size:0.75rem">${o.timeDisplay||''}</span>
+      <span class="order-status ${cls}">${lbl}</span>
+    </div>`;
+  }).join('');
+}
+
+function filterOrders(status) {
+  filteredOrders = status ? allOrders.filter(o=>(o.status||'').includes(status)) : [...allOrders];
+  renderOrders();
+}
+
+function openOrderDetail(ref) {
+  const o = allOrders.find(x=>(x.orderRef||x.ref)===ref); if(!o) return;
+  document.getElementById('odTitle').textContent = 'Đơn: ' + ref;
+  const items = Array.isArray(o.items)
+    ? o.items.map(i=>`<div>• ${i.title} × ${i.qty} — $${(i.price*i.qty).toFixed(2)}</div>`).join('')
+    : (o.items||'—');
+  document.getElementById('odBody').innerHTML = `
+    <table style="width:100%;border-collapse:collapse">
+      <tr><td style="padding:4px 0;color:var(--muted);width:120px">Khách hàng</td><td><strong>${o.name||'—'}</strong></td></tr>
+      <tr><td style="padding:4px 0;color:var(--muted)">Email</td><td style="color:var(--navy)">${o.email||'—'}</td></tr>
+      <tr><td style="padding:4px 0;color:var(--muted)">SĐT</td><td>${o.phone||'—'}</td></tr>
+      <tr><td style="padding:4px 0;color:var(--muted)">Thời gian</td><td>${o.timeDisplay||'—'}</td></tr>
+      <tr><td style="padding:4px 0;color:var(--muted);vertical-align:top">Sản phẩm</td><td>${items}</td></tr>
+      <tr><td style="padding:4px 0;color:var(--muted)">Tổng tiền</td><td><strong style="color:var(--navy);font-size:1.05rem">$${o.total||'0'} USD</strong></td></tr>
+      <tr><td style="padding:4px 0;color:var(--muted)">Ghi chú</td><td>${o.note||'—'}</td></tr>
+      <tr><td style="padding:4px 0;color:var(--muted)">Trạng thái</td><td>${o.status||'—'}</td></tr>
+    </table>`;
+  document.getElementById('odActions').innerHTML = `
+    <a class="btn btn-primary" href="mailto:${o.email}?subject=Zanith Order ${ref}&body=Chào ${o.name},%0A%0ACảm ơn bạn đã đặt hàng tại Zanith Crafted Studio!%0A%0AĐây là link download file của bạn: [DÁN LINK VÀO ĐÂY]%0A%0ATrân trọng,%0AZanith Crafted Studio">📧 Gửi file cho khách</a>
+    <button class="btn btn-success" onclick="updateOrderStatus('${ref}','payment_confirmed');closeOrderDetail()">✅ Xác nhận TT</button>
+    <button class="btn btn-outline" onclick="updateOrderStatus('${ref}','cancelled');closeOrderDetail()">❌ Hủy đơn</button>
+    <button class="btn btn-outline" onclick="closeOrderDetail()">Đóng</button>`;
+  document.getElementById('orderOverlay').classList.add('open');
+}
+function closeOrderDetail() { document.getElementById('orderOverlay').classList.remove('open'); }
+
+function updateOrderStatus(ref, status) {
+  const orders = JSON.parse(localStorage.getItem('zanith_orders')||'[]');
+  const idx = orders.findIndex(o=>(o.orderRef||o.ref)===ref);
+  if (idx>=0) { orders[idx].status=status; localStorage.setItem('zanith_orders',JSON.stringify(orders)); }
+  loadOrders(); renderOrders(); updateStats();
+  showToast('✅ Cập nhật trạng thái','ok');
+}
+
+function exportOrders() {
+  const rows = ['Order Ref,Name,Email,Phone,Items,Total,Time,Status',
+    ...allOrders.map(o=>`"${o.orderRef||o.ref}","${o.name}","${o.email}","${o.phone||''}","${o.items||''}","${o.total}","${o.timeDisplay||''}","${o.status||''}"`)];
+  const a = Object.assign(document.createElement('a'),{ href:URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'})), download:'zanith_orders.csv' });
+  a.click();
+}
+
+function clearOrders() {
+  localStorage.removeItem('zanith_orders');
+  loadOrders(); renderOrders(); updateStats();
+  showToast('🗑 Đã xóa tất cả đơn','ok');
+}
+
+// ══════════════════════════════════════
+// CAMPAIGNS
+// ══════════════════════════════════════
+const SEASONS = {
+  tet:        { pct:30, days:5  },
+  summer:     { pct:25, days:14 },
+  halloween:  { pct:20, days:5  },
+  christmas:  { pct:30, days:7  },
+  valentine:  { pct:20, days:3  },
+  sale11:     { pct:30, days:2  },
+  blackfriday:{ pct:40, days:4  }
+};
+
+function applyPreset(key) {
+  const p = SEASONS[key]; if (!p) return;
+  document.getElementById('campFlashToggle').classList.add('on');
+  document.getElementById('campFlashPct').value = p.pct;
+  const end = new Date(); end.setDate(end.getDate() + p.days);
+  document.getElementById('campFlashEnd').value = end.toISOString().slice(0,16);
+  showToast(`✅ Preset ${key}: ${p.pct}% off, ${p.days} ngày`,'ok');
+}
+
+function loadCampaignUI() {
+  let c = {};
+  try { c = JSON.parse(localStorage.getItem('zanith_campaign')||'{}'); } catch(e){}
+  const ft = document.getElementById('campFlashToggle');
+  if (ft) ft.className = 'toggle' + (c.flashActive ? ' on' : '');
+  if (c.flashPct) document.getElementById('campFlashPct').value = c.flashPct;
+  if (c.flashEnd) document.getElementById('campFlashEnd').value = new Date(c.flashEnd).toISOString().slice(0,16);
+  const bt = document.getElementById('campBundleToggle');
+  if (bt) bt.className = 'toggle' + (c.bundleActive !== false ? ' on' : '');
+  if (c.bundleQty) document.getElementById('campBundleQty').value = c.bundleQty;
+  if (c.bundleFreePct) document.getElementById('campBundleFree').value = c.bundleFreePct;
+  editCodes = c.discountCodes || [{ code:'ZANITH20', pct:20 }];
+  renderCodes();
+}
+
+function renderCodes() {
+  document.getElementById('codeListWrap').innerHTML = editCodes.map((c,i) => `
+    <div class="code-item">
+      <span class="code-tag">${c.code}</span>
+      <span class="code-pct">-${c.pct}%</span>
+      <button class="btn btn-sm btn-outline" style="margin-left:auto" onclick="removeCode(${i})">✕</button>
+    </div>`).join('');
+}
+function addCode() {
+  const code = (document.getElementById('newCodeVal').value||'').trim().toUpperCase();
+  const pct  = parseFloat(document.getElementById('newCodePct').value)||20;
+  if (!code) return;
+  editCodes.push({code, pct});
+  document.getElementById('newCodeVal').value = '';
+  renderCodes();
+}
+function removeCode(i) { editCodes.splice(i,1); renderCodes(); }
+
+async function saveCampaign() {
+  const flashEnd = document.getElementById('campFlashEnd').value;
+  const campaign = {
+    flashActive:  document.getElementById('campFlashToggle').classList.contains('on'),
+    flashEnd:     flashEnd ? new Date(flashEnd).toISOString() : null,
+    flashPct:     parseFloat(document.getElementById('campFlashPct').value)||20,
+    discountCodes: editCodes.slice(),
+    bundleActive: document.getElementById('campBundleToggle').classList.contains('on'),
+    bundleQty:    parseInt(document.getElementById('campBundleQty').value)||3,
+    bundleFreePct:parseInt(document.getElementById('campBundleFree').value)||1,
+    savedAt:      new Date().toISOString()
+  };
+  localStorage.setItem('zanith_campaign', JSON.stringify(campaign));
+
+  const webhookUrl = localStorage.getItem('zanith_webhook')||'';
+  if (!webhookUrl || webhookUrl === 'YOUR_APPS_SCRIPT_URL_HERE') {
+    showToast('✅ Lưu local! Thêm Webhook URL trong Settings để sync Sheet','ok');
+    return;
+  }
+  showToast('⏳ Đang sync lên Sheet...','');
+  try {
+    const codesStr = editCodes.map(d=>d.code+':'+d.pct).join('|');
+    await fetch(webhookUrl, {
+      method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'},
+      body: JSON.stringify({
+        action:'updateConfig',
+        config:{
+          flashActive:   campaign.flashActive ? 'TRUE':'FALSE',
+          flashEnd:      campaign.flashEnd||'',
+          flashPct:      String(campaign.flashPct),
+          discountCodes: codesStr||'ZANITH20:20',
+          bundleActive:  campaign.bundleActive ? 'TRUE':'FALSE',
+          bundleQty:     String(campaign.bundleQty),
+          bundleFreePct: String(campaign.bundleFreePct)
+        }
+      })
+    });
+    showToast('✅ Campaign synced lên Sheet! Mọi thiết bị thấy ngay.','ok');
+  } catch(e) {
+    showToast('✅ Lưu local OK. Sheet sync lỗi: '+e.message,'ok');
+  }
+}
+
+// ══════════════════════════════════════
+// ABOUT US
+// ══════════════════════════════════════
+const ABOUT_SLOTS = ['about_portrait','studio_wide','studio_1','studio_2','studio_3','studio_4','studio_5'];
+
+function loadAboutForm() {
+  let data = {};
+  try { data = JSON.parse(localStorage.getItem('zanith_about_images')||'{}'); } catch(e){}
+  ABOUT_SLOTS.forEach(slot => {
+    const inp  = document.getElementById('ab-'+slot);
+    const prev = document.getElementById('prev-'+slot);
+    if (inp && data[slot]) {
+      inp.value = data[slot];
+      if (prev) { prev.src = data[slot]; prev.style.display='block'; }
+    }
+  });
+}
+
+function prevAbout(slot, url) {
+  const el = document.getElementById('prev-'+slot); if (!el) return;
+  if (url) { el.src=url; el.style.display='block'; el.onerror=()=>el.style.display='none'; }
+  else el.style.display='none';
+}
+
+function saveAboutImages() {
+  const data = {};
+  ABOUT_SLOTS.forEach(slot => { const inp=document.getElementById('ab-'+slot); if(inp&&inp.value.trim()) data[slot]=inp.value.trim(); });
+  localStorage.setItem('zanith_about_images', JSON.stringify(data));
+  const st = document.getElementById('aboutStatus');
+  if (st) { st.innerHTML=`<span style="color:var(--green)">✅ Đã lưu ${Object.keys(data).length} ảnh!</span>`; setTimeout(()=>st.innerHTML='',3000); }
+}
+
+// ══════════════════════════════════════
+// SETTINGS
+// ══════════════════════════════════════
+function loadSettingsForm() {
+  const sid = localStorage.getItem('zanith_sheet_id')||'';
+  const el = document.getElementById('sheetInput'); if(el&&!el.value) el.value=sid;
+  const wh = localStorage.getItem('zanith_webhook')||'';
+  const whEl = document.getElementById('webhookInput'); if(whEl&&!whEl.value) whEl.value=wh;
+  const ak = localStorage.getItem('zanith_api_key')||'';
+  const akSt = document.getElementById('apiKeyStatus');
+  if(akSt&&ak) akSt.innerHTML=`<span style="color:var(--green)">✅ API key đã lưu (${ak.slice(0,12)}...)</span>`;
+  const fp = localStorage.getItem('zanith_free_pattern_url')||'';
+  const fpEl = document.getElementById('freePatternInput'); if(fpEl&&fp) fpEl.value=fp;
+  loadEJForm();
+}
+
+function saveSheet() {
+  let val = (document.getElementById('sheetInput').value||'').trim();
+  const m = val.match(/\/spreadsheets\/d\/([^/]+)/);
+  if (m) val = m[1];
+  if (!val) { document.getElementById('sheetStatus').innerHTML='<span style="color:var(--red)">Nhập Sheet ID hoặc URL</span>'; return; }
+  SHEET_ID = val;
+  localStorage.setItem('zanith_sheet_id', val);
+  document.getElementById('sheetStatus').innerHTML='<span style="color:var(--green)">✅ Đã lưu! Đang tải sản phẩm...</span>';
+  setSheetLinks(); loadProducts();
+}
+
+async function testSheet() {
+  const id = localStorage.getItem('zanith_sheet_id');
+  if (!id) { document.getElementById('sheetStatus').innerHTML='<span style="color:var(--red)">Chưa có Sheet ID</span>'; return; }
+  document.getElementById('sheetStatus').innerHTML='⏳ Đang test...';
+  try {
+    const r = await fetch(csvUrl(id)+'&t='+Date.now());
+    if (!r.ok) throw new Error('HTTP '+r.status);
+    const rows = parseCSV(await r.text());
+    document.getElementById('sheetStatus').innerHTML=`<span style="color:var(--green)">✅ OK — ${rows.length} sản phẩm</span>`;
+  } catch(e) {
+    document.getElementById('sheetStatus').innerHTML=`<span style="color:var(--red)">❌ ${e.message} — Sheet chưa Publish to web?</span>`;
+  }
+}
+
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!key) { document.getElementById('apiKeyStatus').innerHTML='<span style="color:var(--red)">Nhập key trước</span>'; return; }
+  if (!key.startsWith('sk-ant-')) { document.getElementById('apiKeyStatus').innerHTML='<span style="color:var(--red)">Key phải bắt đầu bằng sk-ant-...</span>'; return; }
+  localStorage.setItem('zanith_api_key', key);
+  document.getElementById('apiKeyInput').value='';
+  document.getElementById('apiKeyStatus').innerHTML=`<span style="color:var(--green)">✅ Đã lưu! Vào shop bấm VI để tự dịch.</span>`;
+}
+function clearApiKey() {
+  localStorage.removeItem('zanith_api_key');
+  document.getElementById('apiKeyInput').value='';
+  document.getElementById('apiKeyStatus').innerHTML='<span style="color:var(--muted)">Đã xóa</span>';
+}
+
+function saveFreePattern() {
+  const url = document.getElementById('freePatternInput').value.trim();
+  if (!url) return;
+  localStorage.setItem('zanith_free_pattern_url', url);
+  const st = document.getElementById('freePatternStatus');
+  if(st) { st.innerHTML='<span style="color:var(--green)">✅ Đã lưu!</span>'; setTimeout(()=>st.innerHTML='',3000); }
+}
+
+function loadEJForm() {
+  const keys = {ejPublicKey:'zanith_ej_public_key',ejServiceId:'zanith_ej_service_id',ejTplCustomer:'zanith_ej_tpl_customer',ejTplAdmin:'zanith_ej_tpl_admin',ejTplNewsletter:'zanith_ej_tpl_newsletter',ejAdminEmail:'zanith_ej_admin_email'};
+  Object.entries(keys).forEach(([id, lk]) => {
+    const el = document.getElementById(id); const v = localStorage.getItem(lk)||'';
+    if (el && !el.value && v) el.value = id==='ejPublicKey' ? v.slice(0,6)+'***' : v;
+  });
+  const pk = localStorage.getItem('zanith_ej_public_key')||'';
+  const st = document.getElementById('ejStatus');
+  if (st && pk) st.innerHTML='<span style="color:var(--green)">✅ EmailJS đã được cấu hình</span>';
+}
+
+function saveEmailJS() {
+  const pk  = document.getElementById('ejPublicKey').value.trim();
+  const sid = document.getElementById('ejServiceId').value.trim();
+  if (!pk||!sid) { document.getElementById('ejStatus').innerHTML='<span style="color:var(--red)">❌ Cần Public Key và Service ID</span>'; return; }
+  if (!pk.includes('***')) localStorage.setItem('zanith_ej_public_key', pk);
+  const ids = {ejServiceId:'zanith_ej_service_id',ejTplCustomer:'zanith_ej_tpl_customer',ejTplAdmin:'zanith_ej_tpl_admin',ejTplNewsletter:'zanith_ej_tpl_newsletter',ejAdminEmail:'zanith_ej_admin_email'};
+  Object.entries(ids).forEach(([id,lk])=>{ const v=document.getElementById(id).value.trim(); if(v) localStorage.setItem(lk,v); });
+  document.getElementById('ejStatus').innerHTML='<span style="color:var(--green)">✅ Đã lưu EmailJS!</span>';
+}
+
+function clearEmailJS() {
+  ['zanith_ej_public_key','zanith_ej_service_id','zanith_ej_tpl_customer','zanith_ej_tpl_admin','zanith_ej_tpl_newsletter','zanith_ej_admin_email'].forEach(k=>localStorage.removeItem(k));
+  ['ejPublicKey','ejServiceId','ejTplCustomer','ejTplAdmin','ejTplNewsletter','ejAdminEmail'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('ejStatus').innerHTML='<span style="color:var(--muted)">Đã xóa</span>';
+}
+
+async function testEmailJS() {
+  const pk = localStorage.getItem('zanith_ej_public_key')||'';
+  const sid = localStorage.getItem('zanith_ej_service_id')||'';
+  const ta  = localStorage.getItem('zanith_ej_tpl_admin')||'';
+  if (!pk||!sid||!ta) { document.getElementById('ejStatus').innerHTML='<span style="color:var(--red)">❌ Cần Public Key, Service ID và Template Admin</span>'; return; }
+  document.getElementById('ejStatus').innerHTML='⏳ Đang gửi test...';
+  try {
+    await fetch('https://api.emailjs.com/api/v1.0/email/send',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ service_id:sid, template_id:ta, user_id:pk,
+        template_params:{ order_ref:'TEST-001', customer_name:'Test', customer_email:'test@test.com',
+          to_email:localStorage.getItem('zanith_ej_admin_email')||'', items:'Test item × 1 — $8.00',
+          subtotal:'$8.00', discount:'None', total:'$8.00', total_vnd:'≈ 203.200 VNĐ', note:'Test email', status:'TEST', time:new Date().toLocaleString('vi-VN') }
+      })
+    });
+    document.getElementById('ejStatus').innerHTML='<span style="color:var(--green)">✅ Đã gửi! Kiểm tra hộp thư.</span>';
+  } catch(e) { document.getElementById('ejStatus').innerHTML=`<span style="color:var(--red)">❌ ${e.message}</span>`; }
+}
+
+function saveWebhook() {
+  const url = document.getElementById('webhookInput').value.trim();
+  if (!url) { document.getElementById('webhookStatus').innerHTML='<span style="color:var(--red)">⚠️ Nhập URL</span>'; return; }
+  localStorage.setItem('zanith_webhook', url);
+  document.getElementById('webhookStatus').innerHTML='<span style="color:var(--green)">✅ Đã lưu! Nhấn Test.</span>';
+}
+
+async function testWebhook() {
+  const url = localStorage.getItem('zanith_webhook')||document.getElementById('webhookInput').value.trim();
+  if (!url) { document.getElementById('webhookStatus').innerHTML='<span style="color:var(--red)">Chưa có URL</span>'; return; }
+  document.getElementById('webhookStatus').innerHTML='⏳ Đang test...';
+  try {
+    await fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},
+      body:JSON.stringify({order_ref:'TEST-'+Date.now(),name:'Test',email:'test@test.com',items:'Test item',total:'$0.00',status:'TEST'})});
+    document.getElementById('webhookStatus').innerHTML='<span style="color:var(--green)">✅ Gửi OK! Kiểm tra Sheet tab Orders.</span>';
+  } catch(e) { document.getElementById('webhookStatus').innerHTML=`<span style="color:var(--red)">❌ ${e.message}</span>`; }
+}
+
+function toggleGuide() {
+  const el=document.getElementById('guideContent'); const ar=document.getElementById('guideArrow');
+  const open = el.style.display==='flex';
+  el.style.display = open ? 'none' : 'flex';
+  if (ar) ar.textContent = open ? '▼' : '▲';
+}
+
+function exportConfig() {
+  const cfg = {
+    _note:'Zanith config — paste vào config.json trên GitHub',
+    sheet_id:    localStorage.getItem('zanith_sheet_id')||'',
+    webhook_url: localStorage.getItem('zanith_webhook')||'',
+    emailjs:{
+      public_key:    localStorage.getItem('zanith_ej_public_key')||'',
+      service_id:    localStorage.getItem('zanith_ej_service_id')||'',
+      tpl_customer:  localStorage.getItem('zanith_ej_tpl_customer')||'',
+      tpl_admin:     localStorage.getItem('zanith_ej_tpl_admin')||'',
+      tpl_newsletter:localStorage.getItem('zanith_ej_tpl_newsletter')||'',
+      admin_email:   localStorage.getItem('zanith_ej_admin_email')||''
+    },
+    anthropic_api_key: localStorage.getItem('zanith_api_key')||''
+  };
+  const json = JSON.stringify(cfg,null,2);
+  navigator.clipboard && navigator.clipboard.writeText(json);
+  const m = document.createElement('div');
+  m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1rem';
+  m.innerHTML=`<div style="background:#fff;border-radius:14px;padding:1.5rem;max-width:540px;width:100%;max-height:90vh;overflow:auto">
+    <div style="display:flex;justify-content:space-between;margin-bottom:1rem"><strong style="color:var(--navy)">📋 Export config.json</strong>
+    <button onclick="this.closest('[style*=fixed]').remove()" style="background:none;border:none;font-size:1.2rem;cursor:pointer">✕</button></div>
+    <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.75rem">Copy → dán vào <code>config.json</code> trên GitHub → Commit → mọi thiết bị tự load.</p>
+    <textarea style="width:100%;height:250px;font-family:monospace;font-size:0.73rem;border:1px solid var(--border);border-radius:8px;padding:0.75rem;background:var(--warm)" readonly>${json}</textarea>
+    <button onclick="navigator.clipboard.writeText(this.previousElementSibling.value);this.textContent='✓ Đã copy!'" style="margin-top:0.75rem;background:var(--navy);color:#fff;border:none;padding:0.6rem 1.2rem;border-radius:8px;cursor:pointer">📋 Copy JSON</button>
+  </div>`;
+  document.body.appendChild(m);
+}
+
+// Load config từ config.json
+async function loadConfigFromFile() {
+  try {
+    const r = await fetch('config.json?t='+Date.now());
+    if (!r.ok) return;
+    const cfg = await r.json();
+    if (cfg.sheet_id && !localStorage.getItem('zanith_sheet_id')) {
+      localStorage.setItem('zanith_sheet_id', cfg.sheet_id); SHEET_ID = cfg.sheet_id;
+    }
+    if (cfg.webhook_url) localStorage.setItem('zanith_webhook', cfg.webhook_url);
+    if (cfg.emailjs) {
+      const ej = cfg.emailjs;
+      const map = {public_key:'zanith_ej_public_key',service_id:'zanith_ej_service_id',tpl_customer:'zanith_ej_tpl_customer',tpl_admin:'zanith_ej_tpl_admin',tpl_newsletter:'zanith_ej_tpl_newsletter',admin_email:'zanith_ej_admin_email'};
+      Object.entries(map).forEach(([k,lk])=>{ if(ej[k]) localStorage.setItem(lk,ej[k]); });
+    }
+    if (cfg.anthropic_api_key && !localStorage.getItem('zanith_api_key'))
+      localStorage.setItem('zanith_api_key', cfg.anthropic_api_key);
+    console.log('[Zanith Admin] Config loaded ✅');
+  } catch(e) { console.log('[Zanith Admin] config.json chưa setup'); }
+}
+
+// ══════════════════════════════════════
+// FALLBACK DATA
+// ══════════════════════════════════════
+const FALLBACK_DATA = [
+  {SKU:'PTN-ACC-001',Category:'Digital Pattern',Title:'Boho Fashion Accessories Toss Pattern',Type:'Illustrated Toss',Style:'Boho / Y2K Retro',Colors:'Pink, Beige',Price_USD:'14.00',Image:'images/IMG_2152.jpeg'},
+  {SKU:'PTN-GEO-Bear-001',Category:'Digital Pattern',Title:'Abstract Geometric Bear Silhouette Pattern',Type:'Geometric Abstract',Style:'Modern / Bauhaus',Colors:'Black, Baby Blue',Price_USD:'8.00',Image:'images/PTN-GEO-Bear-001.png'},
+  {SKU:'PTN-GEO-diamond-001',Category:'Digital Pattern',Title:'Periwinkle Blue Diamond Tile Pattern',Type:'Diamond Tile',Style:'Classic / Woven',Colors:'Periwinkle, Lavender',Price_USD:'8.00',Image:'images/PTN-GEO-diamond-001.png'},
+  {SKU:'PTN-ILL-Goose-Whimsy-001',Category:'Digital Pattern',Title:'Illustrated Goose Whimsy Argyle Pattern',Type:'Illustrated Novelty',Style:'Whimsical',Colors:'Pink, Olive',Price_USD:'14.00',Image:'images/IMG_2145.jpg'},
+  {SKU:'PTN-GEO-FLW-001',Category:'Digital Pattern',Title:'Sage Green Blush Pink Floral Lattice Pattern',Type:'Floral Lattice',Style:'Cottagecore',Colors:'Sage Green, Blush Pink',Price_USD:'8.00',Image:'images/PTN-GEO-FLW-001.png'}
+];
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
+window.addEventListener('DOMContentLoaded', async function() {
+  await loadConfigFromFile();
+  SHEET_ID = localStorage.getItem('zanith_sheet_id') || '';
+  if (SHEET_ID) {
+    const el = document.getElementById('sheetInput'); if(el) el.value = SHEET_ID;
+    setSheetLinks();
+  }
+  loadProducts();
+  loadOrders();
+  updateStats();
+});
+</script>
+</body>
+</html>
