@@ -7,9 +7,9 @@
  *
  * ⚙️ CHỈ SỬA 3 DÒNG NÀY:
  */
-const ZANITH_ADMIN_PASSWORD = 'Zanith@79';      // ← mật khẩu admin
-const ZANITH_SHEET_URL      = 'YOUR_APPS_SCRIPT_URL';  // ← URL Apps Script
-const ZANITH_SHEET_SECRET   = 'YOUR_SECRET_KEY';       // ← Secret key
+const ZANITH_ADMIN_PASSWORD = 'Zanith2026';      // ← mật khẩu admin
+const ZANITH_SHEET_URL      = 'https://script.google.com/macros/s/AKfycbzOKYnoBiHwTVpk3kkPnXupaQc201QTFA-9NlY6diQ5z1HtoUfgJB-wojZSWdhJUEUO/exec';  // ← URL Apps Script
+const ZANITH_SHEET_SECRET   = 'Zanith@79';       // ← Secret key
 /**
  * ============================================================
  */
