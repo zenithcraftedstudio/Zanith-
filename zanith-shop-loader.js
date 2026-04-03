@@ -1,4 +1,7 @@
-/**
+const ZANITH_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSY4PMlpCs78wKXxX_E2BKqGuJI3T9-vCrMWpo8YZtEEwyJvo5khwreI5Ca6xnQtZepxSaj9aeovGzW/pub?gid=0&single=true&output=csv';
+
+
+// Các đoạn code xử lý bên dưới của loader...
  * ============================================================
  * ZANITH SHOP — DATA LOADER
  * ============================================================
