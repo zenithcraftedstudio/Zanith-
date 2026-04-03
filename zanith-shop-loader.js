@@ -10,7 +10,7 @@ var ZANITH_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSY4PMlpCs
  *
  * ⚙️ CHỈ SỬA 2 DÒNG NÀY (giống hệt trong zanith-guard.js):
  */
-var ZANITH_SHOP_SHEET_URL    = 'https://script.google.com/macros/s/AKfycbxfgj56Z5oKgpfVoG4cNpVm8-NiamCpJa3H_dKQaPu2Pj2pBfPiRGDriSL4AL8AnLtR/exec';  // ← URL Apps Script
+var ZANITH_SHOP_SHEET_URL    = 'https://script.google.com/macros/s/AKfycbzpCsrYKA-xwF2UYKseCyY-EVkAJJPUWTw7gRxMvofunZT5-lT51PRhH31jk1GNdnA/exec';  // ← URL Apps Script
 var ZANITH_SHOP_SHEET_SECRET = 'Zanith2026';       // ← Secret key
 /**
  * ============================================================
