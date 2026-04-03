@@ -1,4 +1,4 @@
-const ZANITH_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSY4PMlpCs78wKXxX_E2BKqGuJI3T9-vCrMWpo8YZtEEwyJvo5khwreI5Ca6xnQtZepxSaj9aeovGzW/pub?gid=0&single=true&output=csv';
+var ZANITH_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSY4PMlpCs78wKXxX_E2BKqGuJI3T9-vCrMWpo8YZtEEwyJvo5khwreI5Ca6xnQtZepxSaj9aeovGzW/pub?gid=0&single=true&output=csv';
 
 
 // Các đoạn code xử lý bên dưới của loader...
@@ -10,7 +10,7 @@ const ZANITH_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSY4PMlp
  *
  * ⚙️ CHỈ SỬA 2 DÒNG NÀY (giống hệt trong zanith-guard.js):
  */
-var ZANITH_SHOP_SHEET_URL    = 'https://script.google.com/macros/s/AKfycbzOKYnoBiHwTVpk3kkPnXupaQc201QTFA-9NlY6diQ5z1HtoUfgJB-wojZSWdhJUEUO/exec';  // ← URL Apps Script
+var ZANITH_SHOP_SHEET_URL    = 'https://script.google.com/macros/s/AKfycbwUmN6vywW2m4VRJsXeXp1T0ZHuioUV-ZbEHReFj2GgswyCkRuAxWmM3pw5zncscYWO/exec';  // ← URL Apps Script
 var ZANITH_SHOP_SHEET_SECRET = 'YOUR_SECRET_KEY';       // ← Secret key
 /**
  * ============================================================
