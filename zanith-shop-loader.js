@@ -11,7 +11,7 @@ var ZANITH_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSY4PMlpCs
  * ⚙️ CHỈ SỬA 2 DÒNG NÀY (giống hệt trong zanith-guard.js):
  */
 var ZANITH_SHOP_SHEET_URL    = 'https://script.google.com/macros/s/AKfycbwUmN6vywW2m4VRJsXeXp1T0ZHuioUV-ZbEHReFj2GgswyCkRuAxWmM3pw5zncscYWO/exec';  // ← URL Apps Script
-var ZANITH_SHOP_SHEET_SECRET = 'YOUR_SECRET_KEY';       // ← Secret key
+var ZANITH_SHOP_SHEET_SECRET = 'Zanith2026';       // ← Secret key
 /**
  * ============================================================
  * Cách hoạt động:
