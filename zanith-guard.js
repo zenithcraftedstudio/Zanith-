@@ -7,11 +7,21 @@
  *
  * ⚙️ CHỈ SỬA 3 DÒNG NÀY:
  */
-let ZANITH_ADMIN_PASSWORD = localStorage.getItem('zanith_session_pw'); 
-const ZANITH_SHEET_URL      = 'URL_APPS_SCRIPT_CỦA_BẠN'; 
-const ZANITH_SHEET_SECRET   = 'KEY_CỦA_BẠN';     // ← mật khẩu admin
-const ZANITH_SHEET_URL      = 'https://script.google.com/macros/s/AKfycbzOKYnoBiHwTVpk3kkPnXupaQc201QTFA-9NlY6diQ5z1HtoUfgJB-wojZSWdhJUEUO/exec';  // ← URL Apps Script
-const ZANITH_SHEET_SECRET   = 'Zanith@79';       // ← Secret key
+// KHÔNG dán mật khẩu trực tiếp vào đây nữa
+const ZANITH_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwUmN6vywW2m4VRJsXeXp1T0ZHuioUV-ZbEHReFj2GgswyCkRuAxWmM3pw5zncscYWO/exec';
+
+// Lấy mật khẩu từ bộ nhớ máy bạn (do bạn nhập vào lúc đăng nhập)
+let ZANITH_SHEET_SECRET = localStorage.getItem('zanith_admin_key'); 
+
+if (!ZANITH_SHEET_SECRET) {
+    // Nếu chưa có mật khẩu, hiện bảng bắt nhập
+    let pw = prompt("Nhập mã Admin để truy cập Zanith Central:");
+    if (pw) {
+        localStorage.setItem('zanith_admin_key', pw);
+        ZANITH_SHEET_SECRET = pw;
+        location.reload(); // Load lại để áp dụng mật khẩu
+    }
+}
 /**
  * ============================================================
  */
