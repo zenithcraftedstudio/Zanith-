@@ -2270,35 +2270,52 @@ function parseCSV(txt) {
 }
 
 // Load from Google Sheets
+// Khai báo URL Script của bạn ở đầu file (hoặc trong hàm)
+const SCRIPT_URL = "DÁN_LINK_WEB_APP_URL_CỦA_BẠN_VÀO_ĐÂY";
+
 async function loadProducts() {
-  const id = localStorage.getItem('zanith_sheet_id') || SHEET_ID;
-  if(!id || id==='YOUR_SHEET_ID_HERE'){
-    loadFallback(); return;
-  }
-  // Hiện loading skeleton
+  // 1. Hiện loading skeleton
   var grid = document.getElementById('productsGrid');
-  if(grid) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted);font-size:0.9rem">⏳ Đang tải sản phẩm...</div>';
-  document.getElementById('resultsInfo').textContent = '';
+  if(grid) grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted);font-size:0.9rem">⏳ Đang kết nối hệ thống Zanith...</div>';
+  
   try {
-    const r = await fetch(CSV_URL(id) + '&t=' + Date.now()); // cache-bust
-    if(!r.ok) throw new Error('HTTP ' + r.status);
-    const txt = await r.text();
-    console.log('[Zanith] CSV preview:', txt.substring(0,300));
-    allProducts = parseCSV(txt);
-    console.log('[Zanith] Parsed:', allProducts.length, 'rows. First:', allProducts[0] && allProducts[0].SKU);
-    if(!allProducts.length) throw new Error('0 sản phẩm — kiểm tra Sheet có cột SKU chưa?');
-    filtered = [...allProducts];
-    renderGrid();
-    renderReviews();
-    showToast('✅ ' + allProducts.length + ' sản phẩm đã tải', 'success');
-    handleURLHash(); // ← mở đúng modal nếu URL có #SKU
-  } catch(e){
+    // 2. Gọi Apps Script thay vì gọi link CSV
+    const response = await fetch(SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "read",
+        key: "Zanith2026" // Phải khớp với KEY_READ trong Apps Script
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.status === "success") {
+      // 3. Lấy dữ liệu từ mảng data trả về
+      allProducts = result.data; 
+      
+      console.log('[Zanith] Đã tải:', allProducts.length, 'sản phẩm.');
+      
+      if(!allProducts.length) throw new Error('Chưa có sản phẩm nào trong Sheet Products');
+
+      // 4. Cập nhật giao diện
+      filtered = [...allProducts];
+      renderGrid();
+      renderReviews();
+      showToast('✅ ' + allProducts.length + ' sản phẩm đã tải', 'success');
+      handleURLHash(); 
+
+    } else {
+      throw new Error(result.message || "Lỗi phản hồi từ Script");
+    }
+
+  } catch(e) {
     console.error('[Zanith] Load lỗi:', e.message);
-    showToast('⚠️ ' + e.message + ' — hiển thị data mẫu', 'info');
-    loadFallback();
+    showToast('⚠️ Lỗi kết nối: ' + e.message, 'info');
+    // Nếu lỗi, hiện data mẫu để web không bị trắng xóa
+    if (typeof loadFallback === "function") loadFallback();
   }
 }
-
 function loadFallback(){
   allProducts = FALLBACK_DATA;
   filtered = [...allProducts];
