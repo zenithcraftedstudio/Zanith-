@@ -68,34 +68,28 @@ var ZANITH_SHOP_SHEET_SECRET = 'Zanith2026';       // ← Secret key
   function fetchFromScript() {
     return fetch(ZANITH_SHOP_SHEET_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ secret: ZANITH_SHOP_SHEET_SECRET, action: 'getData' })
-    }).then(function (res) {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
+      mode: 'cors',           // Quan trọng 1: Chế độ chia sẻ tài nguyên
+      redirect: 'follow',     // Quan trọng 2: Cho phép Google chuyển hướng link
+      headers: { 
+        'Content-Type': 'text/plain;charset=utf-8' // Quan trọng 3: Dùng text/plain để Google không chặn
+      },
+      body: JSON.stringify({ 
+        action: 'read',       // Khớp với lệnh 'read' trong Apps Script 3 lớp của bạn
+        key: ZANITH_SHOP_SHEET_SECRET 
+      })
+    })
+    .then(function (res) {
+      if (!res.ok) throw new Error('Lỗi kết nối HTTP ' + res.status);
       return res.json();
-    }).then(function (result) {
-      if (result && result.data && Array.isArray(result.data.products)) {
-        return result.data.products;
+    })
+    .then(function (result) {
+      // Kiểm tra cấu trúc dữ liệu trả về từ Apps Script 3 lớp
+      if (result && result.status === "success" && Array.isArray(result.data)) {
+        return result.data; // Trả về mảng sản phẩm
       }
-      throw new Error('No products in response');
+      throw new Error(result.message || 'Dữ liệu không đúng định dạng');
     });
   }
-
-  // ── Main loader ──
-  function run() {
-    // Nếu chưa cài URL → bỏ qua, để CSV loader gốc làm việc
-    if (!ZANITH_SHOP_SHEET_URL || ZANITH_SHOP_SHEET_URL === 'YOUR_APPS_SCRIPT_URL') {
-      console.log('[ZanithShop] Apps Script URL chưa cài — dùng Google Sheet CSV như cũ.');
-      return;
-    }
-
-    // 1. Thử cache trước để trang hiện nhanh
-    var cached = getCache();
-    if (cached && cached.length > 0) {
-      console.log('[ZanithShop] Dùng cache (' + cached.length + ' sản phẩm)');
-      tryTriggerShopRender(cached);
-    }
-
     // 2. Fetch mới từ Apps Script (background)
     fetchFromScript().then(function (products) {
       if (!products || products.length === 0) return;
