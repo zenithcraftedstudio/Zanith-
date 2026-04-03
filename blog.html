@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Blog — Zanith Crafted Studio | Seamless Pattern Tips & POD Design Guide</title>
+<meta name="description" content="Design tips, POD business guides, and surface pattern inspiration from Zanith Crafted Studio. Learn how to use seamless patterns for print-on-demand, packaging, and fashion.">
+<meta name="keywords" content="seamless pattern tutorial, POD design tips, surface pattern design, print on demand business, fabric pattern guide">
+<link rel="canonical" href="https://zenithcraftedstudio.github.io/Zanith-/blog.html">
+<meta property="og:title" content="Blog — Zanith Crafted Studio">
+<meta property="og:description" content="Design tips, POD business guides & pattern inspiration.">
+<meta property="og:url" content="https://zenithcraftedstudio.github.io/Zanith-/blog.html">
+<meta property="og:type" content="blog">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SGGH9DKW5J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SGGH9DKW5J');</script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1e2d4a;--navy-light:#2a3f63;--gold:#c8974a;--gold-light:#e8b86d;
+  --cream:#faf7f2;--warm:#f3ede3;--white:#fff;--border:#e2ddd6;
+  --text:#1a2332;--text-soft:#5a6a7e;--muted:#8a9bb5;
+  --shadow:0 2px 16px rgba(30,45,74,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Instrument Sans',sans-serif;background:var(--cream);color:var(--text);}
+
+/* NAV */
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:var(--shadow);}
+.nav-logo{font-family:'Fraunces',serif;font-size:1.05rem;color:var(--navy);text-decoration:none;display:flex;align-items:center;gap:0.6rem;}
+.nav-logo-icon{width:32px;height:32px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.nav-right{display:flex;align-items:center;gap:0.75rem;}
+.nav-right a{font-size:0.82rem;color:var(--text-soft);text-decoration:none;transition:color 0.2s;}
+.nav-right a:hover{color:var(--navy);}
+.btn-shop{background:var(--navy);color:white!important;padding:0.45rem 1rem;border-radius:20px;font-size:0.82rem;font-weight:600;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 60%,#3a5180 100%);padding:3.5rem 1.5rem 3rem;text-align:center;}
+.hero-eyebrow{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:var(--gold-light);margin-bottom:0.75rem;}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:500;color:var(--white);margin-bottom:0.75rem;line-height:1.2;}
+.hero p{color:rgba(255,255,255,0.7);font-size:0.9rem;max-width:520px;margin:0 auto;}
+
+/* MAIN */
+.main{max-width:900px;margin:0 auto;padding:3rem 1.5rem;}
+.section-label{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin-bottom:1.5rem;}
+
+/* CATEGORY FILTER */
+.cat-row{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.cat-pill{padding:0.35rem 0.9rem;border-radius:20px;font-size:0.78rem;border:1.5px solid var(--border);background:transparent;cursor:pointer;color:var(--text-soft);transition:all 0.15s;font-family:inherit;}
+.cat-pill:hover{border-color:var(--navy);color:var(--navy);}
+.cat-pill.active{background:var(--navy);border-color:var(--navy);color:white;font-weight:600;}
+
+/* FEATURED */
+.featured{background:var(--white);border-radius:16px;border:1px solid var(--border);overflow:hidden;margin-bottom:2rem;display:grid;grid-template-columns:1fr 1fr;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow 0.2s;}
+.featured:hover{box-shadow:0 4px 24px rgba(30,45,74,0.14);}
+.featured-img{background:linear-gradient(135deg,var(--navy) 0%,#3a5180 100%);min-height:260px;display:flex;align-items:center;justify-content:center;font-size:4rem;padding:2rem;}
+.featured-body{padding:2rem;}
+.post-cat{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold);margin-bottom:0.5rem;}
+.featured-body h2{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;color:var(--navy);margin-bottom:0.75rem;line-height:1.3;}
+.featured-body p{font-size:0.85rem;color:var(--text-soft);line-height:1.75;margin-bottom:1.25rem;}
+.post-meta{font-size:0.72rem;color:var(--muted);margin-bottom:1rem;}
+.read-btn{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:white;padding:0.55rem 1.2rem;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;font-family:inherit;transition:background 0.2s;}
+.read-btn:hover{background:var(--navy-light);}
+
+/* POSTS GRID */
+.posts-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:3rem;}
+.post-card{background:var(--white);border-radius:14px;border:1px solid var(--border);overflow:hidden;transition:box-shadow 0.2s;cursor:pointer;}
+.post-card:hover{box-shadow:var(--shadow);}
+.post-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;}
+.post-thumb.bg1{background:linear-gradient(135deg,#f3ede3,#e8d8c0);}
+.post-thumb.bg2{background:linear-gradient(135deg,#e8f0f8,#c8d8ec);}
+.post-thumb.bg3{background:linear-gradient(135deg,#f0ede8,#ddd0c8);}
+.post-thumb.bg4{background:linear-gradient(135deg,#e8f3e8,#c8dcc8);}
+.post-thumb.bg5{background:linear-gradient(135deg,#f8ede8,#ecccc0);}
+.post-body{padding:1.1rem 1.25rem 1.25rem;}
+.post-body h3{font-family:'Fraunces',serif;font-size:1rem;font-weight:500;color:var(--navy);margin-bottom:0.5rem;line-height:1.35;}
+.post-body p{font-size:0.78rem;color:var(--text-soft);line-height:1.65;margin-bottom:0.75rem;}
+.post-tag{display:inline-block;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold);background:rgba(200,151,74,0.1);padding:2px 7px;border-radius:4px;margin-bottom:6px;}
+.post-date{font-size:0.7rem;color:var(--muted);}
+
+/* ARTICLE MODAL */
+.article-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:500;align-items:flex-end;justify-content:center;padding:0;}
+.article-overlay.open{display:flex;}
+.article-box{background:var(--white);width:100%;max-width:720px;max-height:92vh;border-radius:20px 20px 0 0;overflow-y:auto;padding:0;margin:0 auto;}
+.article-box::before{content:'';display:block;width:40px;height:4px;background:rgba(0,0,0,0.12);border-radius:2px;margin:12px auto 0;}
+.article-head{padding:1.5rem 2rem 0;}
+.article-head .post-cat{margin-bottom:0.5rem;}
+.article-head h1{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:500;color:var(--navy);line-height:1.3;margin-bottom:0.5rem;}
+.article-head .post-meta{margin-bottom:1rem;}
+.article-divider{border:none;border-top:1px solid var(--border);margin:0 2rem 1.5rem;}
+.article-body{padding:0 2rem 2rem;font-size:0.9rem;color:var(--text);line-height:1.85;}
+.article-body h2{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:500;color:var(--navy);margin:1.75rem 0 0.6rem;}
+.article-body h3{font-size:0.95rem;font-weight:600;color:var(--navy);margin:1.25rem 0 0.4rem;}
+.article-body p{margin-bottom:1rem;}
+.article-body ul,.article-body ol{padding-left:1.25rem;margin-bottom:1rem;}
+.article-body li{margin-bottom:0.4rem;}
+.article-body strong{color:var(--navy);}
+.article-body em{font-style:italic;}
+.article-body .highlight{background:var(--warm);border-left:3px solid var(--gold);padding:1rem 1.25rem;border-radius:0 8px 8px 0;margin:1.25rem 0;font-size:0.85rem;}
+.article-body .cta-box{background:var(--navy);color:white;border-radius:12px;padding:1.5rem;text-align:center;margin:1.75rem 0;}
+.article-body .cta-box h3{color:white;margin-bottom:0.5rem;font-size:1rem;}
+.article-body .cta-box p{color:rgba(255,255,255,0.75);font-size:0.82rem;margin-bottom:1rem;}
+.article-body .cta-box a{background:var(--gold);color:var(--navy);padding:0.6rem 1.5rem;border-radius:8px;font-weight:700;text-decoration:none;font-size:0.85rem;display:inline-block;}
+.article-close{position:sticky;top:1rem;float:right;background:var(--warm);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;margin:1rem 1.5rem 0 0;z-index:10;}
+
+/* NEWSLETTER */
+.newsletter-cta{background:var(--navy);border-radius:16px;padding:2.5rem;text-align:center;margin-bottom:3rem;}
+.newsletter-cta h2{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:500;color:white;margin-bottom:0.5rem;}
+.newsletter-cta p{color:rgba(255,255,255,0.7);font-size:0.85rem;margin-bottom:1.25rem;}
+.nl-form{display:flex;gap:0.5rem;max-width:400px;margin:0 auto;}
+.nl-form input{flex:1;padding:0.6rem 1rem;border-radius:8px;border:none;font-family:inherit;font-size:0.85rem;}
+.nl-form button{background:var(--gold);color:var(--navy);border:none;padding:0.6rem 1.2rem;border-radius:8px;font-weight:700;cursor:pointer;font-family:inherit;font-size:0.85rem;white-space:nowrap;}
+
+/* FOOTER */
+footer{background:var(--navy);color:rgba(255,255,255,0.6);text-align:center;padding:2rem 1.5rem;font-size:0.78rem;}
+footer a{color:var(--gold-light);text-decoration:none;}
+
+/* HIDDEN */
+.hidden{display:none!important;}
+
+/* RESPONSIVE */
+@media(max-width:680px){
+  .featured{grid-template-columns:1fr;}
+  .featured-img{min-height:160px;}
+  .posts-grid{grid-template-columns:1fr;}
+  .article-body,.article-head{padding-left:1.25rem;padding-right:1.25rem;}
+  .nl-form{flex-direction:column;}
+  .article-divider{margin-left:1.25rem;margin-right:1.25rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-icon">🌿</div>
+    <div>
+      <div style="font-size:1rem;font-weight:500">Zanith Crafted Studio</div>
+      <div style="font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em">Handcrafted Patterns</div>
+    </div>
+  </a>
+  <div class="nav-right">
+    <a href="index.html">Shop</a>
+    <a href="blog.html" style="color:var(--navy);font-weight:600">Blog</a>
+    <a href="faq.html">FAQ</a>
+    <a href="index.html" class="btn-shop">🛍️ Buy Patterns</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Design Studio Blog</div>
+  <h1>Pattern Tips & POD Business Guides</h1>
+  <p>Practical guides for makers, POD sellers, and designers who want to build a beautiful, profitable creative business.</p>
+</div>
+
+<div class="main">
+  <div class="section-label">Browse by topic</div>
+
+  <div class="cat-row">
+    <button class="cat-pill active" onclick="filterCat('all',this)">All Posts</button>
+    <button class="cat-pill" onclick="filterCat('pod',this)">POD Business</button>
+    <button class="cat-pill" onclick="filterCat('design',this)">Design Tips</button>
+    <button class="cat-pill" onclick="filterCat('packaging',this)">Packaging</button>
+    <button class="cat-pill" onclick="filterCat('seo',this)">Sell Online</button>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="featured" data-cat="pod" onclick="openArticle('pod-start')">
+    <div class="featured-img">🖨️</div>
+    <div class="featured-body">
+      <div class="post-cat">POD Business</div>
+      <h2>How to Start a Print-on-Demand Shop With No Design Skills</h2>
+      <p>You don't need to know Illustrator or Photoshop. Here's exactly how to launch a POD shop on Printify or Redbubble using ready-made commercial patterns — start to first sale in under 48 hours.</p>
+      <div class="post-meta">March 2025 · 8 min read</div>
+      <button class="read-btn" onclick="event.stopPropagation();openArticle('pod-start')">Read the guide →</button>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <div class="posts-grid">
+    <div class="post-card" data-cat="design" onclick="openArticle('pattern-types')">
+      <div class="post-thumb bg2">🎨</div>
+      <div class="post-body">
+        <span class="post-tag">Design Tips</span>
+        <div class="post-date">March 2025</div>
+        <h3>5 Types of Seamless Patterns and When to Use Each One</h3>
+        <p>From geometric repeats to illustrated toss patterns — understanding which style fits your product is the key to higher conversions.</p>
+      </div>
+    </div>
+
+    <div class="post-card" data-cat="packaging" onclick="openArticle('packaging')">
+      <div class="post-thumb bg3">📦</div>
+      <div class="post-body">
+        <span class="post-tag">Packaging</span>
+        <div class="post-date">March 2025</div>
+        <h3>How a $6 Pattern File Can Make Customers Share Your Packaging on Instagram</h3>
+        <p>Custom tissue paper, stickers, and wrapping — the unboxing moment is your best free marketing tool. Here's how to do it affordably.</p>
+      </div>
+    </div>
+
+    <div class="post-card" data-cat="pod" onclick="openArticle('license')">
+      <div class="post-thumb bg4">📄</div>
+      <div class="post-body">
+        <span class="post-tag">POD Business</span>
+        <div class="post-date">Feb 2025</div>
+        <h3>Commercial License Explained: What You Can and Cannot Do With a Digital Pattern</h3>
+        <p>Most sellers skip reading the license — then get surprised later. This guide breaks it down simply so you never make a costly mistake.</p>
+      </div>
+    </div>
+
+    <div class="post-card" data-cat="seo" onclick="openArticle('etsy-seo')">
+      <div class="post-thumb bg5">🔍</div>
+      <div class="post-body">
+        <span class="post-tag">Sell Online</span>
+        <div class="post-date">Feb 2025</div>
+        <h3>Etsy SEO for POD Sellers: How to Write Titles That Actually Get Found</h3>
+        <p>The right product title on Etsy can be the difference between 0 views and 500 views per month. Learn the exact formula that works.</p>
+      </div>
+    </div>
+
+    <div class="post-card" data-cat="design" onclick="openArticle('color-palette')">
+      <div class="post-thumb bg1">🎨</div>
+      <div class="post-body">
+        <span class="post-tag">Design Tips</span>
+        <div class="post-date">Jan 2025</div>
+        <h3>How to Choose the Right Color Palette for Your POD Products</h3>
+        <p>Color is the first thing customers notice. Learn which palettes sell best on Printify and how to build a cohesive product line.</p>
+      </div>
+    </div>
+
+    <div class="post-card" data-cat="packaging" onclick="openArticle('brand-identity')">
+      <div class="post-thumb bg2">🌿</div>
+      <div class="post-body">
+        <span class="post-tag">Packaging</span>
+        <div class="post-date">Jan 2025</div>
+        <h3>Build a Recognizable Brand Identity for Your Handmade Shop in One Weekend</h3>
+        <p>Consistent patterns, colors, and packaging make customers remember you. Here's a simple system any small shop owner can follow.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter-cta">
+    <h2>Get new patterns + guides first</h2>
+    <p>Join 500+ makers and POD sellers. New patterns, design tips, and exclusive discounts — straight to your inbox.</p>
+    <div class="nl-form" id="nlForm">
+      <input type="text" id="nlName" placeholder="Your name">
+      <input type="email" id="nlEmail" placeholder="Email address">
+      <button onclick="nlSubscribe()">Subscribe →</button>
+    </div>
+    <p style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:0.75rem">No spam. Unsubscribe anytime.</p>
+  </div>
+</div>
+
+<!-- ARTICLE OVERLAY -->
+<div class="article-overlay" id="articleOverlay" onclick="handleOverlayClick(event)">
+  <div class="article-box" id="articleBox">
+    <button class="article-close" onclick="closeArticle()">✕</button>
+    <div id="articleContent"></div>
+  </div>
+</div>
+
+<footer>
+  <p style="margin-bottom:0.5rem">🌿 <strong style="color:white">Zanith Crafted Studio</strong> — Handcrafted Patterns &amp; Digital Goods</p>
+  <p><a href="index.html">Shop</a> · <a href="blog.html">Blog</a> · <a href="faq.html">FAQ</a> · <a href="about.html">About</a></p>
+  <p style="margin-top:0.75rem;font-size:0.7rem">© 2025 Zanith Crafted Studio · Vietnam</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// NỘI DUNG BÀI VIẾT — HARDCODED TRỰC TIẾP TRONG HTML
+// Không dùng localStorage — hoạt động trên mọi thiết bị
+// ═══════════════════════════════════════════════════════
+var ARTICLES = {
+
+  'pod-start': {
+    cat: 'POD Business',
+    title: 'How to Start a Print-on-Demand Shop With No Design Skills',
+    date: 'March 2025',
+    readTime: '8 min read',
+    body: '<p>Print-on-demand (POD) is one of the most accessible ways to start an online business — you don\'t need inventory, you don\'t need a warehouse, and you definitely don\'t need to be a graphic designer.</p>'
+        + '<div class="highlight">💡 The shortcut: Buy ready-made commercial-licensed patterns and upload them directly to Printify or Printful. Total setup time: under 2 hours.</div>'
+        + '<h2>Step 1 — Choose your POD platform</h2>'
+        + '<p><strong>Printify</strong> connects to Etsy, Shopify, and WooCommerce — it\'s the most popular for beginners. <strong>Printful</strong> has slightly higher quality and faster US shipping. Both are free to start.</p>'
+        + '<h2>Step 2 — Pick your products</h2>'
+        + '<ul><li><strong>All-over print t-shirts &amp; hoodies</strong> — high margin, great for pattern showcasing</li><li><strong>Tote bags</strong> — low base cost, huge gift market</li><li><strong>Mugs &amp; water bottles</strong> — evergreen bestsellers</li><li><strong>Throw pillows</strong> — perfect for home decor patterns</li><li><strong>Wrapping paper</strong> — seasonal goldmine</li></ul>'
+        + '<h2>Step 3 — Get your pattern files</h2>'
+        + '<p>You need seamless patterns at <strong>300 DPI minimum</strong>. The pattern must tile perfectly — no visible seams when repeated. Always check the license includes <strong>commercial use for print-on-demand</strong>. Zanith patterns include this automatically.</p>'
+        + '<div class="highlight">✅ File format checklist: PNG (transparent background), minimum 5000×5000px, 300 DPI, sRGB color profile.</div>'
+        + '<h2>Step 4 — Upload and create mockups</h2>'
+        + '<p>In Printify: upload your PNG → drag and scale to fill the product template → preview on the 3D mockup → download the auto-generated product photos. No Photoshop needed.</p>'
+        + '<h2>Step 5 — Write SEO-optimized listings</h2>'
+        + '<p>Your listing title is the single most important factor for Etsy search. Use specific terms: <em>"cottagecore floral pattern tote bag"</em> performs far better than <em>"cute bag"</em>.</p>'
+        + '<h2>Step 6 — Price for profit</h2>'
+        + '<p>Formula: <strong>Base cost × 2.5 + $2</strong> = your retail price. This covers Etsy fees, gives you ~40% margin, and keeps you competitive.</p>'
+        + '<div class="highlight">💡 Most sellers make their first sale within 2 weeks of listing 10+ products. Volume matters more than perfection at the start.</div>'
+        + '<div class="cta-box"><h3>Ready to start? Browse our pattern collection.</h3><p>All patterns include commercial license for POD, 300 DPI files, and instant download.</p><a href="index.html">Shop Patterns →</a></div>'
+  },
+
+  'pattern-types': {
+    cat: 'Design Tips',
+    title: '5 Types of Seamless Patterns and When to Use Each One',
+    date: 'March 2025',
+    readTime: '5 min read',
+    body: '<p>Not all seamless patterns are created equal. The <em>type</em> of pattern you choose has a huge impact on which products it suits, which customers it attracts, and how much you can charge.</p>'
+        + '<h2>1. Geometric Patterns</h2>'
+        + '<p><strong>What they are:</strong> Clean lines, shapes, and mathematical repeats — stripes, chevrons, hexagons, diamonds.</p>'
+        + '<p><strong>Best for:</strong> Home textiles, stationery, professional products, gender-neutral items, modern minimalist aesthetic.</p>'
+        + '<p><strong>Why they work:</strong> Timeless and versatile. Beginner-friendly — they scale well and look good at any size.</p>'
+        + '<h2>2. Floral &amp; Botanical</h2>'
+        + '<p><strong>Best for:</strong> Women\'s fashion, gift wrap, stationery, cottagecore products, spring/summer collections. The single best-selling category on Etsy.</p>'
+        + '<p><strong>Why they work:</strong> Universally appealing. Floral patterns have a near-infinite buyer base and sell year-round with seasonal spikes.</p>'
+        + '<h2>3. Illustrated / Novelty (Toss Patterns)</h2>'
+        + '<p><strong>What they are:</strong> Small illustrated objects "tossed" randomly across the surface — mushrooms, food, animals, hobbies, icons.</p>'
+        + '<p><strong>Best for:</strong> Gifts, niche interest items, children\'s products. Strong viral potential.</p>'
+        + '<div class="highlight">💡 Niche novelty patterns often outperform "beautiful" generic patterns because buyers feel personally seen.</div>'
+        + '<h2>4. Medallion / Folk Art</h2>'
+        + '<p><strong>Best for:</strong> Home decor, premium packaging, bohemian fashion, high-end gifting. These command higher prices.</p>'
+        + '<h2>5. Textured / Abstract</h2>'
+        + '<p><strong>Best for:</strong> Backgrounds, digital products, branding kits, packaging backdrops. Often layered with other design elements.</p>'
+        + '<div class="highlight">💡 Start with geometric or floral for the widest market. Specialize once you have sales data.</div>'
+        + '<div class="cta-box"><h3>Browse all pattern types at Zanith</h3><p>Every style, all with commercial license included.</p><a href="index.html">View Collection →</a></div>'
+  },
+
+  'packaging': {
+    cat: 'Packaging',
+    title: 'How a $6 Pattern File Can Make Customers Share Your Packaging on Instagram',
+    date: 'March 2025',
+    readTime: '6 min read',
+    body: '<p>Your packaging is part of your product. Customers don\'t just buy what\'s inside — they buy the <em>experience</em> of receiving it. And in 2025, that experience is content.</p>'
+        + '<p>The unboxing moment has become one of the most powerful free marketing channels available to small businesses. A single Instagram or TikTok post from a happy customer can reach thousands of potential buyers.</p>'
+        + '<h2>What you can do with one $6 pattern file</h2>'
+        + '<ul><li>🎁 <strong>Tissue paper</strong> — Send your seamless tile to Noissue or a local print shop. Minimum orders as low as 25 sheets.</li><li>🏷️ <strong>Thank-you stickers</strong> — Print your pattern as a circular or square sticker. Stickermule ships 10 for ~$8.</li><li>📦 <strong>Custom boxes</strong> — Packlane and Packhelp accept seamless tile files. They handle the repeat for you.</li><li>✉️ <strong>Greeting cards</strong> — Pattern on the back, personal message inside.</li><li>🛍️ <strong>Branded bags</strong> — Paper bags printed with your pattern instead of generic kraft brown.</li></ul>'
+        + '<div class="highlight">💡 If 1 in 10 customers posts an unboxing photo with 500 followers, that\'s 50 potential new customers per 10 orders — for free.</div>'
+        + '<h2>How to make your packaging "postable"</h2>'
+        + '<p><strong>Color coordination:</strong> Match your tissue paper pattern color to your product\'s primary color. When photographed, it looks intentional and magazine-worthy.</p>'
+        + '<p><strong>Layering:</strong> Wrap the product in pattern tissue, seal with a matching sticker, place in a kraft box. Three layers = three opportunities to impress.</p>'
+        + '<p><strong>The handwritten card:</strong> Even if pre-printed, a card saying "Thank you for supporting a small business" dramatically increases the chance of a social post. Add your Instagram handle.</p>'
+        + '<h2>The math</h2>'
+        + '<p>Pattern file: $6. Custom tissue paper for 100 orders: ~$45. Branded stickers (100): ~$18. Total: ~$69 for 100 beautifully branded orders. That\'s $0.69 per customer for the chance at free Instagram reach.</p>'
+        + '<div class="cta-box"><h3>Find your perfect packaging pattern</h3><p>All Zanith patterns are print-ready at 300 DPI and include commercial license for packaging use.</p><a href="index.html">Browse Patterns →</a></div>'
+  },
+
+  'license': {
+    cat: 'POD Business',
+    title: 'Commercial License Explained: What You Can and Cannot Do With a Digital Pattern',
+    date: 'Feb 2025',
+    readTime: '5 min read',
+    body: '<p>The commercial license is probably the most misunderstood part of buying digital patterns. Most people buy the file, skim the license, and assume they can do whatever they want. This leads to preventable legal problems.</p>'
+        + '<h2>What "Commercial License" allows ✅</h2>'
+        + '<ul><li>✅ Create and sell print-on-demand products (t-shirts, mugs, tote bags, pillows)</li><li>✅ Print on fabric yardage and sell the finished goods</li><li>✅ Use on custom packaging for your business</li><li>✅ Create digital products (planners, wallpapers, scrapbooking kits)</li><li>✅ Use in client work — end product goes to client</li><li>✅ Create physical stationery and paper goods to sell</li></ul>'
+        + '<h2>What you CANNOT do ❌</h2>'
+        + '<ul><li>❌ Resell the original pattern file as-is</li><li>❌ Claim the pattern as your own original design</li><li>❌ Sublicense — you cannot give or sell the file to other designers</li><li>❌ Use in quantities that exceed your license tier limit</li><li>❌ Upload to stock sites like Creative Market or Envato</li></ul>'
+        + '<div class="highlight">⚠️ The most common mistake: sellers buy one pattern and sell 10,000 units, exceeding the Basic license limit. Always check your tier before scaling.</div>'
+        + '<h2>Zanith\'s license tiers</h2>'
+        + '<p><strong>Basic (included free with every purchase):</strong> Up to 500 end products per design. Perfect for small shops just starting out.</p>'
+        + '<p><strong>Standard (+$8):</strong> Up to 2,000 end products. Ideal for growing shops with 1–2 bestsellers.</p>'
+        + '<p><strong>Extended (+$25):</strong> Unlimited products, including large-scale manufacturing.</p>'
+        + '<div class="cta-box"><h3>All Zanith patterns include Basic commercial license</h3><p>Upgrade your license anytime — before you hit your limits, not after.</p><a href="index.html">Shop Now →</a></div>'
+  },
+
+  'etsy-seo': {
+    cat: 'Sell Online',
+    title: 'Etsy SEO for POD Sellers: How to Write Titles That Actually Get Found',
+    date: 'Feb 2025',
+    readTime: '7 min read',
+    body: '<p>Etsy\'s search algorithm decides which products buyers see first. Your title is the single most important signal it uses. A well-written title can be the difference between 0 views and 500 views per month — for the exact same product.</p>'
+        + '<h2>The anatomy of a high-performing title</h2>'
+        + '<p><strong>Format:</strong> [Product Type] [Style/Aesthetic] [Color/Theme] [Use Case or Recipient]</p>'
+        + '<p>❌ <em>"Cute Floral Tote Bag"</em></p>'
+        + '<p>✅ <em>"Cottagecore Floral Tote Bag — Sage Green Botanical Print, Aesthetic Gift for Gardener, Plant Mom Birthday"</em></p>'
+        + '<p>The second title contains 6 different search terms. Each term is a separate opportunity to appear in search results.</p>'
+        + '<h2>Keywords that consistently drive traffic</h2>'
+        + '<p><strong>Aesthetic keywords:</strong> cottagecore, dark academia, Y2K, grandmillennial, coastal grandmother, boho, maximalist, Japandi</p>'
+        + '<p><strong>Color + material keywords:</strong> sage green, dusty blue, terracotta, rust orange, warm beige, muted tones, earthy neutral</p>'
+        + '<p><strong>Occasion/recipient keywords:</strong> gift for her, teacher gift, plant mom gift, bookworm gift, birthday gift for friend, housewarming</p>'
+        + '<div class="highlight">💡 The fastest way to find real buyer keywords: type your product into the Etsy search bar and read the autocomplete suggestions. These are actual searches from real buyers last month.</div>'
+        + '<h2>Tags: use all 13</h2>'
+        + '<p>Etsy gives you 13 tags — never leave any empty. Tags should be different from your title keywords to maximize coverage. If your title says "cottagecore tote bag", your tags might include "botanical accessories", "nature lover gift", "floral market bag".</p>'
+        + '<h2>The first image is your real SEO</h2>'
+        + '<p>Search results show only your first image. If it doesn\'t make someone stop scrolling, your title never gets read. Lifestyle mockups consistently outperform white-background product shots for POD items.</p>'
+        + '<div class="cta-box"><h3>Unique patterns that stand out in search results</h3><p>When your pattern is distinctive, your product photos get the click. Then your SEO does the rest.</p><a href="index.html">Find Your Pattern →</a></div>'
+  },
+
+  'color-palette': {
+    cat: 'Design Tips',
+    title: 'How to Choose the Right Color Palette for Your POD Products',
+    date: 'Jan 2025',
+    readTime: '5 min read',
+    body: '<p>Color is the first thing a buyer notices. Before they read your title, before they check the price — they react to color. And certain palettes consistently outsell others on print-on-demand platforms.</p>'
+        + '<h2>Palettes that consistently sell in 2025</h2>'
+        + '<p><strong>Earthy neutrals</strong> (sage green, terracotta, warm cream, rust, dusty rose): The #1 best-selling palette on Etsy since 2020. Matches every home aesthetic, appeals to buyers across age groups, and photographs beautifully in lifestyle settings.</p>'
+        + '<p><strong>Moody darks</strong> (navy, forest green, burgundy, charcoal, deep teal): Perfect for premium gifting, men\'s market, autumn/winter, and sophisticated home decor.</p>'
+        + '<p><strong>Pastels</strong> (blush, lavender, mint, pale yellow, soft peach): Strong performers for spring/summer, bridal and wedding niches, children\'s products, and feminine gift markets.</p>'
+        + '<p><strong>High contrast brights</strong> (cobalt + yellow, coral + teal, red + black): Best for novelty and statement products. Higher risk, higher reward.</p>'
+        + '<div class="highlight">💡 The single biggest mistake new POD sellers make: using too many colors. A product with 7 colors looks chaotic. A product with 3 well-chosen colors looks intentional and premium.</div>'
+        + '<h2>How to build a cohesive product line</h2>'
+        + '<p>Choose one palette and apply it to all your products. Buyers who visit your Etsy shop should feel like they\'re looking at a curated collection. A cohesive visual identity encourages buyers to purchase multiple items.</p>'
+        + '<h2>Seasonal timing</h2>'
+        + '<p>List autumn palettes in August (buyers plan ahead). Spring palettes should appear by February. Don\'t wait until the season starts — Etsy\'s algorithm needs 4–6 weeks to rank new listings.</p>'
+        + '<div class="cta-box"><h3>Browse Zanith patterns by aesthetic and color palette</h3><p>Find the palette that matches your shop\'s identity — all print-ready, all commercial licensed.</p><a href="index.html">Shop Collection →</a></div>'
+  },
+
+  'brand-identity': {
+    cat: 'Packaging',
+    title: 'Build a Recognizable Brand Identity for Your Handmade Shop in One Weekend',
+    date: 'Jan 2025',
+    readTime: '6 min read',
+    body: '<p>Brand identity sounds like something only big companies need. But for small shops, it\'s actually more important — because you don\'t have a marketing budget, so your brand has to do the work for you.</p>'
+        + '<h2>The 3 elements of a memorable small shop brand</h2>'
+        + '<p><strong>1. A signature pattern</strong><br>Your most distinctive visual element. When your packaging, your products, and your social media all share the same pattern, customers start to associate that aesthetic with your shop specifically.</p>'
+        + '<p><strong>2. A consistent color palette</strong><br>Pick 3 colors: one dominant, one accent, one neutral. Use them everywhere — product backgrounds, packaging, your Etsy banner, your Instagram grid.</p>'
+        + '<p><strong>3. A simple wordmark</strong><br>Your shop name in a beautiful, consistent font. Place it in the same position on every piece of packaging and every product photo.</p>'
+        + '<div class="highlight">💡 Customers often can\'t name what makes a brand feel "premium" — it\'s usually just that all the visual elements feel like they belong to the same family.</div>'
+        + '<h2>Your one-weekend brand plan</h2>'
+        + '<p><strong>Saturday morning (2 hours):</strong> Choose your signature pattern and color palette. Browse Zanith\'s collection filtered by aesthetic — find the one that already feels like your shop.</p>'
+        + '<p><strong>Saturday afternoon (2 hours):</strong> Apply your pattern to packaging mockups in Canva. Create your shop banner, business card design, and tissue paper template.</p>'
+        + '<p><strong>Sunday morning (2 hours):</strong> Order your first batch of branded materials. Reshoot 3–5 product photos using your new brand colors as backgrounds or props.</p>'
+        + '<p><strong>Sunday afternoon (2 hours):</strong> Update your Etsy shop: new banner, new product photos, consistent descriptions. Write a short "About" section that tells your brand story in 3 sentences.</p>'
+        + '<h2>What to expect after</h2>'
+        + '<p>Brand cohesion improves conversion rate. The same number of visitors start buying at a higher rate because your shop looks trustworthy and intentional. Most sellers see a 15–30% increase in conversion rate within 30 days of a visual brand refresh.</p>'
+        + '<div class="cta-box"><h3>Find your brand\'s signature pattern at Zanith</h3><p>Every pattern is designed to work across products, packaging, and digital — your whole brand from one file.</p><a href="index.html">Browse Patterns →</a></div>'
+  }
+
+};
+
+// ══════ FILTER ══════
+function filterCat(cat, btn) {
+  document.querySelectorAll('.cat-pill').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var featured = document.querySelector('.featured');
+  var cards = document.querySelectorAll('.post-card');
+  if (cat === 'all') {
+    if (featured) featured.classList.remove('hidden');
+    cards.forEach(function(c) { c.classList.remove('hidden'); });
+  } else {
+    if (featured) featured.classList.toggle('hidden', featured.dataset.cat !== cat);
+    cards.forEach(function(c) { c.classList.toggle('hidden', c.dataset.cat !== cat); });
+  }
+}
+
+// ══════ OPEN ARTICLE ══════
+function openArticle(id) {
+  var a = ARTICLES[id];
+  if (!a) return;
+  document.getElementById('articleContent').innerHTML =
+    '<div class="article-head">'
+    + '<div class="post-cat">' + a.cat + '</div>'
+    + '<h1>' + a.title + '</h1>'
+    + '<div class="post-meta">' + a.date + ' · ' + a.readTime + '</div>'
+    + '</div>'
+    + '<hr class="article-divider">'
+    + '<div class="article-body">' + a.body + '</div>';
+  var overlay = document.getElementById('articleOverlay');
+  overlay.classList.add('open');
+  document.getElementById('articleBox').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  if (typeof gtag !== 'undefined') gtag('event', 'blog_read', { article_id: id });
+}
+
+// ══════ CLOSE ARTICLE ══════
+function closeArticle() {
+  document.getElementById('articleOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('articleOverlay')) closeArticle();
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeArticle();
+});
+
+// ══════ NEWSLETTER ══════
+function nlSubscribe() {
+  var name = (document.getElementById('nlName').value || '').trim();
+  var email = (document.getElementById('nlEmail').value || '').trim();
+  if (!name || !email || !email.includes('@')) {
+    alert('Please enter your name and a valid email address.');
+    return;
+  }
+  document.getElementById('nlForm').innerHTML =
+    '<p style="color:rgba(255,255,255,0.9);font-size:0.9rem;padding:0.75rem 0">'
+    + '🎉 Thanks ' + name + '! We\'ll be in touch soon.</p>';
+  if (typeof gtag !== 'undefined') gtag('event', 'newsletter_signup', { source: 'blog' });
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Zanith Crafted Studio Blog",
+  "description": "Pattern design tips, POD business guides, and surface design inspiration",
+  "url": "https://zenithcraftedstudio.github.io/Zanith-/blog.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Zanith Crafted Studio"
+  }
+}
+</script>
+</body>
+</html>
