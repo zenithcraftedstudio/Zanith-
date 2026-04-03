@@ -7,7 +7,7 @@
  * ============================================================
  * ⚙️ CHỈ SỬA DÒNG NÀY:
  */
-const ZANITH_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzpCsrYKA-xwF2UYKseCyY-EVkAJJPUWTw7gRxMvofunZT5-lT51PRhH31jk1GNdnA/exec';
+const ZANITH_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwPRo-qRD4U6USHiQBUCIurwAt2fg_XeNE5SFUwbZ_YO7pvfMux61Un33zF7lYn0vId/exec';
 /**
  * ============================================================
  * HƯỚNG DẪN APPS SCRIPT:
@@ -206,43 +206,31 @@ const ZANITH_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzpCsrYKA-xwF2
       var val = pwInput.value;
       if (!val) return;
 
-      // Kiểm tra xem Apps Script URL đã được cài chưa
-      if (!ZANITH_SHEET_URL || ZANITH_SHEET_URL === 'YOUR_APPS_SCRIPT_URL') {
-        setMsg('⚠️ Chưa cài Apps Script URL trong file', 'error');
-        return;
-      }
-
       loginBtn.disabled = true;
       setMsg('Đang xác thực...', 'info');
 
-      // Gửi password lên Apps Script để verify — password KHÔNG lưu ở client
       fetch(ZANITH_SHEET_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        mode: 'cors',
+        redirect: 'follow', // Quan trọng: Để không bị lỗi Fail to fetch
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // Quan trọng: Tránh lỗi CORS
         body: JSON.stringify({ action: 'verifyPassword', secret: val })
       })
-      .then(function(res) {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        return res.json();
-      })
+      .then(function(res) { return res.json(); })
       .then(function(result) {
         loginBtn.disabled = false;
-        if (result && result.ok === true) {
-          // ✅ Đúng password
+        // Kiểm tra đúng cấu trúc trả về từ Apps Script mới
+        if (result && result.status === "success" && result.data.ok === true) {
           unlockSuccess(val);
         } else {
-          // ❌ Sai password
           onWrongPassword();
         }
       })
       .catch(function(err) {
         loginBtn.disabled = false;
-        // Nếu lỗi mạng / CORS → thông báo rõ
-        setMsg('Lỗi kết nối Script: ' + err.message, 'error');
-        console.warn('[ZanithGuard] verify error:', err);
+        setMsg('Lỗi kết nối: ' + err.message, 'error');
       });
     }
-
     function onWrongPassword() {
       attempts++;
       updateDots(attempts, true);
