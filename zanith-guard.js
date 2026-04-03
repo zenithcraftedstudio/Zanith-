@@ -7,7 +7,7 @@
  *
  * ⚙️ CHỈ SỬA 3 DÒNG NÀY:
  */
-const ZANITH_ADMIN_PASSWORD = 'zanith2025';      // ← mật khẩu admin
+const ZANITH_ADMIN_PASSWORD = 'Zanith@79';      // ← mật khẩu admin
 const ZANITH_SHEET_URL      = 'YOUR_APPS_SCRIPT_URL';  // ← URL Apps Script
 const ZANITH_SHEET_SECRET   = 'YOUR_SECRET_KEY';       // ← Secret key
 /**
