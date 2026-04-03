@@ -10,7 +10,7 @@ const ZANITH_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSY4PMlp
  *
  * ⚙️ CHỈ SỬA 2 DÒNG NÀY (giống hệt trong zanith-guard.js):
  */
-var ZANITH_SHOP_SHEET_URL    = 'YOUR_APPS_SCRIPT_URL';  // ← URL Apps Script
+var ZANITH_SHOP_SHEET_URL    = 'https://script.google.com/macros/s/AKfycbzOKYnoBiHwTVpk3kkPnXupaQc201QTFA-9NlY6diQ5z1HtoUfgJB-wojZSWdhJUEUO/exec';  // ← URL Apps Script
 var ZANITH_SHOP_SHEET_SECRET = 'YOUR_SECRET_KEY';       // ← Secret key
 /**
  * ============================================================
