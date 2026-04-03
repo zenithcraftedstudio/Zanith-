@@ -8,7 +8,7 @@
  * ⚙️ CHỈ SỬA 3 DÒNG NÀY:
  */
 // KHÔNG dán mật khẩu trực tiếp vào đây nữa
-const ZANITH_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxfgj56Z5oKgpfVoG4cNpVm8-NiamCpJa3H_dKQaPu2Pj2pBfPiRGDriSL4AL8AnLtR/exec';
+const ZANITH_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzpCsrYKA-xwF2UYKseCyY-EVkAJJPUWTw7gRxMvofunZT5-lT51PRhH31jk1GNdnA/exec';
 
 // Lấy mật khẩu từ bộ nhớ máy bạn (do bạn nhập vào lúc đăng nhập)
 let ZANITH_SHEET_SECRET = localStorage.getItem('zanith_admin_key'); 
