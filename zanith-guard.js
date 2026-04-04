@@ -7,7 +7,7 @@
  * ============================================================
  * ⚙️ CHỈ SỬA DÒNG NÀY:
  */
-const ZANITH_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzc2TrDD6oURWP3Kdw2yTQnKZBHGxR3AcYljH3bzl3hMqB_TzlJT_PMAzh6zx_iGhkr/exec';
+const ZANITH_SHEET_URL = 'https://script.google.com/macros/s/AKfycby1pe9o__nUO6PIb1XQgAcGuo0n1IDZgMWoO4c6GJ7fmneoUYhSzdmQb-k1UpQLx3Q/exec';
 /**
  * ============================================================
  * HƯỚNG DẪN APPS SCRIPT:
