@@ -7,7 +7,7 @@
  * ============================================================
  * ⚙️ CHỈ SỬA DÒNG NÀY:
  */
-const ZANITH_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzSZCXiXhZl27rH-BplHG7OoskTjINf59mKSPx9NhxkYcNecj3jjMvJVeiqgu438QlY/exec';
+const ZANITH_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwK2-ROkPYH3jfASdec8VsuXqNpjACVKptXQx64yv7zby0lTJxTQbooMyb5kVCwPyHK/exec';
 /**
  * ============================================================
  * HƯỚNG DẪN APPS SCRIPT:
@@ -281,17 +281,30 @@ const ZANITH_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzSZCXiXhZl27r
     }
 
     function callSheet(action, payload, secret) {
-      var s = secret || window.ZANITH_SHEET_SECRET || sessionStorage.getItem('zanith_session_secret') || '';
-      var body = Object.assign({ secret: s, action: action }, payload);
-      return fetch(ZANITH_SHEET_URL, {
+    // 1. Lấy URL và Key từ bộ nhớ trình duyệt
+    var url = window.ZANITH_SHEET_URL || localStorage.getItem('zanith_webhook_url');
+    var s = secret || sessionStorage.getItem('zanith_session_secret') || '';
+
+    // 2. Tạo gói dữ liệu kèm Tên Miền để Apps Script xác minh (Bảo mật v6.0)
+    var body = Object.assign({ 
+        secret: s, 
+        action: action, 
+        domain: window.location.hostname // Tự động lấy zenithcraftedstudio.github.io
+    }, payload);
+
+    // 3. Gửi đi
+    return fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        mode: 'cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(body)
-      }).then(function (res) {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        return res.json();
-      });
-    }
+    })
+    .then(res => res.json())
+    .catch(err => {
+        console.error("Lỗi kết nối Zanith:", err);
+        throw err;
+    });
+}
 
     function loadDataFromSheet(secret) {
       setSyncStatus('syncing', 'Đang tải...');
