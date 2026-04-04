@@ -280,19 +280,18 @@ const ZANITH_SHEET_URL = 'https://script.google.com/macros/s/AKfycby1pe9o__nUO6P
       syncText.textContent = text;
     }
 
-    function callSheet(action, payload, secret) {
-    // 1. Lấy URL và Key từ bộ nhớ trình duyệt
-    var url = window.ZANITH_SHEET_URL || localStorage.getItem('zanith_webhook_url');
+function callSheet(action, payload, secret) {
+    // ÉP BUỘC dùng link chuẩn, không lấy từ bộ nhớ cũ
+    var url = ZANITH_SHEET_URL; 
     var s = secret || sessionStorage.getItem('zanith_session_secret') || '';
 
-    // 2. Tạo gói dữ liệu kèm Tên Miền để Apps Script xác minh (Bảo mật v6.0)
-    var body = Object.assign({ 
-        secret: s, 
-        action: action, 
-        domain: window.location.hostname // Tự động lấy zenithcraftedstudio.github.io
-    }, payload);
+    var body = {
+        secret: s,
+        action: action,
+        domain: window.location.hostname,
+        data: payload || {}
+    };
 
-    // 3. Gửi đi
     return fetch(url, {
         method: 'POST',
         mode: 'cors',
@@ -301,9 +300,10 @@ const ZANITH_SHEET_URL = 'https://script.google.com/macros/s/AKfycby1pe9o__nUO6P
     })
     .then(res => res.json())
     .catch(err => {
-        console.error("Lỗi kết nối Zanith:", err);
+        console.error("Lỗi kết nối:", err);
         throw err;
     });
+}
 }
 
     function loadDataFromSheet(secret) {
