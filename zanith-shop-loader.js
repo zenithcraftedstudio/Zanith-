@@ -1,31 +1,69 @@
 /**
- * ZANITH LOADER v6.0 - AUTO SYNC
- * Tự động tải sản phẩm và cấu hình từ Google Sheet
+ * ZANITH LOADER v6.1 - HYBRID CACHE & AUTO SYNC
+ * Tối ưu tốc độ Load và hỗ trợ link Pinterest (#SKU)
  */
 
 function initZanithStore() {
-    console.log("Zanith: Đang kết nối hệ thống...");
+    const CACHE_KEY = 'zanith_products_cache';
+    console.log("Zanith: Đang khởi động hệ thống...");
 
-    // Gọi hàm callSheet từ file zanith-guard.js
-    // Chúng ta dùng KEY_READ "Zanith2026" để lấy dữ liệu công khai
+    // 1. TỐI ƯU TỐC ĐỘ: Lấy dữ liệu từ bộ nhớ tạm (LocalStorage) để hiện ngay lập tức
+    const cachedData = localStorage.getItem(CACHE_KEY);
+    if (cachedData) {
+        const products = JSON.parse(cachedData);
+        console.log("🚀 Zanith: Hiển thị nhanh từ Cache.");
+        if (typeof renderProducts === "function") renderProducts(products);
+        // Sau khi hiện từ cache, kiểm tra xem có cần mở Modal theo URL #SKU không
+        setTimeout(handleURLHash, 500); 
+    }
+
+    // 2. ĐỒNG BỘ ONLINE: Gọi Apps Script để lấy dữ liệu mới nhất (Chạy ngầm)
+    // Chúng ta vẫn dùng hàm callSheet của bạn để giữ tính bảo mật
     callSheet("readProducts", {}, "Zanith2026")
     .then(response => {
         if (response.status === "success") {
-            console.log("Zanith: Đã lấy dữ liệu thành công từ Sheet.");
+            const newDataStr = JSON.stringify(response.data);
             
-            // response.data chính là danh sách sản phẩm của bạn
-            // Hàm renderProducts phải là hàm vẽ giao diện hiện tại của bạn
-            if (typeof renderProducts === "function") {
-                renderProducts(response.data);
+            // Chỉ cập nhật và lưu cache nếu dữ liệu trên Sheet có thay đổi
+            if (newDataStr !== cachedData) {
+                localStorage.setItem(CACHE_KEY, newDataStr);
+                console.log("🔄 Zanith: Đã cập nhật mẫu mới từ Google Sheet.");
+                
+                if (typeof renderProducts === "function") {
+                    renderProducts(response.data);
+                }
+                // Check lại Hash một lần nữa sau khi có dữ liệu mới nhất
+                handleURLHash(); 
             }
-        } else {
-            console.error("Zanith: Lỗi phản hồi từ Server.");
         }
     })
     .catch(err => {
-        console.error("Zanith: Không thể tải sản phẩm. Hãy kiểm tra link Apps Script trong Settings.");
+        console.error("Zanith: Lỗi kết nối online. Đang dùng dữ liệu ngoại tuyến.");
     });
 }
 
-// Lệnh này kích hoạt việc tải sản phẩm ngay khi trang web mở ra
+/**
+ * Hỗ trợ Pinterest: Tự động mở Modal sản phẩm nếu URL có đuôi #SKU
+ */
+function handleURLHash() {
+    const hash = window.location.hash.substring(1); 
+    if (!hash) return;
+
+    // Lấy dữ liệu từ cache để tìm sản phẩm nhanh nhất
+    const cachedData = localStorage.getItem('zanith_products_cache');
+    if (cachedData) {
+        const products = JSON.parse(cachedData);
+        // Tìm sản phẩm có SKU khớp với đoạn sau dấu # trên link
+        const target = products.find(p => p.SKU === hash || p.id === hash);
+        
+        // Nếu tìm thấy và có hàm mở Modal, thực hiện mở ngay
+        if (target && typeof openProductModal === "function") {
+            openProductModal(target); 
+        }
+    }
+}
+
+// Kích hoạt khi trang đã sẵn sàng
 document.addEventListener("DOMContentLoaded", initZanithStore);
+// Lắng nghe nếu khách đổi link (nhấn vào link # khác khi đang ở trong trang)
+window.addEventListener('hashchange', handleURLHash);
