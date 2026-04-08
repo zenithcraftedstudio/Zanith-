@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <script src="config.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Zanith Admin</title>
@@ -150,11 +151,25 @@ body{font-family:"Instrument Sans",sans-serif;background:#f0f2f5;color:var(--tex
     <div class="ztitle">Admin Access</div>
     <div class="zsub">Hệ thống bảo mật 3 lớp</div>
     <div class="zlayers">
-      <div class="zlayer"><div class="zlayer-dot" id="l1"></div><span>Domain</span></div>
+      <div class="zlayer"><div class="zlayer-dot ok" id="l1"></div><span>Domain</span></div>
       <div class="zlayer"><div class="zlayer-dot" id="l2"></div><span>Password</span></div>
       <div class="zlayer"><div class="zlayer-dot" id="l3"></div><span>Token</span></div>
     </div>
 
+    <div id="zstep-pw" style="display: block;">
+      <div class="zwrap">
+        <input type="password" id="zpw" placeholder="••••••••" autocomplete="off" spellcheck="false"/>
+        <button id="zeye" tabindex="-1">👁</button>
+      </div>
+      <button id="zenterbtn">Đăng nhập</button>
+      <div id="zmsg"></div>
+      <div class="zdots">
+        <div class="zdot" id="zd0"></div><div class="zdot" id="zd1"></div><div class="zdot" id="zd2"></div>
+      </div>
+      <p class="zurl-hint" style="margin-top:12px">Hệ thống đã tự động kết nối qua cấu hình bảo mật.</p>
+    </div>
+  </div>
+</div>
     <!-- Bước 1: Nhập Apps Script URL -->
     <div id="zstep-url">
       <p style="font-size:11px;color:#555;margin-bottom:12px;line-height:1.6">Nhập URL Apps Script<br><span style="color:#333">(chỉ cần làm 1 lần trên mỗi thiết bị)</span></p>
@@ -463,8 +478,9 @@ body{font-family:"Instrument Sans",sans-serif;background:#f0f2f5;color:var(--tex
 // ═══════════════════════════════════════════════════════════
 // CONFIG
 // ═══════════════════════════════════════════════════════════
-const SCRIPT_URL_KEY  = 'zanith_script_url';
+const adminScriptUrl = getAppScriptUrl();
 const SESSION_KEY     = 'zanith_session_token';
+
 
 // ─── STATE ───────────────────────────────────────────────
 let scriptUrl    = localStorage.getItem(SCRIPT_URL_KEY) || '';
@@ -474,6 +490,7 @@ let allOrders    = [], filteredOrders   = [];
 let editCodes    = [];
 let appSettings  = {};
 let dlUrls       = {};
+  let currentAdminSecret = "";
 
 // ═══════════════════════════════════════════════════════════
 // ✅ FIX CORS: dùng text/plain thay vì application/json
@@ -558,40 +575,67 @@ async function api(action, extra = {}) {
     }
     return false;
   }
+async function tryLogin() {
+  if(checkLockout()) return;
+  const pw = pwInput.value.trim(); 
+  if(!pw) return;
 
-  async function tryLogin() {
-    if(checkLockout())return;
-    const pw=pwInput.value.trim(); if(!pw)return;
-    setMsg('Đang xác thực...','inf'); loginBtn.disabled=true; setLayer(2,'checking');
-    try {
-      const res=await fetch(scriptUrl,{
-        method:'POST',
-        headers:{'Content-Type':'text/plain;charset=utf-8'}, // ← FIX CORS
-        body:JSON.stringify({action:'verifyPassword',secret:pw,origin:window.location.hostname||'localhost'})
-      });
-      if(!res.ok) throw new Error('HTTP '+res.status);
-      const data=await res.json();
-      if(data.status==='success'&&data.token){
-        sessionToken=data.token; sessionStorage.setItem(SESSION_KEY,sessionToken);
-        setLayer(2,'ok'); setLayer(3,'ok');
-        attempts=0; updateDots(0,false);
-        setMsg('✅ Đăng nhập thành công!','ok-msg');
-        setTimeout(()=>{lock.classList.add('unlocked');sync.style.display='flex';onUnlocked();},600);
+  setMsg('Đang xác thực...','inf'); 
+  loginBtn.disabled = true; 
+  setLayer(2,'checking');
+
+  try {
+    const res = await fetch(scriptUrl, {
+      method: 'POST',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'}, 
+      body: JSON.stringify({
+        action: 'verifyPassword', 
+        secret: pw,
+        origin: window.location.hostname || 'localhost'
+      })
+    });
+
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+
+    if(data.status === 'success' && data.token){
+      sessionToken = data.token; 
+      sessionStorage.setItem(SESSION_KEY, sessionToken);
+      
+      // Lưu lại mật khẩu để dùng cho việc sửa/xóa sản phẩm sau này
+      currentAdminSecret = pw; 
+
+      setLayer(2, 'ok'); 
+      setLayer(3, 'ok');
+      setMsg('✅ Đăng nhập thành công!', 'ok-msg');
+
+      setTimeout(() => {
+        document.getElementById('zanith-lock').classList.add('unlocked');
+        document.getElementById('zsync').style.display = 'flex';
+        onUnlocked(); 
+      }, 600);
+    } else {
+      setLayer(2, 'err'); 
+      attempts++;
+      updateDots(attempts, true);
+      pwInput.classList.add('shake'); 
+      setTimeout(() => pwInput.classList.remove('shake'), 400); 
+      pwInput.value = '';
+      if(attempts >= 3){
+        lockedUntil = Date.now() + 30000;
+        setMsg('Sai 3 lần — khóa 30s', 'err');
+        checkLockout();
       } else {
-        setLayer(2,'err'); attempts++;
-        updateDots(attempts,true);
-        pwInput.classList.add('shake'); setTimeout(()=>pwInput.classList.remove('shake'),400); pwInput.value='';
-        if(attempts>=3){lockedUntil=Date.now()+30000;setMsg('Sai 3 lần — khóa 30s','err');checkLockout();}
-        else{setMsg('Mật khẩu sai ('+attempts+'/3)','err');loginBtn.disabled=false;}
+        setMsg('Mật khẩu sai (' + attempts + '/3)', 'err');
+        loginBtn.disabled = false;
       }
-    } catch(err) {
-      setLayer(2,'err');
-      setMsg('Lỗi kết nối Apps Script','err');
-      loginBtn.disabled=false;
-      console.error('[ZanithLock]',err);
     }
+  } catch(err) {
+    setLayer(2, 'err');
+    setMsg('Lỗi kết nối Apps Script', 'err');
+    loginBtn.disabled = false;
   }
-
+}
   loginBtn && loginBtn.addEventListener('click',tryLogin);
   pwInput  && pwInput.addEventListener('keydown',e=>{if(e.key==='Enter')tryLogin();else{setMsg('','');setLayer(2,'');}});
   eyeBtn   && eyeBtn.addEventListener('click',()=>{pwInput.type=pwInput.type==='password'?'text':'password';});
