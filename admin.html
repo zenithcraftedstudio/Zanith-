@@ -1112,6 +1112,9 @@ async function tryLogin() {
     if(typeof hideLoad === 'function') hideLoad();
   }
 }
+  function loadAll() {
+   loadAdminDashboard(); // Gọi sang hàm tải dữ liệu chính
+}
 </script>
 </body>
 </html>
