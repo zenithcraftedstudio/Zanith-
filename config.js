@@ -1,7 +1,7 @@
 // config.js - Quản lý cấu hình tập trung cho Zanith Crafted Studio
 const ZANITH_CONFIG = {
   // 1. Dán Link Apps Script chuẩn (đã fix lỗi lặp lại /exec) vào đây
-  S_ID:aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J6cXBYVVhlTDY1MnlCMlp0UzhjTE1DNURUV1MzSWRKTDFGM1pqb1phakR0a3pyTWpBc2VuU2hfdmtQVEFZb3RNbk8vZXhlYw==
+  S_ID:aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J6cXBYVVhlTDY1MnlCMlp0UzhjTE1DNURUV1MzSWRKTDFGM1pqb1phakR0a3pyTWpBc2VuU2hfdmtQVEFZb3RNbk8vZXhlYw== ,
   // 2. Key Read (Để load sản phẩm công khai)
   READ_KEY: 'Zanith2026',
   
