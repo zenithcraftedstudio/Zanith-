@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="config.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SGGH9DKW5J"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -358,14 +359,14 @@ footer{background:var(--navy-dark);color:rgba(255,255,255,0.7);padding:3rem 1.5r
 // ZANITH SHOP CONFIG
 // ═══════════════════════════════════════════════════════════
 // Apps Script URL lấy từ localStorage (admin đã cài)
-const SCRIPT_URL = localStorage.getItem('zanith_script_url') || '';
-const READ_KEY   = 'Zanith2026'; // Read-only key — OK để public
+const SCRIPT_URL = getAppScriptUrl(); // Gọi hàm từ config.js
+const READ_KEY   = ZANITH_CONFIG.READ_KEY;
 const ORIGIN     = window.location.hostname || 'localhost';
 
 // GA4
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date()); gtag('config', 'G-SGGH9DKW5J');
+gtag('config', ZANITH_CONFIG.GA_ID);
 
 // ─── STATE ───────────────────────────────────────────────
 let allProducts = [], filteredProducts = [], activeProduct = null;
