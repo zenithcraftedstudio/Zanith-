@@ -402,21 +402,24 @@ async function callScript(action, extra = {}) {
 // ═══ LOAD PRODUCTS ════════════════════════════════════════
 async function loadProducts() {
   const grid = document.getElementById('productsGrid');
-  grid.innerHTML = '<div class="loading-state"><div class="spinner"></div><p style="color:var(--text-soft)">Loading from Google Sheets...</p></div>';
+  grid.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>Đang tải dữ liệu từ Google Sheets...</p></div>';
+  
   try {
-    const data = await callScript('readProducts');
-    // v7.8 trả về data.all (array đầy đủ) hoặc data trực tiếp
-    let products = [];
-    if (data.data) {
-      products = Array.isArray(data.data) ? data.data
-               : (Array.isArray(data.data.all) ? data.data.all : []);
+    // Sử dụng hàm zanithFetch từ config.js
+    const response = await zanithFetch('readProducts');
+    
+    if (response.status === 'success') {
+      allProducts = response.data;
+      filteredProducts = [...allProducts];
+      renderGrid();
+      checkSKUFromURL();
     }
-    allProducts = products.filter(p => p && (p.SKU || p.sku || p.Title || p.title));
-    if (!allProducts.length) throw new Error('Chưa có sản phẩm trong Sheet');
   } catch(e) {
-    console.warn('[ZanithShop]', e.message);
-    allProducts = FALLBACK_PRODUCTS;
+    console.error('[ZanithShop] Lỗi:', e.message);
+    // Hiển thị fallback hoặc thông báo lỗi cho khách
+    grid.innerHTML = '<div class="empty-state">Không thể tải sản phẩm. Vui lòng thử lại sau.</div>';
   }
+}
   filteredProducts = [...allProducts];
   renderGrid();
   checkSKUFromURL();
