@@ -498,6 +498,15 @@ function getSale(p) {
 
 const cardIdx = {};
 function renderGrid() {
+const imgUrl = p.image || "https://placehold.co/600x600/f3ede3/1e2d4a?text=Coming+Soon";
+const card = `
+  <div class="product-card">
+    <div class="card-gallery">
+       <img src="${imgUrl}" alt="${p.title}" loading="lazy">
+    </div>
+    ...
+  </div>
+`;
   const grid = document.getElementById('productsGrid');
   const info = document.getElementById('resultsInfo');
   let list = [...filteredProducts];
