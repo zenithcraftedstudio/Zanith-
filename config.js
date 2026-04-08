@@ -1,17 +1,3 @@
-{
-  "_note": "Zanith Crafted Studio — Config file. Chỉnh trực tiếp hoặc qua Admin.",
-  "sheet_id": "",
-  "webhook_url": "",
-  "emailjs": {
-    "public_key": "",
-    "service_id": "",
-    "tpl_customer": "",
-    "tpl_admin": "",
-    "tpl_newsletter": "",
-    "admin_email": ""
-  },
-  "anthropic_api_key": ""
-}
 // config.js - Quản lý cấu hình tập trung cho Zanith Crafted Studio
 const ZANITH_CONFIG = {
   // 1. Dán Link Apps Script chuẩn (đã fix lỗi lặp lại /exec) vào đây
