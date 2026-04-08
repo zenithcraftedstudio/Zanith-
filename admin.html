@@ -1060,6 +1060,58 @@ function copyDownloadLink(ref) {
   navigator.clipboard && navigator.clipboard.writeText(url);
   showToast('📋 Đã copy link: ...download.html?ref=' + ref.slice(-8),'ok');
 }
+  // --- HÀM TẢI DỮ LIỆU ADMIN ĐỘC LẬP (Zanith v10) ---
+async function loadAll() {
+  const sec = sessionStorage.getItem('admin_token'); // Lấy mật khẩu tạm từ phiên làm việc
+  if (!sec) return;
+
+  if(typeof showLoad === 'function') showLoad("Đang đồng bộ dữ liệu online...");
+
+  try {
+    // Gọi Apps Script lấy toàn bộ data
+    const res = await zanithFetch("getData", {}, sec);
+    
+    if (res.status === "success") {
+      // Gán dữ liệu vào các biến để hiển thị lên bảng
+      window.allOrders = res.data.orders || [];
+      window.allProducts = res.data.products || [];
+      
+      // Kích hoạt các hàm vẽ giao diện (Render) có sẵn trong file của bạn
+      if(typeof renderOrders === 'function') renderOrders();
+      if(typeof renderProducts === 'function') renderProducts();
+      if(typeof updateStats === 'function') updateStats();
+      
+      if(typeof toast === 'function') toast("🔄 Dữ liệu đã được cập nhật!");
+    }
+  } catch (e) {
+    console.error("Lỗi tải Dashboard:", e);
+    if(typeof toast === 'function') toast("❌ Lỗi kết nối: " + e.message, true);
+  } finally {
+    if(typeof hideLoad === 'function') hideLoad();
+  }
+}
+
+// Sửa lại hàm Login để gọi loadAll ngay khi thành công
+async function tryLogin() {
+  const pw = document.getElementById("zpw").value;
+  if(!pw) return;
+  
+  if(typeof showLoad === 'function') showLoad("Đang xác thực...");
+  try {
+    const res = await zanithFetch("verifyPassword", { secret: pw });
+    if(res.status === "success") {
+      sessionStorage.setItem('admin_token', pw); // Lưu mật khẩu vào phiên làm việc
+      document.querySelector(".zlock").style.display = "none";
+      await loadAll(); // Tải dữ liệu ngay
+    } else {
+      alert("Sai mật khẩu Admin!");
+    }
+  } catch(e) {
+    alert("Không thể kết nối Apps Script!");
+  } finally {
+    if(typeof hideLoad === 'function') hideLoad();
+  }
+}
 </script>
 </body>
 </html>
