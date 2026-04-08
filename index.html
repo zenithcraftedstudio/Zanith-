@@ -673,6 +673,34 @@ async function initZanithShop() {
 // Tự động chạy khi trang web mở ra
 document.addEventListener("DOMContentLoaded", initZanithShop);
 </script>
+  <div class="modal-overlay" id="freebieModal" style="display:none; z-index:1000;">
+  <div class="modal" style="max-width:400px; padding:2rem; text-align:center;">
+    <h3 class="en">Unlock Free Patterns</h3>
+    <h3 class="vi" style="display:none">Nhận Pattern Miễn Phí</h3>
+    <p style="font-size:0.8rem; margin:1rem 0;">Đăng ký để nhận link tải bộ sưu tập Indigo Mosaic miễn phí.</p>
+    <input type="email" id="subEmail" placeholder="Email của bạn..." style="width:100%; padding:0.7rem; margin-bottom:1rem; border:1px solid var(--border); border-radius:8px;">
+    <button class="btn-add-cart" onclick="subscribe()">Đăng ký ngay</button>
+  </div>
+</div>
+
+<script>
+// Tự động hiện sau 10 giây nếu khách chưa đăng ký
+setTimeout(() => {
+  if(!localStorage.getItem('zanith_sub')) document.getElementById('freebieModal').style.display = 'flex';
+}, 10000);
+
+function subscribe() {
+  const email = document.getElementById('subEmail').value;
+  if(email) {
+    // Gửi đồng thời qua Telegram và EmailJS
+    zanithFetch('logLead', { email: email });
+    emailjs.send("YOUR_SERVICE", "YOUR_TEMPLATE", { email: email });
+    localStorage.setItem('zanith_sub', 'true');
+    alert("Cảm ơn bạn! Check email hoặc Telegram để nhận quà nhé.");
+    document.getElementById('freebieModal').style.display = 'none';
+  }
+}
+</script>
 </body>
 </html>
 // ═══ INIT ══════════════════════════════�
