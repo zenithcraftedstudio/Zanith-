@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="config.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SGGH9DKW5J"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Zanith Crafted Studio — Seamless Patterns & Digital Goods</title>
+<meta name="description" content="Handcrafted seamless patterns, POD designs & digital goods. 300 DPI, commercial license, instant download.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://zenithcraftedstudio.github.io/Zanith-/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Zanith Crafted Studio — Seamless Patterns">
+<meta property="og:description" content="Handcrafted seamless patterns for makers & sellers. Commercial license included.">
+<meta property="og:image" content="https://zenithcraftedstudio.github.io/Zanith-/images/PTN-GEO-diamond-001.png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1e2d4a;--navy-l:#2a3f63;--navy-d:#131d30;
+  --gold:#c8974a;--gold-l:#e8b86d;
+  --cream:#faf7f2;--warm:#f3ede3;--white:#fff;
+  --border:#e2ddd6;--text:#1a2332;--soft:#5a6a7e;--muted:#8a9bb5;
+  --green:#2e7d52;--red:#c0392b;
+  --sh-sm:0 1px 4px rgba(30,45,74,.08);--sh-lg:0 12px 40px rgba(30,45,74,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:"Instrument Sans",sans-serif;background:var(--cream);color:var(--text);}
+/* FLASH BAR */
+.flash-bar{background:linear-gradient(90deg,#c0392b,#e74c3c,#c0392b);color:#fff;text-align:center;padding:.55rem 1rem;font-size:.78rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:1rem;position:relative;}
+.flash-bar.hidden{display:none;}
+.fc-unit{background:rgba(0,0,0,.3);border-radius:3px;padding:1px 6px;font-weight:700;min-width:26px;text-align:center;}
+/* PROMO BAR */
+.promo-bar{background:var(--navy);color:rgba(255,255,255,.88);padding:.42rem 1rem;font-size:.73rem;display:flex;align-items:center;justify-content:center;gap:1.4rem;flex-wrap:wrap;}
+.promo-code{background:var(--gold);color:var(--navy);font-weight:700;padding:1px 8px;border-radius:10px;font-size:.7rem;cursor:pointer;transition:opacity .15s;}
+.promo-code:hover{opacity:.85;}
+/* HEADER */
+header{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;box-shadow:var(--sh-sm);}
+.hdr{max-width:1200px;margin:0 auto;padding:.85rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;flex-shrink:0;}
+.logo-icon{width:40px;height:40px;background:var(--navy);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.logo-name{font-family:"Fraunces",serif;font-size:1.05rem;font-weight:500;color:var(--navy);}
+.logo-sub{font-size:.62rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+.hdr-search{flex:1;max-width:400px;display:flex;align-items:center;background:var(--warm);border:1px solid var(--border);border-radius:22px;padding:.42rem .95rem;gap:.45rem;transition:border .18s;}
+.hdr-search:focus-within{border-color:var(--navy);}
+.hdr-search input{flex:1;border:none;background:transparent;outline:none;font-family:inherit;font-size:.85rem;color:var(--text);}
+.hdr-search input::placeholder{color:var(--muted);}
+.hdr-search button{background:none;border:none;cursor:pointer;color:var(--muted);font-size:.95rem;}
+.hdr-right{display:flex;align-items:center;gap:.65rem;}
+/* LANG TOGGLE */
+.lang-btn{display:flex;align-items:center;gap:4px;background:var(--warm);border:1px solid var(--border);border-radius:18px;padding:.3rem .7rem;font-size:.73rem;cursor:pointer;color:var(--soft);transition:all .18s;font-family:inherit;}
+.lang-btn:hover{border-color:var(--navy);color:var(--navy);}
+.lang-active{font-weight:700;color:var(--navy);}
+/* CART BTN */
+.cart-btn{display:flex;align-items:center;gap:.45rem;background:var(--navy);color:#fff;border:none;border-radius:22px;padding:.46rem 1rem;font-family:inherit;font-size:.83rem;font-weight:500;cursor:pointer;transition:all .18s;text-decoration:none;}
+.cart-btn:hover{background:var(--navy-l);}
+.cart-cnt{background:var(--gold);color:#fff;border-radius:50%;width:19px;height:19px;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;}
+/* NAV TABS */
+.nav-tabs{background:var(--white);border-bottom:1px solid var(--border);overflow-x:auto;white-space:nowrap;}
+.nav-tabs-inner{max-width:1200px;margin:0 auto;padding:0 1.4rem;display:flex;}
+.ntab{display:inline-flex;align-items:center;gap:.4rem;padding:.8rem 1rem;font-size:.85rem;font-weight:500;color:var(--soft);cursor:pointer;text-decoration:none;border-bottom:2px solid transparent;transition:all .18s;white-space:nowrap;}
+.ntab:hover{color:var(--navy);}
+.ntab.active{color:var(--navy);border-bottom-color:var(--navy);font-weight:600;}
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-l) 60%,#3a5180 100%);padding:3.5rem 1.4rem;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(200,151,74,.15) 0%,transparent 60%);}
+.hero-content{position:relative;max-width:600px;margin:0 auto;}
+.hero h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(1.9rem,5vw,3rem);color:#fff;line-height:1.14;margin-bottom:.9rem;}
+.hero h1 em{font-style:italic;color:var(--gold-l);}
+.hero p{color:rgba(255,255,255,.75);font-size:.97rem;line-height:1.7;margin-bottom:1.75rem;}
+.hero-badges{display:flex;gap:.65rem;justify-content:center;flex-wrap:wrap;}
+.hero-badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);padding:.35rem .9rem;border-radius:18px;font-size:.77rem;}
+/* FILTERS */
+.filters{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:61px;z-index:100;}
+.filters-inner{max-width:1200px;margin:0 auto;display:flex;gap:.5rem;align-items:center;padding:.65rem 1.4rem;justify-content:space-between;flex-wrap:wrap;}
+.filter-grp{display:flex;gap:.35rem;flex-wrap:wrap;}
+.chip{background:transparent;border:1.5px solid var(--border);padding:.28rem .8rem;border-radius:18px;font-size:.76rem;cursor:pointer;color:var(--soft);transition:all .16s;font-family:inherit;}
+.chip:hover{border-color:var(--navy);color:var(--navy);background:var(--warm);}
+.chip.active{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:600;}
+.sort-sel{border:1px solid var(--border);background:var(--warm);padding:.28rem .7rem;border-radius:7px;font-size:.73rem;color:var(--text);cursor:pointer;outline:none;font-family:inherit;}
+/* MAIN */
+.main-wrap{max-width:1200px;margin:0 auto;padding:1.75rem 1.4rem;}
+.sec-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.4rem;}
+.sec-title{font-family:"Fraunces",serif;font-size:1.35rem;font-weight:500;}
+.results-info{font-size:.8rem;color:var(--soft);}
+/* PRODUCTS GRID — masonry */
+.pgrid{columns:5;column-gap:11px;}
+.pgrid .pcard{break-inside:avoid;margin-bottom:11px;display:inline-block;width:100%;}
+@media(max-width:1100px){.pgrid{columns:4;}}
+@media(max-width:768px){.pgrid{columns:3;column-gap:9px;}.pgrid .pcard{margin-bottom:9px;}.hdr-search{display:none;}}
+@media(max-width:480px){.pgrid{columns:2;column-gap:7px;}.pgrid .pcard{margin-bottom:7px;}}
+/* PRODUCT CARD */
+.pcard{background:transparent;border-radius:4px;cursor:pointer;}
+.card-gal{position:relative;background:var(--warm);overflow:hidden;border-radius:4px;}
+.card-gal::before{content:"";display:block;padding-top:100%;}
+.card-gal.loaded::before{display:none;}
+.gal-track{display:flex;width:100%;transition:transform .28s ease;position:absolute;top:0;left:0;right:0;bottom:0;}
+.card-gal.loaded .gal-track{position:relative;top:auto;left:auto;right:auto;bottom:auto;}
+.gal-track img{flex-shrink:0;width:100%;object-fit:contain;display:block;background:var(--warm);}
+.g-arr{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);border:none;width:28px;height:28px;border-radius:50%;font-size:.95rem;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .14s;box-shadow:0 1px 5px rgba(0,0,0,.16);}
+.g-arr.prev{left:7px;}.g-arr.next{right:7px;}
+.pcard:hover .g-arr{opacity:1;}
+.card-badge-sale,.card-badge-disc{position:absolute;top:8px;font-size:.65rem;font-weight:700;padding:2px 7px;border-radius:10px;z-index:4;}
+.card-badge-sale{left:8px;background:#c0392b;color:#fff;}
+.card-badge-disc{left:8px;background:var(--gold);color:#fff;}
+.card-dots{position:absolute;bottom:7px;left:0;right:0;display:flex;justify-content:center;gap:4px;z-index:4;}
+.card-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.5);border:none;cursor:pointer;padding:0;transition:background .14s;}
+.card-dot.active{background:#fff;}
+.card-wish{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.88);border:none;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;z-index:4;transition:transform .15s;}
+.card-wish:hover{transform:scale(1.12);}
+.card-info{padding:.55rem .4rem .35rem;}
+.card-title{font-size:.8rem;font-weight:500;color:var(--text);line-height:1.35;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.card-shop{font-size:.65rem;color:var(--muted);margin-bottom:.3rem;}
+.card-price-row{display:flex;align-items:center;gap:.35rem;margin-bottom:.35rem;flex-wrap:wrap;}
+.card-price{font-weight:700;font-size:.85rem;color:var(--navy);}
+.card-orig{font-size:.72rem;text-decoration:line-through;color:var(--muted);}
+.card-sale-tag{font-size:.62rem;background:#fde8e6;color:var(--red);padding:1px 5px;border-radius:7px;font-weight:700;}
+.card-add{width:100%;background:var(--navy);color:#fff;border:none;border-radius:6px;padding:.38rem;font-family:inherit;font-size:.72rem;font-weight:600;cursor:pointer;transition:all .16s;}
+.card-add:hover{background:var(--navy-l);}
+/* STATES */
+.loading-state{text-align:center;padding:4rem;grid-column:1/-1;}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--navy);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto .9rem;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty-state{text-align:center;padding:3.5rem;color:var(--soft);}
+/* MODAL */
+.modal-ov{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.48);align-items:center;justify-content:center;padding:1rem;}
+.modal-ov.open{display:flex;}
+.modal{background:var(--white);border-radius:14px;max-width:860px;width:100%;max-height:92vh;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.22);display:flex;flex-direction:column;position:relative;}
+.modal-layout{display:grid;grid-template-columns:60px 1fr 1fr;flex:1;min-height:0;overflow:hidden;}
+.modal-thumbs{display:flex;flex-direction:column;gap:.45rem;overflow-y:auto;padding:.45rem;background:var(--warm);}
+.modal-img-col{background:var(--warm);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;min-height:300px;}
+.modal-img-col img{width:100%;height:100%;object-fit:contain;}
+.modal-thumb{width:50px;height:50px;border-radius:5px;object-fit:contain;background:var(--warm);cursor:pointer;border:2px solid transparent;transition:all .14s;flex-shrink:0;}
+.modal-thumb.active{border-color:var(--navy);}
+.modal-info{padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:.85rem;overflow-y:auto;}
+.modal-close{position:absolute;top:.9rem;right:.9rem;background:var(--white);border:1px solid var(--border);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;z-index:10;}
+.m-sku{font-size:.68rem;color:var(--muted);letter-spacing:.1em;font-weight:600;}
+.m-cat{font-size:.73rem;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.08em;}
+.m-title{font-family:"Fraunces",serif;font-size:1.28rem;font-weight:500;color:var(--text);line-height:1.3;}
+.m-desc{font-size:.85rem;color:var(--soft);line-height:1.75;}
+.price-box{background:var(--warm);border-radius:9px;padding:.9rem;border:1px solid var(--border);}
+.price-row{display:flex;align-items:baseline;gap:7px;margin-bottom:3px;}
+.price-sale{font-size:1.55rem;font-weight:700;color:var(--navy);font-family:"Fraunces",serif;}
+.price-orig{font-size:.92rem;text-decoration:line-through;color:var(--muted);}
+.price-save{font-size:.68rem;font-weight:700;background:#fde8e6;color:var(--red);padding:2px 7px;border-radius:9px;}
+.code-box{display:flex;align-items:center;gap:7px;background:var(--warm);border:1px dashed var(--gold);border-radius:7px;padding:7px 11px;margin:5px 0;}
+.code-val{font-weight:700;color:var(--navy);letter-spacing:.1em;font-size:.83rem;flex:1;}
+.code-copy{background:var(--gold);color:#fff;border:none;padding:2px 9px;border-radius:5px;font-size:.68rem;font-weight:600;cursor:pointer;}
+.qty-row{display:flex;align-items:center;gap:9px;}
+.qty-btn{width:27px;height:27px;border:1.5px solid var(--border);border-radius:50%;background:#fff;cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;transition:all .14s;}
+.qty-btn:hover{border-color:var(--navy);color:var(--navy);}
+.qty-val{width:30px;text-align:center;font-size:.88rem;font-weight:600;}
+.btn-add-cart{flex:1;background:var(--navy);color:#fff;border:none;padding:.75rem 1rem;border-radius:9px;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:5px;}
+.btn-add-cart:hover{background:var(--navy-l);transform:translateY(-1px);}
+.btn-add-cart.added{background:var(--green);}
+.btn-sec{background:var(--warm);border:1px solid var(--border);color:var(--text);padding:.75rem .95rem;border-radius:9px;font-size:.85rem;cursor:pointer;font-family:inherit;}
+.m-actions{display:flex;gap:.65rem;}
+.m-hash{font-size:.73rem;color:var(--soft);line-height:2.1;background:var(--warm);border-radius:7px;padding:.7rem;}
+/* CART FLOAT */
+.cart-float{position:fixed;bottom:1.4rem;right:1.4rem;z-index:300;background:var(--navy);color:#fff;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.35rem;box-shadow:var(--sh-lg);text-decoration:none;transition:all .18s;}
+.cart-float:hover{background:var(--navy-l);transform:scale(1.06);}
+.cf-cnt{position:absolute;top:-3px;right:-3px;background:var(--gold);color:#fff;border-radius:50%;width:19px;height:19px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;}
+/* TOAST */
+.toast{position:fixed;bottom:1.4rem;right:80px;z-index:400;background:var(--navy);color:#fff;padding:.7rem 1.1rem;border-radius:9px;font-size:.83rem;box-shadow:var(--sh-lg);transform:translateY(80px);transition:transform .28s;max-width:300px;}
+.toast.show{transform:translateY(0);}.toast.success{background:var(--green);}.toast.error{background:var(--red);}
+/* FOOTER */
+footer{background:var(--navy-d);color:rgba(255,255,255,.7);padding:2.8rem 1.4rem 1.8rem;margin-top:4rem;}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1.8rem;}
+.footer-brand-name{font-family:"Fraunces",serif;font-size:1.15rem;color:#fff;margin-bottom:.5rem;}
+.footer-desc{font-size:.8rem;line-height:1.7;margin-bottom:.9rem;}
+.footer-email a{color:var(--gold-l);text-decoration:none;font-size:.8rem;}
+.footer-email a:hover{opacity:.8;}
+.footer-col h4{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4);margin-bottom:.9rem;}
+.footer-col a{display:block;font-size:.8rem;color:rgba(255,255,255,.62);text-decoration:none;margin-bottom:.45rem;transition:color .15s;}
+.footer-col a:hover{color:#fff;}
+.footer-bottom{max-width:1200px;margin:1.8rem auto 0;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;font-size:.72rem;color:rgba(255,255,255,.35);flex-wrap:wrap;gap:.5rem;}
+.lang-switch-footer{display:flex;gap:.35rem;}
+.lang-switch-footer button{background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.5);padding:2px 10px;border-radius:10px;font-size:.72rem;cursor:pointer;font-family:inherit;transition:all .15s;}
+.lang-switch-footer button.active{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.35);}
+/* RESPONSIVE MODAL */
+@media(max-width:680px){
+  .modal-ov{align-items:flex-end;padding:0;}
+  .modal{border-radius:18px 18px 0 0;max-height:94vh;}
+  .modal-layout{grid-template-columns:1fr;grid-template-rows:auto auto 1fr;}
+  .modal-thumbs{grid-row:1;flex-direction:row!important;overflow-x:auto;overflow-y:hidden!important;max-height:60px;height:60px;padding:5px 7px;gap:5px;}
+  .modal-thumb{width:48px!important;height:48px!important;}
+  .modal-img-col{grid-row:2;min-height:50vw;height:50vw;}
+  .modal-info{grid-row:3;padding:.9rem;}
+}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr;}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+<!-- FLASH SALE BAR -->
+<div class="flash-bar hidden" id="flashBar">
+  <span>🔥 <span class="en">FLASH SALE — Ends in</span><span class="vi">FLASH SALE — Kết thúc sau</span></span>
+  <div><span class="fc-unit" id="fcH">00</span>:<span class="fc-unit" id="fcM">00</span>:<span class="fc-unit" id="fcS">00</span></div>
+  <button style="position:absolute;right:11px;background:none;border:none;color:rgba(255,255,255,.7);cursor:pointer;font-size:1rem" onclick="document.getElementById('flashBar').classList.add('hidden')">✕</button>
+</div>
+
+<!-- PROMO BAR -->
+<div class="promo-bar" id="promoBar">
+  <span>🎁 <span class="en">First order:</span><span class="vi">Đơn đầu:</span>&nbsp;<span class="promo-code" id="mainCode" onclick="copyCode(this.textContent)">ZANITH20</span>&nbsp;<span class="en">20% off</span><span class="vi">giảm 20%</span></span>
+  <span>🛍️ <span class="en">Buy 3 → get 1 free</span><span class="vi">Mua 3 → tặng 1</span></span>
+  <span>📦 <span class="en">Instant download</span><span class="vi">Tải ngay</span></span>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🌿</div>
+      <div>
+        <div class="logo-name">Zanith Crafted Studio</div>
+        <div class="logo-sub">Handcrafted Digital & Print Goods</div>
+      </div>
+    </a>
+    <div class="hdr-search">
+      <button onclick="applyFilters()">🔍</button>
+      <input type="text" id="searchIn" placeholder="Search patterns, styles…" oninput="applyFilters()">
+    </div>
+    <div class="hdr-right">
+      <button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">
+        <span class="en"><span class="lang-active">EN</span>&nbsp;/&nbsp;VI</span>
+        <span class="vi">EN&nbsp;/&nbsp;<span class="lang-active">VI</span></span>
+      </button>
+      <a href="checkout.html" class="cart-btn">
+        🛒&nbsp;<span class="en">Cart</span><span class="vi">Giỏ</span>&nbsp;<span class="cart-cnt" id="cartCnt" style="display:none">0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <div class="nav-tabs-inner">
+    <a class="ntab active" onclick="setFilter('all',this)">🌿 <span class="en">All</span><span class="vi">Tất cả</span></a>
+    <a class="ntab" onclick="setFilter('digital pattern',this)">🖼 <span class="en">Patterns</span><span class="vi">Họa tiết</span></a>
+    <a class="ntab" onclick="setFilter('pod',this)">👕 POD</a>
+    <a class="ntab" onclick="setFilter('ebook',this)">📚 Ebook</a>
+    <a class="ntab" onclick="setFilter('template',this)">🎨 Template</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <h1 class="en">Handcrafted patterns<br>for <em>makers & sellers</em></h1>
+    <h1 class="vi">Họa tiết thủ công<br>dành cho <em>người sáng tạo</em></h1>
+    <p class="en">Seamless surface patterns, POD designs & digital goods. Commercial license included, instant download.</p>
+    <p class="vi">Họa tiết liền mạch, thiết kế POD & ấn phẩm kỹ thuật số. Giấy phép thương mại, tải về ngay.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">✅ 300 DPI</span>
+      <span class="hero-badge">📄 <span class="en">Commercial License</span><span class="vi">Giấy phép TM</span></span>
+      <span class="hero-badge">⚡ <span class="en">Instant Download</span><span class="vi">Tải ngay</span></span>
+      <span class="hero-badge">🔁 <span class="en">Seamless Tile</span><span class="vi">Lặp liền mạch</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="filters-inner">
+    <div class="filter-grp" id="filterChips">
+      <button class="chip active" onclick="setFilter('all',this)"><span class="en">All</span><span class="vi">Tất cả</span></button>
+      <button class="chip" onclick="setFilter('digital pattern',this)"><span class="en">Patterns</span><span class="vi">Họa tiết</span></button>
+      <button class="chip" onclick="setFilter('pod',this)">POD</button>
+      <button class="chip" onclick="setFilter('ebook',this)">Ebook</button>
+      <button class="chip" onclick="setFilter('template',this)">Template</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:.5rem">
+      <span class="results-info" id="resInfo"></span>
+      <select class="sort-sel" onchange="setSort(this.value)">
+        <option value="default"><span class="en">Sort: Default</span></option>
+        <option value="price-low"><span class="en">Price ↑</span></option>
+        <option value="price-high"><span class="en">Price ↓</span></option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN PRODUCTS -->
+<div class="main-wrap">
+  <div class="sec-hdr">
+    <h2 class="sec-title">
+      <span class="en">Our Collection</span><span class="vi">Bộ sưu tập</span>
+    </h2>
+  </div>
+  <div class="pgrid" id="productsGrid">
+    <div class="loading-state"><div class="spinner"></div><p style="color:var(--soft)"><span class="en">Loading from Google Sheets…</span><span class="vi">Đang tải từ Google Sheets…</span></p></div>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-ov" id="modalOv" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-layout">
+      <div class="modal-thumbs" id="mThumbs"></div>
+      <div class="modal-img-col">
+        <img id="mImg" src="" alt="">
+        <button class="g-arr prev" onclick="modalSlide(-1)">&#8249;</button>
+        <button class="g-arr next" onclick="modalSlide(1)">&#8250;</button>
+      </div>
+      <div class="modal-info">
+        <div><div class="m-sku" id="mSku"></div><div class="m-cat" id="mCat"></div></div>
+        <h3 class="m-title" id="mTitle"></h3>
+        <p class="m-desc" id="mDesc"></p>
+        <hr style="border:none;border-top:1px solid var(--border)">
+        <div class="price-box">
+          <div class="price-row">
+            <span class="price-sale" id="mSalePrice">$0</span>
+            <span class="price-orig" id="mOrigPrice"></span>
+            <span class="price-save" id="mSaveTag" style="display:none"></span>
+          </div>
+          <div class="code-box" id="mCodeBox" style="display:none">
+            <div><div style="font-size:.7rem;color:var(--soft)"><span class="en">Discount code:</span><span class="vi">Mã giảm giá:</span></div><div class="code-val" id="mCodeVal">ZANITH20</div></div>
+            <button class="code-copy" onclick="copyCode(document.getElementById('mCodeVal').textContent)">Copy</button>
+          </div>
+          <div style="font-size:.73rem;color:var(--green);margin-top:5px">✅ PNG · 300 DPI · 3600×3600px · <span class="en">Instant download</span><span class="vi">Tải ngay</span></div>
+        </div>
+        <div class="qty-row">
+          <span style="font-size:.7rem;font-weight:600;color:var(--soft);text-transform:uppercase;letter-spacing:.07em"><span class="en">Qty</span><span class="vi">SL</span></span>
+          <div style="display:flex;align-items:center;gap:5px">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <span class="qty-val" id="mQty">1</span>
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+        </div>
+        <div class="m-hash" id="mHash"></div>
+        <div class="m-actions">
+          <button class="btn-add-cart" id="mAddBtn" onclick="addFromModal()">
+            🛒 <span class="en">Add to Cart</span><span class="vi">Thêm vào giỏ</span>
+          </button>
+          <button class="btn-sec" onclick="closeModal()"><span class="en">Close</span><span class="vi">Đóng</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">🌿 Zanith Crafted Studio</div>
+      <p class="footer-desc en">Handcrafted seamless patterns for makers, sellers, and dreamers worldwide. Every design is created with intention and licensed for commercial use.</p>
+      <p class="footer-desc vi">Họa tiết liền mạch thủ công cho người sáng tạo và kinh doanh toàn cầu. Mỗi thiết kế được tạo ra với tâm huyết và cấp phép thương mại đầy đủ.</p>
+      <div class="footer-email">
+        <a href="mailto:zenithcraftedstudio@gmail.com">✉ zenithcraftedstudio@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4><span class="en">Shop</span><span class="vi">Cửa hàng</span></h4>
+      <a href="#" onclick="setFilter('digital pattern',null);return false"><span class="en">Pattern Designs</span><span class="vi">Họa tiết</span></a>
+      <a href="#" onclick="setFilter('pod',null);return false">POD Designs</a>
+      <a href="#" onclick="setFilter('ebook',null);return false">Ebooks</a>
+      <a href="#" onclick="setFilter('template',null);return false">Templates</a>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <a href="faq.html">FAQ</a>
+      <a href="policy.html"><span class="en">Policy</span><span class="vi">Chính sách</span></a>
+      <a href="about.html"><span class="en">About Us</span><span class="vi">Về chúng tôi</span></a>
+      <a href="blog.html">Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4><span class="en">Follow</span><span class="vi">Theo dõi</span></h4>
+      <a href="#" target="_blank">Pinterest</a>
+      <a href="#" target="_blank">Facebook</a>
+      <a href="mailto:zenithcraftedstudio@gmail.com"><span class="en">Email Us</span><span class="vi">Liên hệ</span></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Zanith Crafted Studio. All rights reserved.</span>
+    <div class="lang-switch-footer">
+      <button id="ftLangEn" onclick="setLangDirect('en')" class="active">EN</button>
+      <button id="ftLangVi" onclick="setLangDirect('vi')">VI</button>
+    </div>
+    <a href="admin.html" style="color:rgba(255,255,255,.1);text-decoration:none;font-size:.68rem">Admin</a>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+<a href="checkout.html" class="cart-float">🛒<span class="cf-cnt" id="cfCnt" style="display:none">0</span></a>
+
+<script>
+// ══ CONFIG ═════════════════════════════════════════════════════
+const SCRIPT_URL = getAppScriptUrl();
+const READ_KEY   = ZANITH_CONFIG.READ_KEY;
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date()); gtag('config', ZANITH_CONFIG.GA_ID);
+
+// ══ STATE ══════════════════════════════════════════════════════
+let allProducts = [], filteredProducts = [], activeProduct = null;
+let cart = [], wishlist = [];
+let campaign = { flashActive:false, flashEnd:null, flashPct:20, discountCodes:[{code:'ZANITH20',pct:20}], bundleActive:true, bundleQty:3 };
+let currentLang   = localStorage.getItem('zanith_lang') || 'en';
+let currentFilter = 'all', currentSort = 'default';
+let modalImages = [], modalIdx = 0;
+const cardIdx = {};
+
+// ══ API ════════════════════════════════════════════════════════
+async function callScript(action, extra = {}) {
+  if (!SCRIPT_URL) { console.warn('[Zanith] Apps Script URL chưa cài'); throw new Error('Chưa có script URL'); }
+  const res = await fetch(SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ action, secret: READ_KEY, ...extra })
+  });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  return res.json();
+}
+
+// ══ LOAD PRODUCTS (độc lập — không cần admin setup) ═══════════
+async function loadProducts() {
+  const grid = document.getElementById('productsGrid');
+  try {
+    const data = await callScript('readProducts');
+    let products = [];
+    if (data.data) {
+      products = Array.isArray(data.data) ? data.data
+               : (Array.isArray(data.data.all) ? data.data.all : []);
+    }
+    allProducts = products.filter(p => p && (p.SKU || p.sku || p.Title || p.title));
+    if (!allProducts.length) throw new Error('Chưa có sản phẩm');
+  } catch(e) {
+    console.warn('[Zanith] Dùng fallback products:', e.message);
+    allProducts = FALLBACK_PRODUCTS;
+  }
+  filteredProducts = [...allProducts];
+  renderGrid();
+  checkSKUFromURL();
+}
+
+// ══ LOAD CONFIG (campaigns + settings) ════════════════════════
+async function loadConfig() {
+  try {
+    const data = await callScript('readConfig');
+    if (data.campaigns) applyCampaign(data.campaigns);
+    if (data.settings)  applyShopSettings(data.settings);
+  } catch(e) { /* Dùng defaults */ }
+}
+
+function applyCampaign(c) {
+  campaign.flashActive  = c.flashActive === true || c.flashActive === 'true' || c.flashActive === 'TRUE';
+  campaign.flashPct     = parseFloat(c.flashPct) || 20;
+  campaign.flashEnd     = c.flashEnd ? new Date(c.flashEnd) : null;
+  campaign.bundleActive = c.bundleActive !== 'false' && c.bundleActive !== 'FALSE';
+  campaign.bundleQty    = parseInt(c.bundleQty) || 3;
+  if (c.discountCodes && typeof c.discountCodes === 'string') {
+    const codes = c.discountCodes.split('|').map(s=>{const[code,pct]=s.split(':');return{code:(code||'').trim(),pct:parseFloat(pct)||20};}).filter(d=>d.code);
+    if (codes.length) campaign.discountCodes = codes;
+  }
+  updateFlashBar(); updatePromo();
+}
+function applyShopSettings(s) {
+  if (s.ejPublicKey && typeof emailjs !== 'undefined') { try{emailjs.init(s.ejPublicKey);}catch(e){} }
+}
+
+// ══ FLASH BAR ══════════════════════════════════════════════════
+let flashTimer = null;
+function updateFlashBar() {
+  const bar = document.getElementById('flashBar');
+  const on  = campaign.flashActive && campaign.flashEnd && new Date(campaign.flashEnd) > new Date();
+  bar.classList.toggle('hidden', !on);
+  if (on) { if(flashTimer)clearInterval(flashTimer); flashTimer=setInterval(tickFlash,1000); tickFlash(); }
+}
+function tickFlash() {
+  const diff = campaign.flashEnd ? campaign.flashEnd - new Date() : 0;
+  if (diff <= 0) { campaign.flashActive=false; updateFlashBar(); return; }
+  const s=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=String(v).padStart(2,'0');};
+  s('fcH',Math.floor(diff/3600000)); s('fcM',Math.floor((diff%3600000)/60000)); s('fcS',Math.floor((diff%60000)/1000));
+}
+function updatePromo() {
+  const code = campaign.discountCodes && campaign.discountCodes[0];
+  const el   = document.getElementById('mainCode');
+  if (el && code) el.textContent = code.code;
+}
+
+// ══ RENDER ═════════════════════════════════════════════════════
+function getImages(p) {
+  const imgs = []; const main = p.Image||p.image||''; if(main) imgs.push(main);
+  for(let i=2;i<=10;i++){const v=p['Image'+i]||p['image'+i]||'';if(v)imgs.push(v);}
+  if(!imgs.length) imgs.push('images/'+(p.SKU||p.sku||'unknown')+'.png');
+  return imgs;
+}
+function getOrig(p){ return parseFloat(p.Price_USD||p.price||0); }
+function getSale(p){
+  let price=getOrig(p);
+  const on=campaign.flashActive&&campaign.flashEnd&&new Date(campaign.flashEnd)>new Date();
+  if(on) price=price*(1-campaign.flashPct/100);
+  return price;
+}
+
+function renderGrid() {
+  const grid=document.getElementById('productsGrid');
+  const info=document.getElementById('resInfo');
+  let list=[...filteredProducts];
+  if(currentSort==='price-low')  list.sort((a,b)=>getOrig(a)-getOrig(b));
+  if(currentSort==='price-high') list.sort((a,b)=>getOrig(b)-getOrig(a));
+  if(info) info.textContent = list.length + (currentLang==='vi'?' sản phẩm':' products');
+  if(!list.length){grid.innerHTML='<div class="empty-state"><div style="font-size:2.5rem">🔍</div><p><span class="en">No products found</span><span class="vi">Không tìm thấy sản phẩm</span></p></div>';applyLang();return;}
+  const flashOn=campaign.flashActive&&campaign.flashEnd&&new Date(campaign.flashEnd)>new Date();
+  grid.innerHTML = list.map(p=>{
+    const imgs=getImages(p),orig=getOrig(p),sale=getSale(p);
+    const hasDsc=flashOn&&sale<orig,pct=hasDsc?Math.round((1-sale/orig)*100):0;
+    const sku=p.SKU||p.sku||'';
+    const title=currentLang==='vi'?(p.Title_VI||p.Title||p.title||''):(p.Title||p.title||'');
+    return `<div class="pcard" data-sku="${sku}" onclick="openModal('${sku}')">
+      <div class="card-gal" id="gal-${sku}">
+        ${hasDsc?'<span class="card-badge-sale">SALE</span>':''}
+        ${pct>0&&!hasDsc?`<span class="card-badge-disc">-${pct}%</span>`:''}
+        <div class="gal-track" id="gt-${sku}">
+          ${imgs.map(src=>`<img src="${src}" alt="${title}" loading="lazy" onerror="this.style.display='none'" onload="this.closest('.card-gal').classList.add('loaded')">`).join('')}
+        </div>
+        ${imgs.length>1?`<button class="g-arr prev" onclick="event.stopPropagation();cSlide('${sku}',-1)">&#8249;</button><button class="g-arr next" onclick="event.stopPropagation();cSlide('${sku}',1)">&#8250;</button><div class="card-dots">${imgs.map((_,i)=>`<button class="card-dot${i===0?' active':''}" onclick="event.stopPropagation();cGoto('${sku}',${i})"></button>`).join('')}</div>`:''}
+        <button class="card-wish" onclick="event.stopPropagation();toggleWish('${sku}',this)">${wishlist.includes(sku)?'❤️':'🤍'}</button>
+      </div>
+      <div class="card-info">
+        <div class="card-title">${title}</div>
+        <div class="card-shop">Zanith Crafted Studio</div>
+        <div class="card-price-row">
+          <span class="card-price">$${sale.toFixed(2)}</span>
+          ${hasDsc?`<span class="card-orig">$${orig.toFixed(2)}</span><span class="card-sale-tag">-${pct}%</span>`:''}
+        </div>
+        <button class="card-add" onclick="event.stopPropagation();quickAdd('${sku}')">🛒 ${currentLang==='vi'?'Thêm vào giỏ':'Add to Cart'}</button>
+      </div>
+    </div>`;
+  }).join('');
+  applyLang();
+}
+function cSlide(sku,d){const p=allProducts.find(x=>(x.SKU||x.sku)===sku);if(!p)return;const imgs=getImages(p);cardIdx[sku]=((cardIdx[sku]||0)+d+imgs.length)%imgs.length;cGoto(sku,cardIdx[sku]);}
+function cGoto(sku,idx){const t=document.getElementById('gt-'+sku);if(!t)return;cardIdx[sku]=idx;t.style.transform=`translateX(-${idx*100}%)`;document.querySelectorAll(`#gal-${sku} .card-dot`).forEach((d,i)=>d.classList.toggle('active',i===idx));}
+
+// ══ FILTER ═════════════════════════════════════════════════════
+function setFilter(type, el) {
+  currentFilter = type||'all';
+  document.querySelectorAll('.chip,.ntab').forEach(c=>c.classList.remove('active'));
+  if(el) el.classList.add('active');
+  applyFilters();
+}
+function setSort(v) { currentSort=v; applyFilters(); }
+function applyFilters() {
+  const q=((document.getElementById('searchIn')||{}).value||'').toLowerCase().trim();
+  filteredProducts=allProducts.filter(p=>{
+    if(currentFilter!=='all'){const cat=(p.Category||p.type||p.Type||'').toLowerCase();if(!cat.includes(currentFilter.toLowerCase()))return false;}
+    if(q){const hay=(''+(p.SKU||p.sku)+' '+(p.Title||p.title)+' '+(p.Style||'')+' '+(p.Type||p.type||'')+' '+(p.Colors||'')+' '+(p.Description||'')).toLowerCase();if(!hay.includes(q))return false;}
+    return true;
+  });
+  renderGrid();
+}
+
+// ══ MODAL ══════════════════════════════════════════════════════
+function openModal(sku) {
+  const p=allProducts.find(x=>(x.SKU||x.sku)===sku); if(!p) return;
+  activeProduct=p; modalIdx=0; modalImages=getImages(p);
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v||'';};
+  set('mSku',p.SKU||p.sku); set('mCat',p.Category||p.Type||p.type||'');
+  const title=currentLang==='vi'?(p.Title_VI||p.Title||p.title||''):(p.Title||p.title||'');
+  const desc =currentLang==='vi'?(p.Description_VI||p.Description||p.description||''):(p.Description||p.description||'');
+  set('mTitle',title); set('mDesc',desc);
+  set('mHash',p.Hashtags||p.hashtags||'');
+  const mImg=document.getElementById('mImg'); if(mImg)mImg.src=modalImages[0]||'';
+  const thumbs=document.getElementById('mThumbs');
+  if(thumbs)thumbs.innerHTML=modalImages.map((s,i)=>`<img class="modal-thumb${i===0?' active':''}" src="${s}" onclick="modalGoto(${i})" onerror="this.style.display='none'">`).join('');
+  const orig=getOrig(p),sale=getSale(p);
+  const flashOn=campaign.flashActive&&campaign.flashEnd&&new Date(campaign.flashEnd)>new Date();
+  set('mSalePrice','$'+sale.toFixed(2));
+  const origEl=document.getElementById('mOrigPrice'); if(origEl)origEl.textContent=(flashOn&&sale<orig)?'$'+orig.toFixed(2):'';
+  const stEl=document.getElementById('mSaveTag');
+  if(stEl){if(flashOn&&sale<orig){stEl.textContent='-'+Math.round((1-sale/orig)*100)+'%';stEl.style.display='';}else stEl.style.display='none';}
+  const codeBox=document.getElementById('mCodeBox');
+  if(codeBox)codeBox.style.display=(campaign.discountCodes&&campaign.discountCodes.length)?'flex':'none';
+  const codeVal=document.getElementById('mCodeVal');
+  if(codeVal&&campaign.discountCodes&&campaign.discountCodes[0])codeVal.textContent=campaign.discountCodes[0].code;
+  document.getElementById('mQty').textContent='1';
+  document.getElementById('modalOv').classList.add('open');
+  document.body.style.overflow='hidden';
+  applyLang();
+}
+function closeModal(){document.getElementById('modalOv').classList.remove('open');document.body.style.overflow='';activeProduct=null;}
+function modalGoto(idx){modalIdx=idx;const mImg=document.getElementById('mImg');if(mImg&&modalImages[idx])mImg.src=modalImages[idx];document.querySelectorAll('.modal-thumb').forEach((t,i)=>t.classList.toggle('active',i===idx));}
+function modalSlide(dir){modalGoto((modalIdx+dir+modalImages.length)%modalImages.length);}
+function changeQty(d){const el=document.getElementById('mQty');if(!el)return;el.textContent=Math.max(1,parseInt(el.textContent||1)+d);}
+
+// ══ CART ═══════════════════════════════════════════════════════
+function loadCart(){try{cart=JSON.parse(localStorage.getItem('zanith_cart')||'[]');}catch(e){cart=[];}updateCartCount();}
+function saveCart(){localStorage.setItem('zanith_cart',JSON.stringify(cart));updateCartCount();}
+function updateCartCount(){
+  const total=cart.reduce((s,i)=>s+(i.qty||1),0);
+  ['cartCnt','cfCnt'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=total;el.style.display=total>0?'flex':'none';}});
+}
+function quickAdd(sku){const p=allProducts.find(x=>(x.SKU||x.sku)===sku);if(!p)return;addItem(p,1);}
+function addFromModal(){
+  if(!activeProduct)return;
+  const qty=parseInt((document.getElementById('mQty')||{}).textContent||1);
+  addItem(activeProduct,qty);
+  const btn=document.getElementById('mAddBtn');
+  if(btn){btn.classList.add('added');btn.innerHTML='✅ Added!';setTimeout(()=>{btn.classList.remove('added');btn.innerHTML='🛒 <span class="en">Add to Cart</span><span class="vi">Thêm vào giỏ</span>';applyLang();},1500);}
+}
+function addItem(p,qty){
+  const sale=getSale(p),orig=getOrig(p),sku=p.SKU||p.sku;
+  const ex=cart.find(i=>i.sku===sku);
+  if(ex)ex.qty=(ex.qty||1)+qty;
+  else cart.push({sku,title:p.Title||p.title||sku,price:sale,origPrice:orig,qty,img:getImages(p)[0]||''});
+  saveCart(); showToast('✅ '+(currentLang==='vi'?'Đã thêm vào giỏ!':'Added to cart!'),'success');
+}
+function loadWishlist(){try{wishlist=JSON.parse(localStorage.getItem('zanith_wish')||'[]');}catch(e){wishlist=[];}}
+function toggleWish(sku,btn){const i=wishlist.indexOf(sku);if(i>=0){wishlist.splice(i,1);if(btn)btn.textContent='🤍';}else{wishlist.push(sku);if(btn)btn.textContent='❤️';}localStorage.setItem('zanith_wish',JSON.stringify(wishlist));}
+
+// ══ LANG ═══════════════════════════════════════════════════════
+function toggleLang(){currentLang=currentLang==='en'?'vi':'en';localStorage.setItem('zanith_lang',currentLang);applyLang();renderGrid();}
+function setLangDirect(lang){currentLang=lang;localStorage.setItem('zanith_lang',lang);applyLang();renderGrid();}
+function applyLang(){
+  const vi=currentLang==='vi';
+  document.querySelectorAll('.en').forEach(el=>el.style.display=vi?'none':'');
+  document.querySelectorAll('.vi').forEach(el=>el.style.display=vi?'':'none');
+  // Footer lang buttons
+  const fen=document.getElementById('ftLangEn'),fvi=document.getElementById('ftLangVi');
+  if(fen)fen.classList.toggle('active',!vi);
+  if(fvi)fvi.classList.toggle('active',vi);
+  // Results info
+  const info=document.getElementById('resInfo');
+  if(info)info.textContent=filteredProducts.length+(vi?' sản phẩm':' products');
+}
+
+// ══ UTILS ══════════════════════════════════════════════════════
+function copyCode(code){navigator.clipboard&&navigator.clipboard.writeText(code);showToast((currentLang==='vi'?'✅ Đã copy mã: ':'✅ Code copied: ')+code,'success');}
+function checkSKUFromURL(){
+  const sku=new URLSearchParams(location.search).get('sku');
+  if(sku){const p=allProducts.find(x=>(x.SKU||x.sku)===sku);if(p)setTimeout(()=>openModal(sku),400);}
+}
+function showToast(msg,type=''){
+  const t=document.getElementById('toast');if(!t)return;
+  t.textContent=msg; t.className='toast show '+(type||'');
+  setTimeout(()=>t.className='toast',3500);
+}
+
+// ══ FALLBACK PRODUCTS ══════════════════════════════════════════
+const FALLBACK_PRODUCTS = [
+  {SKU:'PTN-GEO-diamond-001',Category:'Digital Pattern',Title:'Periwinkle Blue Diamond Tile Pattern',Type:'Diamond Tile',Style:'Classic',Colors:'Periwinkle',Price_USD:'8.00',Image:'images/PTN-GEO-diamond-001.png'},
+  {SKU:'PTN-GEO-FLW-001',Category:'Digital Pattern',Title:'Sage Green Blush Pink Floral Lattice',Type:'Floral',Style:'Cottagecore',Colors:'Sage Green',Price_USD:'8.00',Image:'images/PTN-GEO-FLW-001.png'},
+  {SKU:'PTN-ACC-001',Category:'Digital Pattern',Title:'Boho Fashion Accessories Toss Pattern',Type:'Illustrated Toss',Style:'Boho',Colors:'Pink',Price_USD:'14.00',Image:'images/IMG_2152.jpeg'}
+];
+
+// ══ INIT ═══════════════════════════════════════════════════════
+(function init() {
+  applyLang();
+  loadCart();
+  loadWishlist();
+  loadProducts();   // Fetch từ Apps Script độc lập — không cần Admin
+  loadConfig();     // Campaigns + settings
+  window.addEventListener('popstate', checkSKUFromURL);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<script src="config.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Zanith Admin v9.9</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1e2d4a;--navy-l:#2a3f63;--gold:#c8974a;--cream:#faf7f2;--warm:#f3ede3;--white:#fff;--border:#e2ddd6;--text:#1a2332;--soft:#5a6a7e;--muted:#8a9bb5;--green:#2e7d52;--red:#c0392b;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"Instrument Sans",sans-serif;background:#f0f2f5;color:var(--text);display:flex;min-height:100vh;}
+/* LOCK */
+#lock{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#09090b;font-family:"Georgia",serif;}
+#lock.gone{display:none!important;}
+.zbox{width:360px;padding:44px 36px;background:#111;border:1px solid #222;border-radius:8px;text-align:center;animation:zfade .4s ease;}
+@keyframes zfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.zlogo{font-size:10px;letter-spacing:.35em;color:#444;text-transform:uppercase;margin-bottom:24px;}
+.ztitle{font-size:20px;color:#e8e0d0;font-weight:normal;margin-bottom:4px;}
+.zsub{font-size:11px;color:#555;margin-bottom:20px;letter-spacing:.05em;}
+.zlayers{display:flex;justify-content:center;gap:20px;margin-bottom:20px;}
+.zlayer{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9px;color:#333;letter-spacing:.06em;text-transform:uppercase;}
+.zldot{width:7px;height:7px;border-radius:50%;background:#222;transition:background .3s;}
+.zldot.ok{background:#27ae60;}.zldot.chk{background:#c9a96e;animation:pulse .8s ease infinite;}.zldot.err{background:#c0392b;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.zwrap{position:relative;margin-bottom:12px;}
+#zpw{width:100%;padding:13px 44px 13px 15px;background:#1a1a1a;border:1px solid #222;border-radius:4px;color:#e8e0d0;font-size:14px;font-family:"Courier New",monospace;letter-spacing:.1em;box-sizing:border-box;outline:none;transition:border-color .2s;}
+#zpw:focus{border-color:#c9a96e;}#zpw.shake{animation:zshake .4s ease;border-color:#c0392b!important;}
+@keyframes zshake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+#zeye{position:absolute;right:11px;top:50%;transform:translateY(-50%);background:none;border:none;color:#444;cursor:pointer;font-size:15px;padding:4px;}
+#zenterbtn{width:100%;padding:13px;background:#c9a96e;color:#09090b;border:none;border-radius:4px;font-size:11px;font-family:"Georgia",serif;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+#zenterbtn:hover:not(:disabled){background:#d4b87a;}#zenterbtn:disabled{background:#222;color:#555;cursor:not-allowed;}
+#zmsg{margin-top:12px;font-size:11px;min-height:16px;letter-spacing:.05em;}
+#zmsg.err{color:#c0392b;}#zmsg.ok{color:#27ae60;}#zmsg.inf{color:#c9a96e;}
+.zdots{display:flex;justify-content:center;gap:5px;margin-top:14px;}
+.zdot{width:5px;height:5px;border-radius:50%;background:#222;transition:background .2s;}
+.zdot.f{background:#c9a96e;}.zdot.w{background:#c0392b;}
+.zurlinput{width:100%;padding:11px 13px;background:#1a1a1a;border:1px solid #222;border-radius:4px;color:#e8e0d0;font-size:12px;font-family:"Courier New",monospace;box-sizing:border-box;outline:none;margin-bottom:10px;transition:border-color .2s;}
+.zurlinput:focus{border-color:#c9a96e;}
+.zhint{font-size:10px;color:#444;line-height:1.6;margin-top:10px;}
+.zhint a{color:#555;text-decoration:none;}
+/* SIDEBAR */
+.sidebar{width:210px;background:var(--navy);min-height:100vh;padding:1.1rem 0;display:flex;flex-direction:column;flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto;}
+.sb-brand{padding:0 1rem 1.1rem;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:.6rem;}
+.sb-name{font-family:"Fraunces",serif;font-size:.95rem;color:#fff;}
+.sb-sub{font-size:.6rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;}
+.sb-section{padding:0 .65rem;margin-bottom:.2rem;}
+.sb-label{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.28);padding:.45rem .25rem .25rem;}
+.sb-item{display:flex;align-items:center;gap:.5rem;padding:.5rem .7rem;border-radius:7px;cursor:pointer;font-size:.8rem;color:rgba(255,255,255,.6);margin-bottom:.12rem;transition:all .18s;border:none;background:none;width:100%;text-align:left;font-family:inherit;text-decoration:none;}
+.sb-item:hover{background:rgba(255,255,255,.08);color:#fff;}
+.sb-item.active{background:rgba(255,255,255,.14);color:#fff;font-weight:600;}
+.sb-div{border:none;border-top:1px solid rgba(255,255,255,.08);margin:.4rem .65rem;}
+.sb-sync{padding:.65rem;margin:.4rem .65rem;background:rgba(255,255,255,.04);border-radius:7px;font-size:.68rem;color:rgba(255,255,255,.45);}
+.sdot{display:inline-block;width:5px;height:5px;border-radius:50%;background:#444;margin-right:4px;vertical-align:middle;}
+.sdot.ok{background:#27ae60;}.sdot.err{background:#c0392b;}.sdot.run{background:#c9a96e;animation:pulse .8s ease infinite;}
+/* SYNC BADGE */
+#zsync{position:fixed;bottom:18px;right:18px;z-index:9998;display:none;align-items:center;gap:7px;padding:7px 13px;background:#111;border:1px solid #222;border-radius:18px;font-size:10px;color:#888;font-family:"Georgia",serif;cursor:pointer;transition:all .3s;}
+#zsync:hover{border-color:#444;}
+#zsync .sdot{width:6px;height:6px;}
+/* MAIN */
+.main{flex:1;padding:1.4rem;min-width:0;overflow-x:hidden;}
+.tab-sec{display:none;}.tab-sec.active{display:block;}
+.pg-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.4rem;gap:1rem;flex-wrap:wrap;}
+.pg-title{font-family:"Fraunces",serif;font-size:1.4rem;font-weight:500;color:var(--navy);}
+.pg-sub{font-size:.8rem;color:var(--muted);margin-top:2px;}
+.btn-grp{display:flex;gap:.45rem;flex-wrap:wrap;align-items:center;}
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin-bottom:1.4rem;}
+.stat{background:var(--white);border-radius:10px;padding:1rem 1.15rem;border:1px solid var(--border);border-top:3px solid var(--border);}
+.stat.gold{border-top-color:var(--gold);}.stat.green{border-top-color:var(--green);}.stat.purple{border-top-color:#7b52ab;}.stat.navy{border-top-color:var(--navy);}
+.stat-lbl{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.3rem;}
+.stat-val{font-family:"Fraunces",serif;font-size:1.5rem;font-weight:500;color:var(--navy);line-height:1;}
+.stat-note{font-size:.68rem;color:var(--muted);margin-top:.2rem;}
+/* CARD */
+.card{background:var(--white);border-radius:12px;border:1px solid var(--border);margin-bottom:1.1rem;}
+.card-top{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.15rem;border-bottom:1px solid var(--border);gap:.65rem;flex-wrap:wrap;}
+.card-top h3{font-size:.87rem;font-weight:600;color:var(--navy);}
+.card-tools{display:flex;gap:.45rem;flex-wrap:wrap;align-items:center;}
+/* CONFIG CARD */
+.cfg{background:var(--white);border-radius:12px;border:1px solid var(--border);border-left:3px solid var(--navy);padding:1.15rem 1.4rem;margin-bottom:1rem;overflow:hidden;}
+.cfg h3{font-size:.9rem;font-weight:600;color:var(--navy);margin-bottom:.75rem;}
+.cfg-hint{font-size:.73rem;color:var(--muted);line-height:1.6;margin-top:.3rem;}
+/* BTN */
+.btn{padding:.45rem .9rem;border-radius:7px;font-size:.8rem;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--white);color:var(--text);font-family:inherit;transition:all .14s;display:inline-flex;align-items:center;gap:.3rem;text-decoration:none;}
+.btn:hover{background:var(--warm);}
+.btn-prim{background:var(--navy);color:#fff;border-color:var(--navy);}.btn-prim:hover{background:var(--navy-l);}
+.btn-ok{background:var(--green);color:#fff;border-color:var(--green);}.btn-ok:hover{opacity:.9;}
+.btn-danger{background:var(--red);color:#fff;border-color:var(--red);}.btn-danger:hover{opacity:.9;}
+.btn-sm{font-size:.73rem;padding:.3rem .7rem;}
+/* TABLE */
+.tbl-row{display:grid;gap:.45rem;align-items:center;padding:.6rem 1.15rem;border-bottom:1px solid var(--border);font-size:.78rem;cursor:pointer;transition:background .14s;}
+.tbl-row:hover{background:var(--warm);}
+.tbl-head{background:var(--warm);font-weight:600;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);cursor:default;}
+.tbl-head:hover{background:var(--warm);}
+.tbl-sku{font-family:monospace;font-size:.7rem;color:var(--muted);}
+.tbl-msg{text-align:center;padding:2.5rem;color:var(--muted);}
+.spinner{width:26px;height:26px;border:3px solid var(--border);border-top-color:var(--navy);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto .65rem;}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* ORDER */
+.ord-row{display:grid;grid-template-columns:130px 1fr 75px 105px 90px;gap:.45rem;align-items:center;padding:.6rem 1.15rem;border-bottom:1px solid var(--border);font-size:.78rem;cursor:pointer;transition:background .14s;}
+.ord-row:hover{background:var(--warm);}
+.ord-ref{font-family:monospace;font-size:.7rem;color:var(--navy);font-weight:600;}
+.badge{font-size:.68rem;padding:2px 8px;border-radius:18px;font-weight:600;text-align:center;}
+.badge-pend{background:#fff3cd;color:#856404;}.badge-conf{background:#d1e7dd;color:#0a3622;}.badge-canc{background:#f8d7da;color:#842029;}
+/* FORM */
+.fg{display:flex;flex-direction:column;gap:.28rem;}
+.fg label{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--soft);}
+.fg input,.fg select,.fg textarea{padding:.5rem .8rem;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:.83rem;background:var(--warm);outline:none;transition:border .18s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--navy);background:var(--white);}
+.fg textarea{resize:vertical;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-bottom:.7rem;}
+.cinput{flex:1;min-width:160px;padding:.5rem .8rem;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:.83rem;background:var(--warm);outline:none;transition:border .18s;}
+.cinput:focus{border-color:var(--navy);background:var(--white);}
+.crow{display:flex;gap:.45rem;align-items:center;flex-wrap:wrap;margin-bottom:.45rem;}
+.status-msg{font-size:.78rem;min-height:1.1rem;margin-top:.3rem;}
+/* TOGGLE */
+.tog-row{display:flex;align-items:center;gap:.7rem;padding:.45rem 0 .7rem;}
+.tog-lbl{font-size:.86rem;color:var(--text);}
+.tog{width:42px;height:22px;background:var(--border);border-radius:11px;position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;border:none;}
+.tog.on{background:var(--navy);}
+.tog::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;background:white;border-radius:50%;transition:transform .2s;}
+.tog.on::after{transform:translateX(20px);}
+/* OVERLAY + PANEL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:500;align-items:center;justify-content:center;padding:1rem;}
+.overlay.open{display:flex;}
+.panel{background:var(--white);border-radius:14px;max-width:740px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 18px 55px rgba(0,0,0,.18);}
+.p-head{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.4rem;border-bottom:1px solid var(--border);}
+.p-head h3{font-size:.95rem;font-weight:600;color:var(--navy);}
+.p-close{background:var(--warm);border:none;border-radius:50%;width:26px;height:26px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;}
+.p-foot{padding:.9rem 1.4rem;border-top:1px solid var(--border);display:flex;gap:.45rem;flex-wrap:wrap;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;padding:1.15rem 1.4rem;}
+.fgrid .full{grid-column:1/-1;}
+/* BLOG */
+.blog-card{padding:1rem 1.15rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background .14s;}
+.blog-card:hover{background:var(--warm);}
+.blog-title{font-weight:600;font-size:.88rem;color:var(--navy);margin-bottom:.25rem;}
+.blog-meta{font-size:.72rem;color:var(--muted);}
+/* TOAST */
+.toast{position:fixed;bottom:1.4rem;right:1.4rem;background:var(--navy);color:#fff;padding:.7rem 1.15rem;border-radius:9px;font-size:.83rem;z-index:9999;display:none;max-width:300px;box-shadow:0 4px 18px rgba(0,0,0,.18);}
+.toast.show{display:block;}.toast.ok{background:var(--green);}.toast.err{background:var(--red);}
+@media(max-width:768px){.sidebar{display:none;}.stats{grid-template-columns:1fr 1fr;}.frow{grid-template-columns:1fr;}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+<!-- ══ LOCK SCREEN ══════════════════════════════════════════════ -->
+<div id="lock">
+  <div class="zbox">
+    <div class="zlogo">Zanith Crafted Studio</div>
+    <div class="ztitle">Admin Access</div>
+    <div class="zsub">Bảo mật 3 lớp · v9.9</div>
+    <div class="zlayers">
+      <div class="zlayer"><div class="zldot" id="l1"></div><span>URL</span></div>
+      <div class="zlayer"><div class="zldot" id="l2"></div><span>Password</span></div>
+      <div class="zlayer"><div class="zldot" id="l3"></div><span>Token</span></div>
+    </div>
+
+    <!-- Step 1: Nhập URL (chỉ hiện nếu config.js chưa có URL) -->
+    <div id="zstep-url" style="display:none">
+      <p style="font-size:11px;color:#555;margin-bottom:11px;line-height:1.6">
+        Nhập URL Apps Script<br><span style="color:#444">(1 lần duy nhất trên thiết bị này)</span>
+      </p>
+      <input id="zurl-in" class="zurlinput" type="url"
+        placeholder="https://script.google.com/macros/s/.../exec" autocomplete="off"/>
+      <button id="zurl-btn" style="width:100%;padding:12px;background:#c9a96e;color:#09090b;border:none;border-radius:4px;font-size:11px;font-family:'Georgia',serif;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;">
+        Tiếp tục →
+      </button>
+      <p class="zhint">URL lưu trong trình duyệt, không đẩy lên GitHub.</p>
+    </div>
+
+    <!-- Step 2: Nhập mật khẩu -->
+    <div id="zstep-pw" style="display:none">
+      <div class="zwrap">
+        <input type="password" id="zpw" placeholder="••••••••" autocomplete="off" spellcheck="false"/>
+        <button id="zeye" tabindex="-1">👁</button>
+      </div>
+      <button id="zenterbtn">Đăng nhập</button>
+      <div id="zmsg"></div>
+      <div class="zdots">
+        <div class="zdot" id="zd0"></div><div class="zdot" id="zd1"></div><div class="zdot" id="zd2"></div>
+      </div>
+      <p class="zhint" style="margin-top:13px">
+        <a href="#" onclick="resetAdminUrl();return false">← Đổi Apps Script URL</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- SYNC BADGE -->
+<div id="zsync" title="Click để sync">
+  <span class="sdot" id="syncDot"></span><span id="syncTxt">Chưa sync</span>
+</div>
+
+<!-- ══ SIDEBAR ═════════════════════════════════════════════════ -->
+<nav class="sidebar">
+  <div class="sb-brand">
+    <div class="sb-name">🌿 Zanith Admin</div>
+    <div class="sb-sub">Crafted Studio · v9.9</div>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">Quản lý</div>
+    <button class="sb-item active" id="sb-products" onclick="showTab('products')">📦 Products</button>
+    <button class="sb-item" id="sb-orders"   onclick="showTab('orders')">🛒 Orders</button>
+    <button class="sb-item" id="sb-campaigns" onclick="showTab('campaigns')">🎯 Campaigns</button>
+    <button class="sb-item" id="sb-blog"     onclick="showTab('blog')">✍️ Blog</button>
+    <button class="sb-item" id="sb-settings" onclick="showTab('settings')">⚙️ Settings</button>
+  </div>
+  <hr class="sb-div">
+  <div class="sb-section">
+    <div class="sb-label">Nhanh</div>
+    <button class="sb-item" onclick="showTab('products');quickFilter('')">🎨 All Products</button>
+    <button class="sb-item" onclick="showTab('products');quickFilter('Digital Pattern')">🖼 Patterns</button>
+    <button class="sb-item" onclick="showTab('products');quickFilter('POD')">👕 POD</button>
+    <button class="sb-item" onclick="exportHashtags()">📋 Export Hashtags</button>
+    <a class="sb-item" href="index.html" target="_blank">🛍️ Xem Shop</a>
+  </div>
+  <hr class="sb-div">
+  <div class="sb-section">
+    <div class="sb-sync">
+      <span class="sdot" id="sbDot"></span><span id="sbTxt">—</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ MAIN CONTENT ════════════════════════════════════════════ -->
+<div class="main">
+
+<!-- ─ PRODUCTS ─────────────────────────────────────────────── -->
+<div class="tab-sec active" id="tab-products">
+  <div class="pg-hd">
+    <div><div class="pg-title">Product Manager</div><div class="pg-sub" id="prodSub">Đang tải từ Google Sheet...</div></div>
+    <div class="btn-grp">
+      <button class="btn" onclick="loadAll()">🔄 Sync</button>
+      <button class="btn btn-ok" onclick="saveProducts()">💾 Lưu lên Sheet</button>
+      <button class="btn btn-prim" onclick="openNewProduct()">+ Thêm SP</button>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat navy"><div class="stat-lbl">Sản phẩm</div><div class="stat-val" id="sTot">—</div><div class="stat-note">Google Sheet</div></div>
+    <div class="stat gold"><div class="stat-lbl">Orders</div><div class="stat-val" id="sOrd">—</div><div class="stat-note">all time</div></div>
+    <div class="stat green"><div class="stat-lbl">Pending</div><div class="stat-val" id="sPend">—</div><div class="stat-note">chờ xác nhận</div></div>
+    <div class="stat purple"><div class="stat-lbl">Avg Price</div><div class="stat-val" id="sAvg">—</div><div class="stat-note">USD</div></div>
+  </div>
+  <div class="card">
+    <div class="card-top">
+      <h3>🎨 Sản phẩm (<span id="tblCnt">0</span>)</h3>
+      <div class="card-tools">
+        <input class="cinput" style="min-width:180px" type="text" placeholder="Tìm SKU, tên, style..." oninput="filterTable(this.value)">
+        <button class="btn btn-sm" onclick="exportHashtags()">📋 Hashtags</button>
+      </div>
+    </div>
+    <div class="tbl-row tbl-head" style="grid-template-columns:85px 1fr 68px 80px 75px 80px 48px">
+      <span>SKU</span><span>Tên sản phẩm</span><span>Giá</span><span>Loại</span><span>Style</span><span>Download</span><span></span>
+    </div>
+    <div id="tblBody"><div class="tbl-msg"><div class="spinner"></div><p>Đang tải...</p></div></div>
+  </div>
+</div>
+
+<!-- ─ ORDERS ──────────────────────────────────────────────── -->
+<div class="tab-sec" id="tab-orders">
+  <div class="pg-hd">
+    <div><div class="pg-title">Orders</div><div class="pg-sub" id="ordSub">Đơn hàng từ Google Sheet</div></div>
+    <div class="btn-grp">
+      <button class="btn" onclick="loadAll()">🔄 Refresh</button>
+      <button class="btn" onclick="exportOrders()">⬇ CSV</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-top">
+      <h3>Tất cả đơn hàng <span id="ordCnt" style="color:var(--muted);font-weight:400"></span></h3>
+      <div class="card-tools">
+        <select class="cinput" style="min-width:120px" onchange="filterOrders(this.value)">
+          <option value="">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="payment_confirmed">Confirmed</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+    </div>
+    <div class="ord-row tbl-head"><span>Order Ref</span><span>Khách hàng</span><span>Tổng</span><span>Thời gian</span><span>Trạng thái</span></div>
+    <div id="ordWrap"></div>
+  </div>
+</div>
+
+<!-- ─ CAMPAIGNS ───────────────────────────────────────────── -->
+<div class="tab-sec" id="tab-campaigns">
+  <div class="pg-hd">
+    <div><div class="pg-title">Campaigns</div><div class="pg-sub">Flash sale · Discount · Bundle</div></div>
+    <div class="btn-grp"><button class="btn btn-prim" onclick="saveCampaigns()">💾 Lưu lên Sheet</button></div>
+  </div>
+  <div class="cfg" style="border-left-color:var(--red)">
+    <h3>🔥 Flash Sale</h3>
+    <div class="tog-row"><button class="tog" id="tFlash" onclick="this.classList.toggle('on')"></button><span class="tog-lbl">Bật Flash Sale</span></div>
+    <div class="frow">
+      <div class="fg"><label>Giảm giá (%)</label><input type="number" id="cFlashPct" value="20" min="1" max="80"></div>
+      <div class="fg"><label>Kết thúc (giờ VN)</label><input type="datetime-local" id="cFlashEnd"></div>
+    </div>
+  </div>
+  <div class="cfg" style="border-left-color:var(--gold)">
+    <h3>🗓 Seasonal Presets</h3>
+    <div style="display:flex;gap:.45rem;flex-wrap:wrap">
+      <button class="btn btn-sm" onclick="preset('tet')">🧧 Tết</button>
+      <button class="btn btn-sm" onclick="preset('summer')">☀️ Summer</button>
+      <button class="btn btn-sm" onclick="preset('halloween')">🎃 Halloween</button>
+      <button class="btn btn-sm" onclick="preset('christmas')">🎄 Christmas</button>
+      <button class="btn btn-sm" onclick="preset('valentine')">💝 Valentine</button>
+      <button class="btn btn-sm" onclick="preset('blackfriday')">🖤 Black Friday</button>
+    </div>
+  </div>
+  <div class="cfg" style="border-left-color:var(--green)">
+    <h3>🏷 Discount Codes</h3>
+    <div id="codeList"></div>
+    <div class="frow" style="margin-top:.5rem">
+      <div class="fg"><label>Code mới</label><input type="text" id="newCode" placeholder="ZANITH20" style="text-transform:uppercase"></div>
+      <div class="fg"><label>Giảm (%)</label><input type="number" id="newPct" value="20" min="1" max="80"></div>
+    </div>
+    <button class="btn btn-sm" onclick="addCode()">+ Thêm code</button>
+  </div>
+  <div class="cfg" style="border-left-color:var(--navy)">
+    <h3>📦 Bundle Deal</h3>
+    <div class="tog-row"><button class="tog on" id="tBundle" onclick="this.classList.toggle('on')"></button><span class="tog-lbl">Bật Bundle</span></div>
+    <div class="frow">
+      <div class="fg"><label>Mua bao nhiêu</label><input type="number" id="cBundleQty" value="3" min="2"></div>
+      <div class="fg"><label>Tặng thêm (%)</label><input type="number" id="cBundleFree" value="1" min="1"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ─ BLOG ───────────────────────────────────────────────── -->
+<div class="tab-sec" id="tab-blog">
+  <div class="pg-hd">
+    <div><div class="pg-title">Blog Manager</div><div class="pg-sub">Bài viết lưu trên Google Sheet</div></div>
+    <div class="btn-grp"><button class="btn btn-prim" onclick="openBlogEditor()">+ Bài mới</button></div>
+  </div>
+  <div class="card">
+    <div class="card-top"><h3>Tất cả bài viết</h3></div>
+    <div id="blogList"><div class="tbl-msg">Đang tải...</div></div>
+  </div>
+</div>
+
+<!-- ─ SETTINGS ────────────────────────────────────────────── -->
+<div class="tab-sec" id="tab-settings">
+  <div class="pg-hd">
+    <div><div class="pg-title">Settings</div><div class="pg-sub">☁️ Lưu online trên Google Sheet — mọi thiết bị tự sync</div></div>
+    <div class="btn-grp"><button class="btn btn-prim" onclick="saveSettings()">💾 Lưu tất cả</button></div>
+  </div>
+  <div class="cfg" style="border-left-color:#4285f4">
+    <h3>🔗 Apps Script Connection</h3>
+    <div class="crow">
+      <input class="cinput" id="urlDisplay" placeholder="URL hiện tại..." readonly style="background:#f8f8f8;color:var(--muted)">
+      <button class="btn btn-sm" onclick="resetAdminUrl()">🔄 Đổi URL</button>
+      <button class="btn btn-sm" onclick="testConn()">🔗 Test</button>
+    </div>
+    <div class="status-msg" id="connStatus"></div>
+    <div class="cfg-hint">URL Apps Script lưu trong trình duyệt. Settings bên dưới lưu trên Sheet.</div>
+  </div>
+  <div class="cfg" style="border-left-color:var(--navy)">
+    <h3>🏪 Thông tin Shop</h3>
+    <div class="frow">
+      <div class="fg"><label>Tên shop</label><input class="cinput" id="sShopName" placeholder="Zanith Crafted Studio"></div>
+      <div class="fg"><label>Email</label><input class="cinput" id="sShopEmail" placeholder="your@gmail.com"></div>
+    </div>
+  </div>
+  <div class="cfg" style="border-left-color:var(--gold)">
+    <h3>🏦 Thanh toán chuyển khoản</h3>
+    <div class="frow">
+      <div class="fg"><label>Ngân hàng</label><input class="cinput" id="sBankName" placeholder="Techcombank"></div>
+      <div class="fg"><label>Số tài khoản</label><input class="cinput" id="sBankAcc" placeholder="19038..."></div>
+    </div>
+    <div class="frow">
+      <div class="fg"><label>Chủ tài khoản</label><input class="cinput" id="sBankOwner" placeholder="NGUYEN THI ZHOU"></div>
+      <div class="fg"><label>QR Code URL</label><input class="cinput" id="sBankQR" placeholder="https://...qr.png"></div>
+    </div>
+  </div>
+  <div class="cfg" style="border-left-color:var(--green)">
+    <h3>📧 EmailJS <span style="font-size:.7rem;font-weight:400;color:var(--green)">☁️ Lưu online</span></h3>
+    <div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:7px;padding:.55rem .8rem;font-size:.76rem;color:#2e7d52;margin-bottom:.8rem">
+      ✅ EmailJS settings lưu trên Sheet — iPad hay PC đều tự load
+    </div>
+    <div class="frow">
+      <div class="fg"><label>Public Key</label><input class="cinput" id="sEjPk" placeholder="user_xxx"></div>
+      <div class="fg"><label>Service ID</label><input class="cinput" id="sEjSvc" placeholder="service_xxx"></div>
+    </div>
+    <div class="frow">
+      <div class="fg"><label>Template — Khách hàng</label><input class="cinput" id="sEjTplCust" placeholder="template_xxx"></div>
+      <div class="fg"><label>Template — Admin</label><input class="cinput" id="sEjTplAdmin" placeholder="template_xxx"></div>
+    </div>
+    <div class="frow">
+      <div class="fg"><label>Template — Newsletter</label><input class="cinput" id="sEjTplNews" placeholder="template_xxx"></div>
+      <div class="fg"><label>Email nhận thông báo</label><input class="cinput" id="sEjAdminEmail" placeholder="your@gmail.com"></div>
+    </div>
+    <div class="crow">
+      <button class="btn btn-prim" onclick="saveSettings()">💾 Lưu</button>
+      <button class="btn" onclick="testEmailJS()">🧪 Test gửi</button>
+    </div>
+    <div class="status-msg" id="ejStatus"></div>
+  </div>
+</div>
+
+</div><!-- /.main -->
+
+<!-- ══ OVERLAYS ═══════════════════════════════════════════════ -->
+<!-- Product Detail -->
+<div class="overlay" id="detailOv" onclick="if(event.target===this)closePanel('detailOv')">
+  <div class="panel">
+    <div class="p-head"><h3>📦 <span id="dpSku"></span></h3><button class="p-close" onclick="closePanel('detailOv')">✕</button></div>
+    <div style="display:grid;grid-template-columns:200px 1fr;max-height:55vh">
+      <div style="padding:1.15rem;border-right:1px solid var(--border)"><img id="dpImg" src="" style="width:100%;aspect-ratio:1;object-fit:contain;border-radius:9px;background:var(--warm)"></div>
+      <div style="padding:1.15rem;overflow-y:auto">
+        <div id="dpTitle" style="font-family:'Fraunces',serif;font-size:1.05rem;font-weight:500;color:var(--navy);margin-bottom:.45rem"></div>
+        <p id="dpDesc" style="font-size:.8rem;color:var(--soft);line-height:1.7;margin-bottom:.7rem"></p>
+        <div id="dpPrice" style="font-size:1.05rem;font-weight:600;color:var(--navy);margin-bottom:.7rem"></div>
+        <div id="dpHash" style="font-size:.72rem;color:var(--muted);background:var(--warm);padding:.55rem;border-radius:7px;line-height:1.8"></div>
+      </div>
+    </div>
+    <div class="p-foot">
+      <button class="btn" onclick="copyHash()">📋 Copy Hashtags</button>
+      <button class="btn" onclick="openEditFromDetail()">✏️ Edit</button>
+      <button class="btn btn-prim" onclick="closePanel('detailOv')">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<!-- Product Edit -->
+<div class="overlay" id="editOv" onclick="if(event.target===this)closePanel('editOv')">
+  <div class="panel">
+    <div class="p-head"><h3>✏️ Edit — <span id="editSkuLbl" style="font-family:monospace;font-size:.83rem;color:var(--navy)"></span></h3><button class="p-close" onclick="closePanel('editOv')">✕</button></div>
+    <div class="fgrid">
+      <div class="fg"><label>SKU</label><input id="fSku" readonly></div>
+      <div class="fg"><label>Type</label><input id="fType"></div>
+      <div class="fg full"><label>Title (EN)</label><input id="fTitle"></div>
+      <div class="fg full"><label>Title (VI)</label><input id="fTitleVI" placeholder="Tự động dịch khi lưu lên Sheet"></div>
+      <div class="fg"><label>Style</label><input id="fStyle"></div>
+      <div class="fg"><label>Colors</label><input id="fColors"></div>
+      <div class="fg"><label>Price (USD)</label><input id="fPrice" type="number" step="0.01"></div>
+      <div class="fg"><label>Image URL</label><input id="fImage" placeholder="images/...png"></div>
+      <div class="fg full"><label>Download URL</label><input id="fDlUrl" placeholder="https://drive.google.com/..."></div>
+      <div class="fg full"><label>Description (EN)</label><textarea id="fDesc" rows="3"></textarea></div>
+      <div class="fg full"><label>Description (VI)</label><textarea id="fDescVI" rows="3" placeholder="Tự động dịch thương mại khi lưu..."></textarea></div>
+      <div class="fg full"><label>Hashtags</label><textarea id="fHash" rows="2"></textarea></div>
+    </div>
+    <div style="font-size:.73rem;color:#856404;padding:.6rem 1.4rem;background:#fff8e1;border-top:1px solid #ffe082">⚠️ Bấm "Lưu & Sync" để tự động dịch và cập nhật lên Google Sheet</div>
+    <div class="p-foot">
+      <button class="btn" onclick="closePanel('editOv')">Cancel</button>
+      <button class="btn btn-prim" onclick="saveEditSync()">☁️ Lưu & Sync Sheet</button>
+    </div>
+  </div>
+</div>
+
+<!-- Order Detail -->
+<div class="overlay" id="ordOv" onclick="if(event.target===this)closePanel('ordOv')">
+  <div class="panel">
+    <div class="p-head"><h3 id="odTitle">Order</h3><button class="p-close" onclick="closePanel('ordOv')">✕</button></div>
+    <div id="odBody" style="padding:1.15rem 1.4rem;font-size:.86rem;line-height:1.9"></div>
+    <div class="p-foot" id="odActs"></div>
+  </div>
+</div>
+
+<!-- Blog Editor -->
+<div class="overlay" id="blogOv" onclick="if(event.target===this)closePanel('blogOv')">
+  <div class="panel">
+    <div class="p-head"><h3 id="blogEdTitle">✍️ Blog Editor</h3><button class="p-close" onclick="closePanel('blogOv')">✕</button></div>
+    <div class="fgrid">
+      <div class="fg full"><label>Tiêu đề</label><input id="bTitle" placeholder="Tiêu đề bài viết..."></div>
+      <div class="fg"><label>Slug (URL)</label><input id="bSlug" placeholder="bai-viet-cua-toi"></div>
+      <div class="fg"><label>Ngày đăng</label><input id="bDate" type="date"></div>
+      <div class="fg"><label>Danh mục</label><input id="bCat" placeholder="Tutorial, Tips..."></div>
+      <div class="fg"><label>Ảnh bìa URL</label><input id="bImg" placeholder="images/...jpg"></div>
+      <div class="fg full"><label>Tóm tắt</label><textarea id="bSummary" rows="2"></textarea></div>
+      <div class="fg full"><label>Nội dung (Markdown/HTML)</label><textarea id="bContent" rows="8"></textarea></div>
+    </div>
+    <div class="p-foot">
+      <button class="btn" onclick="closePanel('blogOv')">Cancel</button>
+      <button class="btn btn-danger btn-sm" id="bDeleteBtn" onclick="deleteBlogPost()" style="display:none">🗑 Xóa</button>
+      <button class="btn btn-prim" onclick="saveBlogPost()">💾 Lưu lên Sheet</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ══ JAVASCRIPT ═════════════════════════════════════════════ -->
+<script>
+// ─── CONFIG ──────────────────────────────────────────────────
+const SESSION_KEY = 'zanith_session_v99';
+let scriptUrl    = getAppScriptUrl();
+let sessionToken = sessionStorage.getItem(SESSION_KEY) || '';
+let allProducts = [], filteredProducts = [], activeProduct = null;
+let allOrders = [], filteredOrders = [];
+let allBlog = [], activeBlogIdx = -1;
+let editCodes = [];
+let appSettings = {};
+let dlUrls = {};
+
+// ─── API CALL ────────────────────────────────────────────────
+async function api(action, extra = {}) {
+  if (!scriptUrl) throw new Error('Chưa có Apps Script URL');
+  const body = { action, secret: sessionToken, ...extra };
+  const res  = await fetch(scriptUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const data = await res.json();
+  if (data.status === 'error') throw new Error(data.message || 'Lỗi Apps Script');
+  return data;
+}
+
+// ─── LOCK SCREEN ─────────────────────────────────────────────
+(function initLock() {
+  const lock    = document.getElementById('lock');
+  const stepUrl = document.getElementById('zstep-url');
+  const stepPw  = document.getElementById('zstep-pw');
+  const urlIn   = document.getElementById('zurl-in');
+  const urlBtn  = document.getElementById('zurl-btn');
+  const pwIn    = document.getElementById('zpw');
+  const loginBtn= document.getElementById('zenterbtn');
+  const msgEl   = document.getElementById('zmsg');
+  const eyeBtn  = document.getElementById('zeye');
+
+  let attempts = 0, lockedUntil = 0, lockTimer = null;
+
+  const setL  = (n, s) => { const d = document.getElementById('l'+n); if(d){d.className='zldot';if(s)d.classList.add(s);} };
+  const setMsg= (t, c) => { msgEl.textContent=t; msgEl.className=c||''; };
+  const updateDots = (n, w) => {
+    for(let i=0;i<3;i++){const d=document.getElementById('zd'+i);d.className='zdot';if(i<n)d.classList.add(w?'w':'f');}
+  };
+
+  // Skip session
+  if (sessionToken && scriptUrl) {
+    setL(1,'ok'); setL(2,'ok'); setL(3,'ok');
+    lock.classList.add('gone');
+    document.getElementById('zsync').style.display = 'flex';
+    onUnlocked(); return;
+  }
+
+  if (scriptUrl) {
+    setL(1,'ok');
+    stepUrl.style.display = 'none'; stepPw.style.display = 'block';
+    setTimeout(() => pwIn && pwIn.focus(), 100);
+  } else {
+    setL(1,'checking');
+    stepUrl.style.display = 'block'; stepPw.style.display = 'none';
+    if (urlIn) urlIn.focus();
+  }
+
+  urlBtn && urlBtn.addEventListener('click', () => {
+    const url = (urlIn.value || '').trim();
+    if (!url || !url.startsWith('https://script.google.com')) {
+      urlIn.style.borderColor = '#c0392b';
+      setTimeout(() => urlIn.style.borderColor='', 900); return;
+    }
+    scriptUrl = url;
+    localStorage.setItem(SCRIPT_URL_KEY, url);
+    setL(1,'ok');
+    stepUrl.style.display = 'none'; stepPw.style.display = 'block';
+    setTimeout(() => pwIn && pwIn.focus(), 100);
+  });
+  urlIn && urlIn.addEventListener('keydown', e => { if(e.key==='Enter') urlBtn.click(); });
+
+  function checkLockout() {
+    if (lockedUntil > Date.now()) {
+      loginBtn.disabled = true;
+      const tick = () => {
+        if (Date.now() >= lockedUntil) { clearInterval(lockTimer); lockTimer=null; attempts=0; updateDots(0,false); setMsg('',''); loginBtn.disabled=false; }
+        else setMsg('Thử lại sau ' + Math.ceil((lockedUntil-Date.now())/1000) + 's', 'err');
+      };
+      if (!lockTimer) lockTimer = setInterval(tick, 1000);
+      tick(); return true;
+    }
+    return false;
+  }
+
+  async function tryLogin() {
+    if (checkLockout()) return;
+    const pw = pwIn.value.trim(); if (!pw) return;
+    setMsg('Đang xác thực...', 'inf'); loginBtn.disabled = true; setL(2,'chk');
+    try {
+      const res = await fetch(scriptUrl, {
+        method: 'POST',
+        headers: {'Content-Type': 'text/plain;charset=utf-8'},
+        body: JSON.stringify({ action: 'verifyPassword', secret: pw })
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      if (data.status === 'success' && data.token) {
+        sessionToken = data.token;
+        sessionStorage.setItem(SESSION_KEY, sessionToken);
+        setL(2,'ok'); setL(3,'ok');
+        setMsg('✅ Đăng nhập thành công!', 'ok');
+        setTimeout(() => {
+          lock.classList.add('gone');
+          document.getElementById('zsync').style.display = 'flex';
+          onUnlocked();
+        }, 550);
+      } else {
+        setL(2,'err'); attempts++;
+        updateDots(attempts, true);
+        pwIn.classList.add('shake'); setTimeout(() => pwIn.classList.remove('shake'), 400);
+        pwIn.value = '';
+        if (attempts >= 3) { lockedUntil = Date.now() + 30000; setMsg('Sai 3 lần — khóa 30s','err'); checkLockout(); }
+        else { setMsg('Mật khẩu sai (' + attempts + '/3)','err'); loginBtn.disabled = false; }
+      }
+    } catch(err) { setL(2,'err'); setMsg('Lỗi kết nối: ' + err.message,'err'); loginBtn.disabled=false; }
+  }
+
+  loginBtn && loginBtn.addEventListener('click', tryLogin);
+  pwIn && pwIn.addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); else { setMsg('',''); setL(2,''); } });
+  eyeBtn && eyeBtn.addEventListener('click', () => { pwIn.type = pwIn.type==='password' ? 'text' : 'password'; });
+})();
+
+function resetAdminUrl() {
+  localStorage.removeItem(SCRIPT_URL_KEY);
+  sessionStorage.removeItem(SESSION_KEY);
+  location.reload();
+}
+
+// ─── AFTER UNLOCK ─────────────────────────────────────────────
+function onUnlocked() {
+  const el = document.getElementById('urlDisplay'); if(el) el.value = scriptUrl;
+  loadAll();
+  document.getElementById('zsync').addEventListener('click', loadAll);
+}
+
+// ─── LOAD ALL DATA ────────────────────────────────────────────
+async function loadAll() {
+  setSyncSt('run','Đang tải...');
+  try {
+    const res = await api('getData');
+    const d   = res.data || {};
+    allProducts      = Array.isArray(d.products) ? d.products : [];
+    filteredProducts = [...allProducts];
+    allOrders        = Array.isArray(d.orders)   ? d.orders   : [];
+    filteredOrders   = [...allOrders];
+    allBlog          = Array.isArray(d.blog)     ? d.blog     : [];
+    appSettings      = d.settings || {};
+    populateSettings(appSettings);
+    if (d.campaigns) populateCampaigns(d.campaigns);
+    dlUrls = {};
+    if (Array.isArray(d.downloads)) {
+      d.downloads.forEach(r => { if(r.sku||r.SKU) dlUrls[r.sku||r.SKU] = r.url||r.URL||''; });
+    }
+    if (appSettings.ejPublicKey && typeof emailjs !== 'undefined') {
+      try { emailjs.init(appSettings.ejPublicKey); } catch(e) {}
+    }
+    renderTable(); renderOrders(); renderBlog(); updateStats();
+    setSyncSt('ok', 'Sync ' + new Date().toLocaleTimeString('vi-VN').slice(0,5));
+    document.getElementById('prodSub').textContent = allProducts.length + ' sản phẩm từ Google Sheet ✅';
+    toast('✅ Đã tải ' + allProducts.length + ' sản phẩm', 'ok');
+  } catch(e) {
+    setSyncSt('err', 'Lỗi: ' + e.message.slice(0,28));
+    toast('❌ ' + e.message, 'err');
+  }
+}
+
+function populateSettings(s) {
+  const f = (id, v) => { const el=document.getElementById(id); if(el&&v!==undefined) el.value=v||''; };
+  f('sShopName',s.shopName); f('sShopEmail',s.shopEmail);
+  f('sBankName',s.bankName); f('sBankAcc',s.bankAccount);
+  f('sBankOwner',s.bankOwner); f('sBankQR',s.bankQR);
+  f('sEjPk',s.ejPublicKey); f('sEjSvc',s.ejServiceId);
+  f('sEjTplCust',s.ejTplCustomer); f('sEjTplAdmin',s.ejTplAdmin);
+  f('sEjTplNews',s.ejTplNewsletter); f('sEjAdminEmail',s.ejAdminEmail);
+}
+
+function populateCampaigns(c) {
+  const tog = (id,v) => { const el=document.getElementById(id); if(el)el.className='tog'+(v===true||v==='true'||v==='TRUE'?' on':''); };
+  tog('tFlash',c.flashActive); tog('tBundle',c.bundleActive);
+  const set = (id,v) => { const el=document.getElementById(id); if(el&&v!==undefined&&v!=='')el.value=v; };
+  set('cFlashPct',c.flashPct); set('cBundleQty',c.bundleQty); set('cBundleFree',c.bundleFreePct);
+  if (c.flashEnd) { try { document.getElementById('cFlashEnd').value=new Date(c.flashEnd).toISOString().slice(0,16); } catch(e){} }
+  if (c.discountCodes) {
+    editCodes = typeof c.discountCodes === 'string'
+      ? c.discountCodes.split('|').map(s=>{const[code,pct]=s.split(':');return{code:(code||'').trim(),pct:parseFloat(pct)||20};}).filter(d=>d.code)
+      : (Array.isArray(c.discountCodes)?c.discountCodes:[]);
+    renderCodes();
+  }
+}
+
+// ─── TABS ──────────────────────────────────────────────────────
+function showTab(tab) {
+  document.querySelectorAll('.tab-sec').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.sb-item[id^="sb-"]').forEach(el=>el.classList.remove('active'));
+  const t=document.getElementById('tab-'+tab),s=document.getElementById('sb-'+tab);
+  if(t)t.classList.add('active'); if(s)s.classList.add('active');
+  if(tab==='settings'){const el=document.getElementById('urlDisplay');if(el)el.value=scriptUrl;}
+}
+
+// ─── STATS ─────────────────────────────────────────────────────
+function updateStats() {
+  const g = id => document.getElementById(id);
+  if(g('sTot')) g('sTot').textContent = allProducts.length;
+  if(g('sOrd')) g('sOrd').textContent = allOrders.length;
+  if(g('sPend')) g('sPend').textContent = allOrders.filter(o=>(o.status||'').includes('pending')).length;
+  const avg = allProducts.length ? allProducts.reduce((s,p)=>s+parseFloat(p.Price_USD||p.price||0),0)/allProducts.length : 0;
+  if(g('sAvg')) g('sAvg').textContent = '$' + avg.toFixed(2);
+}
+
+// ─── PRODUCTS TABLE ────────────────────────────────────────────
+function renderTable() {
+  const body = document.getElementById('tblBody');
+  document.getElementById('tblCnt').textContent = filteredProducts.length;
+  if (!filteredProducts.length) { body.innerHTML='<div class="tbl-msg">Không có sản phẩm</div>'; return; }
+  body.innerHTML = filteredProducts.map(p => {
+    const hasDl = !!(p.DownloadURL||p.Download_URL||dlUrls[p.SKU]||dlUrls[p.sku]);
+    const sku = p.SKU||p.sku||'';
+    return `<div class="tbl-row" style="grid-template-columns:85px 1fr 68px 80px 75px 80px 48px" onclick="openDetail('${sku}')">
+      <span class="tbl-sku">${sku}</span>
+      <span style="font-weight:500;font-size:.8rem">${p.Title||p.title||''}</span>
+      <span style="color:var(--navy);font-weight:600">$${parseFloat(p.Price_USD||p.price||0).toFixed(2)}</span>
+      <span style="font-size:.7rem;color:var(--soft)">${(p.Type||p.type||p.Category||'').split('/')[0]}</span>
+      <span style="font-size:.7rem;color:var(--soft)">${(p.Style||p.style||'').split('/')[0]}</span>
+      <span style="font-size:.7rem;color:${hasDl?'var(--green)':'var(--red)'}">${hasDl?'✅ Có':'❌ Thiếu'}</span>
+      <button class="btn btn-sm" onclick="event.stopPropagation();openEdit('${sku}')">✏️</button>
+    </div>`;
+  }).join('');
+}
+
+function filterTable(q) {
+  q = q.toLowerCase();
+  filteredProducts = q ? allProducts.filter(p => (''+(p.SKU||p.sku)+(p.Title||p.title)+p.Style+p.Type+p.Colors).toLowerCase().includes(q)) : [...allProducts];
+  renderTable();
+}
+function quickFilter(type) {
+  filteredProducts = type ? allProducts.filter(p=>(p.Category||p.Type||p.type||'').includes(type)) : [...allProducts];
+  renderTable();
+}
+
+// ─── PRODUCT DETAIL + EDIT ─────────────────────────────────────
+function openDetail(sku) {
+  const p = allProducts.find(x=>(x.SKU||x.sku)===sku); if(!p) return;
+  activeProduct = p;
+  const s = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v||''; };
+  s('dpSku', p.SKU||p.sku); s('dpTitle', p.Title||p.title);
+  s('dpDesc', p.Description||p.description); s('dpPrice', '$'+parseFloat(p.Price_USD||p.price||0).toFixed(2));
+  s('dpHash', p.Hashtags||p.hashtags);
+  const img = document.getElementById('dpImg'); if(img) img.src = p.Image||p.image||'';
+  document.getElementById('detailOv').classList.add('open');
+}
+function openEditFromDetail() { closePanel('detailOv'); if(activeProduct) openEdit(activeProduct.SKU||activeProduct.sku); }
+function copyHash() { if(!activeProduct) return; navigator.clipboard&&navigator.clipboard.writeText(activeProduct.Hashtags||activeProduct.hashtags||''); toast('📋 Copied!','ok'); }
+
+function openNewProduct() {
+  activeProduct = null;
+  ['fSku','fType','fTitle','fTitleVI','fStyle','fColors','fPrice','fImage','fDlUrl','fDesc','fDescVI','fHash'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('editSkuLbl').textContent = '(mới)';
+  document.getElementById('editOv').classList.add('open');
+}
+
+function openEdit(sku) {
+  const p = allProducts.find(x=>(x.SKU||x.sku)===sku); if(!p) return;
+  activeProduct = p;
+  document.getElementById('editSkuLbl').textContent = sku;
+  const map = {fSku:'SKU',fType:'Type',fTitle:'Title',fTitleVI:'Title_VI',fStyle:'Style',fColors:'Colors',fDesc:'Description',fDescVI:'Description_VI',fHash:'Hashtags',fImage:'Image'};
+  Object.keys(map).forEach(id=>{ const el=document.getElementById(id); if(el)el.value=p[map[id]]||p[map[id].toLowerCase()]||''; });
+  document.getElementById('fPrice').value = p.Price_USD||p.price||'';
+  document.getElementById('fDlUrl').value = dlUrls[sku]||p.DownloadURL||p.Download_URL||'';
+  document.getElementById('editOv').classList.add('open');
+}
+
+async function saveEditSync() {
+  const get = id => (document.getElementById(id)||{}).value||'';
+  const sku = get('fSku');
+  const productData = {
+    SKU:            sku,
+    Type:           get('fType'),
+    Title:          get('fTitle'),
+    Title_VI:       get('fTitleVI'),  // Apps Script akan auto-translate jika kosong
+    Style:          get('fStyle'),
+    Colors:         get('fColors'),
+    Price_USD:      get('fPrice'),
+    Image:          get('fImage'),
+    DownloadURL:    get('fDlUrl'),
+    Description:    get('fDesc'),
+    Description_VI: get('fDescVI'),
+    Hashtags:       get('fHash')
+  };
+  // Update local list
+  const idx = allProducts.findIndex(x=>(x.SKU||x.sku)===sku);
+  if (idx >= 0) allProducts[idx] = {...allProducts[idx], ...productData};
+  else if (sku) allProducts.push(productData);
+  // Update dlUrls
+  if (productData.DownloadURL) dlUrls[sku] = productData.DownloadURL;
+
+  setSyncSt('run','Đang sync...');
+  try {
+    await api('setData', { data: { products: allProducts } });
+    if (productData.DownloadURL) {
+      const dlRows = Object.entries(dlUrls).map(([s,u])=>({sku:s,url:u}));
+      await api('setData', { data: { downloads: dlRows } });
+    }
+    setSyncSt('ok','OK');
+    filteredProducts = [...allProducts];
+    renderTable(); updateStats();
+    closePanel('editOv');
+    toast('✅ Đã lưu & sync lên Sheet! (auto-dịch nếu chưa có VI)', 'ok');
+  } catch(e) { setSyncSt('err','Lỗi'); toast('❌ '+e.message,'err'); }
+}
+
+async function saveProducts() {
+  setSyncSt('run','Đang lưu...');
+  try {
+    await api('setData', { data: { products: allProducts } });
+    setSyncSt('ok','OK '+new Date().toLocaleTimeString('vi-VN').slice(0,5));
+    toast('✅ Đã lưu ' + allProducts.length + ' sản phẩm!','ok');
+  } catch(e) { setSyncSt('err','Lỗi'); toast('❌ '+e.message,'err'); }
+}
+
+function exportHashtags() {
+  const rows = ['SKU,Title,Hashtags',...allProducts.map(p=>`"${p.SKU||p.sku}","${p.Title||p.title}","${p.Hashtags||p.hashtags||''}"`)];
+  const a = Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'})),download:'zanith_hashtags.csv'}); a.click();
+}
+
+// ─── ORDERS ────────────────────────────────────────────────────
+function renderOrders() {
+  const wrap = document.getElementById('ordWrap');
+  const cnt  = document.getElementById('ordCnt'); if(cnt) cnt.textContent = '(' + filteredOrders.length + ')';
+  const sub  = document.getElementById('ordSub'); if(sub) sub.textContent = allOrders.length + ' đơn từ Google Sheet';
+  if (!filteredOrders.length) { wrap.innerHTML='<div class="tbl-msg">Chưa có đơn hàng</div>'; return; }
+  wrap.innerHTML = filteredOrders.map(o => {
+    const st  = o.status||'pending';
+    const cls = st.includes('confirm')?'badge-conf':st.includes('cancel')?'badge-canc':'badge-pend';
+    const lbl = st.includes('confirm')?'Confirmed':st.includes('cancel')?'Cancelled':'Pending';
+    return `<div class="ord-row" onclick="openOrderDetail('${o.orderRef||o.ref||''}')">
+      <span class="ord-ref">${o.orderRef||o.ref||'—'}</span>
+      <span>${o.customerName||o.name||''} <span style="color:var(--muted);font-size:.7rem">${o.customerEmail||o.email||''}</span></span>
+      <span style="font-weight:600;color:var(--navy)">$${o.total||'0'}</span>
+      <span style="color:var(--muted);font-size:.73rem">${o.time||o.timeDisplay||''}</span>
+      <span class="badge ${cls}">${lbl}</span>
+    </div>`;
+  }).join('');
+}
+function filterOrders(s) { filteredOrders=s?allOrders.filter(o=>(o.status||'').includes(s)):[...allOrders]; renderOrders(); }
+
+function openOrderDetail(ref) {
+  const o = allOrders.find(x=>(x.orderRef||x.ref)===ref); if(!o) return;
+  document.getElementById('odTitle').textContent = '📦 ' + ref;
+  document.getElementById('odBody').innerHTML = `
+    <table style="width:100%;border-collapse:collapse">
+      <tr><td style="padding:4px 0;color:var(--muted);width:110px">Khách hàng</td><td><strong>${o.customerName||o.name||'—'}</strong></td></tr>
+      <tr><td style="padding:4px 0;color:var(--muted)">Email</td><td>${o.customerEmail||o.email||'—'}</td></tr>
+      <tr><td style="padding:4px 0;color:var(--muted)">Thời gian</td><td>${o.time||'—'}</td></tr>
+      <tr><td style="padding:4px 0;color:var(--muted);vertical-align:top">Sản phẩm</td><td style="word-break:break-all">${o.items||'—'}</td></tr>
+      <tr><td style="padding:4px 0;color:var(--muted)">Tổng</td><td><strong style="color:var(--navy)">$${o.total||'0'}</strong></td></tr>
+      <tr><td style="padding:4px 0;color:var(--muted)">Trạng thái</td><td>${o.status||'—'}</td></tr>
+    </table>`;
+  document.getElementById('odActs').innerHTML = `
+    <button class="btn btn-ok" onclick="confirmOrder('${ref}')">📲 Xác nhận + Gửi file</button>
+    <button class="btn" onclick="copyDlLink('${ref}')">🔗 Copy link</button>
+    <button class="btn btn-danger btn-sm" onclick="updateOrdStatus('${ref}','cancelled')">❌ Hủy</button>
+    <button class="btn" onclick="closePanel('ordOv')">Đóng</button>`;
+  document.getElementById('ordOv').classList.add('open');
+}
+
+async function confirmOrder(ref) {
+  setSyncSt('run','Đang xử lý...');
+  try {
+    const data = await api('confirmAndSend', { orderRef: ref });
+    if (data.downloadUrl) {
+      const box = document.createElement('div');
+      box.style.cssText = 'margin-top:.7rem;padding:.8rem;background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;font-size:.78rem';
+      box.innerHTML = '<strong style="color:var(--green)">✅ Đã gửi email + Telegram!</strong><br>' +
+        '<a href="' + data.downloadUrl + '" target="_blank" style="color:var(--navy);word-break:break-all">' + data.downloadUrl + '</a>';
+      const body = document.getElementById('odBody'); if(body) body.appendChild(box);
+    }
+    const o = allOrders.find(x=>(x.orderRef||x.ref)===ref);
+    if (o) o.status = 'payment_confirmed';
+    filteredOrders = [...allOrders]; renderOrders(); updateStats();
+    setSyncSt('ok','OK'); toast('✅ Xác nhận + gửi file xong!','ok');
+  } catch(e) { setSyncSt('err','Lỗi'); toast('❌ '+e.message,'err'); }
+}
+
+async function updateOrdStatus(ref, status) {
+  try {
+    await api('updateOrderStatus', { orderRef: ref, newStatus: status });
+    const o = allOrders.find(x=>(x.orderRef||x.ref)===ref); if(o) o.status=status;
+    filteredOrders=[...allOrders]; renderOrders(); updateStats();
+    closePanel('ordOv'); toast('✅ Đã cập nhật!','ok');
+  } catch(e) { toast('❌ '+e.message,'err'); }
+}
+
+function copyDlLink(ref) {
+  const url = 'https://zenithcraftedstudio.github.io/Zanith-/download.html?ref=' + ref;
+  navigator.clipboard && navigator.clipboard.writeText(url);
+  toast('📋 Đã copy link download', 'ok');
+}
+
+function exportOrders() {
+  const rows = ['OrderRef,Name,Email,Total,Time,Status',...allOrders.map(o=>`"${o.orderRef||o.ref}","${o.customerName||o.name||''}","${o.customerEmail||o.email||''}","${o.total||''}","${o.time||''}","${o.status||''}"`)];
+  const a = Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'})),download:'zanith_orders.csv'}); a.click();
+}
+
+// ─── CAMPAIGNS ─────────────────────────────────────────────────
+const SEASONS = {tet:{pct:30,days:5},summer:{pct:25,days:14},halloween:{pct:20,days:5},christmas:{pct:30,days:7},valentine:{pct:20,days:3},blackfriday:{pct:40,days:4}};
+function preset(k) {
+  const p = SEASONS[k]; if(!p) return;
+  document.getElementById('tFlash').classList.add('on');
+  document.getElementById('cFlashPct').value = p.pct;
+  const d=new Date(); d.setDate(d.getDate()+p.days);
+  document.getElementById('cFlashEnd').value = d.toISOString().slice(0,16);
+  toast('✅ '+k+': -'+p.pct+'%, '+p.days+' ngày','ok');
+}
+function renderCodes() {
+  document.getElementById('codeList').innerHTML = editCodes.map((c,i)=>`
+    <div style="display:flex;align-items:center;gap:.5rem;padding:.45rem .7rem;background:var(--warm);border-radius:7px;font-size:.8rem;margin-bottom:.35rem">
+      <span style="font-family:monospace;font-weight:700;color:var(--navy)">${c.code}</span>
+      <span style="color:var(--green);font-weight:600">-${c.pct}%</span>
+      <button class="btn btn-sm" style="margin-left:auto" onclick="removeCode(${i})">✕</button>
+    </div>`).join('');
+}
+function addCode() {
+  const code=(document.getElementById('newCode').value||'').trim().toUpperCase();
+  const pct=parseFloat(document.getElementById('newPct').value)||20;
+  if(!code) return; editCodes.push({code,pct}); document.getElementById('newCode').value=''; renderCodes();
+}
+function removeCode(i) { editCodes.splice(i,1); renderCodes(); }
+async function saveCampaigns() {
+  const flashEnd = document.getElementById('cFlashEnd').value;
+  const campaigns = {
+    flashActive:  String(document.getElementById('tFlash').classList.contains('on')),
+    flashPct:     document.getElementById('cFlashPct').value,
+    flashEnd:     flashEnd ? (()=>{const d=new Date(flashEnd);return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString();})() : '',
+    bundleActive: String(document.getElementById('tBundle').classList.contains('on')),
+    bundleQty:    document.getElementById('cBundleQty').value,
+    bundleFreePct:document.getElementById('cBundleFree').value,
+    discountCodes:editCodes.map(c=>c.code+':'+c.pct).join('|')
+  };
+  try { await api('setData',{data:{campaigns}}); toast('✅ Campaign lưu lên Sheet!','ok'); }
+  catch(e) { toast('❌ '+e.message,'err'); }
+}
+
+// ─── BLOG ──────────────────────────────────────────────────────
+function renderBlog() {
+  const wrap = document.getElementById('blogList');
+  if (!allBlog.length) { wrap.innerHTML='<div class="tbl-msg">Chưa có bài viết</div>'; return; }
+  wrap.innerHTML = allBlog.map((b,i)=>`
+    <div class="blog-card" onclick="openBlogEditor(${i})">
+      <div class="blog-title">${b.title||'Chưa có tiêu đề'}</div>
+      <div class="blog-meta">${b.date||''} · ${b.category||''}</div>
+    </div>`).join('');
+}
+function openBlogEditor(idx=-1) {
+  activeBlogIdx = idx;
+  const b = idx>=0 ? allBlog[idx] : {};
+  const f = (id,v) => { const el=document.getElementById(id); if(el)el.value=v||''; };
+  f('bTitle',b.title); f('bSlug',b.slug); f('bDate',b.date);
+  f('bCat',b.category); f('bImg',b.coverImage||b.img||'');
+  f('bSummary',b.summary); f('bContent',b.content||b.body||'');
+  document.getElementById('blogEdTitle').textContent = idx>=0 ? '✏️ Sửa bài viết' : '✍️ Bài viết mới';
+  document.getElementById('bDeleteBtn').style.display = idx>=0 ? '' : 'none';
+  if (!b.date) document.getElementById('bDate').value = new Date().toISOString().slice(0,10);
+  document.getElementById('blogOv').classList.add('open');
+}
+async function saveBlogPost() {
+  const get = id => (document.getElementById(id)||{}).value||'';
+  const post = {
+    title: get('bTitle'), slug: get('bSlug'), date: get('bDate'),
+    category: get('bCat'), coverImage: get('bImg'),
+    summary: get('bSummary'), content: get('bContent')
+  };
+  if (!post.title) { toast('⚠️ Nhập tiêu đề','err'); return; }
+  if (activeBlogIdx >= 0) allBlog[activeBlogIdx] = post;
+  else allBlog.unshift(post);
+  try {
+    await api('setData', { data: { blog: allBlog } });
+    renderBlog(); closePanel('blogOv'); toast('✅ Đã lưu bài viết!','ok');
+  } catch(e) { toast('❌ '+e.message,'err'); }
+}
+async function deleteBlogPost() {
+  if (activeBlogIdx < 0 || !confirm('Xóa bài viết này?')) return;
+  allBlog.splice(activeBlogIdx, 1);
+  try {
+    await api('setData', { data: { blog: allBlog } });
+    renderBlog(); closePanel('blogOv'); toast('🗑 Đã xóa bài viết','ok');
+  } catch(e) { toast('❌ '+e.message,'err'); }
+}
+
+// ─── SETTINGS ─────────────────────────────────────────────────
+async function saveSettings() {
+  const g = id => (document.getElementById(id)||{}).value||'';
+  const settings = {
+    shopName:g('sShopName'),shopEmail:g('sShopEmail'),
+    bankName:g('sBankName'),bankAccount:g('sBankAcc'),
+    bankOwner:g('sBankOwner'),bankQR:g('sBankQR'),
+    ejPublicKey:g('sEjPk'),ejServiceId:g('sEjSvc'),
+    ejTplCustomer:g('sEjTplCust'),ejTplAdmin:g('sEjTplAdmin'),
+    ejTplNewsletter:g('sEjTplNews'),ejAdminEmail:g('sEjAdminEmail')
+  };
+  try {
+    await api('setData', { data: { settings } });
+    appSettings = {...appSettings,...settings};
+    if (settings.ejPublicKey && typeof emailjs!=='undefined') { try{emailjs.init(settings.ejPublicKey);}catch(e){} }
+    toast('✅ Settings lưu lên Sheet! Mọi thiết bị tự sync.','ok');
+  } catch(e) { toast('❌ '+e.message,'err'); }
+}
+async function testConn() {
+  const st = document.getElementById('connStatus'); st.textContent='⏳ Đang test...';
+  try { const d=await api('getData'); st.innerHTML=`<span style="color:var(--green)">✅ OK — ${(d.data?.products||[]).length} sản phẩm</span>`; }
+  catch(e) { st.innerHTML=`<span style="color:var(--red)">❌ ${e.message}</span>`; }
+}
+async function testEmailJS() {
+  const pk=appSettings.ejPublicKey||'', sid=appSettings.ejServiceId||'', ta=appSettings.ejTplAdmin||'';
+  if(!pk||!sid||!ta) { document.getElementById('ejStatus').innerHTML='<span style="color:var(--red)">❌ Chưa đủ thông tin EmailJS</span>'; return; }
+  document.getElementById('ejStatus').textContent='⏳ Đang gửi test...';
+  try {
+    await fetch('https://api.emailjs.com/api/v1.0/email/send',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({service_id:sid,template_id:ta,user_id:pk,
+        template_params:{to_email:appSettings.ejAdminEmail,order_ref:'TEST-001',customer_name:'Test',total:'$8.00'}})
+    });
+    document.getElementById('ejStatus').innerHTML='<span style="color:var(--green)">✅ Đã gửi! Check hộp thư.</span>';
+  } catch(e) { document.getElementById('ejStatus').innerHTML=`<span style="color:var(--red)">❌ ${e.message}</span>`; }
+}
+
+// ─── UTILS ────────────────────────────────────────────────────
+function closePanel(id) { document.getElementById(id).classList.remove('open'); }
+function setSyncSt(status, txt) {
+  const dot=document.getElementById('syncDot'), t=document.getElementById('syncTxt');
+  const sbDot=document.getElementById('sbDot'), sbT=document.getElementById('sbTxt');
+  const syncEl=document.getElementById('zsync');
+  const clsMap = {ok:'ok',err:'err',run:'run'};
+  if(dot){dot.className='sdot';if(clsMap[status])dot.classList.add(clsMap[status]);}
+  if(t)t.textContent=txt;
+  if(sbDot){sbDot.className='sdot';if(clsMap[status])sbDot.classList.add(clsMap[status]);}
+  if(sbT)sbT.textContent=txt;
+  if(syncEl)syncEl.className=status;
+}
+function toast(msg, type='') {
+  const t=document.getElementById('toast'); t.textContent=msg;
+  t.className='toast show '+(type==='ok'?'ok':type==='err'?'err':'');
+  setTimeout(()=>t.className='toast',3500);
+}
+</script>
+</body>
+</html>
