@@ -268,24 +268,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // === FETCH & RENDER ===
-async function loadProducts(){
-  const container = document.getElementById("products-container");
-  
-  try{
-    const res = await zanithFetch("readProducts", {}, CONFIG.KEY_READ);
-    if(res.status!=="success" || !res.data?.all) throw new Error("Không tải được dữ liệu từ Google Sheet");
-    
-    products = res.data.all;
-    if(products.length === 0){
-      container.innerHTML = `<div class="loading">🌱 Chưa có sản phẩm. Quay lại sau nhé!</div>`;
-      return;
+async function loadProducts() {
+    try {
+        // Sử dụng GET để bypass các hạn chế thiết bị
+        const url = `${ZANITH_CONFIG.SCRIPT_URL}?action=readProducts&key=${ZANITH_CONFIG.READ_KEY}`;
+        const response = await fetch(url);
+        const result = await response.json();
+        
+        if (result.status === "success") {
+            renderProducts(result.data); // Hàm hiển thị của bạn
+        }
+    } catch (error) {
+        console.error("Lỗi load dữ liệu online:", error);
     }
-    
-    renderSections(products);
-  } catch(e){
-    console.error("Load error:", e);
-    container.innerHTML = `<div class="loading" style="color:#e74c3c">⚠️ ${e.message}<br><small>Kiểm tra kết nối hoặc thử lại sau.</small></div>`;
-  }
 }
 
 function renderSections(list){
