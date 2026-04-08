@@ -632,5 +632,35 @@ const FALLBACK_PRODUCTS=[
   {SKU:'PTN-GEO-FLW-001',Category:'Digital Pattern',Title:'Sage Green Blush Pink Floral Lattice',Type:'Floral',Style:'Cottagecore',Colors:'Sage Green',Price_USD:'8.00',Image:'images/PTN-GEO-FLW-001.png'},
   {SKU:'PTN-ACC-001',Category:'Digital Pattern',Title:'Boho Fashion Accessories Toss Pattern',Type:'Illustrated Toss',Style:'Boho',Colors:'Pink',Price_USD:'14.00',Image:'images/IMG_2152.jpeg'}
 ];
+  // --- HÀM TẢI SHOP ĐỘC LẬP (Zanith v10) ---
+async function initZanithShop() {
+  try {
+    // Lấy dữ liệu công khai (dùng KEY_READ)
+    const res = await zanithFetch("readProducts", {});
+    
+    if(res && res.status === "success") {
+      // allProducts là biến chứa danh sách sản phẩm trong file của bạn
+      window.allProducts = res.data.all || res.data; 
+      
+      // Gọi hàm vẽ sản phẩm ra màn hình
+      if(typeof renderGrid === 'function') renderGrid();
+      
+      // Ẩn loader nếu có
+      const L = document.getElementById("loader");
+      if(L) L.style.display = "none";
+    }
+  } catch(e) {
+    console.warn("Sử dụng dữ liệu dự phòng do lỗi kết nối.");
+    if(typeof FALLBACK_PRODUCTS !== 'undefined') {
+      window.allProducts = FALLBACK_PRODUCTS;
+      if(typeof renderGrid === 'function') renderGrid();
+    }
+  }
+}
 
-// ═══ INIT ══════════════════════════════�
+// Tự động chạy khi trang web mở ra
+document.addEventListener("DOMContentLoaded", initZanithShop);
+</script>
+</body>
+</html>
+// ═══ INIT ══════════════════════════════�
