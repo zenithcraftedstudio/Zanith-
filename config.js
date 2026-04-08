@@ -3,7 +3,7 @@
  */
 
 // 🔗 URL Apps Script - THAY BẰNG URL THẬT CỦA BẠN
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGJZqtR40ySho3u4iq16wruTY1NjWI0PQZhrJ95IX0eZ4s60bZ_AbSb_u9PYUFG98/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzb9xgyx5PthSbvsKMT-h5waKdTyJlrP68Oj_5CluV4mIruwx8AtUh2hkc5TJjUaHrD/exec";
 
 const CONFIG = {
   SCRIPT_URL: APPS_SCRIPT_URL,
