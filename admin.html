@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zanith Admin • Crafted Studio</title>
+  <script src="config.js"></script>
+  <style>
+    :root{--bg:#f8f9fa;--card:#fff;--primary:#667eea;--danger:#e74c3c;--success:#27ae60;--text:#333;--border:#e0e0e0}
+    *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+    body{background:var(--bg);color:var(--text);line-height:1.5}
+    
+    /* Lock Screen */
+    .zlock{position:fixed;inset:0;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;z-index:9999}
+    .zbox{background:var(--card);border-radius:16px;padding:2rem;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.3);text-align:center}
+    .zbox h3{color:var(--primary);margin-bottom:.5rem}
+    .zbox .small{color:#666;font-size:.9rem;margin-bottom:1.5rem}
+    .zstep{display:none}.zstep.active{display:block}
+    .zbox input{width:100%;padding:.75rem 1rem;border:2px solid var(--border);border-radius:8px;font-size:1rem;margin:.5rem 0}
+    .zbox input:focus{outline:none;border-color:var(--primary)}
+    .zbox button{width:100%;padding:.75rem;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:1rem}
+    .zbox button:disabled{opacity:.6;cursor:not-allowed}
+    .zbox .err{color:var(--danger);font-size:.9rem;margin-top:.5rem;min-height:1.2em}
+    .zbox .tiny{font-size:.75rem;color:#999;margin-top:1rem}
+    .zspinner{width:24px;height:24px;border:3px solid #eee;border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite;margin:1rem auto}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    
+    /* Dashboard */
+    #dashboard{display:none;max-width:1200px;margin:0 auto;padding:1rem}
+    .top-bar{display:flex;justify-content:space-between;align-items:center;padding:1rem;background:var(--card);border-radius:12px;margin-bottom:1rem;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .top-bar h2{color:var(--primary)}
+    .top-bar .actions button{padding:.5rem 1rem;margin-left:.5rem;border:none;border-radius:6px;background:var(--primary);color:#fff;cursor:pointer}
+    .top-bar .actions button.sec{background:#e0e0e0;color:#333}
+    
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin-bottom:1.5rem}
+    .stat{background:var(--card);padding:1rem;border-radius:12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .stat .num{font-size:1.4rem;font-weight:700;color:var(--primary)}
+    .stat .lbl{font-size:.85rem;color:#666}
+    
+    .tabs{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+    .tab{padding:.5rem 1rem;background:#e0e0e0;border:none;border-radius:8px;cursor:pointer}
+    .tab.active{background:var(--primary);color:#fff}
+    
+    .panel{background:var(--card);border-radius:12px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.08);display:none}
+    .panel.active{display:block}
+    
+    table{width:100%;border-collapse:collapse;font-size:.9rem}
+    th,td{padding:.75rem;text-align:left;border-bottom:1px solid var(--border)}
+    th{background:#f8f9fa;font-weight:600}
+    .form-group{margin-bottom:1rem}
+    .form-group label{display:block;font-weight:600;margin-bottom:.25rem;font-size:.9rem}
+    .form-group input,.form-group textarea,.form-group select{width:100%;padding:.5rem;border:1px solid var(--border);border-radius:6px}
+    .btn{padding:.5rem 1rem;border:none;border-radius:6px;cursor:pointer;font-size:.9rem}
+    .btn-p{background:var(--primary);color:#fff}.btn-s{background:#e0e0e0;color:#333}.btn-d{background:var(--danger);color:#fff}
+    .toast{position:fixed;bottom:2rem;right:2rem;background:#333;color:#fff;padding:1rem 1.5rem;border-radius:8px;z-index:10000;display:none}
+    .hidden{display:none!important}
+    @media(max-width:600px){.top-bar{flex-direction:column;gap:.5rem}.stats{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+
+<!-- 🔐 LOCK SCREEN (FIXED: Chỉ 1 #zstep-pw) -->
+<div id="zlock" class="zlock">
+  <div class="zbox">
+    <h3>🌿 Zanith Admin</h3>
+    <p class="small">Hệ thống bảo mật 3 lớp • Dữ liệu 100% Online</p>
+    <div id="zstep-domain" class="zstep active"><p>✓ Kết nối Google Sheet...</p><div class="zspinner"></div></div>
+    <div id="zstep-pw" class="zstep">
+      <input type="password" id="zpw" placeholder="🔑 Mật khẩu Admin" autocomplete="current-password">
+      <button id="zloginBtn">👁 Đăng nhập</button>
+      <p id="zerr" class="err"></p>
+      <p class="tiny">Xác thực online. Không lưu mật khẩu trên máy.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 📊 DASHBOARD -->
+<div id="dashboard">
+  <div class="top-bar">
+    <div><h2>🌿 Zanith Admin</h2><small style="color:var(--success)">● Online • Google Sheet</small></div>
+    <div class="actions">
+      <button class="sec" onclick="refreshAll()">🔄 Sync</button>
+      <button onclick="logout()">🚪 Đăng xuất</button>
+    </div>
+  </div>
+  
+  <div class="stats">
+    <div class="stat"><div class="num" id="s-prod">—</div><div class="lbl">Products</div></div>
+    <div class="stat"><div class="num" id="s-ord">—</div><div class="lbl">Orders</div></div>
+    <div class="stat"><div class="num" id="s-pend">—</div><div class="lbl">Pending</div></div>
+    <div class="stat"><div class="num" id="s-dl">—</div><div class="lbl">Downloads</div></div>
+  </div>
+  
+  <div class="tabs">
+    <button class="tab active" data-tab="products">📦 Products</button>
+    <button class="tab" data-tab="orders">🛒 Orders</button>
+    <button class="tab" data-tab="campaigns">🎯 Campaigns</button>
+    <button class="tab" data-tab="settings">⚙️ Settings</button>
+  </div>
+
+  <!-- Products -->
+  <div id="panel-products" class="panel active">
+    <div style="display:flex;justify-content:space-between;margin-bottom:1rem">
+      <h3>📦 Product Manager</h3>
+      <button class="btn btn-p" onclick="saveData('products')">💾 Lưu & Sync Sheet</button>
+    </div>
+    <div style="overflow-x:auto"><table id="t-prod"><thead><tr><th>SKU</th><th>Title</th><th>Price</th><th>Type</th><th>DL URL</th><th>Action</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <!-- Orders -->
+  <div id="panel-orders" class="panel">
+    <div style="display:flex;justify-content:space-between;margin-bottom:1rem">
+      <h3>🛒 Orders</h3>
+      <button class="btn btn-s" onclick="refreshAll()">🔄 Refresh</button>
+    </div>
+    <div style="overflow-x:auto"><table id="t-ord"><thead><tr><th>Ref</th><th>Customer</th><th>Total</th><th>Status</th><th>Time</th><th>Action</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <!-- Campaigns -->
+  <div id="panel-campaigns" class="panel">
+    <h3>🎯 Flash Sale & Discounts</h3>
+    <div class="form-group"><label><input type="checkbox" id="cam-flash"> Bật Flash Sale</label></div>
+    <div class="form-group"><label>Giảm giá (%) <input type="number" id="cam-discount" value="20" min="0" max="100"></label></div>
+    <div class="form-group"><label>Kết thúc (timestamp) <input type="number" id="cam-end" placeholder="Unix time"></label></div>
+    <div class="form-group"><label>Bundle Enabled <input type="checkbox" id="cam-bundle"> Buy <input type="number" id="cam-bundle-qty" value="3" style="width:60px;display:inline"> Get <input type="number" id="cam-bundle-get" value="1" style="width:60px;display:inline"> Free</label></div>
+    <button class="btn btn-p" onclick="saveData('campaigns')">💾 Lưu Campaigns</button>
+  </div>
+
+  <!-- Settings -->
+  <div id="panel-settings" class="panel">
+    <h3>⚙️ Settings (Online)</h3>
+    <div class="form-group"><label>Tên Shop <input type="text" id="set-name"></label></div>
+    <div class="form-group"><label>Email <input type="email" id="set-email"></label></div>
+    <div class="form-group"><label>Ngân hàng <input type="text" id="set-bank"></label></div>
+    <div class="form-group"><label>STK <input type="text" id="set-stk"></label></div>
+    <div class="form-group"><label>EmailJS Public Key <input type="text" id="set-ejs-pub"></label></div>
+    <div class="form-group"><label>EmailJS Service <input type="text" id="set-ejs-svc"></label></div>
+    <div class="form-group"><label>EmailJS Template (Customer) <input type="text" id="set-ejs-tpl-c"></label></div>
+    <div class="form-group"><label>Anthropic API Key <input type="text" id="set-anth"></label></div>
+    <div class="form-group"><label>Apps Script URL <input type="text" id="set-as" readonly style="background:#f5f5f5"></label></div>
+    <button class="btn btn-p" onclick="saveData('settings')">💾 Lưu Settings</button>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+let ADM_TOKEN = "";
+let ADMIN_DATA = {};
+
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(()=>{
+    document.getElementById("zstep-domain").classList.remove("active");
+    document.getElementById("zstep-pw").classList.add("active");
+    document.getElementById("zpw").focus();
+  }, 500);
+  
+  document.getElementById("zloginBtn").onclick = login;
+  document.getElementById("zpw").onkeypress = e=>e.key==="Enter"&&login();
+  document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>switchTab(t.dataset.tab));
+  document.getElementById("set-as").value = CONFIG.SCRIPT_URL;
+});
+
+// === SECURE LOGIN (Server-Side Verification) ===
+async function login() {
+  const pw = document.getElementById("zpw").value.trim();
+  const err = document.getElementById("zerr");
+  const btn = document.getElementById("zloginBtn");
+  if(!pw) return err.textContent="Nhập mật khẩu";
+  err.textContent=""; btn.disabled=true; btn.textContent="⏳ Xác thực...";
+  
+  try {
+    const res = await zanithFetch("verifyPassword", {pass:pw}, pw);
+    if(res.status==="success"){
+      ADM_TOKEN = res.token || pw; // Token hàng ngày từ Apps Script
+      sessionStorage.setItem("zanith_admin_token", ADM_TOKEN);
+      document.getElementById("zlock").style.display="none";
+      document.getElementById("dashboard").style.display="block";
+      loadAll();
+    } else err.textContent=res.message||"Sai mật khẩu";
+  } catch(e){ err.textContent=e.message; }
+  finally{ btn.disabled=false; btn.textContent="👁 Đăng nhập"; }
+}
+
+function logout(){
+  ADM_TOKEN=""; sessionStorage.removeItem("zanith_admin_token");
+  document.getElementById("dashboard").style.display="none";
+  document.getElementById("zlock").style.display="flex";
+  document.getElementById("zpw").value="";
+}
+
+// === ONLINE DATA OPERATIONS ===
+async function loadAll(){
+  const sec = ADM_TOKEN || sessionStorage.getItem("zanith_admin_token") || "";
+  if(!sec) return logout();
+  showLoad("Đang đồng bộ từ Google Sheet...");
+  try{
+    const res = await zanithFetch("getData", {}, sec);
+    if(res.status==="success" && res.data){
+      ADMIN_DATA = res.data;
+      renderStats(); renderProds(ADMIN_DATA.products||[]); renderOrds(ADMIN_DATA.orders||[]);
+      renderCamps(ADMIN_DATA.campaigns||{}); renderSets(ADMIN_DATA.settings||{});
+    }
+  } catch(e){ toast("❌ "+e.message,true); }
+  finally{ hideLoad(); }
+}
+
+function renderStats(){
+  document.getElementById("s-prod").textContent = ADMIN_DATA.products?.length||0;
+  document.getElementById("s-ord").textContent = ADMIN_DATA.orders?.length||0;
+  document.getElementById("s-pend").textContent = ADMIN_DATA.orders?.filter(o=>o.status==="pending").length||0;
+  document.getElementById("s-dl").textContent = ADMIN_DATA.downloads?.length||0;
+}
+
+function renderProds(list){
+  const tb = document.querySelector("#t-prod tbody");
+  if(!list.length){ tb.innerHTML="<tr><td colspan='6' style='text-align:center'>Chưa có SP</td></tr>"; return; }
+  tb.innerHTML = list.slice(0,50).map(p=>`<tr><td><b>${p.SKU||p.sku}</b></td><td>${p.Title_VI||p.Title}</td><td>$${p.Price||0}</td><td>${p.Type}</td><td style="max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.DownloadURL||p.download||''}">${p.DownloadURL||p.download||'-'}</td><td><button class="btn btn-s" style="padding:.2rem .5rem" onclick="editProd('${p.SKU||p.sku}')">✏️</button></td></tr>`).join("");
+}
+
+function renderOrds(list){
+  const tb = document.querySelector("#t-ord tbody");
+  if(!list.length){ tb.innerHTML="<tr><td colspan='6' style='text-align:center'>Chưa có đơn</td></tr>"; return; }
+  tb.innerHTML = list.slice(-50).reverse().map(o=>{
+    const st = o.status||"pending";
+    const bg = st.includes("confirm")?"#27ae60":st.includes("cancel")?"#e74c3c":"#f39c12";
+    return `<tr><td><b>${o.orderRef}</b></td><td>${o.name||o.email}</td><td>$${o.total}</td><td><span style="background:${bg};color:#fff;padding:.2rem .4rem;border-radius:4px;font-size:.8rem">${st}</span></td><td>${o.time}</td><td>${st!=="confirmed"?`<button class="btn btn-p" style="padding:.2rem .5rem" onclick="confirmOrd('${o.orderRef}')">✅</button>`:""}</td></tr>`;
+  }).join("");
+}
+
+function renderCamps(c){
+  document.getElementById("cam-flash").checked=!!c.flashEnabled;
+  document.getElementById("cam-discount").value=c.flashDiscount||20;
+  document.getElementById("cam-end").value=c.flashEnd||"";
+  document.getElementById("cam-bundle").checked=!!c.bundleEnabled;
+  document.getElementById("cam-bundle-qty").value=c.bundleQty||3;
+  document.getElementById("cam-bundle-get").value=c.bundleGet||1;
+}
+
+function renderSets(s){
+  document.getElementById("set-name").value=s.shopName||"Zanith Crafted Studio";
+  document.getElementById("set-email").value=s.email||"zenithcraftedstudio@gmail.com";
+  document.getElementById("set-bank").value=s.bankName||"";
+  document.getElementById("set-stk").value=s.bankStk||"";
+  document.getElementById("set-ejs-pub").value=s.emailjsPub||"";
+  document.getElementById("set-ejs-svc").value=s.emailjsSvc||"";
+  document.getElementById("set-ejs-tpl-c").value=s.emailjsTplC||"";
+  document.getElementById("set-anth").value=s.anthKey||"";
+}
+
+// === SAVE TO SHEET ===
+async function saveData(type){
+  const sec = ADM_TOKEN || sessionStorage.getItem("zanith_admin_token");
+  if(!sec) return toast("❌ Session hết hạn. Vui lòng đăng nhập lại.",true);
+  showLoad("Đang lưu lên Google Sheet...");
+  let data;
+  if(type==="products") data = ADMIN_DATA.products;
+  else if(type==="campaigns") data = {flashEnabled:document.getElementById("cam-flash").checked, flashDiscount:+document.getElementById("cam-discount").value, flashEnd:+document.getElementById("cam-end").value, bundleEnabled:document.getElementById("cam-bundle").checked, bundleQty:+document.getElementById("cam-bundle-qty").value, bundleGet:+document.getElementById("cam-bundle-get").value};
+  else if(type==="settings") data = {shopName:document.getElementById("set-name").value, email:document.getElementById("set-email").value, bankName:document.getElementById("set-bank").value, bankStk:document.getElementById("set-stk").value, emailjsPub:document.getElementById("set-ejs-pub").value, emailjsSvc:document.getElementById("set-ejs-svc").value, emailjsTplC:document.getElementById("set-ejs-tpl-c").value, anthKey:document.getElementById("set-anth").value};
+  else return;
+  
+  try{
+    const res = await zanithFetch("setData", {data:{[type]:data}}, sec);
+    if(res.status==="success"){ toast("✅ Đã lưu online! Mọi thiết bị cập nhật ngay."); if(type!=="products") ADMIN_DATA[type]=data; }
+    else throw new Error(res.message);
+  } catch(e){ toast("❌ "+e.message,true); }
+  finally{ hideLoad(); }
+}
+
+async function confirmOrd(ref){
+  const sec = ADM_TOKEN || sessionStorage.getItem("zanith_admin_token");
+  try{
+    showLoad("Đang xác nhận...");
+    const res = await zanithFetch("confirmAndSend", {orderRef:ref, newStatus:"confirmed"}, sec);
+    if(res.status==="success"){ toast("✅ Đã xác nhận & gửi file!"); refreshAll(); }
+    else throw new Error(res.message);
+  } catch(e){ toast("❌ "+e.message,true); } finally{ hideLoad(); }
+}
+
+function editProd(sku){ toast(`✏️ Sửa ${sku} (Mở rộng modal theo nhu cầu)`); }
+function refreshAll(){ loadAll(); toast("🔄 Đang sync..."); }
+
+function switchTab(name){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+  document.querySelector(`.tab[data-tab="${name}"]`).classList.add("active");
+  document.getElementById(`panel-${name}`).classList.add("active");
+}
+
+function toast(m,err=false){const t=document.getElementById("toast");t.textContent=m;t.style.background=err?"#e74c3c":"#333";t.style.display="block";setTimeout(()=>t.style.display="none",3000);}
+function showLoad(m="Đang tải..."){let L=document.getElementById("loader");if(!L){L=document.createElement("div");L.id="loader";L.style.cssText="position:fixed;inset:0;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;z-index:9998";L.innerHTML='<div style="text-align:center"><div class="zspinner" style="margin:0 auto 1rem"></div><div></div></div>';document.body.appendChild(L);}L.querySelector("div:last-child").textContent=m;L.style.display="flex";}
+function hideLoad(){const L=document.getElementById("loader");if(L)L.style.display="none";}
+</script>
+</body>
+</html>
