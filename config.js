@@ -1,65 +1,48 @@
 /**
- * ZANITH CONFIG v9.8
+ * ZANITH CONFIG v9.8 — PRODUCTION READY
  */
-
-// 🔗 URL Apps Script - THAY BẰNG URL THẬT CỦA BẠN
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzb9xgyx5PthSbvsKMT-h5waKdTyJlrP68Oj_5CluV4mIruwx8AtUh2hkc5TJjUaHrD/exec";
+const ENCODED_SCRIPT_URL = "DÁN_MÃ_BASE64_URL_APPS_SCRIPT_CỦA_BẠN_VÀO_ĐÂY";
 
 const CONFIG = {
-  SCRIPT_URL: APPS_SCRIPT_URL,
-  KEY_READ: "Zanith2026",
+  SCRIPT_URL: "",
+  KEY_READ: "Zanith2026", // Key này phải khớp với key trong Apps Script của bạn
   TIMEOUT_MS: 20000,
   RETRY: 2
 };
 
-/**
- * Fetch wrapper
- */
-async function zanithFetch(action, payload, secret) {
-  if (!payload) payload = {};
-  if (!secret) secret = CONFIG.KEY_READ;
-  
-  if (!CONFIG.SCRIPT_URL || CONFIG.SCRIPT_URL.includes("YOUR_SCRIPT_ID")) {
-    throw new Error("Chua cau hinh Apps Script URL");
-  }
+try {
+  // Giải mã URL
+  CONFIG.SCRIPT_URL = window.atob(ENCODED_SCRIPT_URL);
+} catch(e) {
+  console.error("❌ Lỗi cấu hình URL:", e.message);
+}
 
-  let lastErr;
+/**
+ * Hàm gọi Apps Script dùng chung cho cả Index và Admin
+ */
+async function zanithFetch(action, payload = {}, secret = CONFIG.KEY_READ) {
+  if (!CONFIG.SCRIPT_URL) throw new Error("⚠️ SCRIPT_URL chưa được cấu hình!");
+
   for (let i = 0; i <= CONFIG.RETRY; i++) {
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(function() { controller.abort(); }, CONFIG.TIMEOUT_MS);
-
-      const response = await fetch(CONFIG.SCRIPT_URL, {
+      const timeout = setTimeout(() => controller.abort(), CONFIG.TIMEOUT_MS);
+      
+      const res = await fetch(CONFIG.SCRIPT_URL, {
         method: "POST",
         mode: "cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: action, secret: secret }, payload),
+        headers: { "Content-Type": "text/plain;charset=utf-8" }, // Dùng text/plain để tránh lỗi CORS Preflight
+        body: JSON.stringify({ action, secret, ...payload }),
         signal: controller.signal
       });
-
+      
       clearTimeout(timeout);
-
-      if (!response.ok) {
-        throw new Error("HTTP " + response.status);
-      }
-
-      const data = await response.json();
-
-      if (data.status === "error") {
-        throw new Error(data.message || "Server error");
-      }
-
+      const data = await res.json();
+      if (data.status === "error") throw new Error(data.message);
       return data;
-
     } catch (err) {
-      lastErr = err;
-      if (i < CONFIG.RETRY) {
-        await new Promise(function(r) { setTimeout(r, 500 * (i + 1)); });
-      }
+      if (i === CONFIG.RETRY) throw err;
+      console.warn(`🔄 Thử lại lần ${i + 1}...`);
     }
   }
-
-  throw lastErr || new Error("Network failed");
 }
-
-console.log("Config loaded:", CONFIG.SCRIPT_URL);
