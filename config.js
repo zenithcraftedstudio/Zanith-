@@ -1,13 +1,10 @@
 /**
  * ZANITH CONFIG v9.8 — ONLINE-FIRST & OBFSUCATED URL
- * 🔒 URL Apps Script được mã hóa Base64 để tránh bị crawl trực tiếp từ GitHub.
- * ⚠️ Thay thế ENCODED_SCRIPT_URL bằng chuỗi Base64 của URL thật của bạn.
- */
+ 
 
-// 🔐 THAY THẾ BẰNG CHUỖI BASE64 CỦA URL APPS SCRIPT CỦA BẠN
-// Ví dụ URL gốc: https://script.google.com/macros/s/ABC123xyz/exec
-// Base64 tương ứng: aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BQkMxMjN4eXovZXhlYw==
-const ENCODED_SCRIPT_URL = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9ZT1VSX1NDUklQVF9JRC9leGVj";
+
+
+const ENCODED_SCRIPT_URL = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J3RHpleUk5ajFNNm1JVG9sSjlBdlJDSGRaNk5TZFlTazRmN1Z1bVZrVHl4YkY1bDJJbHVxTXFFZWJMZEJrd090Ql8vZXhlYw==";
 
 const CONFIG = {
   SCRIPT_URL: "", // Sẽ được giải mã tự động khi file load
