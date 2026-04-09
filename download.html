@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" id="H">
+<head>
+<script src="config.js"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Download — Zanith Crafted Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1e2d4a;--nl:#2a3f63;--gold:#c8974a;--cream:#faf7f2;--warm:#f3ede3;--w:#fff;--bdr:#e2ddd6;--tx:#1a2332;--sf:#5a6a7e;--gr:#2e7d52;--rd:#c0392b;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:"Instrument Sans",sans-serif;background:var(--cream);color:var(--tx);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.4rem;}
+html[lang="en"] .vi{display:none!important;}html[lang="vi"] .en{display:none!important;}
+.box{background:var(--w);border-radius:16px;max-width:480px;width:100%;box-shadow:0 12px 40px rgba(0,0,0,.12);overflow:hidden;}
+.box-hero{background:linear-gradient(135deg,var(--navy),var(--nl));padding:1.75rem;text-align:center;}
+.box-hero .logo{font-family:"Fraunces",serif;font-size:1rem;color:#fff;opacity:.7;letter-spacing:.05em;margin-bottom:.5rem;}
+.box-hero h2{font-family:"Fraunces",serif;font-size:1.4rem;font-weight:500;color:#fff;}
+.box-body{padding:1.75rem;}
+.spin{width:36px;height:36px;border:3px solid var(--bdr);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;margin:.5rem auto;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.product-img{width:100%;max-height:220px;object-fit:contain;border-radius:10px;background:var(--warm);margin-bottom:1rem;display:block;}
+.product-name{font-family:"Fraunces",serif;font-size:1.15rem;font-weight:500;color:var(--navy);margin-bottom:.5rem;}
+.order-ref{font-family:monospace;font-size:.78rem;color:var(--sf);margin-bottom:1.25rem;}
+.dl-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;background:var(--gr);color:#fff;border:none;border-radius:10px;padding:.85rem 1.5rem;font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;text-decoration:none;width:100%;transition:all .2s;}
+.dl-btn:hover{opacity:.9;transform:translateY(-1px);}
+.note{font-size:.75rem;color:var(--sf);text-align:center;margin-top:.75rem;line-height:1.6;}
+.error-box{text-align:center;}
+.error-icon{font-size:2.5rem;margin-bottom:.75rem;}
+.error-title{font-family:"Fraunces",serif;font-size:1.2rem;color:var(--navy);margin-bottom:.5rem;}
+.error-desc{font-size:.85rem;color:var(--sf);line-height:1.65;margin-bottom:1.25rem;}
+.contact-link{color:var(--navy);font-weight:600;}
+.ref-input-box{background:var(--warm);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;}
+.ref-input-box label{font-size:.75rem;font-weight:600;color:var(--sf);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.4rem;}
+.ref-input{width:100%;padding:.6rem .85rem;border:1.5px solid var(--bdr);border-radius:8px;font-family:monospace;font-size:.9rem;outline:none;transition:border .18s;}
+.ref-input:focus{border-color:var(--navy);}
+.find-btn{width:100%;padding:.65rem;background:var(--navy);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;margin-top:.5rem;}
+.find-btn:hover{background:var(--nl);}
+</style>
+</head>
+<body>
+
+<div class="box">
+  <div class="box-hero">
+    <div class="logo">🌿 Zanith Crafted Studio</div>
+    <h2 class="en">Download Your Files</h2>
+    <h2 class="vi">Tải File Của Bạn</h2>
+  </div>
+  <div class="box-body" id="boxBody">
+    <div style="text-align:center;padding:1rem">
+      <div class="spin"></div>
+      <p style="font-size:.82rem;color:var(--sf);margin-top:.5rem"><span class="en">Verifying your order…</span><span class="vi">Đang xác minh đơn hàng…</span></p>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:1rem;font-size:.75rem;color:var(--sf)">
+  <a href="index.html" style="color:var(--navy);text-decoration:none">← <span class="en">Back to Shop</span><span class="vi">Về cửa hàng</span></a>
+</div>
+
+<script>
+const SCRIPT_URL=getAppScriptUrl(), READ_KEY=ZANITH_CONFIG.READ_KEY;
+const currentLang=localStorage.getItem('zanith_lang')||'en';
+document.getElementById('H').setAttribute('lang',currentLang);
+
+async function verifyDownload(){
+  const params=new URLSearchParams(location.search);
+  const orderRef=params.get('ref')||'';
+  const token=params.get('token')||'';
+  const body=document.getElementById('boxBody');
+  const vi=currentLang==='vi';
+
+  if(!orderRef||!token){
+    showManualLookup(body,vi);return;
+  }
+  try{
+    const res=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'getDownloadByRef',secret:READ_KEY,orderRef,downloadToken:token})});
+    const d=await res.json();
+    if(d.status==='success'&&d.downloadUrl){
+      body.innerHTML=`
+        ${d.image?`<img class="product-img" src="${d.image}" onerror="this.remove()">`:''}
+        <div class="product-name">${d.productName||vi?'Sản phẩm của bạn':'Your Product'}</div>
+        <div class="order-ref">Order: ${d.orderRef||orderRef}</div>
+        <a class="dl-btn" href="${d.downloadUrl}" download target="_blank">
+          ⬇️ ${vi?'Tải file ngay':'Download Now'}
+        </a>
+        <p class="note">
+          ${vi?'Link tải gắn với mã đơn hàng của bạn để bảo mật.<br>Vui lòng lưu file ngay sau khi tải.':'This download link is tied to your order for security.<br>Please save your file immediately after downloading.'}
+        </p>`;
+    } else {
+      showError(body,d.message||'Invalid link',vi);
+    }
+  }catch(e){
+    showError(body,vi?'Lỗi kết nối. Vui lòng thử lại.':'Connection error. Please try again.',vi);
+  }
+}
+
+function showError(body,msg,vi){
+  body.innerHTML=`
+    <div class="error-box">
+      <div class="error-icon">❌</div>
+      <div class="error-title">${vi?'Link không hợp lệ':'Invalid Download Link'}</div>
+      <div class="error-desc">${msg}</div>
+      <hr style="border:none;border-top:1px solid var(--bdr);margin:1rem 0">
+      <div class="error-desc">${vi?'Nếu bạn nghĩ đây là lỗi, liên hệ chúng tôi tại':'If you think this is an error, contact us at'}: <a class="contact-link" href="mailto:zenithcraftedstudio@gmail.com">zenithcraftedstudio@gmail.com</a> ${vi?'kèm mã đơn hàng của bạn.':'with your order reference.'}</div>
+      <hr style="border:none;border-top:1px solid var(--bdr);margin:1rem 0">
+    </div>`;
+  showManualLookup(body,vi,true);
+}
+
+function showManualLookup(body,vi,append=false){
+  const html=`
+    <div class="ref-input-box" style="${append?'margin-top:1rem':''}">
+      <label>${vi?'Tìm đơn hàng theo mã tham chiếu':'Look Up Your Order'}</label>
+      <input class="ref-input" id="manualRef" placeholder="${vi?'Mã đơn hàng (vd: ZN123456)':'Order ref (e.g. ZN123456)'}">
+      <input class="ref-input" id="manualToken" placeholder="${vi?'Token từ email':'Token from your email'}" style="margin-top:.4rem">
+      <button class="find-btn" onclick="lookupManual()">${vi?'Tìm file tải':'Find My Download'}</button>
+    </div>`;
+  if(append)body.innerHTML+=html;
+  else body.innerHTML=html;
+}
+
+async function lookupManual(){
+  const ref=(document.getElementById('manualRef').value||'').trim();
+  const tok=(document.getElementById('manualToken').value||'').trim();
+  if(!ref){alert(currentLang==='vi'?'Nhập mã đơn hàng':'Enter order reference');return;}
+  window.location.href=`download.html?ref=${encodeURIComponent(ref)}&token=${encodeURIComponent(tok)}`;
+}
+
+verifyDownload();
+</script>
+</body>
+</html>

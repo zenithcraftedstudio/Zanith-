@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" id="H">
+<head>
+<script src="config.js"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Blog — Zanith Crafted Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1e2d4a;--nl:#2a3f63;--nd:#131d30;--gold:#c8974a;--gl:#e8b86d;--cream:#faf7f2;--warm:#f3ede3;--w:#fff;--bdr:#e2ddd6;--tx:#1a2332;--sf:#5a6a7e;--mu:#8a9bb5;--gr:#2e7d52;--rd:#c0392b;--ss:0 1px 4px rgba(30,45,74,.08);--sl:0 12px 40px rgba(30,45,74,.16);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:"Instrument Sans",sans-serif;background:var(--cream);color:var(--tx);}
+html[lang="en"] .vi{display:none!important;}html[lang="vi"] .en{display:none!important;}
+header{background:var(--w);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;box-shadow:var(--ss);}
+.hdr{max-width:1000px;margin:0 auto;padding:.85rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
+.logo-icon{width:38px;height:38px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.logo-name{font-family:"Fraunces",serif;font-size:1rem;font-weight:500;color:var(--navy);}
+.hright{display:flex;gap:.65rem;align-items:center;}
+.lbtn{background:var(--warm);border:1px solid var(--bdr);border-radius:18px;padding:.3rem .7rem;font-size:.73rem;cursor:pointer;color:var(--sf);font-family:inherit;transition:all .18s;}
+.lbtn:hover{border-color:var(--navy);color:var(--navy);}
+.back-btn{display:flex;align-items:center;gap:.4rem;background:transparent;border:1px solid var(--bdr);border-radius:18px;padding:.3rem .85rem;font-size:.78rem;cursor:pointer;color:var(--sf);font-family:inherit;text-decoration:none;transition:all .18s;}
+.back-btn:hover{border-color:var(--navy);color:var(--navy);background:var(--warm);}
+.page-hero{background:linear-gradient(135deg,var(--navy),var(--nl));padding:2.5rem 1.4rem;text-align:center;}
+.page-hero h1{font-family:"Fraunces",serif;font-size:2rem;font-weight:500;color:#fff;margin-bottom:.5rem;}
+.page-hero p{color:rgba(255,255,255,.7);font-size:.9rem;}
+.wrap{max-width:1000px;margin:0 auto;padding:2.5rem 1.4rem;}
+/* BLOG GRID */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+@media(max-width:768px){.blog-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.blog-grid{grid-template-columns:1fr;}}
+.blog-card{border-radius:12px;overflow:hidden;border:1px solid var(--bdr);cursor:pointer;transition:all .18s;background:var(--w);}
+.blog-card:hover{box-shadow:var(--sl);transform:translateY(-2px);}
+.blog-thumb{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--warm);display:block;}
+.blog-thumb-ph{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,var(--warm),#e4dfd8);display:flex;align-items:center;justify-content:center;font-size:3rem;}
+.blog-meta{padding:1rem;}
+.blog-cat{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:.35rem;}
+.blog-ttl{font-family:"Fraunces",serif;font-size:1.05rem;font-weight:500;color:var(--navy);line-height:1.35;margin-bottom:.4rem;}
+.blog-sum{font-size:.8rem;color:var(--sf);line-height:1.65;}
+.blog-date{font-size:.7rem;color:var(--mu);margin-top:.5rem;}
+.blog-read{display:inline-flex;align-items:center;gap:.3rem;font-size:.75rem;font-weight:600;color:var(--navy);margin-top:.6rem;}
+/* POST MODAL */
+.pmov{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);align-items:center;justify-content:center;padding:1rem;}
+.pmov.open{display:flex;}
+.ppanel{background:var(--w);border-radius:14px;max-width:780px;width:100%;max-height:94vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;}
+.phero{width:100%;max-height:300px;object-fit:cover;display:block;border-radius:14px 14px 0 0;}
+.phero-ph{width:100%;height:200px;background:linear-gradient(135deg,var(--navy),var(--nl));display:flex;align-items:center;justify-content:center;font-size:3rem;border-radius:14px 14px 0 0;}
+.pbody{padding:2rem 2.25rem;}
+.pcat{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:.55rem;}
+.ptitle{font-family:"Fraunces",serif;font-size:1.75rem;font-weight:500;color:var(--navy);line-height:1.2;margin-bottom:.65rem;}
+.pmeta{font-size:.75rem;color:var(--mu);margin-bottom:1.4rem;display:flex;align-items:center;gap:.75rem;}
+.pcontent{font-size:.92rem;color:var(--sf);line-height:1.9;}
+.pcontent p{margin-bottom:.9rem;}
+.pcontent h2,.pcontent h3{font-family:"Fraunces",serif;color:var(--navy);margin:1.2rem 0 .5rem;}
+.pcontent strong{color:var(--tx);}
+.pcontent ul,.pcontent ol{padding-left:1.4rem;margin-bottom:.75rem;}
+.pcontent li{margin-bottom:.3rem;}
+.pclose{position:absolute;top:.9rem;right:.9rem;background:var(--w);border:1px solid var(--bdr);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;z-index:10;}
+.spin{width:36px;height:36px;border:3px solid var(--bdr);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;margin:2rem auto;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty-st{text-align:center;padding:4rem;color:var(--sf);}
+/* FILTERS */
+.cats{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:2rem;}
+.cat-btn{background:transparent;border:1.5px solid var(--bdr);padding:.28rem .8rem;border-radius:18px;font-size:.76rem;cursor:pointer;color:var(--sf);transition:all .16s;font-family:inherit;}
+.cat-btn.active{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:600;}
+footer{background:var(--nd);color:rgba(255,255,255,.6);padding:1.5rem 1.4rem;margin-top:3rem;}
+.fbot{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-size:.75rem;flex-wrap:wrap;gap:.5rem;}
+.fbot a{color:rgba(255,255,255,.45);text-decoration:none;}
+.flinks{display:flex;gap:1.25rem;}
+.lsw{display:flex;gap:.3rem;}
+.lsw button{background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.5);padding:2px 9px;border-radius:9px;font-size:.7rem;cursor:pointer;font-family:inherit;transition:all .15s;}
+.lsw button.on,.lsw button:hover{background:rgba(255,255,255,.12);color:#fff;}
+@media(max-width:680px){.pmov{align-items:flex-end;padding:0;}.ppanel{border-radius:18px 18px 0 0;max-height:96vh;}.pbody{padding:1.25rem 1.4rem;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🌿</div>
+      <div><div class="logo-name">Zanith Crafted Studio</div></div>
+    </a>
+    <div class="hright">
+      <button class="lbtn" onclick="toggleLang()" id="langBtn">EN / VI</button>
+      <a href="index.html" class="back-btn">← <span class="en">Shop</span><span class="vi">Cửa hàng</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <h1>📝 Blog</h1>
+  <p class="en">Tips, tutorials, and inspiration for pattern designers and makers.</p>
+  <p class="vi">Mẹo, hướng dẫn và cảm hứng cho nhà thiết kế họa tiết và người sáng tạo.</p>
+</div>
+
+<div class="wrap">
+  <div class="cats" id="catBar">
+    <button class="cat-btn active" onclick="setCat('',this)"><span class="en">All Posts</span><span class="vi">Tất cả</span></button>
+  </div>
+  <div id="blogGrid"><div class="spin"></div></div>
+</div>
+
+<!-- POST MODAL -->
+<div class="pmov" id="pMov" onclick="if(event.target===this)closePost()">
+  <div class="ppanel">
+    <button class="pclose" onclick="closePost()">✕</button>
+    <div id="postContent"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="fbot">
+    <span>© 2025 Zanith Crafted Studio</span>
+    <div class="flinks">
+      <a href="index.html"><span class="en">Shop</span><span class="vi">Cửa hàng</span></a>
+      <a href="faq.html">FAQ</a>
+      <a href="about.html"><span class="en">About</span><span class="vi">Về chúng tôi</span></a>
+    </div>
+    <div class="lsw">
+      <button id="btEN" onclick="setLang('en')" class="on">EN</button>
+      <button id="btVI" onclick="setLang('vi')">VI</button>
+    </div>
+  </div>
+</footer>
+
+<script>
+const SCRIPT_URL=getAppScriptUrl(), READ_KEY=ZANITH_CONFIG.READ_KEY;
+let currentLang=localStorage.getItem('zanith_lang')||'en';
+let allPosts=[], currentCat='';
+
+function applyLang(){const vi=currentLang==='vi';document.getElementById('H').setAttribute('lang',currentLang);document.getElementById('langBtn').textContent=vi?'VI / EN':'EN / VI';const fe=document.getElementById('btEN'),fv=document.getElementById('btVI');if(fe)fe.className=vi?'':'on';if(fv)fv.className=vi?'on':'';}
+function toggleLang(){currentLang=currentLang==='en'?'vi':'en';localStorage.setItem('zanith_lang',currentLang);applyLang();}
+function setLang(l){currentLang=l;localStorage.setItem('zanith_lang',l);applyLang();}
+
+async function loadPosts(){
+  const grid=document.getElementById('blogGrid');
+  try {
+    // Try to get blog posts via admin getData — will fail with READ_KEY, graceful fallback
+    const res=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'getData',secret:READ_KEY})});
+    const d=await res.json();
+    allPosts=(d.data&&d.data.blog)||[];
+  } catch(e){ allPosts=[]; }
+  // Check URL slug
+  const slug=new URLSearchParams(location.search).get('slug');
+  if(slug&&allPosts.length){const post=allPosts.find(p=>(p.slug||p.Slug||'')===slug);if(post)setTimeout(()=>openPost(post),300);}
+  renderCats();
+  renderGrid(allPosts);
+  applyLang();
+}
+
+function renderCats(){
+  const cats=[...new Set(allPosts.map(p=>p.category||p.Category||'').filter(Boolean))];
+  const bar=document.getElementById('catBar');
+  cats.forEach(cat=>{
+    const btn=document.createElement('button');
+    btn.className='cat-btn';
+    btn.innerHTML=cat;
+    btn.onclick=()=>setCat(cat,btn);
+    bar.appendChild(btn);
+  });
+}
+
+function setCat(cat,el){
+  currentCat=cat;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  if(el)el.classList.add('active');
+  const filtered=cat?allPosts.filter(p=>(p.category||p.Category||'')===cat):allPosts;
+  renderGrid(filtered);
+}
+
+function renderGrid(posts){
+  const grid=document.getElementById('blogGrid');
+  if(!posts||!posts.length){
+    grid.innerHTML='<div class="empty-st"><div style="font-size:2.5rem">📝</div><p class="en" style="margin-top:.5rem">No posts yet. Check back soon!</p><p class="vi" style="margin-top:.5rem">Chưa có bài viết. Hãy quay lại sớm!</p></div>';
+    applyLang();return;
+  }
+  grid.innerHTML='<div class="blog-grid">'+posts.map(p=>`
+    <div class="blog-card" onclick="openPost(${JSON.stringify(JSON.stringify(p))})">
+      ${(p.coverImage||p.img)?`<img class="blog-thumb" src="${p.coverImage||p.img}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\\'blog-thumb-ph\\'>📝</div>'">`:`<div class="blog-thumb-ph">📝</div>`}
+      <div class="blog-meta">
+        <div class="blog-cat">${p.category||p.Category||''}</div>
+        <div class="blog-ttl">${p.title||p.Title||''}</div>
+        <div class="blog-sum">${(p.summary||p.Summary||'').slice(0,110)}${((p.summary||'').length>110?'…':'')}</div>
+        <div class="blog-date">${p.date||p.Date||''}</div>
+        <div class="blog-read"><span class="en">Read more →</span><span class="vi">Đọc thêm →</span></div>
+      </div>
+    </div>`).join('')+'</div>';
+  applyLang();
+}
+
+function openPost(postOrJson){
+  let p=postOrJson;
+  if(typeof p==='string'){try{p=JSON.parse(p);}catch(e){return;}}
+  const cnt=document.getElementById('postContent');
+  cnt.innerHTML=`
+    ${(p.coverImage||p.img)?`<img class="phero" src="${p.coverImage||p.img}" onerror="this.remove()">`:`<div class="phero-ph">📝</div>`}
+    <div class="pbody">
+      <div class="pcat">${p.category||p.Category||''}</div>
+      <div class="ptitle">${p.title||p.Title||''}</div>
+      <div class="pmeta">
+        <span>📅 ${p.date||p.Date||''}</span>
+        ${(p.author||p.Author)?`<span>✍️ ${p.author||p.Author}</span>`:''}
+      </div>
+      <div class="pcontent">${formatContent(p.content||p.Content||p.body||p.summary||'')}</div>
+    </div>`;
+  document.getElementById('pMov').classList.add('open');
+  document.body.style.overflow='hidden';
+  // Update URL without navigation
+  history.replaceState(null,'','?slug='+(p.slug||p.Slug||''));
+  applyLang();
+}
+function closePost(){document.getElementById('pMov').classList.remove('open');document.body.style.overflow='';history.replaceState(null,'',location.pathname);}
+function formatContent(text){
+  // Simple Markdown-like formatting
+  return text.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');
+}
+
+// Init
+applyLang();
+loadPosts();
+</script>
+</body>
+</html>

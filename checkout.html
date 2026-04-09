@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" id="H">
+<head>
+<script src="config.js"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Checkout — Zanith Crafted Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1e2d4a;--nl:#2a3f63;--nd:#131d30;--gold:#c8974a;--gl:#e8b86d;--cream:#faf7f2;--warm:#f3ede3;--w:#fff;--bdr:#e2ddd6;--tx:#1a2332;--sf:#5a6a7e;--mu:#8a9bb5;--gr:#2e7d52;--rd:#c0392b;--ss:0 1px 4px rgba(30,45,74,.08);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:"Instrument Sans",sans-serif;background:var(--cream);color:var(--tx);min-height:100vh;}
+html[lang="en"] .vi{display:none!important;}html[lang="vi"] .en{display:none!important;}
+header{background:var(--w);border-bottom:1px solid var(--bdr);padding:.85rem 1.4rem;}
+.hdr{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
+.logo-icon{width:36px;height:36px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.logo-name{font-family:"Fraunces",serif;font-size:.95rem;font-weight:500;color:var(--navy);}
+.lbtn{background:var(--warm);border:1px solid var(--bdr);border-radius:18px;padding:.28rem .65rem;font-size:.72rem;cursor:pointer;color:var(--sf);font-family:inherit;}
+.wrap{max-width:960px;margin:0 auto;padding:2rem 1.4rem;}
+/* STEPS */
+.steps{display:flex;align-items:center;gap:.5rem;margin-bottom:2rem;}
+.step{display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--mu);}
+.step.active{color:var(--navy);font-weight:600;}
+.step.done{color:var(--gr);}
+.step-num{width:24px;height:24px;border-radius:50%;background:var(--bdr);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;}
+.step.active .step-num{background:var(--navy);color:#fff;}
+.step.done .step-num{background:var(--gr);color:#fff;}
+.step-line{flex:1;height:1px;background:var(--bdr);max-width:40px;}
+/* LAYOUT */
+.co-layout{display:grid;grid-template-columns:1fr 360px;gap:2rem;}
+@media(max-width:768px){.co-layout{grid-template-columns:1fr;}}
+/* SECTIONS */
+.co-section{background:var(--w);border-radius:12px;border:1px solid var(--bdr);padding:1.4rem;margin-bottom:1rem;}
+.co-section h3{font-family:"Fraunces",serif;font-size:1rem;font-weight:500;color:var(--navy);margin-bottom:1rem;}
+.fg{display:flex;flex-direction:column;gap:.25rem;margin-bottom:.75rem;}
+.fg label{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--sf);}
+.fg input,.fg select{padding:.55rem .85rem;border:1px solid var(--bdr);border-radius:8px;font-family:inherit;font-size:.88rem;background:var(--warm);outline:none;transition:border .18s;}
+.fg input:focus,.fg select:focus{border-color:var(--navy);background:var(--w);}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+/* ORDER SUMMARY */
+.summary-card{background:var(--w);border-radius:12px;border:1px solid var(--bdr);padding:1.4rem;position:sticky;top:80px;}
+.sum-title{font-family:"Fraunces",serif;font-size:1rem;font-weight:500;color:var(--navy);margin-bottom:1rem;}
+.sum-item{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;border-bottom:1px solid var(--bdr);}
+.sum-img{width:52px;height:52px;border-radius:7px;object-fit:contain;background:var(--warm);flex-shrink:0;}
+.sum-img-ph{width:52px;height:52px;border-radius:7px;background:var(--warm);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.sum-name{flex:1;font-size:.82rem;font-weight:500;color:var(--tx);}
+.sum-qty{font-size:.75rem;color:var(--mu);}
+.sum-price{font-size:.88rem;font-weight:700;color:var(--navy);}
+.sum-row{display:flex;justify-content:space-between;font-size:.85rem;padding:.35rem 0;}
+.sum-total{display:flex;justify-content:space-between;padding:.75rem 0;border-top:2px solid var(--bdr);font-weight:700;font-size:1rem;color:var(--navy);}
+.disc-row{display:flex;gap:.5rem;margin-bottom:.75rem;}
+.disc-in{flex:1;padding:.5rem .85rem;border:1px solid var(--bdr);border-radius:8px;font-family:inherit;font-size:.85rem;background:var(--warm);outline:none;text-transform:uppercase;}
+.disc-btn{padding:.5rem .9rem;background:var(--navy);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;}
+/* PAYMENT INFO (fetched from Sheet) */
+.pay-box{background:linear-gradient(135deg,rgba(30,45,74,.03),rgba(200,151,74,.06));border:1px solid rgba(200,151,74,.3);border-radius:12px;padding:1.25rem;}
+.pay-box h3{font-family:"Fraunces",serif;font-size:1rem;font-weight:500;color:var(--navy);margin-bottom:1rem;}
+.bank-info{display:grid;gap:.5rem;margin-bottom:1rem;}
+.bank-row{display:flex;justify-content:space-between;align-items:center;padding:.45rem .65rem;background:var(--w);border-radius:7px;font-size:.83rem;}
+.bank-label{color:var(--mu);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;}
+.bank-val{font-weight:700;color:var(--navy);font-family:monospace;font-size:.9rem;}
+.bank-copy{background:none;border:1px solid var(--bdr);border-radius:5px;padding:1px 7px;font-size:.7rem;cursor:pointer;color:var(--sf);}
+.bank-copy:hover{background:var(--warm);}
+.qr-box{text-align:center;padding:.75rem;background:var(--w);border-radius:10px;margin-top:.75rem;}
+.qr-box img{max-width:160px;border-radius:6px;}
+.amount-input{width:100%;padding:.65rem .85rem;border:2px solid var(--gold);border-radius:9px;font-family:inherit;font-size:1rem;font-weight:700;color:var(--navy);background:var(--w);outline:none;text-align:center;margin-bottom:.75rem;}
+/* BUTTONS */
+.btn-main{width:100%;padding:.8rem;background:var(--navy);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:.5rem;}
+.btn-main:hover{background:var(--nl);}
+.btn-main:disabled{background:var(--mu);cursor:not-allowed;}
+.btn-back{background:none;border:1px solid var(--bdr);border-radius:9px;padding:.65rem 1.2rem;font-family:inherit;font-size:.85rem;cursor:pointer;color:var(--sf);width:100%;}
+.btn-back:hover{background:var(--warm);}
+/* THANK YOU */
+.ty-screen{display:none;text-align:center;padding:3rem 1.4rem;}
+.ty-icon{font-size:3.5rem;margin-bottom:1rem;}
+.ty-title{font-family:"Fraunces",serif;font-size:1.8rem;font-weight:500;color:var(--navy);margin-bottom:.75rem;}
+.ty-ref{background:var(--warm);border:1px dashed var(--gold);border-radius:10px;padding:.75rem 1.25rem;display:inline-block;font-family:monospace;font-size:1rem;font-weight:700;color:var(--navy);margin:1rem 0;}
+.ty-steps{text-align:left;max-width:420px;margin:1.5rem auto;background:var(--w);border:1px solid var(--bdr);border-radius:12px;padding:1.2rem;}
+.ty-step{display:flex;gap:.75rem;padding:.5rem 0;font-size:.88rem;color:var(--sf);}
+.ty-step-num{width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;}
+/* PAY INFO INLINE (in thank you) */
+.ty-pay{background:var(--warm);border:1px solid var(--bdr);border-radius:12px;padding:1.2rem;margin-top:1rem;text-align:left;}
+.ty-pay h4{font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em;}
+/* TOAST */
+.toast{position:fixed;bottom:1.4rem;right:1.4rem;z-index:800;background:var(--navy);color:#fff;padding:.7rem 1.1rem;border-radius:9px;font-size:.83rem;transform:translateY(80px);transition:transform .28s;max-width:300px;}
+.toast.show{transform:translateY(0);}.toast.success{background:var(--gr);}.toast.error{background:var(--rd);}
+.loading-ph{text-align:center;padding:1rem;color:var(--mu);font-size:.82rem;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🌿</div>
+      <div><div class="logo-name">Zanith Crafted Studio</div></div>
+    </a>
+    <button class="lbtn" onclick="toggleLang()" id="langBtn">EN / VI</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="steps" id="stepsBar">
+    <div class="step active" id="step1"><div class="step-num">1</div><span class="en">Cart</span><span class="vi">Giỏ</span></div>
+    <div class="step-line"></div>
+    <div class="step" id="step2"><div class="step-num">2</div><span class="en">Details</span><span class="vi">Thông tin</span></div>
+    <div class="step-line"></div>
+    <div class="step" id="step3"><div class="step-num">3</div><span class="en">Payment</span><span class="vi">Thanh toán</span></div>
+  </div>
+
+  <!-- SCREEN 1: Cart review -->
+  <div id="screen1">
+    <div class="co-layout">
+      <div>
+        <div class="co-section">
+          <h3><span class="en">Your Cart</span><span class="vi">Giỏ hàng của bạn</span></h3>
+          <div id="cartItems"></div>
+          <div id="emptyCart" style="display:none;text-align:center;padding:2rem;color:var(--mu)">
+            <p style="font-size:1.5rem">🛒</p>
+            <p class="en" style="margin-top:.5rem">Your cart is empty</p>
+            <p class="vi" style="margin-top:.5rem">Giỏ hàng trống</p>
+            <a href="index.html" style="display:inline-block;margin-top:1rem;background:var(--navy);color:#fff;padding:.6rem 1.2rem;border-radius:9px;text-decoration:none;font-size:.88rem"><span class="en">Browse Shop</span><span class="vi">Xem cửa hàng</span></a>
+          </div>
+        </div>
+        <div class="co-section" id="discSection">
+          <h3><span class="en">Discount Code</span><span class="vi">Mã giảm giá</span></h3>
+          <div class="disc-row">
+            <input class="disc-in" id="discInput" placeholder="ZANITH20">
+            <button class="disc-btn" onclick="applyDiscount()"><span class="en">Apply</span><span class="vi">Áp dụng</span></button>
+          </div>
+          <p id="discMsg" style="font-size:.78rem;min-height:1rem;color:var(--gr)"></p>
+        </div>
+        <button class="btn-main" onclick="goToStep2()" id="toStep2Btn">
+          <span class="en">Continue to Details →</span><span class="vi">Tiếp tục →</span>
+        </button>
+      </div>
+      <div class="summary-card">
+        <div class="sum-title"><span class="en">Order Summary</span><span class="vi">Tóm tắt đơn hàng</span></div>
+        <div id="summaryItems"></div>
+        <div style="padding:.75rem 0">
+          <div class="sum-row"><span><span class="en">Subtotal</span><span class="vi">Tạm tính</span></span><span id="subtotalEl">$0.00</span></div>
+          <div class="sum-row" id="discountRow" style="display:none;color:var(--gr)"><span><span class="en">Discount</span><span class="vi">Giảm giá</span></span><span id="discountEl">-$0.00</span></div>
+          <div class="sum-total"><span><span class="en">Total</span><span class="vi">Tổng cộng</span></span><span id="totalEl">$0.00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: Customer details -->
+  <div id="screen2" style="display:none">
+    <div class="co-layout">
+      <div>
+        <div class="co-section">
+          <h3><span class="en">Your Details</span><span class="vi">Thông tin của bạn</span></h3>
+          <div class="frow">
+            <div class="fg"><label class="en">First Name</label><label class="vi">Tên</label><input id="fName" placeholder="Nguyen"></div>
+            <div class="fg"><label class="en">Last Name</label><label class="vi">Họ</label><input id="lName" placeholder="Thi Lan"></div>
+          </div>
+          <div class="fg"><label>Email</label><input type="email" id="email" placeholder="your@email.com"></div>
+          <div class="fg"><label><span class="en">Phone (optional)</span><span class="vi">Điện thoại (tuỳ chọn)</span></label><input type="tel" id="phone" placeholder="+84..."></div>
+          <div class="fg"><label><span class="en">Notes (optional)</span><span class="vi">Ghi chú (tuỳ chọn)</span></label><input id="notes" placeholder="..."></div>
+        </div>
+        <div style="display:flex;gap:.75rem">
+          <button class="btn-back" onclick="goToStep1()">← <span class="en">Back</span><span class="vi">Quay lại</span></button>
+          <button class="btn-main" onclick="goToStep3()" style="flex:2">
+            <span class="en">Continue to Payment →</span><span class="vi">Tiếp tục thanh toán →</span>
+          </button>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="sum-title"><span class="en">Order Summary</span><span class="vi">Tóm tắt</span></div>
+        <div id="summaryItems2"></div>
+        <div class="sum-total"><span><span class="en">Total</span><span class="vi">Tổng</span></span><span id="totalEl2">$0.00</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: Payment -->
+  <div id="screen3" style="display:none">
+    <div class="co-layout">
+      <div>
+        <div class="pay-box" id="payBox">
+          <h3>🏦 <span class="en">Payment Information</span><span class="vi">Thông tin thanh toán</span></h3>
+          <div id="payLoading" class="loading-ph">
+            <span class="en">Loading payment details…</span><span class="vi">Đang tải thông tin thanh toán…</span>
+          </div>
+          <div id="bankDetails" style="display:none">
+            <div class="bank-info">
+              <div class="bank-row"><div><div class="bank-label"><span class="en">Bank</span><span class="vi">Ngân hàng</span></div><div class="bank-val" id="bankName">—</div></div></div>
+              <div class="bank-row"><div><div class="bank-label"><span class="en">Account Number</span><span class="vi">Số tài khoản</span></div><div class="bank-val" id="bankAcc">—</div></div><button class="bank-copy" onclick="copyBank('bankAcc')">Copy</button></div>
+              <div class="bank-row"><div><div class="bank-label"><span class="en">Account Name</span><span class="vi">Chủ tài khoản</span></div><div class="bank-val" id="bankOwner">—</div></div></div>
+              <div class="bank-row"><div><div class="bank-label"><span class="en">Transfer Note</span><span class="vi">Nội dung chuyển khoản</span></div><div class="bank-val" id="bankNote" style="font-size:.78rem">—</div></div><button class="bank-copy" onclick="copyBank('bankNote')">Copy</button></div>
+            </div>
+            <div style="font-size:.78rem;color:var(--sf);margin-bottom:.75rem">
+              <span class="en">Amount to transfer:</span><span class="vi">Số tiền cần chuyển:</span>
+            </div>
+            <input class="amount-input" id="transferAmount" readonly>
+            <div id="qrWrap" class="qr-box" style="display:none">
+              <img id="qrImg" src="" alt="QR Code" onerror="document.getElementById('qrWrap').style.display='none'">
+              <div style="font-size:.73rem;color:var(--mu);margin-top:.4rem"><span class="en">Scan with banking app</span><span class="vi">Quét bằng app ngân hàng</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="co-section" style="margin-top:1rem">
+          <div style="font-size:.82rem;color:var(--sf);line-height:1.7;margin-bottom:1rem">
+            <span class="en">After transferring, click the button below. We'll verify and send your download link via email within minutes.</span>
+            <span class="vi">Sau khi chuyển khoản, nhấn nút bên dưới. Chúng tôi sẽ xác nhận và gửi link tải qua email trong vài phút.</span>
+          </div>
+          <div style="display:flex;gap:.75rem">
+            <button class="btn-back" onclick="goToStep2()">← <span class="en">Back</span><span class="vi">Quay lại</span></button>
+            <button class="btn-main" onclick="placeOrder()" id="placeBtn" style="flex:2">
+              ✅ <span class="en">I have paid — Place Order</span><span class="vi">Tôi đã chuyển khoản — Đặt hàng</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="sum-title"><span class="en">Order Summary</span><span class="vi">Tóm tắt</span></div>
+        <div id="summaryItems3"></div>
+        <div class="sum-total"><span><span class="en">Total</span><span class="vi">Tổng</span></span><span id="totalEl3">$0.00</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THANK YOU SCREEN -->
+  <div id="tyScreen" class="ty-screen">
+    <div class="ty-icon">🎉</div>
+    <div class="ty-title en">Order Placed Successfully!</div>
+    <div class="ty-title vi">Đặt hàng thành công!</div>
+    <p style="font-size:.9rem;color:var(--sf);margin-bottom:.5rem">
+      <span class="en">Your order reference is:</span><span class="vi">Mã đơn hàng của bạn:</span>
+    </p>
+    <div class="ty-ref" id="tyRef">ZN...</div>
+    <div class="ty-steps">
+      <div class="ty-step"><div class="ty-step-num">1</div><span class="en">We'll verify your payment (usually within 30 minutes)</span><span class="vi">Chúng tôi xác nhận thanh toán (thường trong 30 phút)</span></div>
+      <div class="ty-step"><div class="ty-step-num">2</div><span class="en">You'll receive an email with your secure download link</span><span class="vi">Bạn nhận email với link tải bảo mật</span></div>
+      <div class="ty-step"><div class="ty-step-num">3</div><span class="en">Click the link to download your files instantly</span><span class="vi">Nhấp link để tải file ngay lập tức</span></div>
+    </div>
+    <!-- Payment reminder in thank you screen -->
+    <div class="ty-pay" id="tyPayReminder">
+      <h4>🏦 <span class="en">Payment Reminder</span><span class="vi">Nhắc nhở thanh toán</span></h4>
+      <div id="tyBankInfo"></div>
+    </div>
+    <a href="index.html" style="display:inline-block;margin-top:1.5rem;background:var(--navy);color:#fff;padding:.7rem 1.5rem;border-radius:10px;text-decoration:none;font-size:.9rem;font-weight:600">
+      🛍️ <span class="en">Continue Shopping</span><span class="vi">Tiếp tục mua sắm</span>
+    </a>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SCRIPT_URL = getAppScriptUrl();
+const READ_KEY   = ZANITH_CONFIG.READ_KEY;
+let currentLang  = localStorage.getItem('zanith_lang')||'en';
+let cart=[], discount={code:'',pct:0}, bankSettings={}, currentTotal=0, orderRef='';
+const CODES = [{code:'ZANITH20',pct:20},{code:'ZANITH10',pct:10}]; // fallback codes
+
+function applyLang(){const vi=currentLang==='vi';document.getElementById('H').setAttribute('lang',currentLang);document.getElementById('langBtn').textContent=vi?'VI / EN':'EN / VI';}
+function toggleLang(){currentLang=currentLang==='en'?'vi':'en';localStorage.setItem('zanith_lang',currentLang);applyLang();}
+
+function loadCart(){try{cart=JSON.parse(localStorage.getItem('zanith_cart')||'[]');}catch(e){cart=[];}renderCart();}
+
+function getTotal(){
+  const sub=cart.reduce((s,i)=>s+i.price*(i.qty||1),0);
+  const disc=discount.pct?sub*(discount.pct/100):0;
+  return{sub,disc,total:sub-disc};
+}
+
+function renderCart(){
+  const {sub,disc,total}=getTotal();
+  currentTotal=total;
+  // Screen 1 items
+  const cartEl=document.getElementById('cartItems');
+  const emptyEl=document.getElementById('emptyCart');
+  const btn=document.getElementById('toStep2Btn');
+  if(!cart.length){if(cartEl)cartEl.innerHTML='';if(emptyEl)emptyEl.style.display='';if(btn)btn.disabled=true;return;}
+  if(emptyEl)emptyEl.style.display='none';if(btn)btn.disabled=false;
+  const itemHtml=cart.map((item,i)=>`
+    <div class="sum-item">
+      ${item.img?`<img class="sum-img" src="${item.img}" onerror="this.style.opacity='.2'">`:`<div class="sum-img-ph">🌿</div>`}
+      <div style="flex:1">
+        <div class="sum-name">${currentLang==='vi'?(item.title_vi||item.title):item.title}</div>
+        <div class="sum-qty"><span class="en">Qty:</span><span class="vi">SL:</span> ${item.qty||1}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.3rem">
+        <div class="sum-price">$${((item.price||0)*(item.qty||1)).toFixed(2)}</div>
+        <button onclick="removeItem(${i})" style="background:none;border:none;color:var(--mu);cursor:pointer;font-size:.75rem">✕ <span class="en">Remove</span><span class="vi">Xóa</span></button>
+      </div>
+    </div>`).join('');
+  if(cartEl)cartEl.innerHTML=itemHtml;
+  // Totals
+  const fmt=v=>'$'+v.toFixed(2);
+  document.querySelectorAll('#subtotalEl,[id^=totalEl]').forEach(el=>el.textContent=fmt(total));
+  const subEl=document.getElementById('subtotalEl');if(subEl)subEl.textContent=fmt(sub);
+  const discRow=document.getElementById('discountRow'),discEl=document.getElementById('discountEl');
+  if(discRow)discRow.style.display=disc>0?'':'none';
+  if(discEl)discEl.textContent='-'+fmt(disc);
+  // Summary cards
+  ['summaryItems','summaryItems2','summaryItems3'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.innerHTML=cart.map(item=>`
+      <div class="sum-item">
+        ${item.img?`<img class="sum-img" src="${item.img}" onerror="this.style.opacity='.2'">`:`<div class="sum-img-ph">🌿</div>`}
+        <div><div class="sum-name" style="font-size:.78rem">${currentLang==='vi'?(item.title_vi||item.title):item.title}</div><div class="sum-qty">×${item.qty||1}</div></div>
+        <div class="sum-price" style="font-size:.82rem">$${((item.price||0)*(item.qty||1)).toFixed(2)}</div>
+      </div>`).join('');
+  });
+  ['totalEl','totalEl2','totalEl3'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=fmt(total);});
+  applyLang();
+}
+
+function removeItem(i){cart.splice(i,1);localStorage.setItem('zanith_cart',JSON.stringify(cart));renderCart();}
+
+function applyDiscount(){
+  const code=(document.getElementById('discInput').value||'').trim().toUpperCase();
+  const msgEl=document.getElementById('discMsg');
+  // Check against campaign codes loaded from localStorage/campaign state
+  const found=CODES.find(c=>c.code===code);
+  if(found){discount={code,pct:found.pct};msgEl.style.color='var(--gr)';msgEl.textContent=(currentLang==='vi'?`✅ Giảm ${found.pct}% đã áp dụng!`:`✅ ${found.pct}% discount applied!`);renderCart();}
+  else{discount={code:'',pct:0};msgEl.style.color='var(--rd)';msgEl.textContent=(currentLang==='vi'?'❌ Mã không hợp lệ':'❌ Invalid code');}
+}
+
+// Step navigation
+function setStep(n){
+  for(let i=1;i<=3;i++){const el=document.getElementById('step'+i);if(el){el.className='step'+(i<n?' done':i===n?' active':'');}}
+  ['screen1','screen2','screen3'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.style.display=i+1===n?'':'none';});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function goToStep1(){setStep(1);}
+function goToStep2(){
+  if(!cart.length){showToast(currentLang==='vi'?'Giỏ hàng trống!':'Cart is empty!','error');return;}
+  setStep(2); renderCart();
+}
+async function goToStep3(){
+  const name=(document.getElementById('fName').value||'').trim();
+  const email=(document.getElementById('email').value||'').trim();
+  if(!name||!email){showToast(currentLang==='vi'?'Vui lòng điền tên và email':'Please fill name and email','error');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showToast(currentLang==='vi'?'Email không hợp lệ':'Invalid email','error');return;}
+  setStep(3); renderCart();
+  await loadPaymentInfo();
+}
+
+async function loadPaymentInfo(){
+  const payLoad=document.getElementById('payLoading');
+  const bankDet=document.getElementById('bankDetails');
+  if(payLoad)payLoad.style.display='';if(bankDet)bankDet.style.display='none';
+  try{
+    const res=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'readConfig',secret:READ_KEY})});
+    const d=await res.json();
+    const s=d.settings||{};
+    bankSettings=s;
+    if(s.bankName){document.getElementById('bankName').textContent=s.bankName;}
+    if(s.bankAccount){document.getElementById('bankAcc').textContent=s.bankAccount;}
+    if(s.bankOwner){document.getElementById('bankOwner').textContent=s.bankOwner;}
+    // Transfer note = order ref (generated here)
+    const tempRef='ZN'+Date.now();
+    document.getElementById('bankNote').textContent='ZAN '+tempRef.slice(-8);
+    document.getElementById('transferAmount').value='$'+getTotal().total.toFixed(2)+' USD';
+    if(s.bankQR){const qrEl=document.getElementById('qrImg');qrEl.src=s.bankQR;document.getElementById('qrWrap').style.display='';}
+    if(payLoad)payLoad.style.display='none';if(bankDet)bankDet.style.display='';
+    renderCart();applyLang();
+  }catch(e){
+    if(payLoad)payLoad.style.display='none';if(bankDet)bankDet.style.display='';
+    bankDet.innerHTML='<p style="font-size:.82rem;color:var(--rd)">'+(currentLang==='vi'?'Lỗi tải thông tin thanh toán. Liên hệ: zenithcraftedstudio@gmail.com':'Error loading payment info. Contact: zenithcraftedstudio@gmail.com')+'</p>';
+  }
+}
+
+function copyBank(id){const el=document.getElementById(id);if(!el)return;navigator.clipboard&&navigator.clipboard.writeText(el.textContent);showToast('📋 Copied!','success');}
+
+async function placeOrder(){
+  const btn=document.getElementById('placeBtn');
+  btn.disabled=true;btn.innerHTML='⏳ <span class="en">Placing order…</span><span class="vi">Đang đặt hàng…</span>';applyLang();
+  const name=(document.getElementById('fName').value||'').trim()+' '+(document.getElementById('lName').value||'').trim();
+  const email=(document.getElementById('email').value||'').trim();
+  const phone=(document.getElementById('phone').value||'').trim();
+  const {total}=getTotal();
+  const items=cart.map(i=>({sku:i.sku,title:i.title,qty:i.qty||1,price:i.price}));
+  try{
+    const res=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'createOrder',secret:READ_KEY,customerName:name.trim(),customerEmail:email,phone,items,total:total.toFixed(2)})});
+    const d=await res.json();
+    if(d.status==='success'){
+      orderRef=d.orderRef||'';
+      cart=[];localStorage.removeItem('zanith_cart');
+      showThankYou();
+    }else throw new Error(d.message||'Error');
+  }catch(e){
+    btn.disabled=false;btn.innerHTML='✅ <span class="en">I have paid — Place Order</span><span class="vi">Tôi đã chuyển khoản — Đặt hàng</span>';applyLang();
+    showToast('❌ '+(e.message||'Error'),'error');
+  }
+}
+
+function showThankYou(){
+  document.getElementById('screen3').style.display='none';
+  document.getElementById('stepsBar').style.display='none';
+  const ty=document.getElementById('tyScreen');ty.style.display='block';
+  document.getElementById('tyRef').textContent=orderRef;
+  // Show bank info again in thank you
+  const tyBankEl=document.getElementById('tyBankInfo');
+  if(tyBankEl&&bankSettings.bankAccount){
+    tyBankEl.innerHTML=`
+      <div style="font-size:.83rem;display:grid;gap:.35rem">
+        <div><span style="color:var(--mu);font-size:.72rem">${currentLang==='vi'?'Ngân hàng':'Bank'}:</span> <strong>${bankSettings.bankName||''}</strong></div>
+        <div><span style="color:var(--mu);font-size:.72rem">${currentLang==='vi'?'Số TK':'Account'}:</span> <strong>${bankSettings.bankAccount||''}</strong></div>
+        <div><span style="color:var(--mu);font-size:.72rem">${currentLang==='vi'?'Chủ TK':'Name'}:</span> <strong>${bankSettings.bankOwner||''}</strong></div>
+        <div><span style="color:var(--mu);font-size:.72rem">${currentLang==='vi'?'Nội dung':'Note'}:</span> <strong>ZAN ${orderRef.slice(-8)}</strong></div>
+        <div style="margin-top:.3rem;font-size:.78rem;color:var(--gr)">⚠️ ${currentLang==='vi'?'Vui lòng chuyển đúng nội dung để chúng tôi xác nhận nhanh hơn':'Please include the transfer note so we can confirm faster'}</div>
+      </div>`;
+  } else if(tyBankEl) document.getElementById('tyPayReminder').style.display='none';
+  applyLang();window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showToast(msg,type=''){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.className='toast show '+(type||'');setTimeout(()=>t.className='toast',3500);}
+
+// INIT
+applyLang();loadCart();setStep(1);
+</script>
+</body>
+</html>
