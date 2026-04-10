@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" id="H">
+<head>
+<script src="config.js"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Blog — Zanith Crafted Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1e2d4a;--nl:#2a3f63;--nd:#131d30;--gold:#c8974a;--gl:#e8b86d;--cream:#faf7f2;--warm:#f3ede3;--w:#fff;--bdr:#e2ddd6;--tx:#1a2332;--sf:#5a6a7e;--mu:#8a9bb5;--gr:#2e7d52;--rd:#c0392b;--ss:0 1px 4px rgba(30,45,74,.08);--sl:0 12px 40px rgba(30,45,74,.16);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:"Instrument Sans",sans-serif;background:var(--cream);color:var(--tx);}
+html[lang="en"] .vi{display:none!important;}html[lang="vi"] .en{display:none!important;}
+header{background:var(--w);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;box-shadow:var(--ss);}
+.hdr{max-width:1000px;margin:0 auto;padding:.85rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
+.logo-icon{width:38px;height:38px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.logo-name{font-family:"Fraunces",serif;font-size:1rem;font-weight:500;color:var(--navy);}
+.hright{display:flex;gap:.65rem;align-items:center;}
+.lbtn{background:var(--warm);border:1px solid var(--bdr);border-radius:18px;padding:.3rem .7rem;font-size:.73rem;cursor:pointer;color:var(--sf);font-family:inherit;transition:all .18s;}
+.lbtn:hover{border-color:var(--navy);color:var(--navy);}
+.back-btn{display:flex;align-items:center;gap:.4rem;background:transparent;border:1px solid var(--bdr);border-radius:18px;padding:.3rem .85rem;font-size:.78rem;cursor:pointer;color:var(--sf);font-family:inherit;text-decoration:none;transition:all .18s;}
+.back-btn:hover{border-color:var(--navy);color:var(--navy);background:var(--warm);}
+.page-hero{background:linear-gradient(135deg,var(--navy),var(--nl));padding:2.5rem 1.4rem;text-align:center;}
+.page-hero h1{font-family:"Fraunces",serif;font-size:2rem;font-weight:500;color:#fff;margin-bottom:.5rem;}
+.page-hero p{color:rgba(255,255,255,.7);font-size:.9rem;}
+.wrap{max-width:1000px;margin:0 auto;padding:2.5rem 1.4rem;}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+@media(max-width:768px){.blog-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.blog-grid{grid-template-columns:1fr;}}
+.blog-card{border-radius:12px;overflow:hidden;border:1px solid var(--bdr);cursor:pointer;transition:all .18s;background:var(--w);}
+.blog-card:hover{box-shadow:var(--sl);transform:translateY(-2px);}
+.blog-thumb{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--warm);display:block;}
+.blog-thumb-ph{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,var(--warm),#e4dfd8);display:flex;align-items:center;justify-content:center;font-size:3rem;}
+.blog-meta{padding:1rem;}
+.blog-cat{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:.35rem;}
+.blog-ttl{font-family:"Fraunces",serif;font-size:1.05rem;font-weight:500;color:var(--navy);line-height:1.35;margin-bottom:.4rem;}
+.blog-sum{font-size:.8rem;color:var(--sf);line-height:1.65;}
+.blog-date{font-size:.7rem;color:var(--mu);margin-top:.5rem;}
+.blog-read{display:inline-flex;align-items:center;gap:.3rem;font-size:.75rem;font-weight:600;color:var(--navy);margin-top:.6rem;}
+.pmov{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);align-items:center;justify-content:center;padding:1rem;}
+.pmov.open{display:flex;}
+.ppanel{background:var(--w);border-radius:14px;max-width:780px;width:100%;max-height:94vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;}
+.phero{width:100%;max-height:300px;object-fit:cover;display:block;border-radius:14px 14px 0 0;}
+.phero-ph{width:100%;height:200px;background:linear-gradient(135deg,var(--navy),var(--nl));display:flex;align-items:center;justify-content:center;font-size:3rem;border-radius:14px 14px 0 0;}
+.pbody{padding:2rem 2.25rem;}
+.pcat{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:.55rem;}
+.ptitle{font-family:"Fraunces",serif;font-size:1.75rem;font-weight:500;color:var(--navy);line-height:1.2;margin-bottom:.65rem;}
+.pmeta{font-size:.75rem;color:var(--mu);margin-bottom:1.4rem;display:flex;align-items:center;gap:.75rem;}
+.pcontent{font-size:.92rem;color:var(--sf);line-height:1.9;}
+.pcontent p{margin-bottom:.9rem;}
+.pcontent h2,.pcontent h3{font-family:"Fraunces",serif;color:var(--navy);margin:1.2rem 0 .5rem;}
+.pcontent strong{color:var(--tx);}
+.pcontent ul,.pcontent ol{padding-left:1.4rem;margin-bottom:.75rem;}
+.pcontent li{margin-bottom:.3rem;}
+.pclose{position:absolute;top:.9rem;right:.9rem;background:var(--w);border:1px solid var(--bdr);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;z-index:10;}
+.loading-state{text-align:center;padding:4rem 2rem;}
+.spin{width:36px;height:36px;border:3px solid var(--bdr);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 1rem;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-state p{color:var(--mu);font-size:.85rem;}
+.empty-st{text-align:center;padding:4rem;color:var(--sf);}
+.retry-note{text-align:center;padding:2.5rem 2rem;color:var(--mu);font-size:.82rem;}
+.retry-btn{margin-top:.75rem;display:inline-block;background:var(--warm);color:var(--navy);border:1px solid var(--bdr);padding:.45rem 1.1rem;border-radius:18px;font-size:.78rem;cursor:pointer;font-family:inherit;}
+.cats{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:2rem;}
+.cat-btn{background:transparent;border:1.5px solid var(--bdr);padding:.28rem .8rem;border-radius:18px;font-size:.76rem;cursor:pointer;color:var(--sf);transition:all .16s;font-family:inherit;}
+.cat-btn.active{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:600;}
+footer{background:var(--nd);color:rgba(255,255,255,.6);padding:1.5rem 1.4rem;margin-top:3rem;}
+.fbot{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-size:.75rem;flex-wrap:wrap;gap:.5rem;}
+.fbot a{color:rgba(255,255,255,.45);text-decoration:none;}
+.flinks{display:flex;gap:1.25rem;}
+.lsw{display:flex;gap:.3rem;}
+.lsw button{background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.5);padding:2px 9px;border-radius:9px;font-size:.7rem;cursor:pointer;font-family:inherit;transition:all .15s;}
+.lsw button.on,.lsw button:hover{background:rgba(255,255,255,.12);color:#fff;}
+@media(max-width:680px){.pmov{align-items:flex-end;padding:0;}.ppanel{border-radius:18px 18px 0 0;max-height:96vh;}.pbody{padding:1.25rem 1.4rem;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🌿</div>
+      <div><div class="logo-name">Zanith Crafted Studio</div></div>
+    </a>
+    <div class="hright">
+      <button class="lbtn" onclick="toggleLang()" id="langBtn">EN / VI</button>
+      <a href="index.html" class="back-btn">← <span class="en">Shop</span><span class="vi">Cửa hàng</span></a>
+    </div>
+  </div>
+</header>
+<div class="page-hero">
+  <h1>📝 Blog</h1>
+  <p class="en">Tips, tutorials, and inspiration for pattern designers and makers.</p>
+  <p class="vi">Mẹo, hướng dẫn và cảm hứng cho nhà thiết kế họa tiết và người sáng tạo.</p>
+</div>
+<div class="wrap">
+  <div class="cats" id="catBar">
+    <button class="cat-btn active" onclick="setCat('',this)">
+      <span class="en">All Posts</span><span class="vi">Tất cả</span>
+    </button>
+  </div>
+  <div id="blogGrid">
+    <div class="loading-state">
+      <div class="spin"></div>
+      <p class="en">Loading posts…</p><p class="vi">Đang tải bài viết…</p>
+    </div>
+  </div>
+</div>
+<div class="pmov" id="pMov" onclick="if(event.target===this)closePost()">
+  <div class="ppanel">
+    <button class="pclose" onclick="closePost()">✕</button>
+    <div id="postContent"></div>
+  </div>
+</div>
+<footer>
+  <div class="fbot">
+    <span>© 2025 Zanith Crafted Studio</span>
+    <div class="flinks">
+      <a href="index.html"><span class="en">Shop</span><span class="vi">Cửa hàng</span></a>
+      <a href="faq.html">FAQ</a>
+      <a href="about.html"><span class="en">About</span><span class="vi">Về chúng tôi</span></a>
+    </div>
+    <div class="lsw">
+      <button id="btEN" onclick="setLang('en')" class="on">EN</button>
+      <button id="btVI" onclick="setLang('vi')">VI</button>
+    </div>
+  </div>
+</footer>
+<script>
+// Language — localStorage OK for UI preference only (not data)
+let currentLang=localStorage.getItem('zanith_lang')||'en';
+function applyLang(){const vi=currentLang==='vi';document.getElementById('H').setAttribute('lang',currentLang);document.getElementById('langBtn').textContent=vi?'VI / EN':'EN / VI';const fe=document.getElementById('btEN'),fv=document.getElementById('btVI');if(fe)fe.className=vi?'':'on';if(fv)fv.className=vi?'on':'';}
+function toggleLang(){currentLang=currentLang==='en'?'vi':'en';localStorage.setItem('zanith_lang',currentLang);applyLang();}
+function setLang(l){currentLang=l;localStorage.setItem('zanith_lang',l);applyLang();}
+
+// Data fetch — uses ZANITH_CONFIG.SCRIPT_URL from config.js (deployed on GitHub)
+// All visitors fetch data independently without any login
+let allPosts=[],currentCat='';
+
+// Seed posts — hiển thị ngay khi sheet chưa có bài viết
+const SEED_POSTS=[
+  {slug:'how-to-use-seamless-patterns',title:'How to Use Seamless Patterns for Your POD Business',title_vi:'Cách Dùng Họa Tiết Liền Mạch Cho Kinh Doanh POD',category:'Tutorial',date:'08/04/2025',author:'Zanith Crafted Studio',summary:'Learn how to tile, scale, and apply seamless patterns to T-shirts, mugs, tote bags and more using free tools like Canva.',summary_vi:'Hướng dẫn lặp, scale và áp dụng họa tiết liền mạch lên áo thun, cốc, túi tote bằng Canva miễn phí.',content:'Seamless patterns are one of the most versatile assets for any POD seller.\n\n**Step 1: Choose your pattern**\nStart with a pattern that fits your brand palette. Geometric patterns work well for home decor, floral designs suit apparel and packaging.\n\n**Step 2: Tile correctly in Canva**\nUpload your PNG to Canva. Set the background to the exact dimensions needed by your POD platform (e.g. 4500×5400px for Printful T-shirts). Duplicate to fill the canvas seamlessly.\n\n**Step 3: Adjust scale**\nBigger patterns work well for fabric. Smaller repeats suit mugs and phone cases. Try 50%, 75% and 100% scale.\n\n**Step 4: Submit and preview**\nAlways use the 3D mockup tool on your POD platform before publishing.',content_vi:'Họa tiết liền mạch là tài sản linh hoạt nhất cho người bán POD.\n\n**Bước 1: Chọn họa tiết**\nBắt đầu với họa tiết phù hợp bảng màu thương hiệu. Hình học phù hợp nội thất, hoa lá hợp thời trang và bao bì.\n\n**Bước 2: Lặp đúng trong Canva**\nTải PNG lên Canva. Đặt kích thước đúng với POD (vd: 4500×5400px cho áo Printful). Nhân đôi để phủ kín canvas liền mạch.\n\n**Bước 3: Điều chỉnh tỉ lệ**\nHọa tiết lớn phù hợp vải, nhỏ hợp cốc và ốp điện thoại. Thử 50%, 75% và 100%.\n\n**Bước 4: Submit và preview**\nLuôn dùng mockup 3D của POD platform trước khi đăng.'},
+  {slug:'color-palette-for-surface-design',title:'Choosing Color Palettes That Sell',title_vi:'Chọn Bảng Màu Bán Chạy',category:'Tips',date:'01/04/2025',author:'Zanith Crafted Studio',summary:'Color is the first thing buyers notice. Learn how to build palettes that attract your target market and convert browsers into buyers.',summary_vi:'Màu sắc là điều đầu tiên người mua chú ý. Học cách xây dựng bảng màu thu hút thị trường mục tiêu.',content:'Color is the most powerful tool in a surface designer\'s toolkit.\n\n**Know your market**\nHome decor buyers in 2025 favor warm neutrals and terracotta. Fashion POD markets respond strongly to sage green and dusty rose. Vietnamese market trends lean toward pastels and gold accents.\n\n**Limit your palette**\nThe most commercially successful patterns use 3–5 colors maximum. This keeps production costs low and makes the pattern versatile enough to coordinate with other products.\n\n**Test in mockups first**\nColors look different on screen vs. print. Add 10–15% saturation to compensate for print ink absorption.',content_vi:'Màu sắc là công cụ mạnh nhất của nhà thiết kế bề mặt.\n\n**Hiểu thị trường**\nNgười mua đồ nội thất 2025 ưa neutral ấm và terracotta. Thị trường POD thời trang phản ứng với xanh sage và hồng bụi. Thị trường Việt Nam xu hướng pastel và gold.\n\n**Giới hạn bảng màu**\nHọa tiết thương mại thành công dùng tối đa 3–5 màu. Giữ chi phí sản xuất thấp và họa tiết linh hoạt hơn.\n\n**Test trên mockup**\nMàu trên màn hình khác với in. Thêm 10–15% saturation để bù lượng mực hấp thụ khi in.'},
+  {slug:'commercial-license-explained',title:'What Does "Commercial License" Actually Mean?',title_vi:'Giấy Phép Thương Mại Nghĩa Là Gì?',category:'Guide',date:'25/03/2025',author:'Zanith Crafted Studio',summary:'A plain-language breakdown of what you can and cannot do with a commercial pattern license — no legal jargon.',summary_vi:'Giải thích đơn giản những gì được và không được làm với giấy phép thương mại họa tiết.',content:'Commercial license can sound intimidating, but it\'s actually simple.\n\n**What you CAN do:**\n- Print patterns on physical products and sell them (clothing, mugs, bags, packaging)\n- Use on POD platforms like Printful, Printify, Redbubble\n- Create digital products using the pattern\n- Use for client work\n\n**What you CANNOT do:**\n- Resell the original pattern file\n- Claim the pattern as your own design\n- Share the file with others\n- Use for AI training datasets or NFT minting\n\n**Which tier do I need?**\nBasic ($4) for personal projects. Standard ($6) for most Etsy/POD sellers. Premium ($9) for agencies and high-volume sellers.',content_vi:'Giấy phép thương mại nghe phức tạp nhưng thực ra đơn giản.\n\n**Bạn ĐƯỢC phép:**\n- In họa tiết lên sản phẩm vật lý và bán\n- Dùng trên POD như Printful, Printify, Redbubble\n- Tạo sản phẩm kỹ thuật số\n- Dùng cho khách hàng của bạn\n\n**Bạn KHÔNG được:**\n- Bán lại file họa tiết gốc\n- Nhận là thiết kế của bạn\n- Chia sẻ file cho người khác\n- Dùng train AI hoặc mint NFT\n\n**Cần tier nào?**\nCơ Bản ($4) cho dự án cá nhân. Tiêu Chuẩn ($6) cho hầu hết Etsy/POD. Cao Cấp ($9) cho agency và bán số lượng lớn.'}
+];
+
+async function loadPosts(){
+  const grid=document.getElementById('blogGrid');
+  const SCRIPT_URL = getAppScriptUrl();
+  const READ_KEY   = ZANITH_CONFIG.READ_KEY;
+
+  // Show loading state
+  grid.innerHTML='<div class="loading-state"><div class="spin"></div><p class="en">Loading posts…</p><p class="vi">Đang tải bài viết…</p></div>';
+  applyLang();
+
+  try{
+    // Fetch from Apps Script using READ_KEY (no admin login required)
+    const res=await fetch(SCRIPT_URL,{
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify({action:'getBlogPosts',secret:READ_KEY})
+    });
+    const d=await res.json();
+    const posts=d.posts||(Array.isArray(d.data)?d.data:(d.data&&d.data.blog))||[];
+    allPosts=Array.isArray(posts)&&posts.length?posts:SEED_POSTS;
+  }catch(e){
+    console.warn('Blog fetch failed, using seed posts:',e.message);
+    allPosts=SEED_POSTS;
+  }
+
+  const slug=new URLSearchParams(location.search).get('slug');
+  if(slug&&allPosts.length){const p=allPosts.find(p=>(p.slug||p.Slug||'')===slug);if(p)setTimeout(()=>openPost(p),300);}
+  renderCats();renderGrid(allPosts);applyLang();
+}
+
+function renderCats(){
+  const cats=[...new Set(allPosts.map(p=>p.category||p.Category||'').filter(Boolean))];
+  const bar=document.getElementById('catBar');
+  bar.querySelectorAll('.cat-btn:not(:first-child)').forEach(b=>b.remove());
+  cats.forEach(cat=>{const btn=document.createElement('button');btn.className='cat-btn';btn.textContent=cat;btn.onclick=()=>setCat(cat,btn);bar.appendChild(btn);});
+}
+function setCat(cat,el){currentCat=cat;document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));if(el)el.classList.add('active');renderGrid(cat?allPosts.filter(p=>(p.category||p.Category||'')===cat):allPosts);}
+
+function renderGrid(posts){
+  const grid=document.getElementById('blogGrid');
+  if(!posts||!posts.length){grid.innerHTML=`<div class="empty-st"><div style="font-size:2.5rem">📝</div><p class="en" style="margin-top:.5rem">No posts yet — check back soon!</p><p class="vi" style="margin-top:.5rem">Chưa có bài viết. Hãy quay lại sớm!</p></div>`;applyLang();return;}
+  grid.innerHTML='<div class="blog-grid">'+posts.map(p=>`
+    <div class="blog-card" onclick='openPost(${JSON.stringify(JSON.stringify(p))})'>
+      ${(p.coverImage||p.img)?`<img class="blog-thumb" src="${p.coverImage||p.img}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\\'blog-thumb-ph\\'>📝</div>'">`:`<div class="blog-thumb-ph">📝</div>`}
+      <div class="blog-meta">
+        <div class="blog-cat">${p.category||p.Category||''}</div>
+        <div class="blog-ttl">${p.title||p.Title||''}</div>
+        <div class="blog-sum">${((p.summary||p.Summary||'')).slice(0,110)}${(p.summary||'').length>110?'…':''}</div>
+        <div class="blog-date">${p.date||p.Date||''}</div>
+        <div class="blog-read"><span class="en">Read more →</span><span class="vi">Đọc thêm →</span></div>
+      </div>
+    </div>`).join('')+'</div>';
+  applyLang();
+}
+
+function openPost(postOrJson){
+  let p=postOrJson;if(typeof p==='string'){try{p=JSON.parse(p);}catch{return;}}
+  document.getElementById('postContent').innerHTML=`
+    ${(p.coverImage||p.img)?`<img class="phero" src="${p.coverImage||p.img}" onerror="this.remove()">`:`<div class="phero-ph">📝</div>`}
+    <div class="pbody">
+      <div class="pcat">${p.category||p.Category||''}</div>
+      <div class="ptitle">${p.title||p.Title||''}</div>
+      <div class="pmeta"><span>📅 ${p.date||p.Date||''}</span>${(p.author||p.Author)?`<span>✍️ ${p.author||p.Author}</span>`:''}</div>
+      <div class="pcontent">${fmt(p.content||p.Content||p.body||p.summary||'')}</div>
+    </div>`;
+  document.getElementById('pMov').classList.add('open');document.body.style.overflow='hidden';
+  history.replaceState(null,'','?slug='+(p.slug||p.Slug||''));applyLang();
+}
+function closePost(){document.getElementById('pMov').classList.remove('open');document.body.style.overflow='';history.replaceState(null,'',location.pathname);}
+function fmt(t){if(!t)return'';return'<p>'+t.replace(/\r\n/g,'\n').replace(/\n\n+/g,'</p><p>').replace(/\n/g,'<br>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>')+'</p>';}
+
+applyLang();loadPosts();
+</script>
+</body>
+</html>
