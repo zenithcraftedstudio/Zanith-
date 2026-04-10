@@ -3,7 +3,7 @@
  * File này commit lên GitHub. Mọi thiết bị tự load.
  * DEPLOY: Điền URL Apps Script vào ZANITH_SCRIPT_URL
  */
-const ZANITH_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby3oAlGK7hdOu8LXqRnYsfFMCKNCgiuSzztAJjpDIu2-by-j5tn3A9HEHJqFvBmcqqs/exec';
+const ZANITH_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxloT6C1lArchnAUqlF9TN3hSy9FBG-KI-XAF-zdxXyc6G4iLjNOEEy05Q-d6rHADuS/exec';
 
 const ZANITH_CONFIG = {
   SCRIPT_URL:    ZANITH_SCRIPT_URL,
