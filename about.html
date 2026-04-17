@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en" id="H">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Our Story — Zanith Crafted Studio</title>
+<meta name="description" content="Behind every pattern is a story. Learn about Zanith Crafted Studio — an independent design studio crafting seamless patterns for makers, sellers, and creative businesses worldwide.">
+<link rel="canonical" href="https://zanith.pages.dev/about.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1e2d4a;--nl:#2a3f63;--nd:#131d30;
+  --gold:#c8974a;--gl:#e8b86d;
+  --cream:#faf7f2;--warm:#f3ede3;--w:#fff;
+  --bdr:#e2ddd6;--tx:#1a2332;--sf:#5a6a7e;--mu:#8a9bb5;
+  --gr:#2e7d52;--rd:#c0392b;
+  --ss:0 1px 4px rgba(30,45,74,.08);--sl:0 12px 40px rgba(30,45,74,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:"Instrument Sans",sans-serif;background:var(--cream);color:var(--tx);}
+html[lang="en"] .vi{display:none!important;}
+html[lang="vi"] .en{display:none!important;}
+
+/* ── NAV ── */
+header{background:var(--w);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:100;}
+.hdr{max-width:1200px;margin:0 auto;padding:.85rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
+.logo-icon{width:40px;height:40px;background:var(--navy);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.logo-name{font-family:"Fraunces",serif;font-size:1rem;font-weight:500;color:var(--navy);}
+.logo-sub{font-size:.68rem;color:var(--mu);}
+.hright{display:flex;align-items:center;gap:.65rem;}
+.lbtn{background:transparent;border:1px solid var(--bdr);border-radius:18px;padding:.32rem .75rem;font-size:.76rem;font-weight:600;color:var(--navy);cursor:pointer;font-family:inherit;text-decoration:none;transition:all .16s;}
+.lbtn:hover{border-color:var(--navy);}
+.cbtn{display:flex;align-items:center;gap:.45rem;background:var(--navy);color:#fff;border:none;border-radius:22px;padding:.46rem 1rem;font-family:inherit;font-size:.83rem;font-weight:500;cursor:pointer;text-decoration:none;}
+
+/* ── HERO ── */
+.about-hero{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--nl) 55%,#3a5180 100%);
+  padding:5rem 1.4rem 4rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.about-hero::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at 20% 60%,rgba(200,151,74,.18) 0%,transparent 55%),
+             radial-gradient(ellipse at 80% 20%,rgba(200,151,74,.1) 0%,transparent 45%);
+}
+.about-hero::after{
+  content:"";position:absolute;bottom:-1px;left:0;right:0;height:60px;
+  background:var(--cream);
+  clip-path:ellipse(55% 100% at 50% 100%);
+}
+.about-hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.4rem;background:rgba(200,151,74,.18);border:1px solid rgba(200,151,74,.35);color:var(--gl);border-radius:20px;padding:.3rem .9rem;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.5rem;}
+.about-hero h1{font-family:"Fraunces",serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:300;color:#fff;line-height:1.2;margin-bottom:1.2rem;}
+.about-hero h1 em{font-style:italic;color:var(--gl);}
+.about-hero p{font-size:1rem;color:rgba(255,255,255,.72);line-height:1.75;max-width:560px;margin:0 auto 1.8rem;}
+.hero-cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+.btn-gold{display:inline-flex;align-items:center;gap:.45rem;background:var(--gold);color:var(--nd);border:none;border-radius:24px;padding:.6rem 1.4rem;font-family:inherit;font-size:.88rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;}
+.btn-ghost{display:inline-flex;align-items:center;gap:.45rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:24px;padding:.6rem 1.4rem;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s;}
+
+/* ── INNER LAYOUT ── */
+.inner{max-width:1100px;margin:0 auto;padding:0 1.4rem;}
+
+/* ── STORY ── */
+.story-section{padding:5rem 1.4rem;}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;max-width:1000px;margin:0 auto;}
+@media(max-width:680px){.story-grid{grid-template-columns:1fr;gap:2.5rem;}}
+.story-label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.85rem;}
+.story-title{font-family:"Fraunces",serif;font-size:clamp(1.5rem,3vw,2.1rem);font-weight:500;color:var(--navy);line-height:1.25;margin-bottom:1.2rem;}
+.story-title em{font-style:italic;color:var(--gold);}
+.story-body p{font-size:.95rem;color:var(--sf);line-height:1.85;margin-bottom:1rem;}
+.story-body p:last-child{margin-bottom:0;}
+.story-body strong{color:var(--tx);}
+
+/* Story visual card */
+.story-visual{background:var(--w);border:1px solid var(--bdr);border-radius:16px;overflow:hidden;box-shadow:var(--sl);}
+.sv-top{background:linear-gradient(135deg,var(--navy),var(--nl));padding:2.5rem;text-align:center;}
+.sv-icon{font-size:3.5rem;display:block;margin-bottom:.75rem;}
+.sv-quote{font-family:"Fraunces",serif;font-size:1rem;font-style:italic;color:rgba(255,255,255,.85);line-height:1.65;}
+.sv-meta{padding:1.2rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;}
+.sv-line{display:flex;align-items:center;gap:.6rem;font-size:.8rem;color:var(--sf);}
+.sv-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+/* ── TIMELINE ── */
+.timeline-section{padding:4rem 1.4rem;background:var(--w);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);}
+.section-label{text-align:center;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;}
+.section-title{text-align:center;font-family:"Fraunces",serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:500;color:var(--navy);margin-bottom:.6rem;}
+.section-sub{text-align:center;font-size:.9rem;color:var(--sf);max-width:520px;margin:0 auto 3rem;}
+.timeline{max-width:680px;margin:0 auto;position:relative;}
+.timeline::before{content:"";position:absolute;left:28px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--gold),rgba(200,151,74,.15));border-radius:2px;}
+@media(max-width:500px){.timeline::before{left:20px;}}
+.tl-item{display:flex;gap:1.5rem;margin-bottom:2.2rem;position:relative;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-dot{flex-shrink:0;width:58px;height:58px;border-radius:50%;background:var(--cream);border:2.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.4rem;z-index:1;}
+@media(max-width:500px){.tl-dot{width:42px;height:42px;font-size:1.1rem;}}
+.tl-content{padding-top:.4rem;}
+.tl-year{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem;}
+.tl-head{font-family:"Fraunces",serif;font-size:1.05rem;font-weight:500;color:var(--navy);margin-bottom:.35rem;}
+.tl-body{font-size:.85rem;color:var(--sf);line-height:1.7;}
+
+/* ── NUMBERS ── */
+.numbers-section{padding:4.5rem 1.4rem;background:var(--cream);}
+.nums-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:900px;margin:2.5rem auto 0;}
+@media(max-width:680px){.nums-grid{grid-template-columns:repeat(2,1fr);}}
+.num-card{background:var(--w);border:1px solid var(--bdr);border-radius:14px;padding:1.6rem 1rem;text-align:center;box-shadow:var(--ss);transition:transform .2s,box-shadow .2s;}
+.num-card:hover{transform:translateY(-3px);box-shadow:var(--sl);}
+.num-val{font-family:"Fraunces",serif;font-size:2.2rem;font-weight:700;color:var(--navy);line-height:1;}
+.num-unit{font-size:.72rem;font-weight:700;color:var(--gold);display:block;margin-top:.2rem;letter-spacing:.05em;text-transform:uppercase;}
+.num-desc{font-size:.76rem;color:var(--sf);margin-top:.45rem;line-height:1.4;}
+
+/* ── VALUES ── */
+.values-section{padding:4.5rem 1.4rem;background:var(--navy);}
+.values-section .section-title{color:#fff;}
+.values-section .section-sub{color:rgba(255,255,255,.6);}
+.values-section .section-label{color:var(--gl);}
+.vals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;max-width:960px;margin:0 auto;}
+@media(max-width:720px){.vals-grid{grid-template-columns:1fr;max-width:480px;}}
+.val-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1.75rem 1.5rem;transition:background .2s;}
+.val-card:hover{background:rgba(255,255,255,.09);}
+.val-icon{font-size:2rem;display:block;margin-bottom:.9rem;}
+.val-head{font-family:"Fraunces",serif;font-size:1.05rem;font-weight:500;color:#fff;margin-bottom:.5rem;}
+.val-body{font-size:.83rem;color:rgba(255,255,255,.62);line-height:1.7;}
+.val-accent{display:inline-block;margin-top:.75rem;font-size:.72rem;font-weight:700;color:var(--gl);letter-spacing:.06em;text-transform:uppercase;}
+
+/* ── FOR WHOM ── */
+.forwho-section{padding:4.5rem 1.4rem;background:var(--warm);}
+.forwho-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:900px;margin:2.5rem auto 0;}
+@media(max-width:640px){.forwho-grid{grid-template-columns:1fr;}}
+.fw-card{background:var(--w);border:1px solid var(--bdr);border-radius:12px;padding:1.4rem;box-shadow:var(--ss);}
+.fw-emoji{font-size:1.6rem;margin-bottom:.6rem;display:block;}
+.fw-head{font-weight:600;font-size:.9rem;color:var(--navy);margin-bottom:.35rem;}
+.fw-body{font-size:.8rem;color:var(--sf);line-height:1.65;}
+
+/* ── TESTIMONIAL / TRUST ── */
+.trust-section{padding:4.5rem 1.4rem;background:var(--w);}
+.trust-quote-wrap{max-width:680px;margin:2.5rem auto 0;text-align:center;}
+.trust-quote{font-family:"Fraunces",serif;font-size:1.25rem;font-style:italic;font-weight:300;color:var(--navy);line-height:1.65;margin-bottom:1.2rem;}
+.trust-divider{display:flex;align-items:center;gap:1rem;margin:2rem 0;}
+.trust-divider::before,.trust-divider::after{content:"";flex:1;height:1px;background:var(--bdr);}
+.trust-divider span{font-size:.72rem;color:var(--mu);letter-spacing:.06em;text-transform:uppercase;}
+.trust-badges{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+.tbadge{display:flex;align-items:center;gap:.4rem;background:var(--warm);border:1px solid var(--bdr);border-radius:20px;padding:.35rem .85rem;font-size:.76rem;font-weight:600;color:var(--navy);}
+
+/* ── CTA BOTTOM ── */
+.cta-section{padding:5rem 1.4rem;background:linear-gradient(135deg,var(--nd),var(--navy));text-align:center;position:relative;overflow:hidden;}
+.cta-section::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(200,151,74,.14),transparent 60%);}
+.cta-section h2{font-family:"Fraunces",serif;font-size:clamp(1.5rem,4vw,2.4rem);font-weight:300;color:#fff;margin-bottom:.75rem;line-height:1.25;position:relative;}
+.cta-section h2 em{color:var(--gl);font-style:italic;}
+.cta-section p{color:rgba(255,255,255,.65);font-size:.92rem;margin-bottom:2rem;position:relative;}
+.cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;position:relative;}
+
+/* ── FOOTER ── */
+footer{background:var(--nd);padding:2.5rem 1.4rem 1.5rem;}
+.fbot{max-width:1100px;margin:.5rem auto 0;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
+.fbot span{font-size:.75rem;color:rgba(255,255,255,.35);}
+.flsw{display:flex;gap:.3rem;}
+.flsw button{background:transparent;border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:.22rem .6rem;font-size:.7rem;font-weight:600;color:rgba(255,255,255,.45);cursor:pointer;font-family:inherit;transition:all .15s;}
+.flsw button.on{background:rgba(255,255,255,.12);color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.25);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+.fade-up{animation:fadeUp .6s ease both;}
+.fade-up-d1{animation-delay:.1s;}
+.fade-up-d2{animation-delay:.22s;}
+.fade-up-d3{animation-delay:.34s;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <div class="hdr">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🌿</div>
+      <div>
+        <div class="logo-name">Zanith Crafted Studio</div>
+        <div class="logo-sub">Handcrafted Digital &amp; Print Goods</div>
+      </div>
+    </a>
+    <div class="hright">
+      <button class="lbtn" onclick="toggleLang()" id="langBtn">EN / VI</button>
+      <a href="index.html" class="cbtn">🛒 <span class="en">Shop</span><span class="vi">Shop</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="about-hero-inner">
+    <div class="hero-eyebrow fade-up">✦ <span class="en">Our Story</span><span class="vi">Câu chuyện của chúng tôi</span></div>
+    <h1 class="en fade-up fade-up-d1">Made with intention.<br><em>Designed for creators.</em></h1>
+    <h1 class="vi fade-up fade-up-d1">Được tạo ra với tâm huyết.<br><em>Dành cho người sáng tạo.</em></h1>
+    <p class="en fade-up fade-up-d2">Zanith Crafted Studio is an independent design studio specializing in handcrafted seamless patterns and digital goods — for makers, sellers, and creative businesses who believe that beautiful design shouldn't cost a fortune.</p>
+    <p class="vi fade-up fade-up-d2">Zanith Crafted Studio là studio thiết kế độc lập chuyên về họa tiết liền mạch thủ công và ấn phẩm kỹ thuật số — dành cho người làm thủ công, bán hàng, và doanh nghiệp sáng tạo tin rằng thiết kế đẹp không nhất thiết phải tốn kém.</p>
+    <div class="hero-cta-row fade-up fade-up-d3">
+      <a href="index.html" class="btn-gold"><span class="en">Browse the Shop</span><span class="vi">Vào Shop</span></a>
+      <a href="#story" class="btn-ghost"><span class="en">Read our story ↓</span><span class="vi">Đọc câu chuyện ↓</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section" id="story">
+  <div class="story-grid">
+    <div class="story-body">
+      <div class="story-label">✦ <span class="en">The Beginning</span><span class="vi">Khởi đầu</span></div>
+      <h2 class="story-title en">A love for patterns<br>and a <em>gap in the market.</em></h2>
+      <h2 class="story-title vi">Tình yêu với họa tiết<br>và một <em>khoảng trống thị trường.</em></h2>
+      <div class="en">
+        <p>Zanith Crafted Studio was born from a simple frustration: finding high-quality, commercially licensed patterns that were <strong>actually affordable</strong> felt impossible. Most marketplaces sold licenses in confusing tiers, with hidden fees and ambiguous terms.</p>
+        <p>So instead of waiting, I started designing. Pattern by pattern, colorway by colorway — each one hand-drawn, tested for seamless tiling, and priced honestly. No gatekeeping. No fine print that kills creative momentum.</p>
+        <p>Today, Zanith serves creators across Southeast Asia and beyond — from indie Etsy sellers stitching tote bags in Hanoi, to POD brands scaling on Printful and Redbubble.</p>
+      </div>
+      <div class="vi">
+        <p>Zanith Crafted Studio ra đời từ một sự thất vọng đơn giản: tìm họa tiết chất lượng cao, có giấy phép thương mại rõ ràng mà giá cả <strong>thực sự hợp lý</strong> — rất khó. Hầu hết các marketplace bán giấy phép rối rắm, đầy phí ẩn và điều khoản mơ hồ.</p>
+        <p>Vì vậy, thay vì chờ đợi, tôi bắt đầu thiết kế. Từng họa tiết, từng bảng màu — được vẽ tay, kiểm tra độ liền mạch kỹ lưỡng, và định giá thật thà. Không có rào cản. Không có điều khoản nhỏ giết chết động lực sáng tạo.</p>
+        <p>Ngày nay, Zanith phục vụ người sáng tạo khắp Đông Nam Á và xa hơn — từ người bán Etsy cá nhân may túi tote ở Hà Nội, đến thương hiệu POD mở rộng quy mô trên Printful và Redbubble.</p>
+      </div>
+    </div>
+
+    <div class="story-visual">
+      <div class="sv-top">
+        <span class="sv-icon">🌿</span>
+        <div class="sv-quote en">"I wanted patterns that felt alive — not like they came out of a stock photo factory. Every design here carries intention."</div>
+        <div class="sv-quote vi">"Tôi muốn những họa tiết có hơi thở — không phải thứ được xuất ra từ nhà máy ảnh stock. Mỗi thiết kế ở đây đều mang theo chủ ý."</div>
+      </div>
+      <div class="sv-meta">
+        <div class="sv-line"><div class="sv-dot"></div><span class="en">Hand-drawn on iPad · Procreate &amp; Canva</span><span class="vi">Vẽ tay trên iPad · Procreate &amp; Canva</span></div>
+        <div class="sv-line"><div class="sv-dot"></div><span class="en">Tested for perfect seamless repeat</span><span class="vi">Kiểm tra độ liền mạch hoàn hảo</span></div>
+        <div class="sv-line"><div class="sv-dot"></div><span class="en">Commercial license — clear, honest terms</span><span class="vi">Giấy phép thương mại — điều khoản rõ ràng, thành thật</span></div>
+        <div class="sv-line"><div class="sv-dot"></div><span class="en">Shipped globally · Vietnamese roots</span><span class="vi">Phục vụ toàn cầu · Gốc Việt Nam</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="section-label">✦ <span class="en">The Journey</span><span class="vi">Hành trình</span></div>
+  <h2 class="section-title en">How we got here</h2>
+  <h2 class="section-title vi">Chúng tôi đã đến đây thế nào</h2>
+  <p class="section-sub en">Every studio has a founding story. Ours started with a sketchbook and a stubborn belief that independent creators deserve professional tools.</p>
+  <p class="section-sub vi">Mỗi studio đều có câu chuyện khởi đầu. Của chúng tôi bắt đầu với một cuốn sổ phác thảo và niềm tin rằng người sáng tạo độc lập xứng đáng có công cụ chuyên nghiệp.</p>
+  <div class="timeline inner">
+    <div class="tl-item">
+      <div class="tl-dot">✏️</div>
+      <div class="tl-content">
+        <div class="tl-year en">The Beginning</div>
+        <div class="tl-year vi">Khởi đầu</div>
+        <div class="tl-head en">First patterns, first sales</div>
+        <div class="tl-head vi">Họa tiết đầu tiên, đơn hàng đầu tiên</div>
+        <div class="tl-body en">Zanith was founded as a one-person studio focused on surface pattern design. The first collection — geometric florals and abstract botanicals — sold within the first week.</div>
+        <div class="tl-body vi">Zanith được thành lập như một studio một người tập trung vào thiết kế họa tiết bề mặt. Bộ sưu tập đầu tiên — họa tiết hình học và thực vật trừu tượng — đã bán được ngay tuần đầu.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🌏</div>
+      <div class="tl-content">
+        <div class="tl-year en">Going Global</div>
+        <div class="tl-year vi">Vươn ra toàn cầu</div>
+        <div class="tl-head en">Pinterest, Etsy &amp; international reach</div>
+        <div class="tl-head vi">Pinterest, Etsy &amp; khách hàng quốc tế</div>
+        <div class="tl-body en">The shop expanded beyond Vietnam — patterns found their way onto products from the US to Europe. A bilingual strategy was born: Vietnamese for local makers, English for the global market.</div>
+        <div class="tl-body vi">Shop mở rộng ra ngoài Việt Nam — họa tiết xuất hiện trên sản phẩm từ Mỹ đến châu Âu. Chiến lược song ngữ ra đời: tiếng Việt cho người sáng tạo địa phương, tiếng Anh cho thị trường toàn cầu.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">📦</div>
+      <div class="tl-content">
+        <div class="tl-year en">Growing the Library</div>
+        <div class="tl-year vi">Mở rộng thư viện</div>
+        <div class="tl-head en">Collections for every creative use</div>
+        <div class="tl-head vi">Bộ sưu tập cho mọi nhu cầu sáng tạo</div>
+        <div class="tl-body en">The catalog grew to cover packaging, fashion, POD, interior design, and digital stationery — always at 300 DPI, always seamlessly tiled, always with a clear commercial license.</div>
+        <div class="tl-body vi">Danh mục mở rộng để phục vụ bao bì, thời trang, POD, thiết kế nội thất và văn phòng phẩm kỹ thuật số — luôn 300 DPI, luôn liền mạch hoàn hảo, luôn có giấy phép thương mại rõ ràng.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🌱</div>
+      <div class="tl-content">
+        <div class="tl-year en">Today</div>
+        <div class="tl-year vi">Hôm nay</div>
+        <div class="tl-head en">Still independent. Still intentional.</div>
+        <div class="tl-head vi">Vẫn độc lập. Vẫn có chủ ý.</div>
+        <div class="tl-body en">Zanith remains a solo studio — every pattern designed, tested, and curated by hand. No algorithmic bulk. No outsourced mediocrity. Just design that means something.</div>
+        <div class="tl-body vi">Zanith vẫn là studio một người — mỗi họa tiết được thiết kế, kiểm tra và chọn lọc bằng tay. Không có hàng loạt theo thuật toán. Không có sự tầm thường được outsource. Chỉ là thiết kế có ý nghĩa.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="numbers-section">
+  <div class="section-label">✦ <span class="en">By the Numbers</span><span class="vi">Con số</span></div>
+  <h2 class="section-title en">Quality you can measure</h2>
+  <h2 class="section-title vi">Chất lượng đo được bằng số</h2>
+  <div class="nums-grid">
+    <div class="num-card">
+      <div class="num-val">19+</div>
+      <span class="num-unit en">Patterns</span>
+      <span class="num-unit vi">Họa tiết</span>
+      <div class="num-desc en">And growing — each one tested for seamless repeat</div>
+      <div class="num-desc vi">Và đang tăng — mỗi mẫu được kiểm tra liền mạch</div>
+    </div>
+    <div class="num-card">
+      <div class="num-val">300</div>
+      <span class="num-unit">DPI</span>
+      <div class="num-desc en">Print-ready resolution. No pixelation, ever.</div>
+      <div class="num-desc vi">Độ phân giải sẵn sàng in. Không bao giờ vỡ nét.</div>
+    </div>
+    <div class="num-card">
+      <div class="num-val">∞</div>
+      <span class="num-unit en">Seamless Tile</span>
+      <span class="num-unit vi">Liền mạch</span>
+      <div class="num-desc en">Every edge matches perfectly — tile to any size</div>
+      <div class="num-desc vi">Mỗi cạnh khớp hoàn hảo — lặp vô hạn</div>
+    </div>
+    <div class="num-card">
+      <div class="num-val">100%</div>
+      <span class="num-unit en">Licensed</span>
+      <span class="num-unit vi">Có giấy phép</span>
+      <div class="num-desc en">Commercial license included with every single purchase</div>
+      <div class="num-desc vi">Giấy phép thương mại kèm theo mọi đơn hàng</div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="inner">
+    <div class="section-label">✦ <span class="en">What We Stand For</span><span class="vi">Chúng tôi tin vào điều gì</span></div>
+    <h2 class="section-title en">Three values. Zero compromises.</h2>
+    <h2 class="section-title vi">Ba giá trị. Không thỏa hiệp.</h2>
+    <p class="section-sub en">These aren't just words on a page — they shape every design decision, every pricing choice, every license term we write.</p>
+    <p class="section-sub vi">Đây không chỉ là chữ trên trang — chúng định hình mọi quyết định thiết kế, mọi lựa chọn giá cả, mọi điều khoản giấy phép chúng tôi viết.</p>
+    <div class="vals-grid" style="margin-top:2.5rem">
+      <div class="val-card">
+        <span class="val-icon">🎨</span>
+        <div class="val-head en">Quality First</div>
+        <div class="val-head vi">Chất lượng trên hết</div>
+        <div class="val-body en">Every pattern is created at 300 DPI and tested for seamless tiling before it reaches you. If it doesn't look perfect at scale, it doesn't ship.</div>
+        <div class="val-body vi">Mỗi họa tiết được tạo ở 300 DPI và kiểm tra độ liền mạch trước khi đến tay bạn. Nếu không hoàn hảo khi phóng to, chúng tôi không bán.</div>
+        <span class="val-accent en">Print ready · POD ready · Pixel perfect</span>
+        <span class="val-accent vi">Sẵn sàng in · Sẵn sàng POD · Hoàn hảo từng điểm ảnh</span>
+      </div>
+      <div class="val-card">
+        <span class="val-icon">🤝</span>
+        <div class="val-head en">Creator-Friendly</div>
+        <div class="val-head vi">Thân thiện với người sáng tạo</div>
+        <div class="val-body en">Clear licensing, honest pricing, straightforward terms. No hidden fees. No complicated rules that require a lawyer to decode. Your creative flow matters.</div>
+        <div class="val-body vi">Giấy phép rõ ràng, giá thành thật, điều khoản minh bạch. Không phí ẩn. Không quy tắc phức tạp cần luật sư giải mã. Dòng chảy sáng tạo của bạn quan trọng.</div>
+        <span class="val-accent en">Transparent · Honest · Human</span>
+        <span class="val-accent vi">Minh bạch · Thành thật · Nhân văn</span>
+      </div>
+      <div class="val-card">
+        <span class="val-icon">🌿</span>
+        <div class="val-head en">Intentional Design</div>
+        <div class="val-head vi">Thiết kế có chủ ý</div>
+        <div class="val-body en">We don't mass-produce. Each design is thoughtfully crafted for specific use cases and markets — packaging, fashion, POD, interior. No filler. Only purpose.</div>
+        <div class="val-body vi">Chúng tôi không sản xuất hàng loạt. Mỗi thiết kế được tạo ra có chủ đích cho từng trường hợp sử dụng — bao bì, thời trang, POD, nội thất. Không có hàng độn. Chỉ có mục đích.</div>
+        <span class="val-accent en">Curated · Purposeful · Not algorithmic</span>
+        <span class="val-accent vi">Chọn lọc · Có mục đích · Không theo thuật toán</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section class="forwho-section">
+  <div class="inner">
+    <div class="section-label">✦ <span class="en">Who We Design For</span><span class="vi">Chúng tôi thiết kế cho ai</span></div>
+    <h2 class="section-title en">You might be exactly who we had in mind</h2>
+    <h2 class="section-title vi">Bạn có thể chính xác là người chúng tôi đang nghĩ đến</h2>
+    <div class="forwho-grid">
+      <div class="fw-card">
+        <span class="fw-emoji">🧵</span>
+        <div class="fw-head en">Handmade Sellers</div>
+        <div class="fw-head vi">Người bán thủ công</div>
+        <div class="fw-body en">Fabric, packaging, tote bags, journals — you need patterns that print beautifully and come with rights to sell.</div>
+        <div class="fw-body vi">Vải, bao bì, túi tote, sổ tay — bạn cần họa tiết in đẹp và đi kèm quyền bán hàng.</div>
+      </div>
+      <div class="fw-card">
+        <span class="fw-emoji">👕</span>
+        <div class="fw-head en">POD Businesses</div>
+        <div class="fw-head vi">Doanh nghiệp POD</div>
+        <div class="fw-body en">Printful, Redbubble, Printify — drop your pattern and sell. Our files are sized, tested, and ready.</div>
+        <div class="fw-body vi">Printful, Redbubble, Printify — tải họa tiết lên và bán. File của chúng tôi đã được chuẩn bị kỹ.</div>
+      </div>
+      <div class="fw-card">
+        <span class="fw-emoji">🎨</span>
+        <div class="fw-head en">Canva Creators</div>
+        <div class="fw-head vi">Người dùng Canva</div>
+        <div class="fw-body en">Build branded templates, social media kits, and digital goods with patterns that elevate everything they touch.</div>
+        <div class="fw-body vi">Xây dựng template thương hiệu, bộ mạng xã hội và sản phẩm số với họa tiết nâng tầm mọi thứ.</div>
+      </div>
+      <div class="fw-card">
+        <span class="fw-emoji">🛍️</span>
+        <div class="fw-head en">Packaging Designers</div>
+        <div class="fw-head vi">Nhà thiết kế bao bì</div>
+        <div class="fw-body en">Gift wrapping, branded tissue paper, boxes — patterns that make your product unforgettable before it's even opened.</div>
+        <div class="fw-body vi">Giấy gói quà, tissue giấy thương hiệu, hộp — họa tiết khiến sản phẩm đáng nhớ ngay từ cái nhìn đầu tiên.</div>
+      </div>
+      <div class="fw-card">
+        <span class="fw-emoji">🏠</span>
+        <div class="fw-head en">Interior &amp; Home</div>
+        <div class="fw-head vi">Nội thất &amp; Gia đình</div>
+        <div class="fw-body en">Cushion covers, wallpaper mockups, ceramics — patterns designed with scale and texture in mind.</div>
+        <div class="fw-body vi">Vỏ gối, wallpaper, gốm sứ — họa tiết được thiết kế với tỉ lệ và kết cấu được cân nhắc kỹ.</div>
+      </div>
+      <div class="fw-card">
+        <span class="fw-emoji">💼</span>
+        <div class="fw-head en">Freelance Creatives</div>
+        <div class="fw-head vi">Creative Freelancer</div>
+        <div class="fw-body en">Client work, brand identity, seasonal campaigns — a ready library of patterns to pull from when inspiration needs a shortcut.</div>
+        <div class="fw-body vi">Dự án khách hàng, nhận diện thương hiệu, chiến dịch theo mùa — thư viện họa tiết sẵn sàng để kéo ra khi cần.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust-section">
+  <div class="inner">
+    <div class="section-label" style="text-align:center">✦ <span class="en">The Philosophy</span><span class="vi">Triết lý</span></div>
+    <div class="trust-quote-wrap">
+      <div class="trust-quote en">"Great patterns shouldn't live behind paywalls that only big studios can afford. Beauty should be accessible — especially to the creators who are just starting out."</div>
+      <div class="trust-quote vi">"Họa tiết đẹp không nên ẩn sau những rào cản tài chính chỉ các studio lớn mới vượt qua được. Cái đẹp nên dễ tiếp cận — đặc biệt với những người sáng tạo mới bắt đầu."</div>
+      <div class="trust-divider"><span>— Zanith Studio</span></div>
+      <div class="trust-badges">
+        <div class="tbadge">✅ <span class="en">300 DPI Print Ready</span><span class="vi">300 DPI Sẵn sàng in</span></div>
+        <div class="tbadge">🔁 <span class="en">Seamless Tile</span><span class="vi">Liền mạch tuyệt đối</span></div>
+        <div class="tbadge">📄 <span class="en">Commercial License Included</span><span class="vi">Kèm Giấy phép Thương mại</span></div>
+        <div class="tbadge">⚡ <span class="en">Instant Download</span><span class="vi">Tải về ngay lập tức</span></div>
+        <div class="tbadge">✉ <span class="en">24h Support</span><span class="vi">Hỗ trợ trong 24h</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 class="en">Ready to make something <em>beautiful?</em></h2>
+  <h2 class="vi">Sẵn sàng tạo ra điều gì đó <em>thật đẹp?</em></h2>
+  <p class="en">Browse the full collection — every pattern is commercial-ready and waiting for your project.</p>
+  <p class="vi">Khám phá bộ sưu tập đầy đủ — mọi họa tiết đều sẵn sàng thương mại và chờ đợi dự án của bạn.</p>
+  <div class="cta-row">
+    <a href="index.html" class="btn-gold">🌿 <span class="en">Shop All Patterns</span><span class="vi">Xem tất cả họa tiết</span></a>
+    <a href="index.html#freebie" onclick="window.location='index.html';setTimeout(()=>document.dispatchEvent(new Event('openFreebie')),500);return false;" class="btn-ghost">🎁 <span class="en">Get Free Pattern</span><span class="vi">Nhận Pattern Miễn Phí</span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fbot">
+    <span>© 2025 Zanith Crafted Studio</span>
+    <div class="flsw">
+      <button id="btEN" onclick="setLang('en')" class="on">EN</button>
+      <button id="btVI" onclick="setLang('vi')">VI</button>
+    </div>
+  </div>
+</footer>
+
+<script>
+let currentLang = localStorage.getItem('zanith_lang') || 'en';
+function applyLang() {
+  const vi = currentLang === 'vi';
+  document.getElementById('H').setAttribute('lang', currentLang);
+  const lb = document.getElementById('langBtn');
+  if (lb) lb.textContent = vi ? 'VI / EN' : 'EN / VI';
+  const fe = document.getElementById('btEN'), fv = document.getElementById('btVI');
+  if (fe) fe.className = vi ? '' : 'on';
+  if (fv) fv.className = vi ? 'on' : '';
+}
+function setLang(l) {
+  currentLang = l;
+  localStorage.setItem('zanith_lang', l);
+  applyLang();
+}
+function toggleLang() {
+  setLang(currentLang === 'en' ? 'vi' : 'en');
+}
+applyLang();
+</script>
+</body>
+</html>
