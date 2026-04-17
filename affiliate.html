@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en" id="H">
+<head>
+<script src="config.js"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Tools I Actually Use — Zanith Crafted Studio</title>
+<meta name="description" content="Honest picks from my creative workflow — tools that made a real difference for my pattern design business.">
+<link rel="canonical" href="https://zanith.pages.dev/affiliate.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+:root{
+  --navy:#1e2d4a;--nl:#2a3f63;--nd:#131d30;
+  --gold:#c8974a;--gl:#e8b86d;--gd:#a07535;
+  --cream:#faf7f2;--warm:#f3ede3;--w:#fff;
+  --bdr:#e2ddd6;--tx:#1a2332;--sf:#5a6a7e;--mu:#8a9bb5;
+  --gr:#2e7d52;--rd:#c0392b;
+  --ss:0 1px 4px rgba(30,45,74,.08);--sl:0 12px 40px rgba(30,45,74,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:"Instrument Sans",sans-serif;background:var(--cream);color:var(--tx);}
+html[lang="en"] .vi{display:none!important;}
+html[lang="vi"] .en{display:none!important;}
+
+/* PROMO BAR */
+.pbar{background:var(--navy);color:rgba(255,255,255,.85);padding:.42rem 1rem;font-size:.73rem;display:flex;align-items:center;justify-content:center;gap:1.4rem;flex-wrap:wrap;}
+
+/* HEADER */
+header{background:var(--w);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:200;box-shadow:var(--ss);}
+.hdr{max-width:1200px;margin:0 auto;padding:.85rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;flex-shrink:0;}
+.logo-icon{width:40px;height:40px;background:var(--navy);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.logo-name{font-family:"Fraunces",serif;font-size:1.05rem;font-weight:500;color:var(--navy);}
+.logo-sub{font-size:.62rem;color:var(--mu);letter-spacing:.08em;text-transform:uppercase;}
+.hright{display:flex;align-items:center;gap:.65rem;}
+.lbtn{background:var(--warm);border:1px solid var(--bdr);border-radius:18px;padding:.3rem .7rem;font-size:.73rem;cursor:pointer;color:var(--sf);font-family:inherit;transition:all .18s;text-decoration:none;display:inline-flex;align-items:center;}
+.lbtn:hover{border-color:var(--navy);color:var(--navy);}
+.cbtn{display:flex;align-items:center;gap:.45rem;background:var(--navy);color:#fff;border:none;border-radius:22px;padding:.46rem 1rem;font-family:inherit;font-size:.83rem;font-weight:500;cursor:pointer;text-decoration:none;}
+.cbtn:hover{background:var(--nl);}
+
+/* HERO */
+.aff-hero{background:var(--navy);padding:4rem 1.4rem 3rem;position:relative;overflow:hidden;text-align:center;}
+.aff-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 20% 80%,rgba(200,151,74,.18) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(200,151,74,.1) 0%,transparent 50%);}
+.aff-hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;}
+.hero-inner{position:relative;z-index:1;max-width:640px;margin:0 auto;}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(200,151,74,.15);border:1px solid rgba(200,151,74,.35);color:var(--gl);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.28rem .85rem;border-radius:20px;margin-bottom:1.2rem;}
+.hero-badge::before{content:"✦";}
+.hero-h{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(2rem,5vw,3.2rem);color:#fff;line-height:1.1;margin-bottom:1rem;}
+.hero-h em{font-style:italic;color:var(--gl);}
+.hero-p{font-size:.95rem;color:rgba(255,255,255,.65);line-height:1.75;max-width:480px;margin:0 auto 2rem;}
+.hero-stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;}
+.hstat{text-align:center;}
+.hstat-n{font-family:"Fraunces",serif;font-size:1.6rem;font-weight:700;color:var(--gl);}
+.hstat-l{font-size:.7rem;color:rgba(255,255,255,.45);letter-spacing:.06em;text-transform:uppercase;margin-top:.15rem;}
+
+/* CATEGORY NAV */
+.cat-nav{background:var(--w);border-bottom:1px solid var(--bdr);position:sticky;top:61px;z-index:100;overflow-x:auto;}
+.cat-inner{max-width:1200px;margin:0 auto;padding:0 1.4rem;display:flex;gap:0;}
+.ctab{display:inline-flex;align-items:center;gap:.38rem;padding:.75rem 1rem;font-size:.82rem;font-weight:500;color:var(--sf);cursor:pointer;border:none;border-bottom:2.5px solid transparent;background:none;font-family:inherit;white-space:nowrap;transition:all .16s;}
+.ctab:hover{color:var(--navy);}
+.ctab.active{color:var(--navy);border-bottom-color:var(--gold);font-weight:600;}
+
+/* DISCLAIMER STRIP */
+.disc-strip{background:rgba(200,151,74,.08);border-bottom:1px solid rgba(200,151,74,.2);padding:.5rem 1.4rem;text-align:center;}
+.disc-strip p{font-size:.72rem;color:var(--sf);max-width:700px;margin:0 auto;line-height:1.6;}
+.disc-strip strong{color:var(--gold);}
+
+/* MAIN LAYOUT */
+.wrap{max-width:1200px;margin:0 auto;padding:2rem 1.4rem 3rem;}
+
+/* SECTION HEADER */
+.sec-head{margin-bottom:1.75rem;padding-bottom:1rem;border-bottom:1px solid var(--bdr);}
+.sec-head h2{font-family:"Fraunces",serif;font-size:1.4rem;font-weight:500;color:var(--navy);margin-bottom:.3rem;}
+.sec-head p{font-size:.83rem;color:var(--sf);line-height:1.6;}
+.sec-badge{display:inline-flex;align-items:center;gap:.3rem;font-size:.63rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+
+/* FEATURED CARD — horizontal, big */
+.feat-card{display:grid;grid-template-columns:240px 1fr;background:var(--w);border-radius:16px;overflow:hidden;border:1.5px solid var(--gold);box-shadow:0 4px 24px rgba(200,151,74,.12);margin-bottom:1.5rem;transition:all .22s;}
+.feat-card:hover{box-shadow:0 12px 40px rgba(200,151,74,.2);transform:translateY(-2px);}
+.feat-img{background:linear-gradient(135deg,var(--warm),#e4ddd5);display:flex;align-items:center;justify-content:center;font-size:4rem;min-height:180px;}
+.feat-img img{width:100%;height:100%;object-fit:cover;}
+.feat-body{padding:1.5rem 1.75rem;display:flex;flex-direction:column;gap:.5rem;}
+.feat-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem;flex-wrap:wrap;}
+.feat-badge{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .65rem;border-radius:20px;}
+.feat-badge.design{background:#e8f5e9;color:#1b5e20;}
+.feat-badge.pod{background:#e3f2fd;color:#0d47a1;}
+.feat-badge.course{background:#fef9c3;color:#7b4d00;}
+.feat-badge.tool{background:#f3e5f5;color:#4a148c;}
+.feat-badge.marketing{background:#fce4ec;color:#880e4f;}
+.feat-badge.finance{background:#e0f2f1;color:#004d40;}
+.feat-badge.product{background:#fff3e0;color:#e65100;}
+.feat-name{font-family:"Fraunces",serif;font-size:1.25rem;font-weight:500;color:var(--navy);line-height:1.25;}
+.feat-why{font-size:.7rem;font-style:italic;color:var(--gold);font-weight:500;}
+.feat-desc{font-size:.85rem;color:var(--sf);line-height:1.75;flex:1;}
+.feat-pros{list-style:none;padding:0;display:flex;flex-direction:column;gap:.2rem;}
+.feat-pros li{font-size:.8rem;color:var(--sf);padding-left:1rem;position:relative;}
+.feat-pros li::before{content:"✓";position:absolute;left:0;color:var(--gr);font-weight:700;}
+.feat-bottom{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-top:.25rem;padding-top:.85rem;border-top:1px solid var(--bdr);}
+.feat-price{font-family:"Fraunces",serif;font-size:.95rem;color:var(--gold);}
+.feat-cta{display:inline-flex;align-items:center;gap:.35rem;background:var(--navy);color:#fff;border:none;border-radius:22px;padding:.48rem 1.1rem;font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .16s;}
+.feat-cta:hover{background:var(--nl);}
+.feat-cta.gold{background:var(--gold);color:var(--nd);}
+.feat-cta.gold:hover{background:var(--gl);}
+.feat-tag{font-size:.65rem;color:var(--mu);padding:.2rem .6rem;background:var(--warm);border-radius:10px;}
+
+/* GRID CARDS — small, 3-col */
+.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.5rem;}
+@media(max-width:900px){.tool-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.tool-grid{grid-template-columns:1fr;}}
+
+.tool-card{background:var(--w);border-radius:12px;overflow:hidden;border:1.5px solid var(--bdr);display:flex;flex-direction:column;text-decoration:none;transition:all .2s;}
+.tool-card:hover{box-shadow:0 8px 28px rgba(30,45,74,.12);transform:translateY(-2px);border-color:rgba(200,151,74,.4);}
+.tool-card.featured-grid{border-color:var(--gold);}
+.tool-card.cs-grid{background:linear-gradient(135deg,#1e2d4a 0%,#253652 100%);border:1.5px dashed rgba(200,151,74,.35);cursor:default;}
+.tool-card.cs-grid:hover{transform:none;box-shadow:none;}
+.tc-img{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,var(--warm),#e0dbd3);display:flex;align-items:center;justify-content:center;font-size:2.2rem;overflow:hidden;position:relative;}
+.tc-img img{width:100%;height:100%;object-fit:cover;}
+.tc-cs-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(20,30,50,.55);gap:.35rem;}
+.tc-cs-tag{font-size:.58rem;font-weight:800;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;}
+.tc-cs-icon{font-size:1.8rem;opacity:.6;}
+.tc-body{padding:.9rem 1rem 1rem;flex:1;display:flex;flex-direction:column;gap:.4rem;}
+.tc-badge{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.15rem .55rem;border-radius:12px;display:inline-block;width:fit-content;}
+.tc-name{font-family:"Fraunces",serif;font-size:.97rem;font-weight:500;color:var(--navy);line-height:1.3;}
+.tc-name.light{color:#fff;}
+.tc-desc{font-size:.78rem;color:var(--sf);line-height:1.65;flex:1;}
+.tc-desc.light{color:rgba(255,255,255,.55);}
+.tc-footer{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding-top:.65rem;border-top:1px solid var(--bdr);margin-top:.35rem;}
+.tc-footer.dark{border-top-color:rgba(255,255,255,.08);}
+.tc-price{font-size:.78rem;color:var(--gold);font-weight:600;}
+.tc-cta{font-size:.72rem;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:.2rem;text-decoration:none;}
+.tc-cta.light{color:var(--gold);}
+.tc-cta-notify{font-size:.72rem;font-weight:600;color:var(--gold);background:none;border:none;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:.2rem;}
+.tc-cta-notify:hover{text-decoration:underline;}
+
+/* PHYSICAL PRODUCT CARD — Beacon style */
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.5rem;}
+@media(max-width:900px){.prod-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.prod-grid{grid-template-columns:1fr;}}
+
+.prod-card{background:var(--w);border-radius:14px;overflow:hidden;border:1.5px solid var(--bdr);display:flex;flex-direction:column;text-decoration:none;transition:all .2s;}
+.prod-card:hover{box-shadow:0 8px 28px rgba(30,45,74,.12);transform:translateY(-2px);border-color:rgba(200,151,74,.5);}
+.prod-img{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,var(--warm),#e0dbd3);display:flex;align-items:center;justify-content:center;font-size:2.8rem;overflow:hidden;}
+.prod-img img{width:100%;height:100%;object-fit:cover;}
+.prod-body{padding:1rem;flex:1;display:flex;flex-direction:column;gap:.4rem;}
+.prod-name{font-family:"Fraunces",serif;font-size:.97rem;font-weight:500;color:var(--navy);line-height:1.3;}
+.prod-desc{font-size:.78rem;color:var(--sf);line-height:1.6;flex:1;}
+.prod-footer{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding-top:.7rem;border-top:1px solid var(--bdr);margin-top:.35rem;}
+.prod-price{font-family:"Fraunces",serif;font-size:1rem;font-weight:700;color:var(--navy);}
+.prod-btn{display:inline-flex;align-items:center;gap:.3rem;background:var(--gold);color:var(--nd);border:none;border-radius:18px;padding:.38rem .9rem;font-family:inherit;font-size:.75rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .16s;}
+.prod-btn:hover{background:var(--gl);}
+
+/* PERSONAL NOTE SECTION */
+.note-section{background:var(--w);border-radius:16px;border:1px solid var(--bdr);padding:2rem;margin-bottom:2.5rem;display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:start;}
+.note-avatar{width:56px;height:56px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;}
+.note-text blockquote{font-family:"Fraunces",serif;font-size:1rem;font-style:italic;color:var(--navy);line-height:1.7;margin-bottom:.6rem;}
+.note-text cite{font-size:.75rem;color:var(--mu);font-style:normal;}
+
+/* NEWSLETTER CTA */
+.nl-cta{background:linear-gradient(135deg,var(--gold),var(--gl));border-radius:16px;padding:2.5rem 2rem;text-align:center;margin-top:3rem;}
+.nl-cta h3{font-family:"Fraunces",serif;font-size:1.5rem;color:var(--nd);margin-bottom:.5rem;}
+.nl-cta p{font-size:.88rem;color:rgba(20,30,50,.72);margin-bottom:1.2rem;max-width:400px;margin-left:auto;margin-right:auto;}
+.nlrow{display:flex;gap:.5rem;max-width:380px;margin:0 auto;}
+.nlinput{flex:1;padding:.62rem 1rem;border:none;border-radius:9px;font-family:inherit;font-size:.88rem;outline:none;background:#fff;}
+.nlbtn{padding:.62rem 1.15rem;background:var(--navy);color:#fff;border:none;border-radius:9px;font-family:inherit;font-size:.85rem;font-weight:700;cursor:pointer;}
+
+/* LOADING STATE */
+.aff-loading{text-align:center;padding:4rem 1rem;color:var(--sf);}
+.aff-spinner{width:32px;height:32px;border:3px solid var(--bdr);border-top-color:var(--navy);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto .75rem;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* FOOTER */
+footer{background:var(--nd);color:rgba(255,255,255,.7);padding:2rem 1.4rem 1.5rem;}
+.fbot{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-size:.76rem;flex-wrap:wrap;gap:.75rem;}
+.flinks{display:flex;gap:1.2rem;}
+.flinks a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.76rem;transition:color .14s;}
+.flinks a:hover{color:var(--gl);}
+.lsw{display:flex;gap:.3rem;}
+.lsw button{background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.5);padding:2px 10px;border-radius:10px;font-size:.72rem;cursor:pointer;font-family:inherit;}
+.lsw button.on,.lsw button:hover{background:rgba(255,255,255,.12);color:#fff;}
+
+/* SUBSCRIBE POPUP */
+.cs-popup-ov{display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:1rem;}
+.cs-popup-ov.open{display:flex;}
+.cs-popup{background:var(--w);border-radius:20px;max-width:420px;width:100%;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.28);}
+.cs-popup-hero{background:linear-gradient(135deg,var(--navy),#2a3f6e);padding:1.75rem 2rem 1.5rem;text-align:center;position:relative;}
+.cs-popup-close{position:absolute;top:.8rem;right:.9rem;background:rgba(255,255,255,.15);border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;color:#fff;font-size:.9rem;display:flex;align-items:center;justify-content:center;}
+.cs-popup-body{padding:1.5rem 2rem 2rem;}
+.csp-input{width:100%;padding:.62rem 1rem;border:1.5px solid var(--bdr);border-radius:9px;font-family:inherit;font-size:.88rem;outline:none;margin-bottom:.55rem;}
+.csp-input:focus{border-color:var(--navy);}
+.csp-btn{width:100%;padding:.7rem;background:var(--gold);color:var(--nd);border:none;border-radius:9px;font-family:inherit;font-size:.88rem;font-weight:700;cursor:pointer;}
+.csp-btn:hover{background:var(--gl);}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.4rem;right:1.4rem;z-index:800;background:var(--navy);color:#fff;padding:.7rem 1.1rem;border-radius:9px;font-size:.83rem;box-shadow:var(--sl);transform:translateY(80px);transition:transform .28s;max-width:300px;}
+.toast.show{transform:translateY(0);}
+.toast.success{background:var(--gr);}
+
+@media(max-width:720px){
+  .feat-card{grid-template-columns:1fr;}
+  .feat-img{min-height:140px;aspect-ratio:16/9;}
+  .note-section{grid-template-columns:1fr;}
+  .note-avatar{display:none;}
+  .nlrow{flex-direction:column;}
+}
+@media(max-width:480px){.hdr{gap:.5rem;}.logo-sub{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="pbar">
+  <span>🎁 <span class="en">First order:</span><span class="vi">Đơn đầu:</span>&nbsp;<strong style="background:var(--gold);color:var(--nd);padding:1px 8px;border-radius:10px;font-size:.7rem">ZANITH20</strong>&nbsp;<span class="en">— 20% off</span><span class="vi">— giảm 20%</span></span>
+  <span>🛍️ <span class="en">Buy 3 → get 1 free</span><span class="vi">Mua 3 → tặng 1</span></span>
+</div>
+
+<header>
+  <div class="hdr">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">🌿</div>
+      <div><div class="logo-name">Zanith Crafted Studio</div><div class="logo-sub">Handcrafted Digital &amp; Print Goods</div></div>
+    </a>
+    <div class="hright">
+      <button class="lbtn" onclick="toggleLang()" id="langBtn">EN / VI</button>
+      <a href="index.html" class="lbtn">← <span class="en">Shop</span><span class="vi">Cửa hàng</span></a>
+      <a href="checkout.html" class="cbtn">🛒 <span class="en">Cart</span><span class="vi">Giỏ</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="aff-hero">
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="en">Resources & Recommendations</span><span class="vi">Tài Nguyên & Gợi Ý</span></div>
+    <h1 class="hero-h en">Tools I <em>Actually</em> Use</h1>
+    <h1 class="hero-h vi">Công Cụ Mình <em>Thực Sự</em> Dùng</h1>
+    <p class="hero-p en">Honest picks from my creative workflow — no fluff, no paid placements. Just things that genuinely made a difference running Zanith Crafted Studio.</p>
+    <p class="hero-p vi">Những gợi ý thật lòng từ quy trình của mình — không PR, không quảng cáo. Chỉ những thứ thực sự tạo ra sự khác biệt khi điều hành Zanith Crafted Studio.</p>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-n">3+</div><div class="hstat-l en">Years using</div><div class="hstat-l vi">Năm sử dụng</div></div>
+      <div class="hstat"><div class="hstat-n">12+</div><div class="hstat-l en">Tools tested</div><div class="hstat-l vi">Công cụ đã thử</div></div>
+      <div class="hstat"><div class="hstat-n">100%</div><div class="hstat-l en">Honest picks</div><div class="hstat-l vi">Đánh giá thật</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY NAV -->
+<div class="cat-nav">
+  <div class="cat-inner">
+    <button class="ctab active" onclick="filterCat('all',this)">🌿 <span class="en">All</span><span class="vi">Tất cả</span></button>
+    <button class="ctab" onclick="filterCat('tool',this)">🛠 Tools</button>
+    <button class="ctab" onclick="filterCat('course',this)">📚 <span class="en">Learning</span><span class="vi">Học tập</span></button>
+    <button class="ctab" onclick="filterCat('marketing',this)">📣 Marketing</button>
+    <button class="ctab" onclick="filterCat('finance',this)">💳 <span class="en">Finance</span><span class="vi">Tài chính</span></button>
+    <button class="ctab" onclick="filterCat('product',this)">🛍 <span class="en">Physical Products</span><span class="vi">Sản phẩm</span></button>
+  </div>
+</div>
+
+<!-- DISCLAIMER -->
+<div class="disc-strip">
+  <p><strong class="en">Transparency note:</strong><strong class="vi">Lưu ý minh bạch:</strong> <span class="en">Some links below are affiliate links — I earn a small commission if you sign up or purchase, at no extra cost to you. I only recommend tools I personally use and trust.</span><span class="vi">Một số link bên dưới là liên kết tiếp thị — mình nhận hoa hồng nhỏ nếu bạn đăng ký hoặc mua, bạn không tốn thêm phí. Mình chỉ giới thiệu công cụ mình thực sự dùng và tin tưởng.</span></p>
+</div>
+
+<div class="wrap">
+
+  <!-- PERSONAL NOTE -->
+  <div class="note-section">
+    <div class="note-avatar">🌿</div>
+    <div class="note-text">
+      <blockquote class="en">"I started Zanith Crafted Studio on an iPad with just Canva and Procreate. These are the tools that helped me go from hobby to actual income — tested through real trial and error, not sponsored posts."</blockquote>
+      <blockquote class="vi">"Mình bắt đầu Zanith Crafted Studio trên iPad chỉ với Canva và Procreate. Đây là những công cụ giúp mình chuyển từ sở thích thành thu nhập thực — được thử nghiệm qua thực tế, không phải bài PR."</blockquote>
+      <cite>— Zhou, founder of Zanith Crafted Studio</cite>
+    </div>
+  </div>
+
+  <!-- SECTIONS rendered by JS -->
+  <div id="affContent">
+    <div class="aff-loading">
+      <div class="aff-spinner"></div>
+      <p class="en">Loading recommendations…</p>
+      <p class="vi">Đang tải…</p>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="nl-cta">
+    <h3 class="en">Get a FREE seamless pattern</h3>
+    <h3 class="vi">Nhận họa tiết liền mạch MIỄN PHÍ</h3>
+    <p class="en">Subscribe for new tool reviews, pattern releases, and an instant free download.</p>
+    <p class="vi">Đăng ký nhận đánh giá công cụ mới, họa tiết mới ra mắt, và file miễn phí ngay.</p>
+    <div class="nlrow">
+      <input class="nlinput" type="email" id="nlEmail" placeholder="your@email.com">
+      <button class="nlbtn" onclick="submitNL()"><span class="en">Subscribe</span><span class="vi">Đăng ký</span></button>
+    </div>
+    <p id="nlMsg" style="font-size:.78rem;margin-top:.6rem;min-height:1rem;color:var(--nd);font-weight:500"></p>
+  </div>
+</div>
+
+<footer>
+  <div class="fbot">
+    <span>© 2025 Zanith Crafted Studio</span>
+    <div class="flinks">
+      <a href="index.html"><span class="en">Shop</span><span class="vi">Cửa hàng</span></a>
+      <a href="blog.html">Blog</a>
+      <a href="faq.html">FAQ</a>
+      <a href="policy.html"><span class="en">Policy</span><span class="vi">Chính sách</span></a>
+    </div>
+    <div class="lsw"><button id="btEN" onclick="setLang('en')" class="on">EN</button><button id="btVI" onclick="setLang('vi')">VI</button></div>
+  </div>
+</footer>
+
+<!-- COMING SOON POPUP -->
+<div class="cs-popup-ov" id="csOv" onclick="if(event.target===this)closeCS()">
+  <div class="cs-popup">
+    <div class="cs-popup-hero">
+      <button class="cs-popup-close" onclick="closeCS()">✕</button>
+      <div style="font-size:2rem;margin-bottom:.5rem" id="csEmoji">🔔</div>
+      <div style="font-family:'Fraunces',serif;font-size:1.3rem;color:#fff;line-height:1.25;margin-bottom:.4rem" id="csTitle"></div>
+      <p style="font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.55" id="csSub"></p>
+    </div>
+    <div class="cs-popup-body" id="csForm">
+      <p style="font-size:.83rem;color:var(--sf);margin-bottom:.9rem;line-height:1.6" id="csFormDesc"></p>
+      <input class="csp-input" type="email" id="csEmail" placeholder="your@email.com">
+      <button class="csp-btn" onclick="submitCS()"><span class="en">🔔 Notify me first!</span><span class="vi">🔔 Báo tôi trước!</span></button>
+      <p style="font-size:.7rem;color:var(--mu);text-align:center;margin-top:.75rem;line-height:1.5">
+        <span class="en">No spam. Early access + exclusive discount when it launches.</span>
+        <span class="vi">Không spam. Truy cập sớm + giảm giá khi ra mắt.</span>
+      </p>
+    </div>
+    <div id="csSuccess" style="display:none;text-align:center;padding:1.5rem 2rem 2rem">
+      <div style="font-size:2.5rem;margin-bottom:.6rem">🎉</div>
+      <div style="font-family:'Fraunces',serif;font-size:1.1rem;color:var(--navy);margin-bottom:.4rem">
+        <span class="en">You're on the list!</span><span class="vi">Đã thêm vào danh sách!</span>
+      </div>
+      <p style="font-size:.82rem;color:var(--sf);line-height:1.6">
+        <span class="en">We'll email you first when this launches — with an exclusive discount.</span>
+        <span class="vi">Mình sẽ email bạn đầu tiên khi ra mắt — kèm giảm giá độc quyền.</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── CONFIG ───────────────────────────────────────────────────
+// Đọc từ config.js (ZANITH_CONFIG) — không hardcode URL ở đây
+const SCRIPT_URL = (typeof ZANITH_CONFIG !== 'undefined' ? ZANITH_CONFIG.SCRIPT_URL : '') || '';
+const READ_KEY   = (typeof ZANITH_CONFIG !== 'undefined' ? ZANITH_CONFIG.READ_KEY   : '') || 'Zanith2026';
+
+// ── STATE ────────────────────────────────────────────────────
+let currentLang = localStorage.getItem('zanith_lang') || 'en';
+let currentCat  = 'all';
+let _csTool     = null;
+// Dữ liệu load từ Sheet — KHÔNG hardcode
+let TOOLS = [];
+
+// ── API CALL ─────────────────────────────────────────────────
+async function apiCall(action, body = {}) {
+  if (!SCRIPT_URL || SCRIPT_URL.includes('YOUR_DEPLOYMENT_ID')) return null;
+  const res = await fetch(SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ action, secret: READ_KEY, ...body })
+  });
+  return res.json();
+}
+
+// ── LOAD DATA FROM SHEET ─────────────────────────────────────
+async function loadAffiliates() {
+  try {
+    const d = await apiCall('getAffiliates');
+    if (d && Array.isArray(d.data) && d.data.length > 0) {
+      TOOLS = d.data;
+    } else if (d && Array.isArray(d.affiliates) && d.affiliates.length > 0) {
+      TOOLS = d.affiliates;
+    } else {
+      TOOLS = [];
+    }
+  } catch(e) {
+    TOOLS = [];
+  }
+  render();
+}
+
+// ── LANG ─────────────────────────────────────────────────────
+function applyLang() {
+  document.getElementById('H').setAttribute('lang', currentLang);
+  const vi = currentLang === 'vi';
+  const lb = document.getElementById('langBtn');
+  if (lb) lb.textContent = vi ? 'VI / EN' : 'EN / VI';
+  const fe = document.getElementById('btEN'), fv = document.getElementById('btVI');
+  if (fe) fe.className = vi ? '' : 'on';
+  if (fv) fv.className = vi ? 'on' : '';
+}
+function toggleLang() { currentLang = currentLang === 'en' ? 'vi' : 'en'; localStorage.setItem('zanith_lang', currentLang); applyLang(); render(); }
+function setLang(l)   { currentLang = l; localStorage.setItem('zanith_lang', l); applyLang(); render(); }
+
+// ── FILTER ───────────────────────────────────────────────────
+function filterCat(cat, el) {
+  currentCat = cat;
+  document.querySelectorAll('.ctab').forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+  render();
+}
+
+// ── BADGE CLASS MAP ──────────────────────────────────────────
+function getBadgeClass(cat) {
+  const map = { design:'design', pod:'pod', course:'course', marketing:'marketing', finance:'finance', product:'product', tool:'tool' };
+  return map[(cat||'').toLowerCase()] || 'tool';
+}
+
+// ── isComingSoon: link trống hoặc available === false ─────────
+function isComingSoon(t) {
+  if (t.available === false || t.available === 'false' || t.available === 'FALSE') return true;
+  if (!t.link || t.link.trim() === '') return true;
+  return false;
+}
+
+// ── catMatch: map type từ admin → tab ─────────────────────────
+// admin type: 'tool' | 'course' | 'product'
+// admin badge/cat field có thể là: 'design','pod','marketing','finance','course','product','tool'
+// Tab filter: 'all' | 'tool' | 'course' | 'marketing' | 'finance' | 'product'
+function catMatch(t, cat) {
+  if (cat === 'all') return true;
+  // type là field chính từ admin form
+  const type = (t.type || '').toLowerCase();
+  // badge/cat là sub-category
+  const badge = (t.badge || t.cat || '').toLowerCase();
+  if (cat === 'product') return type === 'product';
+  if (cat === 'course')  return type === 'course' || badge === 'course' || badge === 'learning';
+  if (cat === 'marketing') return badge === 'marketing';
+  if (cat === 'finance')   return badge === 'finance';
+  // 'tool' tab = type tool hoặc design/pod/finance/marketing badges (không phải product/course)
+  if (cat === 'tool') return type === 'tool' || type === '' || (type !== 'product' && type !== 'course');
+  return false;
+}
+
+// ── RENDER ───────────────────────────────────────────────────
+function render() {
+  const vi = currentLang === 'vi';
+  const container = document.getElementById('affContent');
+  if (!container) return;
+
+  // Nếu chưa load xong
+  if (TOOLS.length === 0 && !_dataLoaded) {
+    container.innerHTML = `<div class="aff-loading"><div class="aff-spinner"></div><p class="${vi?'vi':'en'}">${vi?'Đang tải…':'Loading recommendations…'}</p></div>`;
+    return;
+  }
+
+  const filtered  = TOOLS.filter(t => catMatch(t, currentCat));
+  const products  = filtered.filter(t => (t.type||'').toLowerCase() === 'product');
+  const nonProd   = filtered.filter(t => (t.type||'').toLowerCase() !== 'product');
+  const featured  = nonProd.filter(t => (t.featured === true || t.featured === 'true' || t.featured === 'TRUE') && !isComingSoon(t));
+  const regular   = nonProd.filter(t => !(t.featured === true || t.featured === 'true' || t.featured === 'TRUE') && !isComingSoon(t));
+  const comingSoon = nonProd.filter(t => isComingSoon(t));
+
+  let html = '';
+
+  // ── FEATURED TOOLS ──
+  if (featured.length) {
+    html += `<div class="sec-head">
+      <div class="sec-badge">⭐ <span class="en">Top Picks</span><span class="vi">Gợi Ý Hàng Đầu</span></div>
+      <h2 class="en">My most-recommended tools</h2>
+      <h2 class="vi">Công cụ mình giới thiệu nhiều nhất</h2>
+      <p class="en">These are what I reach for every single day running Zanith Crafted Studio.</p>
+      <p class="vi">Đây là những gì mình sử dụng mỗi ngày khi điều hành Zanith Crafted Studio.</p>
+    </div>`;
+
+    featured.forEach(t => {
+      const name  = t.name || '';
+      const desc  = vi ? (t.desc_vi || t.desc || '') : (t.desc || t.desc_en || '');
+      const price = vi ? (t.price_vi || t.price || '') : (t.price || t.price_en || '');
+      const cta   = vi ? (t.cta_vi || 'Xem ngay →') : (t.cta || t.cta_en || 'View →');
+      const why   = vi ? (t.why_vi || '') : (t.why || t.why_en || '');
+      const tag   = vi ? (t.tag_vi || '') : (t.tag || t.tag_en || '');
+      const badge = vi ? (t.badge_vi || t.badge || '') : (t.badge || '');
+      const cat   = (t.badge || t.cat || t.type || '').toLowerCase();
+
+      html += `<div class="feat-card">
+        <div class="feat-img">${t.image ? `<img src="${t.image}" alt="${name}" loading="lazy" onerror="this.parentElement.textContent='${t.emoji||'🔗'}'">` : (t.emoji || '🔗')}</div>
+        <div class="feat-body">
+          <div class="feat-top">
+            <div>
+              <span class="feat-badge ${getBadgeClass(cat)}">${badge}</span>
+              <div class="feat-name">${name}</div>
+              ${why ? `<div class="feat-why">"${why}"</div>` : ''}
+            </div>
+            ${tag ? `<span class="feat-tag">✦ ${tag}</span>` : ''}
+          </div>
+          <div class="feat-desc">${desc}</div>
+          <div class="feat-bottom">
+            ${price ? `<span class="feat-price">${price}</span>` : ''}
+            <a class="feat-cta gold" href="${t.link}" target="_blank" rel="noopener sponsored">${cta}</a>
+          </div>
+        </div>
+      </div>`;
+    });
+  }
+
+  // ── REGULAR TOOLS GRID ──
+  if (regular.length) {
+    html += `<div class="sec-head" style="margin-top:${featured.length ? '2rem' : '0'}">
+      <div class="sec-badge">🔧 <span class="en">Also in my toolkit</span><span class="vi">Cũng trong bộ công cụ của mình</span></div>
+      <h2 class="en">More tools worth knowing</h2>
+      <h2 class="vi">Thêm công cụ đáng biết</h2>
+    </div>
+    <div class="tool-grid">`;
+
+    regular.forEach(t => {
+      const name  = t.name || '';
+      const desc  = vi ? (t.desc_vi || t.desc || '') : (t.desc || t.desc_en || '');
+      const price = vi ? (t.price_vi || t.price || '') : (t.price || t.price_en || '');
+      const cta   = vi ? (t.cta_vi || 'Xem →') : (t.cta || t.cta_en || 'View →');
+      const badge = vi ? (t.badge_vi || t.badge || '') : (t.badge || '');
+      const cat   = (t.badge || t.cat || t.type || '').toLowerCase();
+
+      html += `<a class="tool-card" href="${t.link}" target="_blank" rel="noopener sponsored">
+        <div class="tc-img">${t.image ? `<img src="${t.image}" alt="${name}" loading="lazy" onerror="this.parentElement.textContent='${t.emoji||'🔗'}'">` : (t.emoji || '🔗')}</div>
+        <div class="tc-body">
+          <span class="tc-badge ${getBadgeClass(cat)}">${badge}</span>
+          <div class="tc-name">${name}</div>
+          <div class="tc-desc">${desc}</div>
+          <div class="tc-footer">
+            <span class="tc-price">${price}</span>
+            <span class="tc-cta">${cta}</span>
+          </div>
+        </div>
+      </a>`;
+    });
+
+    html += `</div>`;
+  }
+
+  // ── COMING SOON ──
+  if (comingSoon.length) {
+    html += `<div class="sec-head" style="margin-top:${(featured.length || regular.length) ? '1.5rem' : '0'}">
+      <div class="sec-badge">🔜 <span class="en">Coming Soon</span><span class="vi">Sắp Có</span></div>
+      <h2 class="en">Reviews in progress</h2>
+      <h2 class="vi">Đánh giá đang thực hiện</h2>
+      <p class="en">I'm currently testing these tools. Subscribe to get notified when reviews go live.</p>
+      <p class="vi">Mình đang thử nghiệm những công cụ này. Đăng ký để nhận thông báo khi đánh giá được đăng.</p>
+    </div>
+    <div class="tool-grid">`;
+
+    comingSoon.forEach((t, idx) => {
+      const name  = t.name || '';
+      const desc  = vi ? (t.desc_vi || t.desc || '') : (t.desc || t.desc_en || '');
+      const badge = vi ? (t.badge_vi || t.badge || '') : (t.badge || '');
+      const cat   = (t.badge || t.cat || t.type || '').toLowerCase();
+      const csId  = t.id || t.name || ('cs-' + idx);
+
+      html += `<div class="tool-card cs-grid">
+        <div class="tc-img" style="background:rgba(30,45,74,.8)">
+          <div class="tc-cs-overlay">
+            <div class="tc-cs-icon">${t.emoji || '🔔'}</div>
+            <div class="tc-cs-tag">${vi ? 'Sắp có' : 'Coming Soon'}</div>
+          </div>
+        </div>
+        <div class="tc-body">
+          <span class="tc-badge ${getBadgeClass(cat)}" style="background:rgba(200,151,74,.15);color:var(--gold)">${badge}</span>
+          <div class="tc-name light">${name}</div>
+          <div class="tc-desc light">${desc}</div>
+          <div class="tc-footer dark">
+            <span class="tc-price" style="color:rgba(255,255,255,.4);font-size:.7rem">${vi ? 'Sắp có' : 'Coming soon'}</span>
+            <button class="tc-cta-notify" onclick="openCS('${csId}','${(t.emoji||'🔔').replace(/'/g,"\\'")}','${name.replace(/'/g,"\\'")}')">🔔 ${vi ? 'Báo tôi' : 'Notify me'}</button>
+          </div>
+        </div>
+      </div>`;
+    });
+
+    html += `</div>`;
+  }
+
+  // ── PHYSICAL PRODUCTS (Beacon style) ──
+  if (products.length && (currentCat === 'all' || currentCat === 'product')) {
+    html += `<div class="sec-head" style="margin-top:${(featured.length || regular.length || comingSoon.length) ? '2rem' : '0'}">
+      <div class="sec-badge">🛍 <span class="en">Physical Products</span><span class="vi">Sản phẩm vật lý</span></div>
+      <h2 class="en">Shop my favourite finds</h2>
+      <h2 class="vi">Sản phẩm mình yêu thích</h2>
+      <p class="en">Curated picks from Shopee & Lazada — affiliate links help support this studio.</p>
+      <p class="vi">Những sản phẩm được chọn lọc từ Shopee & Lazada — link tiếp thị giúp mình duy trì studio.</p>
+    </div>
+    <div class="prod-grid">`;
+
+    products.forEach(t => {
+      const name  = t.name || '';
+      const desc  = vi ? (t.desc_vi || t.desc || '') : (t.desc || t.desc_en || '');
+      const price = t.price || '';
+      const cta   = vi ? (t.cta_vi || 'Mua ngay →') : (t.cta || t.cta_en || 'Buy now →');
+
+      if (isComingSoon(t)) {
+        // Sản phẩm chưa có link — hiện placeholder
+        html += `<div class="prod-card" style="opacity:.6;cursor:default">
+          <div class="prod-img">${t.emoji || '🛍'}</div>
+          <div class="prod-body">
+            <div class="prod-name">${name}</div>
+            <div class="prod-desc">${desc || (vi ? 'Sắp có' : 'Coming soon')}</div>
+            <div class="prod-footer">
+              ${price ? `<span class="prod-price">${price}</span>` : ''}
+              <span style="font-size:.72rem;color:var(--mu)">${vi ? 'Sắp ra mắt' : 'Coming soon'}</span>
+            </div>
+          </div>
+        </div>`;
+      } else {
+        html += `<a class="prod-card" href="${t.link}" target="_blank" rel="noopener sponsored">
+          <div class="prod-img">${t.image ? `<img src="${t.image}" alt="${name}" loading="lazy" onerror="this.parentElement.textContent='${t.emoji||'🛍'}'">` : (t.emoji || '🛍')}</div>
+          <div class="prod-body">
+            <div class="prod-name">${name}</div>
+            <div class="prod-desc">${desc}</div>
+            <div class="prod-footer">
+              ${price ? `<span class="prod-price">${price}</span>` : ''}
+              <span class="prod-btn">${cta}</span>
+            </div>
+          </div>
+        </a>`;
+      }
+    });
+
+    html += `</div>`;
+  }
+
+  // ── EMPTY STATE ──
+  if (!featured.length && !regular.length && !comingSoon.length && !products.length) {
+    html = `<div style="text-align:center;padding:4rem 1rem;color:var(--sf)">
+      <div style="font-size:2.5rem;margin-bottom:.75rem">🔍</div>
+      <p class="en">No items in this category yet — check back soon.</p>
+      <p class="vi">Chưa có mục nào trong danh mục này — quay lại sớm nhé.</p>
+    </div>`;
+  }
+
+  container.innerHTML = html;
+  applyLang();
+}
+
+// ── FLAG: data đã load xong chưa ─────────────────────────────
+let _dataLoaded = false;
+
+// ── COMING SOON POPUP ────────────────────────────────────────
+function openCS(toolId, emoji, titleFallback) {
+  _csTool = toolId;
+  const vi = currentLang === 'vi';
+  // Tìm data của tool trong TOOLS nếu có
+  const t = TOOLS.find(x => (x.id || x.name) === toolId) || {};
+  document.getElementById('csEmoji').textContent = emoji || t.emoji || '🔔';
+  document.getElementById('csTitle').textContent = vi ? (t.desc_vi ? t.name : titleFallback) : titleFallback;
+  document.getElementById('csSub').textContent = vi ? 'Đang thử nghiệm — đánh giá sắp có.' : 'Currently testing — review drops soon.';
+  document.getElementById('csFormDesc').textContent = vi
+    ? 'Đăng ký để nhận thông báo ngay khi đánh giá được đăng, cộng thêm mã giảm giá độc quyền.'
+    : 'Subscribe to be notified the moment this review goes live, plus get an exclusive discount code.';
+  document.getElementById('csEmail').value = '';
+  document.getElementById('csForm').style.display = '';
+  document.getElementById('csSuccess').style.display = 'none';
+  document.getElementById('csOv').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  applyLang();
+}
+function closeCS() {
+  document.getElementById('csOv').classList.remove('open');
+  document.body.style.overflow = '';
+}
+async function submitCS() {
+  const email = (document.getElementById('csEmail').value || '').trim();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showToast(currentLang === 'vi' ? '⚠️ Email không hợp lệ' : '⚠️ Invalid email', '');
+    return;
+  }
+  try {
+    await apiCall('logLead', { email, source: 'aff_coming_soon_' + (_csTool || 'unknown') });
+  } catch(e) {}
+  document.getElementById('csForm').style.display = 'none';
+  document.getElementById('csSuccess').style.display = 'block';
+  applyLang();
+  setTimeout(closeCS, 4000);
+}
+
+// ── NEWSLETTER ───────────────────────────────────────────────
+async function submitNL() {
+  const email  = (document.getElementById('nlEmail').value || '').trim();
+  const msgEl  = document.getElementById('nlMsg');
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    msgEl.textContent = currentLang === 'vi' ? '⚠️ Email không hợp lệ' : '⚠️ Invalid email';
+    return;
+  }
+  msgEl.textContent = '⏳';
+  try {
+    await apiCall('logLead', { email, source: 'aff_newsletter' });
+  } catch(e) {}
+  msgEl.textContent = currentLang === 'vi' ? '✅ Đã đăng ký!' : '✅ Subscribed!';
+  document.getElementById('nlEmail').value = '';
+}
+
+// ── TOAST ────────────────────────────────────────────────────
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.className = 'toast show ' + (type || '');
+  setTimeout(() => t.className = 'toast', 3200);
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+(function() {
+  applyLang();
+  // Render loading state ngay
+  render();
+  // Load data từ Sheet
+  loadAffiliates().then(() => {
+    _dataLoaded = true;
+    render();
+  });
+})();
+</script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69e15ec7c0e3ae1c3248d413/1jmc5kf61';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>
