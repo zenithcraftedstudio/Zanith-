@@ -260,12 +260,26 @@ body{font-family:"Instrument Sans",sans-serif;background:#f0f2f5;color:var(--tx)
 
   <div class="config-card" style="border-left-color:var(--gr)">
     <h3>🏷️ Discount Codes</h3>
+    <p class="config-hint" style="margin-bottom:.85rem">Mỗi code có thể giới hạn <strong>số lần dùng tổng</strong> và <strong>1 lần / email</strong>. Log ai đã dùng hiển thị bên dưới — lấy từ Google Sheet.</p>
     <div id="codeList"></div>
-    <div class="form-row" style="margin-top:.75rem">
-      <div class="fg"><label>Code mới</label><input type="text" id="newCodeVal" placeholder="ZANITH20" style="text-transform:uppercase"></div>
-      <div class="fg"><label>Giảm (%)</label><input type="number" id="newCodePct" value="20" min="1" max="80"></div>
+    <div style="display:grid;grid-template-columns:1fr 72px 72px 90px;gap:.6rem;margin-top:.85rem;align-items:end">
+      <div class="fg" style="margin:0"><label>Code mới</label><input type="text" id="newCodeVal" placeholder="ZANITH20" style="text-transform:uppercase"></div>
+      <div class="fg" style="margin:0"><label>Giảm (%)</label><input type="number" id="newCodePct" value="20" min="1" max="80"></div>
+      <div class="fg" style="margin:0"><label title="0 = không giới hạn">Giới hạn</label><input type="number" id="newCodeLimit" value="0" min="0"></div>
+      <div class="fg" style="margin:0"><label>1 lần/email</label>
+        <select id="newCodeOnce" style="padding:.52rem .6rem;border:1px solid var(--bdr);border-radius:8px;font-family:inherit;font-size:.82rem;background:var(--warm);width:100%">
+          <option value="1">Có</option><option value="0">Không</option>
+        </select>
+      </div>
     </div>
-    <button class="btn btn-outline btn-sm" onclick="addCode()">+ Thêm code</button>
+    <div style="display:flex;gap:.5rem;align-items:center;margin-top:.6rem;flex-wrap:wrap">
+      <button class="btn btn-outline btn-sm" onclick="addCode()">+ Thêm code</button>
+      <button class="btn btn-sm" style="background:var(--warm)" onclick="loadCodeUsage()">📊 Xem ai đã dùng</button>
+    </div>
+    <div id="codeUsagePanel" style="display:none;margin-top:1rem">
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--mu);margin-bottom:.5rem">📋 Log sử dụng mã giảm giá</div>
+      <div id="codeUsageList"><div class="tbl-msg"><div class="spinner"></div>Đang tải…</div></div>
+    </div>
   </div>
   <div class="config-card" style="border-left-color:var(--navy)">
     <h3>📦 Bundle Deal</h3>
@@ -990,14 +1004,52 @@ function populateCampaigns(c){
   const s=(id,v)=>{const el=document.getElementById(id);if(el&&v!==undefined&&v!=='')el.value=v;};
   s('campFlashPct',c.flashPct);s('campBundleQty',c.bundleQty);s('campBundleFree',c.bundleFreePct);
   if(c.flashEnd){try{document.getElementById('campFlashEnd').value=new Date(c.flashEnd).toISOString().slice(0,16);}catch(e){}}
-  if(c.discountCodes){editCodes=typeof c.discountCodes==='string'?c.discountCodes.split('|').map(s=>{const[code,pct]=s.split(':');return{code:(code||'').trim(),pct:parseFloat(pct)||20};}).filter(d=>d.code):[];renderCodes();}
+  if(c.discountCodes){editCodes=parseDiscountCodes(c.discountCodes);renderCodes();}
 }
-function renderCodes(){document.getElementById('codeList').innerHTML=editCodes.map((c,i)=>`<div class="code-item"><span class="code-tag">${c.code}</span><span style="color:var(--gr);font-weight:600">-${c.pct}%</span><button class="btn btn-sm" style="margin-left:auto" onclick="removeCode(${i})">✕</button></div>`).join('');}
-function addCode(){const code=(g('newCodeVal')||'').toUpperCase(),pct=parseFloat(g('newCodePct'))||20;if(!code)return;editCodes.push({code,pct});document.getElementById('newCodeVal').value='';renderCodes();}
-function removeCode(i){editCodes.splice(i,1);renderCodes();}
+function renderCodes(){
+  const html=editCodes.map((c,i)=>{
+    const expired=c.limit>0&&(c.used||0)>=c.limit;
+    const limitTxt=c.limit>0?`<span style="color:${expired?'var(--rd)':'var(--sf)'};font-size:.75rem">${c.used||0}/${c.limit}lượt</span>`:`<span style="color:var(--mu);font-size:.75rem">${c.used||0}lượt</span>`;
+    const onceBadge=c.once?`<span style="font-size:.68rem;background:#e8f5e9;color:var(--gr);padding:1px 6px;border-radius:10px">1×/email</span>`:'';
+    const expiredBadge=expired?`<span style="font-size:.68rem;color:var(--rd);font-weight:700">HẾT</span>`:'';
+    return`<div class="code-item" style="${expired?'opacity:.5':''}"><span class="code-tag">${c.code}</span><span style="color:var(--gr);font-weight:600">-${c.pct}%</span>${onceBadge}${limitTxt}${expiredBadge}<button class="btn btn-sm" style="margin-left:auto" onclick="removeCode(${i})">✕</button></div>`;
+  }).join('');
+  document.getElementById('codeList').innerHTML=html||'<p style="font-size:.8rem;color:var(--mu);padding:.4rem 0">Chưa có code nào.</p>';
+}
+function addCode(){
+  const code=(g('newCodeVal')||'').trim().toUpperCase();
+  const pct=parseFloat(g('newCodePct'))||20;
+  const limit=parseInt(document.getElementById('newCodeLimit')?.value)||0;
+  const once=document.getElementById('newCodeOnce')?.value==='1';
+  if(!code)return;
+  if(editCodes.find(c=>c.code===code)){toast('⚠️ Code này đã tồn tại','err');return;}
+  editCodes.push({code,pct,limit,once,used:0});
+  document.getElementById('newCodeVal').value='';
+  renderCodes();
+  toast('✅ Đã thêm code '+code,'ok');
+}
+function removeCode(i){if(!confirm('Xoá code "'+editCodes[i].code+'"?'))return;editCodes.splice(i,1);renderCodes();}
+async function loadCodeUsage(){
+  const panel=document.getElementById('codeUsagePanel');
+  const list=document.getElementById('codeUsageList');
+  panel.style.display='block';
+  list.innerHTML='<div class="tbl-msg"><div class="spinner"></div>Đang tải…</div>';
+  try{
+    const data=await api('getCodeUsage',{});
+    if(!data||!data.rows||!data.rows.length){list.innerHTML='<div class="tbl-msg" style="padding:1rem">Chưa có lần dùng nào.</div>';return;}
+    data.rows.forEach(r=>{const c=editCodes.find(ec=>ec.code===r.code);if(c)c.used=r.count;});
+    renderCodes();
+    list.innerHTML=`<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.78rem"><thead><tr style="background:var(--warm);text-align:left"><th style="padding:.5rem .75rem;color:var(--mu);font-weight:700">Mã code</th><th style="padding:.5rem .75rem;color:var(--mu);font-weight:700">Email</th><th style="padding:.5rem .75rem;color:var(--mu);font-weight:700">Đơn hàng</th><th style="padding:.5rem .75rem;color:var(--mu);font-weight:700">Giảm</th><th style="padding:.5rem .75rem;color:var(--mu);font-weight:700">Thời gian</th></tr></thead><tbody>${data.detail.map(r=>`<tr style="border-bottom:1px solid var(--bdr)"><td style="padding:.45rem .75rem;font-family:monospace;font-weight:700;color:var(--navy)">${r.code}</td><td style="padding:.45rem .75rem;color:var(--sf)">${r.email}</td><td style="padding:.45rem .75rem;font-family:monospace;font-size:.72rem">${r.ref}</td><td style="padding:.45rem .75rem;color:var(--gr)">-${r.pct}%</td><td style="padding:.45rem .75rem;color:var(--mu)">${r.time}</td></tr>`).join('')}</tbody></table></div>`;
+  }catch(e){list.innerHTML=`<div class="tbl-msg" style="padding:1rem;color:var(--rd)">❌ ${e.message}</div>`;}
+}
+function parseDiscountCodes(raw){
+  if(!raw)return[];
+  return raw.split('|').map(s=>{const p=s.split(':');return{code:(p[0]||'').trim().toUpperCase(),pct:parseFloat(p[1])||20,limit:parseInt(p[2])||0,once:p[3]==='1',used:0};}).filter(c=>c.code);
+}
+function serializeDiscountCodes(codes){return codes.map(c=>`${c.code}:${c.pct}:${c.limit||0}:${c.once?1:0}`).join('|');}
 async function saveCampaigns(){
   const flashEnd=g('campFlashEnd');
-  const campaigns={flashActive:String(document.getElementById('campFlashToggle').classList.contains('on')),saleName:g('campSaleName'),flashPct:g('campFlashPct'),flashEnd:flashEnd?(()=>{const d=new Date(flashEnd);return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString();})():'',bundleActive:String(document.getElementById('campBundleToggle').classList.contains('on')),bundleQty:g('campBundleQty'),bundleFreePct:g('campBundleFree'),discountCodes:editCodes.map(c=>c.code+':'+c.pct).join('|')};
+  const campaigns={flashActive:String(document.getElementById('campFlashToggle').classList.contains('on')),saleName:g('campSaleName'),flashPct:g('campFlashPct'),flashEnd:flashEnd?(()=>{const d=new Date(flashEnd);return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString();})():'',bundleActive:String(document.getElementById('campBundleToggle').classList.contains('on')),bundleQty:g('campBundleQty'),bundleFreePct:g('campBundleFree'),discountCodes:serializeDiscountCodes(editCodes)};
   try{await api('setData',{data:{campaigns}});toast('✅ Campaign đã lưu lên Sheet!','ok');}catch(e){toast('❌ '+e.message,'err');}
 }
 async function sendCampaignEmail(){
@@ -1117,7 +1169,7 @@ async function savePatternSales(){
       bundleActive:String(document.getElementById('campBundleToggle').classList.contains('on')),
       bundleQty:g('campBundleQty'),
       bundleFreePct:g('campBundleFree'),
-      discountCodes:editCodes.map(c=>c.code+':'+c.pct).join('|'),
+      discountCodes:serializeDiscountCodes(editCodes),
       patternSales:JSON.stringify(patternSales)
     };
     await api('setData',{data:{campaigns}});

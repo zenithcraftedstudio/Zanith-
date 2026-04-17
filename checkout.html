@@ -253,7 +253,7 @@ const SCRIPT_URL = getAppScriptUrl();
 const READ_KEY   = ZANITH_CONFIG.READ_KEY;
 let currentLang  = localStorage.getItem('zanith_lang')||'en';
 let cart=[], discount={code:'',pct:0}, bankSettings={}, currentTotal=0, orderRef='';
-const CODES = [{code:'ZANITH20',pct:20},{code:'ZANITH10',pct:10}]; // fallback codes
+const CODES = [{code:'ZANITH20',pct:20},{code:'ZANITH10',pct:10}]; // fallback — overridden by Sheet
 
 function applyLang(){const vi=currentLang==='vi';document.getElementById('H').setAttribute('lang',currentLang);document.getElementById('langBtn').textContent=vi?'VI / EN':'EN / VI';}
 function toggleLang(){currentLang=currentLang==='en'?'vi':'en';localStorage.setItem('zanith_lang',currentLang);applyLang();}
@@ -311,13 +311,68 @@ function renderCart(){
 
 function removeItem(i){cart.splice(i,1);localStorage.setItem('zanith_cart',JSON.stringify(cart));renderCart();}
 
-function applyDiscount(){
-  const code=(document.getElementById('discInput').value||'').trim().toUpperCase();
+async function applyDiscount(){
+  const codeRaw=(document.getElementById('discInput').value||'').trim().toUpperCase();
   const msgEl=document.getElementById('discMsg');
-  // Check against campaign codes loaded from localStorage/campaign state
-  const found=CODES.find(c=>c.code===code);
-  if(found){discount={code,pct:found.pct};msgEl.style.color='var(--gr)';msgEl.textContent=(currentLang==='vi'?`✅ Giảm ${found.pct}% đã áp dụng!`:`✅ ${found.pct}% discount applied!`);renderCart();}
-  else{discount={code:'',pct:0};msgEl.style.color='var(--rd)';msgEl.textContent=(currentLang==='vi'?'❌ Mã không hợp lệ':'❌ Invalid code');}
+  discount={code:'',pct:0};
+  renderCart();
+  if(!codeRaw){msgEl.style.color='var(--rd)';msgEl.textContent=currentLang==='vi'?'⚠️ Nhập mã giảm giá':'⚠️ Please enter a code';return;}
+
+  // Lấy codes từ campaign (Sheet) hoặc fallback
+  const allCodes=(window._zanithCodes&&window._zanithCodes.length)?window._zanithCodes:CODES;
+  const found=allCodes.find(c=>c.code===codeRaw);
+  if(!found){msgEl.style.color='var(--rd)';msgEl.textContent=currentLang==='vi'?'❌ Mã không hợp lệ':'❌ Invalid code';return;}
+
+  const btn=document.querySelector('.disc-btn');
+  if(btn)btn.disabled=true;
+  msgEl.style.color='var(--navy)';msgEl.textContent=currentLang==='vi'?'⏳ Đang kiểm tra mã…':'⏳ Checking code…';
+
+  // ── Tầng 1: Kiểm tra tổng lượt dùng ──────────────────────────
+  if(found.limit>0){
+    try{
+      const res=await callScript('checkCode',{code:codeRaw});
+      if((res.used||0)>=found.limit){
+        msgEl.style.color='var(--rd)';msgEl.textContent=currentLang==='vi'?'❌ Mã này đã hết lượt sử dụng':'❌ This code has reached its usage limit';
+        if(btn)btn.disabled=false;return;
+      }
+    }catch(e){console.warn('checkCode skip:',e);}
+  }
+
+  // ── Tầng 2: Kiểm tra 1 lần / email ───────────────────────────
+  if(found.once){
+    const email=(document.getElementById('email')?.value||'').trim().toLowerCase();
+    if(!email||!email.includes('@')){
+      msgEl.style.color='var(--rd)';msgEl.textContent=currentLang==='vi'?'⚠️ Nhập email ở bước 2 trước để kiểm tra mã này':'⚠️ Please fill in your email at step 2 first';
+      if(btn)btn.disabled=false;return;
+    }
+    try{
+      const res=await callScript('checkCodeEmail',{code:codeRaw,email});
+      if(res.used){
+        msgEl.style.color='var(--rd)';msgEl.textContent=currentLang==='vi'?'❌ Email này đã dùng mã '+codeRaw+' trước đó':'❌ This email has already used code '+codeRaw;
+        if(btn)btn.disabled=false;return;
+      }
+    }catch(e){console.warn('checkCodeEmail skip:',e);}
+  }
+
+  // ── Hợp lệ → áp dụng ─────────────────────────────────────────
+  discount={code:found.code,pct:found.pct};
+  msgEl.style.color='var(--gr)';
+  msgEl.innerHTML=currentLang==='vi'?`✅ Mã <strong>${found.code}</strong> — giảm <strong>${found.pct}%</strong> đã áp dụng!`:`✅ Code <strong>${found.code}</strong> — <strong>${found.pct}%</strong> discount applied!`;
+  renderCart();
+  if(btn)btn.disabled=false;
+}
+
+async function callScript(action,extra={}){
+  const res=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,secret:READ_KEY,...extra})});
+  const json=await res.json();
+  if(json.error)throw new Error(json.error);
+  return json;
+}
+
+async function logCodeUsage(ref,email){
+  if(!discount||!discount.code)return;
+  try{await callScript('logCodeUsage',{code:discount.code,pct:discount.pct,email:(email||'').toLowerCase(),ref,time:new Date().toISOString()});}
+  catch(e){console.warn('logCodeUsage non-critical:',e);}
 }
 
 // Step navigation
@@ -375,11 +430,14 @@ async function placeOrder(){
   const phone=(document.getElementById('phone').value||'').trim();
   const {total}=getTotal();
   const items=cart.map(i=>({sku:i.sku,title:i.title,qty:i.qty||1,price:i.price}));
+  const discountInfo=discount.code?{discountCode:discount.code,discountPct:discount.pct}:{};
   try{
-    const res=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'createOrder',secret:READ_KEY,customerName:name.trim(),customerEmail:email,phone,items,total:total.toFixed(2)})});
+    const res=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'createOrder',secret:READ_KEY,customerName:name.trim(),customerEmail:email,phone,items,total:total.toFixed(2),...discountInfo})});
     const d=await res.json();
     if(d.status==='success'){
       orderRef=d.orderRef||'';
+      // ── Tầng 3: Ghi log discount code sau khi đặt hàng thành công ──
+      await logCodeUsage(orderRef,email);
       cart=[];localStorage.removeItem('zanith_cart');
       showThankYou();
     }else throw new Error(d.message||'Error');
@@ -413,6 +471,8 @@ function showToast(msg,type=''){const t=document.getElementById('toast');if(!t)r
 
 // INIT
 applyLang();loadCart();setStep(1);
+// Load discount codes từ Sheet (ghi đè CODES fallback)
+(async()=>{try{const res=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'readConfig',secret:READ_KEY})});const d=await res.json();const raw=d?.campaigns?.discountCodes||d?.settings?.discountCodes||'';if(raw){window._zanithCodes=raw.split('|').map(s=>{const p=s.split(':');return{code:(p[0]||'').trim().toUpperCase(),pct:parseFloat(p[1])||20,limit:parseInt(p[2])||0,once:p[3]==='1'};}).filter(c=>c.code);}}catch(e){}})();
 </script>
 </body>
 </html>
