@@ -5,7 +5,7 @@
  */
 
 // ← PASTE URL APPS SCRIPT THẬT VÀO ĐÂY (sau khi New Deployment)
-const ZANITH_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyX-5S_ueebD9EMmvub2qFfiyRio2JQb_mNrBgW-MnWf8Ly04rL5QAFjeeS-9XUalEw/exec';
+const ZANITH_SCRIPT_URL ='https://script.google.com/macros/s/AKfycbyX-5S_ueebD9EMmvub2qFfiyRio2JQb_mNrBgW-MnWf8Ly04rL5QAFjeeS-9XUalEw/exec';
 
 const ZANITH_CONFIG = {
   SCRIPT_URL:    ZANITH_SCRIPT_URL,
